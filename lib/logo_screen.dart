@@ -10,8 +10,6 @@ class LogoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var matrix42 = matrix4;
-    Float64List matrix4 = new Matrix4.identity().storage;
     return MaterialApp(
       title: 'Otus Food App',
       theme: ThemeData(
@@ -30,6 +28,7 @@ class LogoScreen extends StatelessWidget {
         child: Text(
           'OTUS FOOD',
           style: TextStyle(
+            fontFamily: 'Roboto',
             fontWeight: FontWeight.w900,
             fontSize: 165,
           ),
