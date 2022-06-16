@@ -1,7 +1,6 @@
 import 'dart:async';
-import 'dart:typed_data';
-
 import 'dart:ui' as ui;
+import 'package:flutter/services.dart';
 
 import 'package:flutter/material.dart';
 
@@ -10,62 +9,101 @@ class LogoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var name = 'assets/images/logo.png';
     return MaterialApp(
       title: 'Otus Food App',
       theme: ThemeData(
-        canvasColor: Colors.green[900],
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: Colors.green[900],
-          secondary: Colors.green,
-          background: Colors.green[900],
-        ),
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
       ),
       home: Scaffold(
           body: Center(
-              child: MaskedImage(
-        image: Image.asset('assets/images/logo.png').image,
-        child: Text(
-          'OTUS FOOD',
-          style: TextStyle(
-            fontFamily: 'Roboto',
-            fontWeight: FontWeight.w900,
-            fontSize: 165,
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment(0.0, 0.0),
+              end: Alignment(0.308, 0.951),
+              colors: <Color>[
+                Color(0xFF2ECC71),
+                Color(0xFF165932),
+                //Color(0x2ECC71),
+                //Color(0x165932),
+              ],
+            ),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Image(image: Image.asset(name).image),
+              Center(
+                child: MaskedImage(
+                  imageSrc: name,
+                  child: SizedBox(
+                    width: 258,
+                    height: 168,
+                    child: Text(
+                      "OTUS FOOD",
+                      style: TextStyle(
+                        fontFamily: 'Roboto',
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w900,
+                        height: 0.95,
+                        fontSize: 95.0,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-      ))),
+      )),
     );
   }
 }
 
 class MaskedImage extends StatelessWidget {
-  final ImageProvider image;
+  final String imageSrc;
   final Widget child;
 
-  const MaskedImage({Key? key, required this.image, required this.child})
+  MaskedImage({Key? key, required this.imageSrc, required this.child})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) => FutureBuilder<ui.Image>(
-        future: loadImage(),
+        future: getUiImage(imageSrc, 175, 250),
         builder: (context, snap) => snap.hasData
             ? ShaderMask(
-                blendMode: BlendMode.dstATop,
+                blendMode: BlendMode.srcATop,
                 shaderCallback: (bounds) => ui.ImageShader(
                       snap.data!,
-                      ui.TileMode.clamp,
-                      ui.TileMode.clamp,
+                      ui.TileMode.decal,
+                      ui.TileMode.decal,
                       Matrix4.identity().storage,
                     ),
                 child: child)
             : Container(),
       );
 
-  Future<ui.Image> loadImage() async {
-    final completer = Completer<ui.Image>();
-    final stream = image.resolve(ImageConfiguration());
-    stream.addListener(
-        ImageStreamListener((info, _) => completer.complete(info.image)));
-    return completer.future;
+  // Future<ui.Image> loadImage() async {
+  //   final completer = Completer<ui.Image>();
+  //   final stream = image.resolve(ImageConfiguration());
+  //   stream.addListener(
+  //       ImageStreamListener((info, _) => completer.complete(info.image)));
+  //   return completer.future;
+  // }
+
+  Future<ui.Image> getUiImage(
+      String imageAssetPath, int height, int width) async {
+    final ByteData assetImageByteData = await rootBundle.load(imageAssetPath);
+    final codec = await ui.instantiateImageCodec(
+      assetImageByteData.buffer.asUint8List(),
+      targetHeight: height,
+      targetWidth: width,
+    );
+    final image = (await codec.getNextFrame()).image;
+    return image;
   }
 }
