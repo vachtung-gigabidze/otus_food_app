@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/logo_screen.dart';
+import 'package:otus_food_app/screens/logo_screen.dart';
 
 void main() {
   runApp(MyApp());
