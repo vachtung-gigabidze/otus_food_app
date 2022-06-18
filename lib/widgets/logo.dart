@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:ui' as ui;
 import 'package:flutter/services.dart';
+import 'package:otus_food_app/constants.dart';
 
 Widget logoWidget() {
-  var name = 'assets/images/logo.png';
+  var name = Constants.LOGO_IMAGE;
 
   return MaskedImage(
     imageSrc: name,
