@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/Constants.dart';
+import 'package:otus_food_app/model.dart';
 
 class ReceptCard extends StatelessWidget {
-  const ReceptCard({Key? key}) : super(key: key);
+  ReceptCard({Key? key, required Recipes? this.recept}) : super(key: key);
+
+  Recipes? recept;
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +32,9 @@ class ReceptCard extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Название рецепта \nровно в две строки',
+                Text(
+                  this.recept?.name ?? "",
+                  overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontStyle: FontStyle.normal,
