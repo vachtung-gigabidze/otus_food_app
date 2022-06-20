@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/app_colors.dart';
+import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/widgets/recept_card.dart';
 
 class ReceptsList extends StatelessWidget {
