@@ -9,45 +9,44 @@ class ReceptCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(
-            Radius.circular(5),
-          )),
-      margin: const EdgeInsets.all(12),
-      // color: Colors.white,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image(
-            image: AssetImage('assets/images/${recept?.imageUrl}'),
-            fit: BoxFit.fill,
-            // repeat: ImageRepeat.repeat,
-            height: 136,
-            width: 149,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  recept?.name ?? "",
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(
-                    fontFamily: 'Roboto',
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 20.0,
-                    color: Colors.black87,
-                    decoration: TextDecoration.none,
+    return Card(
+      margin: EdgeInsets.all(12.0),
+      child: InkWell(
+        onTap: () {},
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              height: 70, // default\minimum height
+            ),
+            Image(
+              image: AssetImage('assets/images/${recept?.imageUrl}'),
+              fit: BoxFit.fill,
+              // repeat: ImageRepeat.repeat,
+              height: 136,
+              width: 149,
+            ),
+            SizedBox(
+              width: 15,
+            ),
+            Expanded(
+              child: Column(
+                children: [
+                  Text(
+                    recept?.name ?? "",
+                    overflow: TextOverflow.clip,
+                    style: const TextStyle(
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 24.0,
+                      color: Colors.black87,
+                      decoration: TextDecoration.none,
+                    ),
                   ),
-                  maxLines: 2,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 23.0),
-                  child: Row(
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
                     children: [
                       const Image(
                         image: AssetImage(Constants.ICON_CLOCK),
@@ -71,12 +70,84 @@ class ReceptCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
+    // return Container(
+    //   decoration: const BoxDecoration(
+    //       color: Colors.white,
+    //       borderRadius: BorderRadius.all(
+    //         Radius.circular(5),
+    //       )),
+    //   margin: const EdgeInsets.all(12),
+    //   // color: Colors.white,
+    //   child: Row(
+    //     crossAxisAlignment: CrossAxisAlignment.start,
+    //     children: [
+    //       Image(
+    //         image: AssetImage('assets/images/${recept?.imageUrl}'),
+    //         fit: BoxFit.fill,
+    //         // repeat: ImageRepeat.repeat,
+    //         height: 136,
+    //         width: 149,
+    //       ),
+    //       Padding(
+    //         padding: const EdgeInsets.all(16.0),
+    //         child: Column(
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: [
+    //             LimitedBox(
+    //               child: Text(
+    //                 recept?.name ?? "",
+    //                 overflow: TextOverflow.ellipsis,
+    //                 textDirection: TextDirection.ltr,
+    //                 maxLines: 2,
+    //                 style: const TextStyle(
+    //                   fontFamily: 'Roboto',
+    //                   fontStyle: FontStyle.normal,
+    //                   fontWeight: FontWeight.w500,
+    //                   fontSize: 20.0,
+    //                   color: Colors.black87,
+    //                   decoration: TextDecoration.none,
+    //                 ),
+    //               ),
+    //             ),
+    //             Padding(
+    //               padding: const EdgeInsets.only(top: 23.0),
+    //               child: Row(
+    //                 children: [
+    //                   const Image(
+    //                     image: AssetImage(Constants.ICON_CLOCK),
+    //                     height: 16,
+    //                     width: 16,
+    //                     fit: BoxFit.cover,
+    //                   ),
+    //                   Padding(
+    //                     padding: const EdgeInsets.only(left: 11.0),
+    //                     child: Text(
+    //                       recept?.time ?? "",
+    //                       style: const TextStyle(
+    //                         fontFamily: 'Roboto',
+    //                         fontStyle: FontStyle.normal,
+    //                         fontWeight: FontWeight.w400,
+    //                         fontSize: 16.0,
+    //                         color: Color(0xFF2ECC71),
+    //                         decoration: TextDecoration.none,
+    //                       ),
+    //                     ),
+    //                   ),
+    //                 ],
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 }
