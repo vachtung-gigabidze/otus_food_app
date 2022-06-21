@@ -3,25 +3,25 @@ import 'package:otus_food_app/Constants.dart';
 import 'package:otus_food_app/model.dart';
 
 class ReceptCard extends StatelessWidget {
-  ReceptCard({Key? key, required Recipes? this.recept}) : super(key: key);
+  ReceptCard({Key? key, required Recipes this.recept}) : super(key: key);
 
   Recipes? recept;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.all(
             Radius.circular(5),
           )),
-      margin: EdgeInsets.all(16),
+      margin: const EdgeInsets.all(12),
       // color: Colors.white,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Image(
-            image: AssetImage(Constants.IMAGE1),
+          Image(
+            image: AssetImage('assets/images/${recept?.imageUrl}'),
             fit: BoxFit.fill,
             // repeat: ImageRepeat.repeat,
             height: 136,
@@ -33,9 +33,9 @@ class ReceptCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  this.recept?.name ?? "",
+                  recept?.name ?? "",
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'Roboto',
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w500,
@@ -49,7 +49,7 @@ class ReceptCard extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 23.0),
                   child: Row(
                     children: [
-                      Image(
+                      const Image(
                         image: AssetImage(Constants.ICON_CLOCK),
                         height: 16,
                         width: 16,
@@ -58,8 +58,8 @@ class ReceptCard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 11.0),
                         child: Text(
-                          '45 минут',
-                          style: TextStyle(
+                          recept?.time ?? "",
+                          style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontStyle: FontStyle.normal,
                             fontWeight: FontWeight.w400,

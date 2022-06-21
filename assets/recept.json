@@ -2,11 +2,78 @@
   "Recipes": [
     {
       "id": 1,
-      "name": "N1",
-      "time": "1h",
+      "name": "Лосось в соусе терияки",
+      "time": "45 минут",
+      "imageUrl": "1.png",
       "ingredients": [
         {
-          "name": "Milk",
+          "name": "Соевый соус",
+          "quantity": "8 ст. ложек"
+        },
+        {
+          "name": "Вода",
+          "quantity": "8 ст. ложек"
+        },
+        {
+          "name": "Мёд",
+          "quantity": "3 ст. ложки"
+        },
+        {
+          "name": "Коричневый сахар",
+          "quantity": "2 ст. ложки"
+        },
+        {
+          "name": "Чеснок",
+          "quantity": "3 зубчика"
+        },
+        {
+          "name": "Тёртый свежий имбирь",
+          "quantity": "1 ст. ложка"
+        },
+        {
+          "name": "Лимонный сок",
+          "quantity": "1¹⁄₂ ст. ложки"
+        },
+        {
+          "name": "Кукурузный крахмал",
+          "quantity": "1 ст. ложка"
+        },
+        {
+          "name": "Растительное масло",
+          "quantity": "1 ч. ложка"
+        },
+        {
+          "name": "Филе лосося или сёмги",
+          "quantity": "680 г"
+        },
+        {
+          "name": "Кунжут",
+          "quantity": "по вкусу"
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Поке боул с сыром тофу",
+      "time": "30 минут",
+      "imageUrl": "2.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
           "quantity": "1l."
         },
         {
@@ -30,9 +97,130 @@
       ]
     },
     {
-      "id": 1,
-      "name": "N12222222ddddddddddddddddddd ",
-      "time": "1h",
+      "id": 3,
+      "name": "Стейк из говядины по-грузински",
+      "time": "1 час 15 минут",
+      "imageUrl": "3.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
+          "quantity": "1l."
+        },
+        {
+          "name": "Milk",
+          "quantity": "1l."
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Тосты с голубикой и бананом",
+      "time": "45 минут",
+      "imageUrl": "4.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
+          "quantity": "1l."
+        },
+        {
+          "name": "Milk",
+          "quantity": "1l."
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Паста с морепродуктами",
+      "time": "25 минут",
+      "imageUrl": "5.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
+          "quantity": "1l."
+        },
+        {
+          "name": "Milk",
+          "quantity": "1l."
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Бургер с двумя котлетами",
+      "time": "1 час",
+      "imageUrl": "6.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
+          "quantity": "1l."
+        },
+        {
+          "name": "Milk",
+          "quantity": "1l."
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Пицца Маргарита домашняя",
+      "time": "25 минут",
+      "imageUrl": "7.png",
       "ingredients": [
         {
           "name": "Coco Milk",
