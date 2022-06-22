@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/screens/logo_screen.dart';
+import 'package:flutter/services.dart';
+// import 'package:otus_food_app/screens/logo_screen.dart';
+import 'package:otus_food_app/screens/recept_detail.dart';
 import 'package:otus_food_app/screens/recipes_list.dart';
 
 void main() {
@@ -8,8 +10,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
-    // The path that creates the Home Screen
-    '/Home': (BuildContext context) => ReceptsList()
+    '/Home': (BuildContext context) => ReceptsList(),
+    '/Details': (BuildContext context) => ReceptDetail(),
   };
 
   @override
@@ -21,9 +23,8 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
       ),
-      home: LogoScreen(
-        nextRoute: '/Home',
-      ),
+      home: ReceptDetail(),
+      //LogoScreen(nextRoute: '/Home'),
       routes: routes,
     );
   }

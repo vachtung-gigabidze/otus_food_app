@@ -15,7 +15,7 @@ class ReceptCard extends StatelessWidget {
         onTap: () {},
         child: Row(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 70, // default\minimum height
             ),
             Image(
@@ -25,7 +25,7 @@ class ReceptCard extends StatelessWidget {
               height: 136,
               width: 149,
             ),
-            SizedBox(
+            const SizedBox(
               width: 15,
             ),
             Expanded(
@@ -34,6 +34,7 @@ class ReceptCard extends StatelessWidget {
                   Text(
                     recept?.name ?? "",
                     overflow: TextOverflow.clip,
+                    textAlign: TextAlign.left,
                     style: const TextStyle(
                       fontFamily: 'Roboto',
                       fontStyle: FontStyle.normal,
@@ -43,7 +44,7 @@ class ReceptCard extends StatelessWidget {
                       decoration: TextDecoration.none,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Row(
