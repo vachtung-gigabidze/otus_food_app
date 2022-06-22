@@ -14,12 +14,14 @@ class HeaderDetail extends StatelessWidget {
 
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            height: 20,
+            height: 10,
           ),
           Text(
             recept?.name ?? "Название рецепта",
+            textAlign: TextAlign.left,
             style: const TextStyle(
               fontFamily: 'Roboto',
               fontStyle: FontStyle.normal,
@@ -28,6 +30,9 @@ class HeaderDetail extends StatelessWidget {
               color: Colors.black87,
               decoration: TextDecoration.none,
             ),
+          ),
+          SizedBox(
+            height: 16,
           ),
           Row(
             children: [
@@ -40,7 +45,7 @@ class HeaderDetail extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.only(left: 11.0),
                 child: Text(
-                  recept?.time ?? "",
+                  recept?.time ?? "Время приготовления",
                   style: const TextStyle(
                     fontFamily: 'Roboto',
                     fontStyle: FontStyle.normal,
@@ -53,7 +58,9 @@ class HeaderDetail extends StatelessWidget {
               ),
             ],
           ),
-          Text(recept?.time ?? "Время приготовления"),
+          SizedBox(
+            height: 16,
+          ),
           Image(image: AssetImage('assets/images/1_full.png')),
         ],
       ),

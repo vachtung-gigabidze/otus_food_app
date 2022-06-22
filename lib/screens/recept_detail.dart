@@ -17,35 +17,50 @@ class ReceptDetail extends StatelessWidget {
     //SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Рецепты'),
+        title: const Text('Рецепты'),
         centerTitle: true,
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Image.asset(
+              'assets/icons/megafon.png',
+              height: 24,
+              width: 24,
+            ),
+          )
+        ],
         leading: IconButton(
-            icon: const Icon(Icons.add_alert),
-            tooltip: 'Show Snackbar',
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('This is a snackbar')));
-            },
+          icon: const Icon(Icons.arrow_back),
+          tooltip: 'Show Snackbar',
+          color: Colors.black87,
+          onPressed: () {
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('This is a snackbar')));
+          },
+        ),
       ),
       body: FutureBuilder<RecipesModel>(
         future: recepts,
         builder: (context, snapshot) {
           return SingleChildScrollView(
-            child: Column(
-              children: [
-                HeaderDetail(snapshot: snapshot),
-                IngredientsDetails(snapshot: snapshot),
-                CookingStepsDetail(snapshot: snapshot),
-                TextButton(
-                  style: TextButton.styleFrom(
-                    padding: const EdgeInsets.all(16.0),
-                    primary: Colors.white,
-                    textStyle: const TextStyle(fontSize: 20),
+            child: Padding(
+              padding: const EdgeInsets.all(15),
+              child: Column(
+                children: [
+                  HeaderDetail(snapshot: snapshot),
+                  IngredientsDetails(snapshot: snapshot),
+                  //  CookingStepsDetail(snapshot: snapshot),
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      padding: const EdgeInsets.all(16.0),
+                      primary: Colors.white,
+                      textStyle: const TextStyle(fontSize: 20),
+                    ),
+                    onPressed: () {},
+                    child: const Text('Начать готовить'),
                   ),
-                  onPressed: () {},
-                  child: const Text('Начать готовить'),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },

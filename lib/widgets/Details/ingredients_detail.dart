@@ -9,25 +9,87 @@ class IngredientsDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var recept = snapshot.data?.recipes?[0];
-    return Column(children: [
-      const Text('Ингредиенты'),
-      Container(
-        height: 800,
-        child: ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: recept?.ingredients?.length ?? 0,
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                child: Center(
-                    child: Row(
-                  children: [
-                    Text('${recept?.ingredients?[index].name}'),
-                    Text('${recept?.ingredients?[index].quantity}'),
-                  ],
-                )),
-              );
-            }),
-      )
-    ]);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(top: 22, bottom: 18),
+          child: Text(
+            'Ингредиенты',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w600,
+              fontSize: 16.0,
+              color: Color(0xFF165932),
+            ),
+          ),
+        ),
+        Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(
+              color: Colors.grey,
+              width: 4,
+            ),
+          ),
+          child: ListView.builder(
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(6),
+              itemCount: recept?.ingredients?.length ?? 0,
+              itemBuilder: (BuildContext context, int index) {
+                return Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Container(
+                    child: Center(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            const Text(
+                              '\u2022',
+                              style: TextStyle(
+                                fontSize: 16,
+                                height: 1.55,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 6,
+                            ),
+                            Text(
+                              '${recept?.ingredients?[index].name}',
+                              style: const TextStyle(
+                                fontFamily: 'Roboto',
+                                fontStyle: FontStyle.normal,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 14.0,
+                                color: Colors.black87,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            '${recept?.ingredients?[index].quantity}',
+                            style: const TextStyle(
+                              fontFamily: 'Roboto',
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 13.0,
+                              color: Color(0xFF797676),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
+                  ),
+                );
+              }),
+        )
+      ],
+    );
   }
 }
