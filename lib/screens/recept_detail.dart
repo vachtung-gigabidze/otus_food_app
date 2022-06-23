@@ -49,7 +49,7 @@ class ReceptDetail extends StatelessWidget {
                 children: [
                   HeaderDetail(snapshot: snapshot),
                   IngredientsDetails(snapshot: snapshot),
-                  //  CookingStepsDetail(snapshot: snapshot),
+                  CookingStepsDetail(snapshot: snapshot),
                   TextButton(
                     style: TextButton.styleFrom(
                       padding: const EdgeInsets.all(16.0),
