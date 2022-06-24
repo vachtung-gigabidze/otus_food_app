@@ -27,7 +27,7 @@ class Recipes {
   String? time;
   String? imageUrl;
   List<Ingredients>? ingredients;
-  List<CookingSteps>? cookingSteps;
+  List<CookingStep>? cookingSteps;
 
   Recipes(
       {this.id,
@@ -50,9 +50,9 @@ class Recipes {
       });
     }
     if (json['cookingSteps'] != null) {
-      cookingSteps = <CookingSteps>[];
+      cookingSteps = <CookingStep>[];
       json['cookingSteps'].forEach((v) {
-        cookingSteps!.add(new CookingSteps.fromJson(v));
+        cookingSteps!.add(new CookingStep.fromJson(v));
       });
     }
   }
@@ -98,15 +98,15 @@ enum CookingStepsStatus {
   notStarted,
 }
 
-class CookingSteps {
+class CookingStep {
   int? order;
   String? step;
   String? duration;
   CookingStepsStatus? status;
 
-  CookingSteps({this.order, this.step, this.duration, this.status});
+  CookingStep({this.order, this.step, this.duration, this.status});
 
-  CookingSteps.fromJson(Map<String, dynamic> json) {
+  CookingStep.fromJson(Map<String, dynamic> json) {
     order = json['order'];
     step = json['step'];
     duration = json['duration'];

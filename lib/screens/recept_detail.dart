@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:otus_food_app/api/recept_api.dart';
+import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/widgets/Details/cooking_button.dart';
 import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
 import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/Details/header_detail.dart';
@@ -17,7 +19,13 @@ class ReceptDetail extends StatelessWidget {
     //SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Рецепты'),
+        backgroundColor: Colors.white,
+        title: const Text(
+          'Рецепты',
+          style: TextStyle(
+            color: Colors.black,
+          ),
+        ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -39,6 +47,29 @@ class ReceptDetail extends StatelessWidget {
           },
         ),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Рецепты',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.business),
+            label: 'Холодильник',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Избраное',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'Профиль',
+          ),
+        ],
+        //currentIndex: 1,
+        selectedItemColor: Colors.amber[800],
+        // onTap: () {},
+      ),
       body: FutureBuilder<RecipesModel>(
         future: recepts,
         builder: (context, snapshot) {
@@ -50,15 +81,7 @@ class ReceptDetail extends StatelessWidget {
                   HeaderDetail(snapshot: snapshot),
                   IngredientsDetails(snapshot: snapshot),
                   CookingStepsDetail(snapshot: snapshot),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      padding: const EdgeInsets.all(16.0),
-                      primary: Colors.white,
-                      textStyle: const TextStyle(fontSize: 20),
-                    ),
-                    onPressed: () {},
-                    child: const Text('Начать готовить'),
-                  ),
+                  CookingButton()
                 ],
               ),
             ),

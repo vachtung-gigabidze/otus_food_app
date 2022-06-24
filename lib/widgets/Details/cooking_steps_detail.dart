@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/widgets/Details/cooking_step.dart';
 
 class CookingStepsDetail extends StatelessWidget {
   CookingStepsDetail({Key? key, required this.snapshot}) : super(key: key);
@@ -10,46 +11,37 @@ class CookingStepsDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var recept = snapshot.data?.recipes?[0];
     return Container(
-      child: Column(children: [
-        const Text('Шаги приготовления'),
-        Container(
-          //height: 600,
-          child: ListView.builder(
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(8),
-              itemCount: recept?.cookingSteps?.length ?? 0,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  height: 120,
-                  alignment: Alignment.center,
-                  child: SizedBox(
-                    height: double.infinity,
-                    child: Card(
-                      child: ListTile(
-                        leading: SizedBox(
-                          height: 55,
-                          width: 55,
-                          child: Text(
-                            '${recept?.cookingSteps?[index].order}',
-                            style: TextStyle(fontSize: 50),
-                          ),
-                        ),
-                        title: Text('${recept?.cookingSteps?[index].step}'),
-                        //subtitle: Text('Here is a second line'),
-                        trailing: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Icon(Icons.check_box),
-                            Text('${recept?.cookingSteps?[index].duration}')
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                );
-              }),
-        )
-      ]),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: 19,
+          ),
+          const Text(
+            'Шаги приготовления',
+            style: TextStyle(
+              fontFamily: 'Roboto',
+              fontStyle: FontStyle.normal,
+              fontWeight: FontWeight.w600,
+              fontSize: 16.0,
+              color: Color(0xFF165932),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            //height: 600,
+            child: ListView.builder(
+                shrinkWrap: true,
+                //padding: const EdgeInsets.all(8),
+                itemCount: recept?.cookingSteps?.length ?? 0,
+                itemBuilder: (BuildContext context, int index) {
+                  return cookingStepCard(recept?.cookingSteps?[index]);
+                }),
+          )
+        ],
+      ),
     );
   }
 }

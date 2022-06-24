@@ -12,25 +12,28 @@ class IngredientsDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Padding(
-          padding: EdgeInsets.only(top: 22, bottom: 18),
-          child: Text(
-            'Ингредиенты',
-            style: TextStyle(
-              fontFamily: 'Roboto',
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w600,
-              fontSize: 16.0,
-              color: Color(0xFF165932),
-            ),
+        SizedBox(
+          height: 18,
+        ),
+        Text(
+          'Ингредиенты',
+          style: TextStyle(
+            fontFamily: 'Roboto',
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w600,
+            fontSize: 16.0,
+            color: Color(0xFF165932),
           ),
+        ),
+        SizedBox(
+          height: 22,
         ),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
-              color: Colors.grey,
-              width: 4,
+              color: Color.fromARGB(255, 121, 118, 118),
+              width: 3,
             ),
           ),
           child: ListView.builder(
