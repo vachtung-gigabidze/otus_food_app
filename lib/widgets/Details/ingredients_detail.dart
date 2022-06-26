@@ -38,6 +38,7 @@ class IngredientsDetails extends StatelessWidget {
           ),
           child: ListView.builder(
               shrinkWrap: true,
+              physics: ClampingScrollPhysics(),
               padding: const EdgeInsets.all(6),
               itemCount: recept?.ingredients?.length ?? 0,
               itemBuilder: (BuildContext context, int index) {

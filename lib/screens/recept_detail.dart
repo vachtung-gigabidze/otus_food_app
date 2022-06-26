@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:otus_food_app/api/recept_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/widgets/Details/comment_view.dart';
 import 'package:otus_food_app/widgets/Details/cooking_button.dart';
 import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
 import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
@@ -31,7 +32,7 @@ class ReceptDetail extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: Image.asset(
-              'assets/icons/megafon.png',
+              Constants.icon_megafon,
               height: 24,
               width: 24,
             ),
@@ -48,42 +49,74 @@ class ReceptDetail extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: ImageIcon(Image.asset(
+              Constants.icon_pizza,
+              height: 24,
+              width: 24,
+            ).image),
             label: 'Рецепты',
+            backgroundColor: Colors.white,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.business),
+            icon: ImageIcon(Image.asset(
+              Constants.icon_fridge,
+              height: 24,
+              width: 24,
+            ).image),
             label: 'Холодильник',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: ImageIcon(Image.asset(
+              Constants.icon_heart,
+              height: 24,
+              width: 24,
+            ).image),
             label: 'Избраное',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
+            icon: ImageIcon(Image.asset(
+              Constants.icon_profile,
+              height: 24,
+              width: 24,
+            ).image),
             label: 'Профиль',
           ),
         ],
-        //currentIndex: 1,
-        selectedItemColor: Colors.amber[800],
+
+        currentIndex: 0,
+        showUnselectedLabels: true,
+        selectedItemColor: AppColors.accent,
+        unselectedItemColor: AppColors.greyColor,
         // onTap: () {},
       ),
       body: FutureBuilder<RecipesModel>(
         future: recepts,
         builder: (context, snapshot) {
           return SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Column(
-                children: [
-                  HeaderDetail(snapshot: snapshot),
-                  IngredientsDetails(snapshot: snapshot),
-                  CookingStepsDetail(snapshot: snapshot),
-                  CookingButton()
-                ],
-              ),
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    children: [
+                      HeaderDetail(snapshot: snapshot),
+                      IngredientsDetails(snapshot: snapshot),
+                      CookingStepsDetail(snapshot: snapshot),
+                    ],
+                  ),
+                ),
+                const Divider(
+                  height: 20,
+                  thickness: 1,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.black,
+                ),
+                CommentView(),
+                CookingButton(),
+              ],
             ),
           );
         },

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/api/recept_api.dart';
 import 'package:otus_food_app/model.dart';
-import 'package:otus_food_app/widgets/logo.dart';
+import 'package:otus_food_app/widgets/Logo/logo.dart';
 
 class LogoScreen extends StatefulWidget {
   final String nextRoute;

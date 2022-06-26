@@ -4,6 +4,8 @@ import 'package:otus_food_app/model.dart';
 // ignore: constant_identifier_names
 class Constants {
   static const String LOGO_IMAGE = 'assets/images/logo.png';
+  static const String avatar_1 = 'assets/images/avatar.png';
+  static const String commentImage_1 = 'assets/images/comment_image_1.png';
   // static const String IMAGE1 = 'assets/images/1.png';
   // static const String IMAGE2 = 'assets/images/2.png';
   // static const String IMAGE3 = 'assets/images/3.png';
@@ -11,6 +13,12 @@ class Constants {
   // static const String IMAGE5 = 'assets/images/5.png';
   // static const String IMAGE6 = 'assets/images/6.png';
   // static const String IMAGE7 = 'assets/images/7.png';
+  static const String icon_pizza = 'assets/icons/pizza_green.png';
+  static const String icon_fridge = 'assets/icons/fridge_green.png';
+  static const String icon_heart = 'assets/icons/heart_green.png';
+  static const String icon_profile = 'assets/icons/profile_green.png';
+
+  static const String icon_megafon = 'assets/icons/megafon.png';
   static const String ICON_CLOCK = 'assets/icons/clock.png';
   static const String checkbox_passed = 'assets/icons/checkbox_passed.png';
   static const String checkbox_nopassed = 'assets/icons/checkbox_nopassed.png';
@@ -34,9 +42,9 @@ class Constants {
 //enum CookingStepsStatus { nostart, start, complite }
 
 class AppColors {
-  static const Color main = Color(0xFF24282F);
-  static const Color accent = Color(0xFF3C3E44);
-  static const Color greyColor = Color(0xFFECECEC);
+  static const Color main = Color(0xFF165932);
+  static const Color accent = Color(0xFF2ECC71);
+  static const Color greyColor = Color(0xFFC2C2C2);
 
   Color step_back(CookingStepsStatus cookingStepsStatus) {
     switch (cookingStepsStatus) {

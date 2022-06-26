@@ -14,7 +14,7 @@ class CookingStepsDetail extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 19,
           ),
           const Text(
@@ -27,13 +27,14 @@ class CookingStepsDetail extends StatelessWidget {
               color: Color(0xFF165932),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
             //height: 600,
             child: ListView.builder(
                 shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
                 //padding: const EdgeInsets.all(8),
                 itemCount: recept?.cookingSteps?.length ?? 0,
                 itemBuilder: (BuildContext context, int index) {
