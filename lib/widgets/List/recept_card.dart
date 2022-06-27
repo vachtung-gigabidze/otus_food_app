@@ -10,7 +10,7 @@ class ReceptCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(12.0),
+      margin: const EdgeInsets.all(12.0),
       child: InkWell(
         onTap: () {},
         child: Row(

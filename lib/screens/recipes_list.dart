@@ -11,7 +11,7 @@ class ReceptsList extends StatelessWidget {
     final recepts = ModalRoute.of(context)!.settings.arguments as RecipesModel;
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: AppColors.greyColor,
       ),
       child: ListView.builder(

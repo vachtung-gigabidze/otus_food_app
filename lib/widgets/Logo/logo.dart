@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:otus_food_app/constants.dart';
 
 Widget logoWidget() {
-  var name = Constants.LOGO_IMAGE;
+  var name = Constants.logoIMAGE;
 
   return MaskedImage(
     imageSrc: name,
@@ -32,7 +32,7 @@ class MaskedImage extends StatelessWidget {
   final String imageSrc;
   final Widget child;
 
-  MaskedImage({Key? key, required this.imageSrc, required this.child})
+  const MaskedImage({Key? key, required this.imageSrc, required this.child})
       : super(key: key);
 
   @override

@@ -7,15 +7,15 @@ class RecipesModel {
     if (json['Recipes'] != null) {
       recipes = <Recipes>[];
       json['Recipes'].forEach((v) {
-        recipes!.add(new Recipes.fromJson(v));
+        recipes!.add(Recipes.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.recipes != null) {
-      data['Recipes'] = this.recipes!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    if (recipes != null) {
+      data['Recipes'] = recipes!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -46,28 +46,28 @@ class Recipes {
     if (json['ingredients'] != null) {
       ingredients = <Ingredients>[];
       json['ingredients'].forEach((v) {
-        ingredients!.add(new Ingredients.fromJson(v));
+        ingredients!.add(Ingredients.fromJson(v));
       });
     }
     if (json['cookingSteps'] != null) {
       cookingSteps = <CookingStep>[];
       json['cookingSteps'].forEach((v) {
-        cookingSteps!.add(new CookingStep.fromJson(v));
+        cookingSteps!.add(CookingStep.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['time'] = this.time;
-    data['imageUrl'] = this.imageUrl;
-    if (this.ingredients != null) {
-      data['ingredients'] = this.ingredients!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['id'] = id;
+    data['name'] = name;
+    data['time'] = time;
+    data['imageUrl'] = imageUrl;
+    if (ingredients != null) {
+      data['ingredients'] = ingredients!.map((v) => v.toJson()).toList();
     }
-    if (this.cookingSteps != null) {
-      data['cookingSteps'] = this.cookingSteps!.map((v) => v.toJson()).toList();
+    if (cookingSteps != null) {
+      data['cookingSteps'] = cookingSteps!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -85,9 +85,9 @@ class Ingredients {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['quantity'] = this.quantity;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['name'] = name;
+    data['quantity'] = quantity;
     return data;
   }
 }
@@ -114,11 +114,11 @@ class CookingStep {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['order'] = this.order;
-    data['step'] = this.step;
-    data['duration'] = this.duration;
-    data['status'] = this.status;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['order'] = order;
+    data['step'] = step;
+    data['duration'] = duration;
+    data['status'] = status;
     return data;
   }
 }

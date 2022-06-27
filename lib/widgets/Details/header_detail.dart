@@ -12,58 +12,56 @@ class HeaderDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     var recept = snapshot.data?.recipes?[0];
 
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: 10,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(
+          height: 10,
+        ),
+        Text(
+          recept?.name ?? "Название рецепта",
+          textAlign: TextAlign.left,
+          style: const TextStyle(
+            fontFamily: 'Roboto',
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w600,
+            fontSize: 24.0,
+            color: Colors.black87,
+            decoration: TextDecoration.none,
           ),
-          Text(
-            recept?.name ?? "Название рецепта",
-            textAlign: TextAlign.left,
-            style: const TextStyle(
-              fontFamily: 'Roboto',
-              fontStyle: FontStyle.normal,
-              fontWeight: FontWeight.w600,
-              fontSize: 24.0,
-              color: Colors.black87,
-              decoration: TextDecoration.none,
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        Row(
+          children: [
+            const Image(
+              image: AssetImage(Constants.iconClock),
+              height: 16,
+              width: 16,
+              fit: BoxFit.cover,
             ),
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Row(
-            children: [
-              const Image(
-                image: AssetImage(Constants.ICON_CLOCK),
-                height: 16,
-                width: 16,
-                fit: BoxFit.cover,
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 11.0),
-                child: Text(
-                  recept?.time ?? "Время приготовления",
-                  style: const TextStyle(
-                    fontFamily: 'Roboto',
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 16.0,
-                    color: Color(0xFF2ECC71),
-                    decoration: TextDecoration.none,
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(left: 11.0),
+              child: Text(
+                recept?.time ?? "Время приготовления",
+                style: const TextStyle(
+                  fontFamily: 'Roboto',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16.0,
+                  color: Color(0xFF2ECC71),
+                  decoration: TextDecoration.none,
                 ),
               ),
-            ],
-          ),
-          SizedBox(
-            height: 16,
-          ),
-          Image(image: AssetImage('assets/images/1_full.png')),
-        ],
-      ),
+            ),
+          ],
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+        const Image(image: AssetImage('assets/images/1_full.png')),
+      ],
     );
   }
 }

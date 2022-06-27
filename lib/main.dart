@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 // import 'package:otus_food_app/screens/logo_screen.dart';
 import 'package:otus_food_app/screens/recept_detail.dart';
 import 'package:otus_food_app/screens/recipes_list.dart';
@@ -10,9 +10,11 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
-    '/Home': (BuildContext context) => ReceptsList(),
+    '/Home': (BuildContext context) => const ReceptsList(),
     '/Details': (BuildContext context) => ReceptDetail(),
   };
+
+  MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

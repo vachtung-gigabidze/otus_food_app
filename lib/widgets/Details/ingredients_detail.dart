@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:otus_food_app/model.dart';
 
 class IngredientsDetails extends StatelessWidget {
-  IngredientsDetails({Key? key, required this.snapshot}) : super(key: key);
+  const IngredientsDetails({Key? key, required this.snapshot})
+      : super(key: key);
 
   final AsyncSnapshot<RecipesModel> snapshot;
 
@@ -12,10 +13,10 @@ class IngredientsDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(
+        const SizedBox(
           height: 18,
         ),
-        Text(
+        const Text(
           'Ингредиенты',
           style: TextStyle(
             fontFamily: 'Roboto',
@@ -25,71 +26,69 @@ class IngredientsDetails extends StatelessWidget {
             color: Color(0xFF165932),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 22,
         ),
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
-              color: Color.fromARGB(255, 121, 118, 118),
+              color: const Color.fromARGB(255, 121, 118, 118),
               width: 3,
             ),
           ),
           child: ListView.builder(
               shrinkWrap: true,
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.all(6),
               itemCount: recept?.ingredients?.length ?? 0,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(2.0),
-                  child: Container(
-                    child: Center(
-                        child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            const Text(
-                              '\u2022',
-                              style: TextStyle(
-                                fontSize: 16,
-                                height: 1.55,
-                                color: Colors.black87,
-                              ),
+                  child: Center(
+                      child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const Text(
+                            '\u2022',
+                            style: TextStyle(
+                              fontSize: 16,
+                              height: 1.55,
+                              color: Colors.black87,
                             ),
-                            const SizedBox(
-                              width: 6,
-                            ),
-                            Text(
-                              '${recept?.ingredients?[index].name}',
-                              style: const TextStyle(
-                                fontFamily: 'Roboto',
-                                fontStyle: FontStyle.normal,
-                                fontWeight: FontWeight.w600,
-                                fontSize: 14.0,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ],
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            '${recept?.ingredients?[index].quantity}',
+                          ),
+                          const SizedBox(
+                            width: 6,
+                          ),
+                          Text(
+                            '${recept?.ingredients?[index].name}',
                             style: const TextStyle(
                               fontFamily: 'Roboto',
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 13.0,
-                              color: Color(0xFF797676),
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14.0,
+                              color: Colors.black87,
                             ),
                           ),
+                        ],
+                      ),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          '${recept?.ingredients?[index].quantity}',
+                          style: const TextStyle(
+                            fontFamily: 'Roboto',
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 13.0,
+                            color: Color(0xFF797676),
+                          ),
                         ),
-                      ],
-                    )),
-                  ),
+                      ),
+                    ],
+                  )),
                 );
               }),
         )

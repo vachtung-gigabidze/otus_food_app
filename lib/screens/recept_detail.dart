@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:otus_food_app/api/recept_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/widgets/Details/comment_post.dart';
 import 'package:otus_food_app/widgets/Details/comment_view.dart';
 import 'package:otus_food_app/widgets/Details/cooking_button.dart';
 import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
@@ -13,7 +14,7 @@ class ReceptDetail extends StatelessWidget {
   ReceptDetail({Key? key, Recipes? this.recept}) : super(key: key);
 
   Future<RecipesModel> recepts = Future.value(ReceptApi().fetchRecipets());
-  Recipes? recept;
+  final Recipes? recept;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class ReceptDetail extends StatelessWidget {
           IconButton(
             onPressed: () {},
             icon: Image.asset(
-              Constants.icon_megafon,
+              Constants.iconMegafon,
               height: 24,
               width: 24,
             ),
@@ -52,7 +53,7 @@ class ReceptDetail extends StatelessWidget {
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
-              Constants.icon_pizza,
+              Constants.iconPizza,
               height: 24,
               width: 24,
             ).image),
@@ -61,7 +62,7 @@ class ReceptDetail extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
-              Constants.icon_fridge,
+              Constants.iconFridge,
               height: 24,
               width: 24,
             ).image),
@@ -69,7 +70,7 @@ class ReceptDetail extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
-              Constants.icon_heart,
+              Constants.iconHeart,
               height: 24,
               width: 24,
             ).image),
@@ -77,7 +78,7 @@ class ReceptDetail extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
-              Constants.icon_profile,
+              Constants.iconProfile,
               height: 24,
               width: 24,
             ).image),
@@ -98,14 +99,28 @@ class ReceptDetail extends StatelessWidget {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(15),
+                  padding: const EdgeInsets.only(left: 15, right: 15),
                   child: Column(
                     children: [
                       HeaderDetail(snapshot: snapshot),
                       IngredientsDetails(snapshot: snapshot),
+                      const SizedBox(
+                        height: 27,
+                      ),
+                      checkIngredients(),
+                      const SizedBox(
+                        height: 27,
+                      ),
                       CookingStepsDetail(snapshot: snapshot),
                     ],
                   ),
+                ),
+                const SizedBox(
+                  height: 27,
+                ),
+                cookingButton(),
+                const SizedBox(
+                  height: 32,
                 ),
                 const Divider(
                   height: 20,
@@ -114,8 +129,18 @@ class ReceptDetail extends StatelessWidget {
                   endIndent: 0,
                   color: Colors.black,
                 ),
-                CommentView(),
-                CookingButton(),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    children: [
+                      commentView(),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const CommentPost(),
+                    ],
+                  ),
+                ),
               ],
             ),
           );

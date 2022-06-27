@@ -4,7 +4,7 @@ import 'package:otus_food_app/model.dart';
 
 Widget checkBoxView(CookingStepsStatus cookingStepsStatus) {
   return Image(
-    image: AssetImage(Constants().checkBox_icon(cookingStepsStatus)),
+    image: AssetImage(Constants().checkBoxIcon(cookingStepsStatus)),
     height: 30,
     width: 30,
     fit: BoxFit.cover,

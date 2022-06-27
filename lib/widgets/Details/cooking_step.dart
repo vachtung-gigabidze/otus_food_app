@@ -12,7 +12,7 @@ Widget cookingStepCard(CookingStep? cookingStep) {
           color: Colors.grey.withOpacity(0.8),
           spreadRadius: 0,
           blurRadius: 4,
-          offset: Offset(0, 4), // changes position of shadow
+          offset: const Offset(0, 4), // changes position of shadow
         ),
       ],
     ),
@@ -22,7 +22,7 @@ Widget cookingStepCard(CookingStep? cookingStep) {
       height: 120, //double.infinity,
 
       child: Card(
-        color: AppColors().step_back(cookingStep!.status!),
+        color: AppColors().stepBackground(cookingStep!.status!),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -35,7 +35,7 @@ Widget cookingStepCard(CookingStep? cookingStep) {
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w900,
                   fontSize: 40.0,
-                  color: AppColors().step_text(cookingStep.status!),
+                  color: AppColors().stepText(cookingStep.status!),
                 ),
               ),
             ),
@@ -47,7 +47,7 @@ Widget cookingStepCard(CookingStep? cookingStep) {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w600,
                     fontSize: 14.0,
-                    color: AppColors().step_text(cookingStep.status!)),
+                    color: AppColors().stepText(cookingStep.status!)),
                 overflow: TextOverflow.clip,
               ),
             ),
@@ -64,7 +64,7 @@ Widget cookingStepCard(CookingStep? cookingStep) {
                       fontStyle: FontStyle.normal,
                       fontWeight: FontWeight.w700,
                       fontSize: 13.0,
-                      color: AppColors().step_checkbox(cookingStep.status!),
+                      color: AppColors().stepCheckbox(cookingStep.status!),
                     ),
                   ),
                 ],
