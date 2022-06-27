@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food_app/screens/login_screen.dart';
+import 'package:otus_food_app/screens/logo_screen.dart';
 // import 'package:flutter/services.dart';
 // import 'package:otus_food_app/screens/logo_screen.dart';
 import 'package:otus_food_app/screens/recept_detail.dart';
@@ -12,6 +14,7 @@ class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
     '/Home': (BuildContext context) => const ReceptsList(),
     '/Details': (BuildContext context) => ReceptDetail(),
+    '/Login': (BuildContext context) => LoginScreen(),
   };
 
   MyApp({Key? key}) : super(key: key);
@@ -25,8 +28,9 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
       ),
-      home: ReceptDetail(),
-      //LogoScreen(nextRoute: '/Home'),
+      home: //ReceptDetail(),
+          LoginScreen(),
+      //  LogoScreen(nextRoute: '/Login'),
       routes: routes,
     );
   }

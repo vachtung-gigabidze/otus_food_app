@@ -9,7 +9,6 @@ import 'package:otus_food_app/widgets/Details/cooking_button.dart';
 import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
 import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/Details/header_detail.dart';
-import 'package:otus_food_app/widgets/Details/text_field_test.dart';
 
 class ReceptDetail extends StatelessWidget {
   ReceptDetail({Key? key, Recipes? this.recept}) : super(key: key);
