@@ -9,46 +9,117 @@ class CommentPost extends StatefulWidget {
 }
 
 class _CommentPostState extends State<CommentPost> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 72.0,
-      decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-        border: Border.all(
-            color: const Color(0xFF165932),
-            width: 2.0,
-            style: BorderStyle.solid),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter a search term',
-                ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        SizedBox(
+          height: 72,
+          child: TextField(
+            decoration: InputDecoration(
+              suffixIcon: GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    padding: const EdgeInsets.all(10.0),
+                    color: Colors.transparent,
+                    constraints: const BoxConstraints(
+                      maxHeight: 24.0,
+                      maxWidth: 24.0,
+                    ),
+                    child: const Image(
+                      image: AssetImage(
+                        Constants.imageIcon,
+                      ),
+                      height: 24,
+                      width: 24,
+                    ),
+                  )),
+              enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                color: Color(0xFF165932),
+                width: 2,
+                style: BorderStyle.solid,
+              )),
+              focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                color: Color(0xFF165932),
+                width: 2,
+                style: BorderStyle.solid,
+              )),
+              hintText: 'оставить комментарий',
+              hintStyle: const TextStyle(
+                height: 2.0,
+                fontFamily: 'Roboto',
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w500,
+                fontSize: 16.0,
+                color: Color(0xFFC2C2C2),
               ),
             ),
-            // TextField(
-
-            //   decoration: InputDecoration.collapsed(
-            //     hintText: 'оставить комментарий',
-            //   ),
-            // ),
-            Image(
-              image: AssetImage(Constants.imageIcon),
-              height: 19,
-              width: 24,
-              fit: BoxFit.cover,
-            ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
+    
+    
+    
+//     Container(
+//       height: 72.0,
+//       decoration: BoxDecoration(
+//         borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+//         border: Border.all(
+//             color: const Color(0xFF165932),
+//             width: 2.0,
+//             style: BorderStyle.solid),
+//       ),
+//       child: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: [
+//             Padding(
+//               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+//               child: Text('dsds'
+//                   //controller: _controller,
+//                   // decoration: InputDecoration(
+//                   //   border: OutlineInputBorder(),
+//                   //   hintText: 'Enter a search term',
+//                   // ),
+//                   ),
+//             ),
+//             // TextField(
+
+//             //   decoration: InputDecoration.collapsed(
+//             //     hintText: 'оставить комментарий',
+//             //   ),
+//             // ),
+
+//             Image(
+//               image: AssetImage(Constants.imageIcon),
+//               height: 19,
+//               width: 24,
+//               fit: BoxFit.cover,
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

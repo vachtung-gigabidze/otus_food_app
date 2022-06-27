@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:otus_food_app/api/recept_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
@@ -9,6 +9,7 @@ import 'package:otus_food_app/widgets/Details/cooking_button.dart';
 import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
 import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/Details/header_detail.dart';
+import 'package:otus_food_app/widgets/Details/text_field_test.dart';
 
 class ReceptDetail extends StatelessWidget {
   ReceptDetail({Key? key, Recipes? this.recept}) : super(key: key);
@@ -97,6 +98,7 @@ class ReceptDetail extends StatelessWidget {
         builder: (context, snapshot) {
           return SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15),
@@ -135,7 +137,7 @@ class ReceptDetail extends StatelessWidget {
                     children: [
                       commentView(),
                       const SizedBox(
-                        height: 15,
+                        height: 35,
                       ),
                       const CommentPost(),
                     ],

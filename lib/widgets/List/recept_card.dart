@@ -50,7 +50,7 @@ class ReceptCard extends StatelessWidget {
                   Row(
                     children: [
                       const Image(
-                        image: AssetImage(Constants.ICON_CLOCK),
+                        image: AssetImage(Constants.iconClock),
                         height: 16,
                         width: 16,
                         fit: BoxFit.cover,
