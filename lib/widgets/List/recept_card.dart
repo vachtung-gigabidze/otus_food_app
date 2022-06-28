@@ -3,9 +3,9 @@ import 'package:otus_food_app/Constants.dart';
 import 'package:otus_food_app/model.dart';
 
 class ReceptCard extends StatelessWidget {
-  ReceptCard({Key? key, required Recipes this.recept}) : super(key: key);
+  ReceptCard({Key? key, required Recipe this.recept}) : super(key: key);
 
-  Recipes? recept;
+  Recipe? recept;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,7 @@ class ReceptCard extends StatelessWidget {
             ),
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     recept?.name ?? "",

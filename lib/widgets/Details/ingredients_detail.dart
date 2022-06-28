@@ -2,23 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:otus_food_app/model.dart';
 
 class IngredientsDetails extends StatelessWidget {
-  const IngredientsDetails({Key? key, required this.snapshot})
+  const IngredientsDetails(
+      {Key? key, required this.snapshot, this.title = 'Ингредиенты'})
       : super(key: key);
 
-  final AsyncSnapshot<RecipesModel> snapshot;
-
+  final List<Ingredient>? snapshot;
+  final String title;
   @override
   Widget build(BuildContext context) {
-    var recept = snapshot.data?.recipes?[0];
+    var ingredients = snapshot;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(
           height: 18,
         ),
-        const Text(
-          'Ингредиенты',
-          style: TextStyle(
+        Text(
+          title,
+          style: const TextStyle(
             fontFamily: 'Roboto',
             fontStyle: FontStyle.normal,
             fontWeight: FontWeight.w600,
@@ -31,6 +33,7 @@ class IngredientsDetails extends StatelessWidget {
         ),
         Container(
           decoration: BoxDecoration(
+            color: Colors.white,
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
               color: const Color.fromARGB(255, 121, 118, 118),
@@ -41,7 +44,7 @@ class IngredientsDetails extends StatelessWidget {
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
               padding: const EdgeInsets.all(6),
-              itemCount: recept?.ingredients?.length ?? 0,
+              itemCount: ingredients?.length ?? 0,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
                   padding: const EdgeInsets.all(2.0),
@@ -63,7 +66,7 @@ class IngredientsDetails extends StatelessWidget {
                             width: 6,
                           ),
                           Text(
-                            '${recept?.ingredients?[index].name}',
+                            '${ingredients?[index].name}',
                             style: const TextStyle(
                               fontFamily: 'Roboto',
                               fontStyle: FontStyle.normal,
@@ -74,10 +77,10 @@ class IngredientsDetails extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Align(
-                        alignment: Alignment.centerLeft,
+                      SizedBox(
+                        width: 90,
                         child: Text(
-                          '${recept?.ingredients?[index].quantity}',
+                          '${ingredients?[index].quantity} ${ingredients?[index].unit}',
                           style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontStyle: FontStyle.normal,
