@@ -25,6 +25,7 @@ class Recipe {
   int? id;
   String? name;
   String? time;
+  int? cookingCount;
   String? imageUrl;
   List<Ingredient>? ingredients;
   List<CookingStep>? cookingSteps;
@@ -33,6 +34,7 @@ class Recipe {
       {this.id,
       this.name,
       this.time,
+      this.cookingCount,
       this.imageUrl,
       this.ingredients,
       this.cookingSteps});
@@ -41,6 +43,7 @@ class Recipe {
     id = json['id'];
     name = json['name'];
     time = json['time'];
+    cookingCount = json['cookingCount'];
     imageUrl = json['imageUrl'];
 
     if (json['ingredients'] != null) {
@@ -62,6 +65,7 @@ class Recipe {
     data['id'] = id;
     data['name'] = name;
     data['time'] = time;
+    data['cookingCount'] = cookingCount;
     data['imageUrl'] = imageUrl;
     if (ingredients != null) {
       data['ingredients'] = ingredients!.map((v) => v.toJson()).toList();

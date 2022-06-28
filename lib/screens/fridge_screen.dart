@@ -117,7 +117,9 @@ class _FridgeScreenState extends State<FridgeScreen> {
                               physics: ScrollPhysics(),
                               itemCount: snap.data?.length ?? 1,
                               itemBuilder: (context, index) {
-                                return ReceptCard(recept: snap.data![index]);
+                                return snap.hasData
+                                    ? ReceptCard(recept: snap.data![index])
+                                    : Container();
                               })),
                     ],
                   ),

@@ -8,6 +8,7 @@ class Constants {
   static const String commentImage_1 = 'assets/images/comment_image_1.png';
   static const String imageIcon = 'assets/icons/image_green.png';
   static const String lockIcon = 'assets/icons/lock_grey.png';
+  static const String flagIcon = 'assets/icons/flag_green.png';
 
   // static const String IMAGE1 = 'assets/images/1.png';
   // static const String IMAGE2 = 'assets/images/2.png';
@@ -20,6 +21,8 @@ class Constants {
   static const String iconFridge = 'assets/icons/fridge_green.png';
   static const String iconHeart = 'assets/icons/heart_green.png';
   static const String iconProfile = 'assets/icons/profile_green.png';
+
+  static const String imageProfile = 'assets/images/profile.png';
 
   static const String iconMegafon = 'assets/icons/megafon.png';
   static const String iconClock = 'assets/icons/clock.png';

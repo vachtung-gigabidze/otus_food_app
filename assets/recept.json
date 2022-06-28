@@ -8,47 +8,58 @@
       "ingredients": [
         {
           "name": "Соевый соус",
-          "quantity": "8 ст. ложек"
+          "quantity": "8",
+          "unit": "ст. ложек"
         },
         {
           "name": "Вода",
-          "quantity": "8 ст. ложек"
+          "quantity": "8",
+          "unit": "ст. ложек"
         },
         {
           "name": "Мёд",
-          "quantity": "3 ст. ложки"
+          "quantity": "3",
+          "unit": "ст. ложки"
         },
         {
           "name": "Коричневый сахар",
-          "quantity": "2 ст. ложки"
+          "quantity": "2",
+          "unit": "ст. ложки"
         },
         {
           "name": "Чеснок",
-          "quantity": "3 зубчика"
+          "quantity": "3",
+          "unit": "зубчика"
         },
         {
           "name": "Тёртый свежий имбирь",
-          "quantity": "1 ст. ложка"
+          "quantity": "1",
+          "unit": "ст. ложка"
         },
         {
           "name": "Лимонный сок",
-          "quantity": "1¹⁄₂ ст. ложки"
+          "quantity": "1¹⁄₂",
+          "unit": "ст. ложки"
         },
         {
           "name": "Кукурузный крахмал",
-          "quantity": "1 ст. ложка"
+          "quantity": "1",
+          "unit": "ст. ложка"
         },
         {
           "name": "Растительное масло",
-          "quantity": "1 ч. ложка"
+          "quantity": "1",
+          "unit": "ч. ложка"
         },
         {
           "name": "Филе лосося или сёмги",
-          "quantity": "680 г"
+          "quantity": "680",
+          "unit": "г"
         },
         {
           "name": "Кунжут",
-          "quantity": "по вкусу"
+          "quantity": "по вкусу",
+          "unit": ""
         }
       ],
       "cookingSteps": [
@@ -104,11 +115,13 @@
       "ingredients": [
         {
           "name": "Coco Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         },
         {
           "name": "Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         }
       ],
       "cookingSteps": [
@@ -134,11 +147,13 @@
       "ingredients": [
         {
           "name": "Coco Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         },
         {
           "name": "Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         }
       ],
       "cookingSteps": [
@@ -194,11 +209,13 @@
       "ingredients": [
         {
           "name": "Coco Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         },
         {
           "name": "Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         }
       ],
       "cookingSteps": [
@@ -224,11 +241,13 @@
       "ingredients": [
         {
           "name": "Coco Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         },
         {
           "name": "Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         }
       ],
       "cookingSteps": [
@@ -254,11 +273,13 @@
       "ingredients": [
         {
           "name": "Coco Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         },
         {
           "name": "Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         }
       ],
       "cookingSteps": [
