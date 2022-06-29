@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food_app/features/view/select_foto.dart';
 import 'package:otus_food_app/screens/favourites_screen.dart';
 import 'package:otus_food_app/screens/fridge_screen.dart';
 import 'package:otus_food_app/screens/login_screen.dart';
@@ -32,7 +33,8 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
       ),
       home: //ReceptDetail(),
-          ProfileScreen(),
+          //ProfileScreen(),
+          selectFoto(),
       // FavouritesScreen(),
       // FridgeScreen(),
       //LoginScreen(),
