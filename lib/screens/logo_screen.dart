@@ -20,7 +20,7 @@ class _LogoScreenState extends State<LogoScreen> {
     Timer(const Duration(seconds: 2), () async {
       try {
         RecipesModel recepts = await ReceptApi().fetchRecipets();
-        //print('to list ${recepts.toString()}');
+
         if (recepts.recipes!.isNotEmpty) {
           Navigator.of(context)
               .pushReplacementNamed(widget.nextRoute, arguments: recepts);
