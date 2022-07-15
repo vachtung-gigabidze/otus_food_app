@@ -3,7 +3,6 @@ import 'package:otus_food_app/api/recept_api.dart';
 
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
-import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/List/recept_card.dart';
 
 class FavouritesScreen extends StatefulWidget {
@@ -77,7 +76,7 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
                     future: recepts,
                     builder: (context, snap) => ListView.builder(
                         shrinkWrap: true,
-                        physics: ScrollPhysics(),
+                        physics: const ScrollPhysics(),
                         itemCount: snap.data?.length ?? 1,
                         itemBuilder: (context, index) {
                           return snap.hasData

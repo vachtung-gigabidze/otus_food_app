@@ -17,7 +17,7 @@ class LogoScreen extends StatefulWidget {
 
 class _LogoScreenState extends State<LogoScreen> {
   void getRecept() async {
-    Timer(const Duration(seconds: 2), () async {
+    Timer(const Duration(seconds: 1), () async {
       try {
         RecipesModel recepts = await ReceptApi().fetchRecipets();
 

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     '/recepts': (BuildContext context) => const ReceptsList(),
     '/details': (BuildContext context) => ReceptDetail(),
     '/login': (BuildContext context) => const LoginScreen(),
-    '/logo': (BuildContext context) => LogoScreen(nextRoute: '/recepts'),
+    '/logo': (BuildContext context) => const LogoScreen(nextRoute: '/recepts'),
     '/fridge': (BuildContext context) => const FridgeScreen(),
     '/favourite': (BuildContext context) => const FavouritesScreen(),
     '/profile': (BuildContext context) => const ProfileScreen(),

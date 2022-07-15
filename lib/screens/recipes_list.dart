@@ -22,22 +22,22 @@ class ReceptsList extends StatelessWidget {
             label: 'Рецепты',
             backgroundColor: Colors.white,
           ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconFridge,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Холодильник',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconHeart,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Избраное',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: ImageIcon(Image.asset(
+          //     Constants.iconFridge,
+          //     height: 24,
+          //     width: 24,
+          //   ).image),
+          //   label: 'Холодильник',
+          // ),
+          // BottomNavigationBarItem(
+          //   icon: ImageIcon(Image.asset(
+          //     Constants.iconHeart,
+          //     height: 24,
+          //     width: 24,
+          //   ).image),
+          //   label: 'Избраное',
+          // ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
               Constants.iconProfile,

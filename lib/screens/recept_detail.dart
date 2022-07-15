@@ -11,9 +11,10 @@ import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/Details/header_detail.dart';
 
 class ReceptDetail extends StatelessWidget {
-  ReceptDetail({Key? key, Recipe? this.recept}) : super(key: key);
+  ReceptDetail({Key? key, this.recept}) : super(key: key);
 
-  Future<RecipesModel> recepts = Future.value(ReceptApi().fetchRecipets());
+  final Future<RecipesModel> recepts =
+      Future.value(ReceptApi().fetchRecipets());
   final Recipe? recept;
 
   @override

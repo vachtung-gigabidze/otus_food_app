@@ -114,7 +114,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                           future: recepts,
                           builder: (context, snap) => ListView.builder(
                               shrinkWrap: true,
-                              physics: ScrollPhysics(),
+                              physics: const ScrollPhysics(),
                               itemCount: snap.data?.length ?? 1,
                               itemBuilder: (context, index) {
                                 return snap.hasData

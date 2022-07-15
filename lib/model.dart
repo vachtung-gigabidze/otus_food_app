@@ -13,7 +13,7 @@ class RecipesModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     if (recipes != null) {
       data['Recipes'] = recipes!.map((v) => v.toJson()).toList();
     }
@@ -61,7 +61,7 @@ class Recipe {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     data['id'] = id;
     data['name'] = name;
     data['time'] = time;
@@ -91,7 +91,7 @@ class Ingredient {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     data['name'] = name;
     data['quantity'] = quantity;
     data['unit'] = unit;
@@ -143,7 +143,7 @@ class CookingStep {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     data['order'] = order;
     data['step'] = step;
     data['duration'] = duration;
@@ -167,7 +167,7 @@ class FridgeModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     if (fridge != null) {
       data['fridge'] = fridge!.map((v) => v.toJson()).toList();
     }
