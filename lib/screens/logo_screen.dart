@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/api/recept_api.dart';
+
+import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/Logo/logo.dart';
 
@@ -17,24 +17,24 @@ class LogoScreen extends StatefulWidget {
 
 class _LogoScreenState extends State<LogoScreen> {
   void getRecept() async {
-    Timer(const Duration(seconds: 1), () async {
-      try {
-        RecipesModel recepts = await ReceptApi().fetchRecipets();
-
-        if (recepts.recipes!.isNotEmpty) {
-          Navigator.of(context)
-              .pushReplacementNamed(widget.nextRoute, arguments: recepts);
-        }
-      } catch (e) {
-        log('$e');
-      }
-    });
+    RecipesModel? recipes;
+    try {
+      recipes = await RecipeApi().fetchRecipes();
+    } catch (e) {
+      log('$e');
+    } finally {
+      Navigator.of(context)
+          .pushReplacementNamed(widget.nextRoute, arguments: recipes);
+    }
   }
 
   @override
   void initState() {
     super.initState();
-    getRecept();
+
+    Future.delayed(const Duration(seconds: 1), () {
+      getRecept();
+    });
   }
 
   @override

@@ -5,9 +5,9 @@ import 'dart:developer';
 import 'package:otus_food_app/model.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-class ReceptApi {
-  Future<RecipesModel> fetchRecipets(
-      {String assetsPath = "assets/recept.json"}) async {
+class RecipeApi {
+  Future<RecipesModel> fetchRecipes(
+      {String assetsPath = "assets/recipes.json"}) async {
     log('read recept: $assetsPath');
 
     return rootBundle
@@ -15,8 +15,8 @@ class ReceptApi {
         .then((json) => RecipesModel.fromJson(jsonDecode(json)));
   }
 
-  Future<List<Recipe>?> fetchFavouritesRecipets(
-      {String assetsPath = "assets/recept.json"}) async {
+  Future<List<Recipe>?> fetchFavoritesRecipes(
+      {String assetsPath = "assets/recipes.json"}) async {
     log('read recept: $assetsPath');
 
     return rootBundle.loadString(assetsPath).then((json) {
@@ -26,8 +26,8 @@ class ReceptApi {
     });
   }
 
-  Future<List<Recipe>?> fetchAvailableRecipets(
-      {String assetsPath = "assets/recept.json"}) async {
+  Future<List<Recipe>?> fetchAvailableRecipes(
+      {String assetsPath = "assets/recipes.json"}) async {
     log('read recept: $assetsPath');
 
     return rootBundle.loadString(assetsPath).then((json) {

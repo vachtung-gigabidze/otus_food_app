@@ -62,7 +62,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
-    - assets/recept.json
+    - assets/recipes.json
     - assets/fridge.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/api/recept_api.dart';
+import 'package:otus_food_app/api/recipe_api.dart';
 
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
-import 'package:otus_food_app/widgets/List/recept_card.dart';
+import 'package:otus_food_app/widgets/List/recipe_card.dart';
 
-class FavouritesScreen extends StatefulWidget {
-  const FavouritesScreen({Key? key}) : super(key: key);
+class FavoritesScreen extends StatefulWidget {
+  const FavoritesScreen({Key? key}) : super(key: key);
 
   @override
-  State<FavouritesScreen> createState() => _FavouritesScreenState();
+  State<FavoritesScreen> createState() => _FavoritesScreenState();
 }
 
-class _FavouritesScreenState extends State<FavouritesScreen> {
-  Future<FridgeModel> fridge = Future.value(ReceptApi().fetchFridge());
+class _FavoritesScreenState extends State<FavoritesScreen> {
+  Future<FridgeModel> fridge = Future.value(RecipeApi().fetchFridge());
 
-  Future<List<Recipe>?> recepts =
-      Future.value(ReceptApi().fetchFavouritesRecipets());
+  Future<List<Recipe>?> recipes =
+      Future.value(RecipeApi().fetchFavoritesRecipes());
 
   @override
   Widget build(BuildContext context) {
@@ -73,14 +73,14 @@ class _FavouritesScreenState extends State<FavouritesScreen> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 FutureBuilder<List<Recipe>?>(
-                    future: recepts,
+                    future: recipes,
                     builder: (context, snap) => ListView.builder(
                         shrinkWrap: true,
                         physics: const ScrollPhysics(),
                         itemCount: snap.data?.length ?? 1,
                         itemBuilder: (context, index) {
                           return snap.hasData
-                              ? ReceptCard(recept: snap.data![index])
+                              ? RecipeCard(recipe: snap.data![index])
                               : Container();
                         })),
               ],
