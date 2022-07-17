@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:otus_food_app/Constants.dart';
+import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 
 class RecipeCard extends StatelessWidget {
@@ -32,14 +32,19 @@ class RecipeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const defaultFont = 'Roboto';
     return Card(
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.of(context)
+              .pushReplacementNamed('/detail', arguments: recipe);
+        },
         child: Row(
           children: <Widget>[
             const SizedBox(
               height: 136, // default\minimum height
             ),
+
             FutureBuilder<Image>(
                 future: _loadImage(
                     'assets/images/${recipe?.imageUrl}', _blankImage()),
@@ -56,18 +61,16 @@ class RecipeCard extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 30,
-                  ),
                   Container(
+                    margin: const EdgeInsets.only(top: 30),
                     height: 52,
                     child: Text(
                       recipe?.name ?? "",
                       maxLines: 2,
-                      overflow: TextOverflow.clip,
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                       style: const TextStyle(
-                        fontFamily: 'Roboto',
+                        fontFamily: defaultFont,
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w600,
                         fontSize: 24.0,
@@ -80,59 +83,30 @@ class RecipeCard extends StatelessWidget {
                     height: 12,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          const Image(
-                            image: AssetImage(Constants.iconClock),
-                            height: 16,
-                            width: 16,
-                            fit: BoxFit.cover,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 11.0),
-                            child: Container(
-                              height: 19,
-                              child: Text(
-                                recipe?.time ?? "",
-                                style: const TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontStyle: FontStyle.normal,
-                                  fontWeight: FontWeight.w400,
-                                  fontSize: 16.0,
-                                  color: Color(0xFF2ECC71),
-                                  decoration: TextDecoration.none,
-                                ),
-                              ),
+                      const Image(
+                        image: AssetImage(Constants.iconClock),
+                        height: 16,
+                        width: 16,
+                        fit: BoxFit.cover,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 11.0),
+                        child: SizedBox(
+                          height: 19,
+                          child: Text(
+                            recipe?.time ?? "",
+                            style: const TextStyle(
+                              fontFamily: defaultFont,
+                              fontStyle: FontStyle.normal,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 16.0,
+                              color: Color(0xFF2ECC71),
+                              decoration: TextDecoration.none,
                             ),
                           ),
-                        ],
+                        ),
                       ),
-                      showFavorites
-                          ? Stack(children: const [
-                              Image(
-                                image: AssetImage(Constants.flagIcon),
-                                height: 43,
-                                width: 66,
-                                fit: BoxFit.cover,
-                              ),
-                              Positioned(
-                                top: 5,
-                                left: 45,
-                                child: Text(
-                                  '2',
-                                  style: TextStyle(
-                                    fontFamily: 'Roboto',
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.w800,
-                                    fontSize: 18.0,
-                                    color: Color(0xFFFFFFFF),
-                                  ),
-                                ),
-                              ),
-                            ])
-                          : Container(),
                     ],
                   ),
                   const SizedBox(
@@ -144,6 +118,30 @@ class RecipeCard extends StatelessWidget {
             const SizedBox(
               width: 23,
             ),
+            // showFavorites
+            //     ? Stack(children: const [
+            //         Image(
+            //           image: AssetImage(Constants.flagIcon),
+            //           height: 43,
+            //           width: 66,
+            //           fit: BoxFit.cover,
+            //         ),
+            //         Positioned(
+            //           top: 5,
+            //           left: 45,
+            //           child: Text(
+            //             '2',
+            //             style: TextStyle(
+            //               fontFamily: defaultFont,
+            //               fontStyle: FontStyle.normal,
+            //               fontWeight: FontWeight.w800,
+            //               fontSize: 18.0,
+            //               color: Color(0xFFFFFFFF),
+            //             ),
+            //           ),
+            //         ),
+            //       ])
+            //     : Container(),
           ],
         ),
       ),

@@ -30,13 +30,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Otus Food App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
       ),
-      //home: //ReceptDetail(),
+      //home:
+
       routes: routes,
       initialRoute: '/logo',
     );

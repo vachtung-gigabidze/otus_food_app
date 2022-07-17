@@ -7,9 +7,9 @@ import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/Logo/logo.dart';
 
 class LogoScreen extends StatefulWidget {
-  final String nextRoute;
-
   const LogoScreen({Key? key, required this.nextRoute}) : super(key: key);
+
+  final String nextRoute;
 
   @override
   State<LogoScreen> createState() => _LogoScreenState();
