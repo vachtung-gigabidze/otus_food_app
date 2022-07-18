@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:otus_food_app/features/view/select_foto.dart';
-import 'package:otus_food_app/screens/favourites_screen.dart';
+import 'package:otus_food_app/screens/favorites_screen.dart';
 import 'package:otus_food_app/screens/fridge_screen.dart';
 import 'package:otus_food_app/screens/login_screen.dart';
 import 'package:otus_food_app/screens/logo_screen.dart';
@@ -16,12 +16,12 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
-    '/recepts': (BuildContext context) => const ReceptsList(),
-    '/details': (BuildContext context) => ReceptDetail(),
+    '/recipes': (BuildContext context) => const RecipesList(),
+    '/detail': (BuildContext context) => RecipeDetail(),
     '/login': (BuildContext context) => const LoginScreen(),
-    '/logo': (BuildContext context) => LogoScreen(nextRoute: '/recepts'),
+    '/logo': (BuildContext context) => const LogoScreen(nextRoute: '/recipes'),
     '/fridge': (BuildContext context) => const FridgeScreen(),
-    '/favourite': (BuildContext context) => const FavouritesScreen(),
+    '/favorites': (BuildContext context) => const FavoritesScreen(),
     '/profile': (BuildContext context) => const ProfileScreen(),
   };
 
@@ -30,19 +30,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Otus Food App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
       ),
-      //home: //ReceptDetail(),
-      //ProfileScreen(),
-      //  selectFoto(),
-      // FavouritesScreen(),
-      // FridgeScreen(),
-      //LoginScreen(),
-      //  LogoScreen(nextRoute: '/Login'),
+      //home:
+
       routes: routes,
       initialRoute: '/logo',
     );

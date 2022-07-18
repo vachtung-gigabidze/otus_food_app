@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
-import 'package:otus_food_app/widgets/List/recept_card.dart';
+import 'package:otus_food_app/widgets/List/recipe_card.dart';
 
-class ReceptsList extends StatelessWidget {
-  const ReceptsList({Key? key}) : super(key: key);
+class RecipesList extends StatelessWidget {
+  const RecipesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final recepts = ModalRoute.of(context)!.settings.arguments as RecipesModel;
+    final recipes =
+        (ModalRoute.of(context)!.settings.arguments as RecipesModel).recipes;
 
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
@@ -22,22 +23,22 @@ class ReceptsList extends StatelessWidget {
             label: 'Рецепты',
             backgroundColor: Colors.white,
           ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconFridge,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Холодильник',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconHeart,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Избраное',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: ImageIcon(Image.asset(
+          //     Constants.iconFridge,
+          //     height: 24,
+          //     width: 24,
+          //   ).image),
+          //   label: 'Холодильник',
+          // ),
+          // BottomNavigationBarItem(
+          //   icon: ImageIcon(Image.asset(
+          //     Constants.iconHeart,
+          //     height: 24,
+          //     width: 24,
+          //   ).image),
+          //   label: 'Избраное',
+          // ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
               Constants.iconProfile,
@@ -55,13 +56,18 @@ class ReceptsList extends StatelessWidget {
         // onTap: () {},
       ),
       body: Container(
+        padding: const EdgeInsets.only(top: 33),
         decoration: const BoxDecoration(
           color: AppColors.greyColor,
         ),
         child: ListView.builder(
-          itemCount: recepts.recipes?.length ?? 1,
+          itemCount: recipes?.length ?? 1,
           itemBuilder: (context, index) {
-            return ReceptCard(recept: recepts.recipes![index]);
+            return Padding(
+              padding: const EdgeInsets.only(
+                  left: 16, right: 16, top: 12.0, bottom: 12),
+              child: RecipeCard(recipe: recipes![index]),
+            );
           },
         ),
       ),

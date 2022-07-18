@@ -2,7 +2,7 @@
   "Recipes": [
     {
       "id": 1,
-      "name": "Лосось в соусе терияки",
+      "name": "Лосось в соусе терияки Лосось в соусе терияки Лосось в соусе терияки",
       "time": "45 минут",
       "imageUrl": "1.png",
       "ingredients": [
@@ -111,7 +111,7 @@
       "id": 2,
       "name": "Поке боул с сыром тофу",
       "time": "30 минут",
-      "imageUrl": "2.png",
+      "imageUrl": "02.png",
       "ingredients": [
         {
           "name": "Coco Milk",

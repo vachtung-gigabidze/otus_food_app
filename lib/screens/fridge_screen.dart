@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/api/recept_api.dart';
+import 'package:otus_food_app/api/recipe_api.dart';
 
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
-import 'package:otus_food_app/widgets/List/recept_card.dart';
+import 'package:otus_food_app/widgets/List/recipe_card.dart';
 
 class FridgeScreen extends StatefulWidget {
   const FridgeScreen({Key? key}) : super(key: key);
@@ -14,10 +14,10 @@ class FridgeScreen extends StatefulWidget {
 }
 
 class _FridgeScreenState extends State<FridgeScreen> {
-  Future<FridgeModel> fridge = Future.value(ReceptApi().fetchFridge());
+  Future<FridgeModel> fridge = Future.value(RecipeApi().fetchFridge());
 
-  Future<List<Recipe>?> recepts =
-      Future.value(ReceptApi().fetchAvailableRecipets());
+  Future<List<Recipe>?> recipes =
+      Future.value(RecipeApi().fetchAvailableRecipes());
 
   @override
   Widget build(BuildContext context) {
@@ -111,14 +111,14 @@ class _FridgeScreenState extends State<FridgeScreen> {
                         ),
                       ),
                       FutureBuilder<List<Recipe>?>(
-                          future: recepts,
+                          future: recipes,
                           builder: (context, snap) => ListView.builder(
                               shrinkWrap: true,
-                              physics: ScrollPhysics(),
+                              physics: const ScrollPhysics(),
                               itemCount: snap.data?.length ?? 1,
                               itemBuilder: (context, index) {
                                 return snap.hasData
-                                    ? ReceptCard(recept: snap.data![index])
+                                    ? RecipeCard(recipe: snap.data![index])
                                     : Container();
                               })),
                     ],

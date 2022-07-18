@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
-import 'package:otus_food_app/api/recept_api.dart';
+import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/Details/comment_post.dart';
@@ -10,11 +10,12 @@ import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
 import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/Details/header_detail.dart';
 
-class ReceptDetail extends StatelessWidget {
-  ReceptDetail({Key? key, Recipe? this.recept}) : super(key: key);
+class RecipeDetail extends StatelessWidget {
+  RecipeDetail({Key? key, this.recipe}) : super(key: key);
 
-  Future<RecipesModel> recepts = Future.value(ReceptApi().fetchRecipets());
-  final Recipe? recept;
+  //TODO: Передать рецепт вместо получения из хранилища
+  final Future<RecipesModel> recipes = Future.value(RecipeApi().fetchRecipes());
+  final Recipe? recipe;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +94,7 @@ class ReceptDetail extends StatelessWidget {
         // onTap: () {},
       ),
       body: FutureBuilder<RecipesModel>(
-        future: recepts,
+        future: recipes,
         builder: (context, snapshot) {
           return SingleChildScrollView(
             child: Column(

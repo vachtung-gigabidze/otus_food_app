@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:otus_food_app/constants.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -60,12 +58,12 @@ class ProfileScreen extends StatelessWidget {
             Container(
               height: 123,
               width: 123,
-              padding: EdgeInsets.all(13),
+              padding: const EdgeInsets.all(13),
               decoration: BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: Color(0xFF165932),
+                  color: const Color(0xFF165932),
                   width: 4,
                 ),
               ),
