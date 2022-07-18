@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/List/recipe_card.dart';
@@ -8,9 +9,6 @@ class RecipesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final recipes =
-        (ModalRoute.of(context)!.settings.arguments as RecipesModel).recipes;
-
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -60,14 +58,23 @@ class RecipesList extends StatelessWidget {
         decoration: const BoxDecoration(
           color: AppColors.greyColor,
         ),
-        child: ListView.builder(
-          itemCount: recipes?.length ?? 1,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.only(
-                  left: 16, right: 16, top: 12.0, bottom: 12),
-              child: RecipeCard(recipe: recipes![index]),
-            );
+        child: FutureBuilder<RecipesModel>(
+          future: RecipeApi().fetchRecipes(),
+          builder: (BuildContext context, AsyncSnapshot<RecipesModel> recipes) {
+            if (recipes.hasData) {
+              return ListView.builder(
+                itemCount: recipes.data?.recipes?.length ?? 1,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(
+                        left: 16, right: 16, top: 12.0, bottom: 12),
+                    child: RecipeCard(recipe: recipes.data?.recipes?[index]),
+                  );
+                },
+              );
+            } else {
+              return Container();
+            }
           },
         ),
       ),

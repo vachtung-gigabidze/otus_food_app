@@ -6,11 +6,11 @@ import 'package:otus_food_app/model.dart';
 class HeaderDetail extends StatelessWidget {
   const HeaderDetail({Key? key, required this.snapshot}) : super(key: key);
 
-  final AsyncSnapshot<RecipesModel> snapshot;
+  final AsyncSnapshot<Recipe> snapshot;
 
   @override
   Widget build(BuildContext context) {
-    var recept = snapshot.data?.recipes?[0];
+    var recept = snapshot.data;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

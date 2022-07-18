@@ -16,24 +16,25 @@ class LogoScreen extends StatefulWidget {
 }
 
 class _LogoScreenState extends State<LogoScreen> {
-  void getRecept() async {
-    RecipesModel? recipes;
-    try {
-      recipes = await RecipeApi().fetchRecipes();
-    } catch (e) {
-      log('$e');
-    } finally {
-      Navigator.of(context)
-          .pushReplacementNamed(widget.nextRoute, arguments: recipes);
-    }
-  }
+  // void getRecept() async {
+  //   RecipesModel? recipes;
+  //   try {
+  //     recipes = await RecipeApi().fetchRecipes();
+  //   } catch (e) {
+  //     log('$e');
+  //   } finally {
+  //     Navigator.of(context)
+  //         .pushReplacementNamed(widget.nextRoute, arguments: recipes);
+  //   }
+  // }
 
   @override
   void initState() {
     super.initState();
 
     Future.delayed(const Duration(seconds: 1), () {
-      getRecept();
+      //getRecept();
+      Navigator.of(context).pushReplacementNamed(widget.nextRoute);
     });
   }
 

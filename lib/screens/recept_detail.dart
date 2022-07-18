@@ -11,14 +11,14 @@ import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/Details/header_detail.dart';
 
 class RecipeDetail extends StatelessWidget {
-  RecipeDetail({Key? key, this.recipe}) : super(key: key);
+  RecipeDetail({Key? key}) : super(key: key);
 
   //TODO: Передать рецепт вместо получения из хранилища
-  final Future<RecipesModel> recipes = Future.value(RecipeApi().fetchRecipes());
-  final Recipe? recipe;
+  //final Future<RecipesModel> recipes = Future.value(RecipeApi().fetchRecipes());
 
   @override
   Widget build(BuildContext context) {
+    final Recipe recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
     //SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     return Scaffold(
       appBar: AppBar(
@@ -45,8 +45,9 @@ class RecipeDetail extends StatelessWidget {
           tooltip: 'Show Snackbar',
           color: Colors.black87,
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('This is a snackbar')));
+            Navigator.of(context).pushReplacementNamed('/recipes');
+            //ScaffoldMessenger.of(context).showSnackBar(
+            //  const SnackBar(content: Text('This is a snackbar')));
           },
         ),
       ),
@@ -93,8 +94,8 @@ class RecipeDetail extends StatelessWidget {
         unselectedItemColor: AppColors.greyColor,
         // onTap: () {},
       ),
-      body: FutureBuilder<RecipesModel>(
-        future: recipes,
+      body: FutureBuilder<Recipe>(
+        future: Future<Recipe>(() => recipe),
         builder: (context, snapshot) {
           return SingleChildScrollView(
             child: Column(
@@ -105,8 +106,7 @@ class RecipeDetail extends StatelessWidget {
                   child: Column(
                     children: [
                       HeaderDetail(snapshot: snapshot),
-                      IngredientsDetails(
-                          snapshot: snapshot.data?.recipes?[0].ingredients),
+                      IngredientsDetails(snapshot: snapshot.data?.ingredients),
                       const SizedBox(
                         height: 27,
                       ),
