@@ -55,7 +55,7 @@ Widget commentView() {
                     style: TextStyle(
                       fontFamily: 'Roboto',
                       fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.w400,
                       fontSize: 14.0,
                       color: Colors.black,
                     ),

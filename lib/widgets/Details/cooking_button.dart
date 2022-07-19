@@ -11,7 +11,8 @@ Widget cookingButton() {
           borderRadius: BorderRadius.circular(24.0),
           // side: BorderSide(color: Colors.red)
         )),
-        backgroundColor: MaterialStateProperty.all<Color>(Colors.green),
+        backgroundColor:
+            MaterialStateProperty.all<Color>(const Color(0xFF165932)),
       ),
       onPressed: () {},
       child: const Text(
@@ -52,7 +53,7 @@ Widget checkIngredients() {
         style: TextStyle(
           fontFamily: 'Roboto',
           fontStyle: FontStyle.normal,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.w500,
           fontSize: 16.0,
           color: Color(0xFF165932),
         ),

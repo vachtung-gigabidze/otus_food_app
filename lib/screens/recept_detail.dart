@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
-import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/Details/comment_post.dart';
@@ -13,7 +11,6 @@ import 'package:otus_food_app/widgets/Details/header_detail.dart';
 class RecipeDetail extends StatelessWidget {
   RecipeDetail({Key? key}) : super(key: key);
 
-  //TODO: Передать рецепт вместо получения из хранилища
   //final Future<RecipesModel> recipes = Future.value(RecipeApi().fetchRecipes());
 
   @override
@@ -26,7 +23,11 @@ class RecipeDetail extends StatelessWidget {
         title: const Text(
           'Рецепты',
           style: TextStyle(
-            color: Colors.black,
+            color: Color(0xFF165932),
+            fontFamily: 'Roboto',
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w400,
+            fontSize: 20.0,
           ),
         ),
         centerTitle: true,
@@ -62,22 +63,22 @@ class RecipeDetail extends StatelessWidget {
             label: 'Рецепты',
             backgroundColor: Colors.white,
           ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconFridge,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Холодильник',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconHeart,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Избраное',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: ImageIcon(Image.asset(
+          //     Constants.iconFridge,
+          //     height: 24,
+          //     width: 24,
+          //   ).image),
+          //   label: 'Холодильник',
+          // ),
+          // BottomNavigationBarItem(
+          //   icon: ImageIcon(Image.asset(
+          //     Constants.iconHeart,
+          //     height: 24,
+          //     width: 24,
+          //   ).image),
+          //   label: 'Избраное',
+          // ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
               Constants.iconProfile,
@@ -102,17 +103,21 @@ class RecipeDetail extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
+                  padding:
+                      const EdgeInsets.only(left: 15, right: 15, top: 27.6),
                   child: Column(
                     children: [
                       HeaderDetail(snapshot: snapshot),
+                      const SizedBox(
+                        height: 16.54,
+                      ),
                       IngredientsDetails(snapshot: snapshot.data?.ingredients),
                       const SizedBox(
-                        height: 27,
+                        height: 19,
                       ),
                       checkIngredients(),
                       const SizedBox(
-                        height: 27,
+                        height: 18,
                       ),
                       CookingStepsDetail(snapshot: snapshot),
                     ],
@@ -133,12 +138,13 @@ class RecipeDetail extends StatelessWidget {
                   color: Colors.black,
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding:
+                      const EdgeInsets.only(left: 17.0, right: 16, top: 25),
                   child: Column(
                     children: [
                       commentView(),
                       const SizedBox(
-                        height: 35,
+                        height: 48,
                       ),
                       const CommentPost(),
                     ],

@@ -15,35 +15,33 @@ class IngredientsDetails extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 18,
-        ),
         Text(
           title,
           style: const TextStyle(
             fontFamily: 'Roboto',
             fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             fontSize: 16.0,
             color: Color(0xFF165932),
           ),
         ),
         const SizedBox(
-          height: 22,
+          height: 18,
         ),
         Container(
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(5),
             border: Border.all(
-              color: const Color.fromARGB(255, 121, 118, 118),
+              color: const Color(0xFF797676),
               width: 3,
             ),
           ),
           child: ListView.builder(
               shrinkWrap: true,
               physics: const ClampingScrollPhysics(),
-              padding: const EdgeInsets.all(6),
+              padding:
+                  const EdgeInsets.only(top: 15, left: 8, right: 8, bottom: 18),
               itemCount: ingredients?.length ?? 0,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
@@ -70,7 +68,7 @@ class IngredientsDetails extends StatelessWidget {
                             style: const TextStyle(
                               fontFamily: 'Roboto',
                               fontStyle: FontStyle.normal,
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w500,
                               fontSize: 14.0,
                               color: Colors.black87,
                             ),

@@ -1,9 +1,6 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
 
-import 'package:otus_food_app/api/recipe_api.dart';
-import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/Logo/logo.dart';
 
 class LogoScreen extends StatefulWidget {

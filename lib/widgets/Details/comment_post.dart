@@ -46,7 +46,7 @@ class _CommentPostState extends State<CommentPost> {
                         Constants.imageIcon,
                       ),
                       height: 24,
-                      width: 24,
+                      width: 19.2,
                     ),
                   )),
               enabledBorder: const OutlineInputBorder(

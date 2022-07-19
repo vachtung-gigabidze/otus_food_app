@@ -14,15 +14,12 @@ class CookingStepsDetail extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 19,
-        ),
         const Text(
           'Шаги приготовления',
           style: TextStyle(
             fontFamily: 'Roboto',
             fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w600,
+            fontWeight: FontWeight.w500,
             fontSize: 16.0,
             color: Color(0xFF165932),
           ),
@@ -34,9 +31,13 @@ class CookingStepsDetail extends StatelessWidget {
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
             //padding: const EdgeInsets.all(8),
+
             itemCount: recept?.cookingSteps?.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
-              return cookingStepCard(recept?.cookingSteps?[index]);
+              return Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                child: cookingStepCard(recept?.cookingSteps?[index]),
+              );
             })
       ],
     );

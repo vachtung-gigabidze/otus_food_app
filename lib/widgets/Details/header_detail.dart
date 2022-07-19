@@ -18,20 +18,38 @@ class HeaderDetail extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Text(
-          recept?.name ?? "Название рецепта",
-          textAlign: TextAlign.left,
-          style: const TextStyle(
-            fontFamily: 'Roboto',
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w600,
-            fontSize: 24.0,
-            color: Colors.black87,
-            decoration: TextDecoration.none,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              height: 31,
+              width: 314,
+              child: Text(
+                recept?.name ?? "Название рецепта",
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: const TextStyle(
+                  fontFamily: 'Roboto',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 24.0,
+                  color: Colors.black87,
+                  decoration: TextDecoration.none,
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(right: 20),
+              child: ImageIcon(Image.asset(
+                Constants.iconHeart,
+                height: 30,
+                width: 30,
+              ).image),
+            ),
+          ],
         ),
         const SizedBox(
-          height: 16,
+          height: 4,
         ),
         Row(
           children: [
@@ -41,26 +59,28 @@ class HeaderDetail extends StatelessWidget {
               width: 16,
               fit: BoxFit.cover,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 11.0),
-              child: Text(
-                recept?.time ?? "Время приготовления",
-                style: const TextStyle(
-                  fontFamily: 'Roboto',
-                  fontStyle: FontStyle.normal,
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16.0,
-                  color: Color(0xFF2ECC71),
-                  decoration: TextDecoration.none,
-                ),
+            const SizedBox(
+              width: 11,
+            ),
+            Text(
+              recept?.time ?? "Время приготовления",
+              style: const TextStyle(
+                fontFamily: 'Roboto',
+                fontStyle: FontStyle.normal,
+                fontWeight: FontWeight.w400,
+                fontSize: 16.0,
+                color: Color(0xFF2ECC71),
+                decoration: TextDecoration.none,
               ),
             ),
           ],
         ),
         const SizedBox(
-          height: 16,
+          height: 12,
         ),
-        const Image(image: AssetImage('assets/images/1_full.png')),
+        const Image(
+          image: AssetImage('assets/images/1_full.png'),
+        ),
       ],
     );
   }
