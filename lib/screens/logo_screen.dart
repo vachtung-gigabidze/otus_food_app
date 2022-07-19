@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:otus_food_app/widgets/Logo/logo.dart';
+import 'package:otus_food_app/widgets/status_style.dart';
 
 class LogoScreen extends StatefulWidget {
   const LogoScreen({Key? key, required this.nextRoute}) : super(key: key);
@@ -37,6 +39,7 @@ class _LogoScreenState extends State<LogoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(StatusOverlay.green);
     return Scaffold(
         body: Center(
       child: Container(

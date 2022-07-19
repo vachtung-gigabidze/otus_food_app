@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/List/recipe_card.dart';
+import 'package:otus_food_app/widgets/status_style.dart';
 
 class RecipesList extends StatelessWidget {
   const RecipesList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(StatusOverlay.grey);
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
@@ -54,7 +57,7 @@ class RecipesList extends StatelessWidget {
         // onTap: () {},
       ),
       body: Container(
-        padding: const EdgeInsets.only(top: 33),
+        padding: const EdgeInsets.only(top: 45, left: 16, right: 16),
         decoration: const BoxDecoration(
           color: AppColors.greyColor,
         ),
@@ -65,9 +68,10 @@ class RecipesList extends StatelessWidget {
               return ListView.builder(
                 itemCount: recipes.data?.recipes?.length ?? 1,
                 itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(
-                        left: 16, right: 16, top: 12.0, bottom: 12),
+                  return Container(
+                    margin: const EdgeInsets.only(
+                      bottom: 16,
+                    ),
                     child: RecipeCard(recipe: recipes.data?.recipes?[index]),
                   );
                 },
