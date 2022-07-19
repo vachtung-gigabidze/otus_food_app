@@ -19,7 +19,9 @@ class Constants {
   // static const String IMAGE7 = 'assets/images/7.png';
   static const String iconPizza = 'assets/icons/pizza_green.png';
   static const String iconFridge = 'assets/icons/fridge_green.png';
-  static const String iconHeart = 'assets/icons/heart_green.png';
+  static const String iconHeartBlack = 'assets/icons/heart_black.png';
+  static const String iconHeartRed = 'assets/icons/heart_red.png';
+  static const String iconHeartGreen = 'assets/icons/heart_green.png';
   static const String iconProfile = 'assets/icons/profile_green.png';
 
   static const String imageProfile = 'assets/images/profile.png';

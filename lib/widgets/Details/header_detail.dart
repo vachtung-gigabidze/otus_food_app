@@ -3,14 +3,27 @@ import 'package:otus_food_app/constants.dart';
 
 import 'package:otus_food_app/model.dart';
 
-class HeaderDetail extends StatelessWidget {
+class HeaderDetail extends StatefulWidget {
   const HeaderDetail({Key? key, required this.snapshot}) : super(key: key);
 
   final AsyncSnapshot<Recipe> snapshot;
 
   @override
+  State<HeaderDetail> createState() => _HeaderDetailState();
+}
+
+class _HeaderDetailState extends State<HeaderDetail> {
+  late bool isFavorites;
+
+  @override
+  void initState() {
+    super.initState();
+    isFavorites = false;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    var recept = snapshot.data;
+    var recept = widget.snapshot.data;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,11 +53,18 @@ class HeaderDetail extends StatelessWidget {
             ),
             Container(
               margin: const EdgeInsets.only(right: 20),
-              child: ImageIcon(Image.asset(
-                Constants.iconHeart,
-                height: 30,
-                width: 30,
-              ).image),
+              child: InkWell(
+                onTap: () => setState(() {
+                  isFavorites = !isFavorites;
+                }),
+                child: Image.asset(
+                  isFavorites
+                      ? Constants.iconHeartRed
+                      : Constants.iconHeartBlack,
+                  height: 30,
+                  width: 30,
+                ),
+              ),
             ),
           ],
         ),

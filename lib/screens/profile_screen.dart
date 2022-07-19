@@ -28,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
-              Constants.iconHeart,
+              Constants.iconHeartGreen,
               height: 24,
               width: 24,
             ).image),

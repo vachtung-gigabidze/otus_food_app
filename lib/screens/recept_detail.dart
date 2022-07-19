@@ -8,11 +8,34 @@ import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
 import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/Details/header_detail.dart';
 
-class RecipeDetail extends StatelessWidget {
-  RecipeDetail({Key? key}) : super(key: key);
+class RecipeDetail extends StatefulWidget {
+  const RecipeDetail({Key? key}) : super(key: key);
+
+  @override
+  State<RecipeDetail> createState() => _RecipeDetailState();
+}
+
+class _RecipeDetailState extends State<RecipeDetail> {
+  late ScrollController _scrollController;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController()..addListener(() {});
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollToTop() {
+    _scrollController.animateTo(0,
+        duration: const Duration(seconds: 3), curve: Curves.linear);
+  }
 
   //final Future<RecipesModel> recipes = Future.value(RecipeApi().fetchRecipes());
-
   @override
   Widget build(BuildContext context) {
     final Recipe recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
@@ -99,6 +122,7 @@ class RecipeDetail extends StatelessWidget {
         future: Future<Recipe>(() => recipe),
         builder: (context, snapshot) {
           return SingleChildScrollView(
+            controller: _scrollController,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -126,30 +150,35 @@ class RecipeDetail extends StatelessWidget {
                 const SizedBox(
                   height: 27,
                 ),
-                cookingButton(),
+                InkWell(
+                  child: cookingButton(),
+                  onTap: () {
+                    _scrollToTop();
+                  },
+                ),
                 const SizedBox(
                   height: 32,
                 ),
-                const Divider(
-                  height: 20,
-                  thickness: 1,
-                  indent: 0,
-                  endIndent: 0,
-                  color: Colors.black,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 17.0, right: 16, top: 25),
-                  child: Column(
-                    children: [
-                      commentView(),
-                      const SizedBox(
-                        height: 48,
-                      ),
-                      const CommentPost(),
-                    ],
-                  ),
-                ),
+                // const Divider(
+                //   height: 20,
+                //   thickness: 1,
+                //   indent: 0,
+                //   endIndent: 0,
+                //   color: Colors.black,
+                // ),
+                // Padding(
+                //   padding:
+                //       const EdgeInsets.only(left: 17.0, right: 16, top: 25),
+                //   child: Column(
+                //     children: [
+                //       commentView(),
+                //       const SizedBox(
+                //         height: 48,
+                //       ),
+                //       const CommentPost(),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           );

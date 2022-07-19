@@ -42,7 +42,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
-              Constants.iconHeart,
+              Constants.iconHeartGreen,
               height: 24,
               width: 24,
             ).image),
