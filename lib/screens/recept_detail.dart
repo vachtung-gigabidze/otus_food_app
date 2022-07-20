@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/Details/comment_post.dart';
@@ -41,7 +41,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   @override
   Widget build(BuildContext context) {
     final Recipe recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
-    //SystemChrome.setSystemUIOverlayStyle(StatusOverlay.white);
+
     return Scaffold(
       appBar: AppBar(
         systemOverlayStyle: StatusOverlay.white,
@@ -162,26 +162,26 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 const SizedBox(
                   height: 32,
                 ),
-                // const Divider(
-                //   height: 20,
-                //   thickness: 1,
-                //   indent: 0,
-                //   endIndent: 0,
-                //   color: Colors.black,
-                // ),
-                // Padding(
-                //   padding:
-                //       const EdgeInsets.only(left: 17.0, right: 16, top: 25),
-                //   child: Column(
-                //     children: [
-                //       commentView(),
-                //       const SizedBox(
-                //         height: 48,
-                //       ),
-                //       const CommentPost(),
-                //     ],
-                //   ),
-                // ),
+                const Divider(
+                  height: 20,
+                  thickness: 1,
+                  indent: 0,
+                  endIndent: 0,
+                  color: Colors.black,
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.only(left: 17.0, right: 16, top: 25),
+                  child: Column(
+                    children: [
+                      commentView(),
+                      const SizedBox(
+                        height: 48,
+                      ),
+                      const CommentPost(),
+                    ],
+                  ),
+                ),
               ],
             ),
           );

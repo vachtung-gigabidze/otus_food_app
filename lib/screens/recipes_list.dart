@@ -69,6 +69,8 @@ class RecipesList extends StatelessWidget {
                 (BuildContext context, AsyncSnapshot<RecipesModel> recipes) {
               if (recipes.hasData) {
                 return ListView.builder(
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
                   itemCount: recipes.data?.recipes?.length ?? 1,
                   itemBuilder: (context, index) {
                     return Container(
