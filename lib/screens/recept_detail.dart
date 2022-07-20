@@ -18,11 +18,13 @@ class RecipeDetail extends StatefulWidget {
 }
 
 class _RecipeDetailState extends State<RecipeDetail> {
+  late bool isCooking;
   late ScrollController _scrollController;
 
   @override
   void initState() {
     super.initState();
+    isCooking = true;
     _scrollController = ScrollController()..addListener(() {});
   }
 
@@ -43,9 +45,46 @@ class _RecipeDetailState extends State<RecipeDetail> {
     final Recipe recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
 
     return Scaffold(
+      // extendBodyBehindAppBar: false,
       appBar: AppBar(
-        systemOverlayStyle: StatusOverlay.white,
-        backgroundColor: Colors.white,
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(59.0),
+          child: Theme(
+            data: Theme.of(context).copyWith(accentColor: Colors.white),
+            child: Container(
+              height: 59.0,
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  Text(
+                    'Таймер',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                  Text(
+                    '38:59',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w900,
+                      fontSize: 24.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+        systemOverlayStyle:
+            isCooking ? StatusOverlay.green : StatusOverlay.white,
+        backgroundColor: isCooking ? const Color(0xFF2ECC71) : Colors.white,
         title: const Text(
           'Рецепты',
           style: TextStyle(
@@ -156,6 +195,9 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 InkWell(
                   child: cookingButton(),
                   onTap: () {
+                    setState(() {
+                      isCooking = true;
+                    });
                     _scrollToTop();
                   },
                 ),
