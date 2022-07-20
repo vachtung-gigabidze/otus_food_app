@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 
@@ -10,25 +9,7 @@ class RecipeCard extends StatelessWidget {
   final Recipe? recipe;
   final bool showFavorites;
 
-  Image _blankImage() => Image.asset(
-        'assets/icons/blank.png',
-        fit: BoxFit.fill,
-        height: 136,
-        width: 149,
-      );
-
-  Future<Image> _loadImage(String img, Image blank) async {
-    return rootBundle.load(img).then((value) {
-      return Image.memory(
-        value.buffer.asUint8List(),
-        fit: BoxFit.fill,
-        height: 136,
-        width: 149,
-      );
-    }).catchError((_) {
-      return blank;
-    });
-  }
+  AssetImage _blankImage() => const AssetImage('assets/icons/blank.png');
 
   @override
   Widget build(BuildContext context) {
@@ -44,17 +25,21 @@ class RecipeCard extends StatelessWidget {
             const SizedBox(
               height: 136, // default\minimum height
             ),
-
-            FutureBuilder<Image>(
-                future: _loadImage(
-                    'assets/images/${recipe?.imageUrl}', _blankImage()),
-                builder: (BuildContext context, AsyncSnapshot<Image> image) {
-                  if (image.hasData) {
-                    return image.data!;
-                  } else {
-                    return _blankImage();
-                  }
-                }),
+            FadeInImage(
+              fit: BoxFit.fill,
+              height: 136,
+              width: 149,
+              placeholder: _blankImage(),
+              image: AssetImage('assets/images/${recipe?.imageUrl}'),
+              imageErrorBuilder: (context, error, stackTrace) {
+                return Image.asset(
+                  'assets/icons/blank.png',
+                  fit: BoxFit.fill,
+                  height: 136,
+                  width: 149,
+                );
+              },
+            ),
             const SizedBox(
               width: 16,
             ),

@@ -17,7 +17,7 @@ class StatusOverlay {
     systemNavigationBarDividerColor: null,
     statusBarColor: Color(0xFF2ECC71),
     systemNavigationBarIconBrightness: Brightness.light,
-    statusBarIconBrightness: Brightness.dark,
+    statusBarIconBrightness: Brightness.light,
     statusBarBrightness: Brightness.light,
   );
   static const SystemUiOverlayStyle white = SystemUiOverlayStyle(
