@@ -9,7 +9,12 @@ class RecipeCard extends StatelessWidget {
   final Recipe? recipe;
   final bool showFavorites;
 
-  AssetImage _blankImage() => const AssetImage('assets/icons/blank.png');
+  Image _blankImage() => Image.asset(
+        'assets/icons/blank.png',
+        fit: BoxFit.fill,
+        height: 136,
+        width: 149,
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +34,10 @@ class RecipeCard extends StatelessWidget {
               fit: BoxFit.fill,
               height: 136,
               width: 149,
-              placeholder: _blankImage(),
+              placeholder: _blankImage().image,
               image: AssetImage('assets/images/${recipe?.imageUrl}'),
               imageErrorBuilder: (context, error, stackTrace) {
-                return Image.asset(
-                  'assets/icons/blank.png',
-                  fit: BoxFit.fill,
-                  height: 136,
-                  width: 149,
-                );
+                return _blankImage();
               },
             ),
             const SizedBox(
