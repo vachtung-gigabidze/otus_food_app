@@ -24,8 +24,8 @@ class StatusOverlay {
     systemNavigationBarColor: Color(0xFF000000),
     systemNavigationBarDividerColor: null,
     statusBarColor: Colors.white,
-    systemNavigationBarIconBrightness: Brightness.light,
+    systemNavigationBarIconBrightness: Brightness.dark,
     statusBarIconBrightness: Brightness.dark,
-    statusBarBrightness: Brightness.light,
+    statusBarBrightness: Brightness.dark,
   );
 }

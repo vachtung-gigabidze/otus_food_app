@@ -41,9 +41,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
   @override
   Widget build(BuildContext context) {
     final Recipe recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
-    SystemChrome.setSystemUIOverlayStyle(StatusOverlay.white);
+    //SystemChrome.setSystemUIOverlayStyle(StatusOverlay.white);
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: StatusOverlay.white,
         backgroundColor: Colors.white,
         title: const Text(
           'Рецепты',

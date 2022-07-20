@@ -11,75 +11,79 @@ class RecipesList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(StatusOverlay.grey);
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconPizza,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Рецепты',
-            backgroundColor: Colors.white,
-          ),
-          // BottomNavigationBarItem(
-          //   icon: ImageIcon(Image.asset(
-          //     Constants.iconFridge,
-          //     height: 24,
-          //     width: 24,
-          //   ).image),
-          //   label: 'Холодильник',
-          // ),
-          // BottomNavigationBarItem(
-          //   icon: ImageIcon(Image.asset(
-          //     Constants.iconHeart,
-          //     height: 24,
-          //     width: 24,
-          //   ).image),
-          //   label: 'Избраное',
-          // ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconProfile,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Профиль',
-          ),
-        ],
+    //SystemChrome.setSystemUIOverlayStyle(StatusOverlay.grey);
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: StatusOverlay.grey,
+      child: Scaffold(
+        bottomNavigationBar: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: ImageIcon(Image.asset(
+                Constants.iconPizza,
+                height: 24,
+                width: 24,
+              ).image),
+              label: 'Рецепты',
+              backgroundColor: Colors.white,
+            ),
+            // BottomNavigationBarItem(
+            //   icon: ImageIcon(Image.asset(
+            //     Constants.iconFridge,
+            //     height: 24,
+            //     width: 24,
+            //   ).image),
+            //   label: 'Холодильник',
+            // ),
+            // BottomNavigationBarItem(
+            //   icon: ImageIcon(Image.asset(
+            //     Constants.iconHeart,
+            //     height: 24,
+            //     width: 24,
+            //   ).image),
+            //   label: 'Избраное',
+            // ),
+            BottomNavigationBarItem(
+              icon: ImageIcon(Image.asset(
+                Constants.iconProfile,
+                height: 24,
+                width: 24,
+              ).image),
+              label: 'Профиль',
+            ),
+          ],
 
-        currentIndex: 0,
-        showUnselectedLabels: true,
-        selectedItemColor: AppColors.accent,
-        unselectedItemColor: AppColors.greyColor,
-        // onTap: () {},
-      ),
-      body: Container(
-        padding: const EdgeInsets.only(top: 45, left: 16, right: 16),
-        decoration: const BoxDecoration(
-          color: AppColors.greyColor,
+          currentIndex: 0,
+          showUnselectedLabels: true,
+          selectedItemColor: AppColors.accent,
+          unselectedItemColor: AppColors.greyColor,
+          // onTap: () {},
         ),
-        child: FutureBuilder<RecipesModel>(
-          future: RecipeApi().fetchRecipes(),
-          builder: (BuildContext context, AsyncSnapshot<RecipesModel> recipes) {
-            if (recipes.hasData) {
-              return ListView.builder(
-                itemCount: recipes.data?.recipes?.length ?? 1,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(
-                      bottom: 16,
-                    ),
-                    child: RecipeCard(recipe: recipes.data?.recipes?[index]),
-                  );
-                },
-              );
-            } else {
-              return Container();
-            }
-          },
+        body: Container(
+          padding: const EdgeInsets.only(top: 45, left: 16, right: 16),
+          decoration: const BoxDecoration(
+            color: AppColors.greyColor,
+          ),
+          child: FutureBuilder<RecipesModel>(
+            future: RecipeApi().fetchRecipes(),
+            builder:
+                (BuildContext context, AsyncSnapshot<RecipesModel> recipes) {
+              if (recipes.hasData) {
+                return ListView.builder(
+                  itemCount: recipes.data?.recipes?.length ?? 1,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.only(
+                        bottom: 16,
+                      ),
+                      child: RecipeCard(recipe: recipes.data?.recipes?[index]),
+                    );
+                  },
+                );
+              } else {
+                return Container();
+              }
+            },
+          ),
         ),
       ),
     );

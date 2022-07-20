@@ -32,11 +32,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Otus Food App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
-      ),
+
+      //theme: ThemeData(
+      //primarySwatch: Colors.blue,
+      //visualDensity: VisualDensity.adaptivePlatformDensity,
+      //textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
+      //appBarTheme: AppBarTheme
+      //),
       //home:
 
       routes: routes,
