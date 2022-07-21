@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 Widget cookingButton() {
@@ -14,7 +16,7 @@ Widget cookingButton() {
         backgroundColor:
             MaterialStateProperty.all<Color>(const Color(0xFF165932)),
       ),
-      onPressed: () {},
+      onPressed: null,
       child: const Text(
         'Начать готовить',
         style: TextStyle(
@@ -23,6 +25,37 @@ Widget cookingButton() {
           fontWeight: FontWeight.w500,
           fontSize: 16.0,
           color: Color(0xFFFFFFFF),
+        ),
+      ),
+    ),
+  );
+}
+
+Widget stopCookingButton() {
+  return SizedBox(
+    height: 48,
+    width: 232,
+    child: TextButton(
+      style: ButtonStyle(
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(24.0),
+                side: const BorderSide(
+                  width: 4,
+                  color: Color(0xFF165932),
+                ))),
+        backgroundColor:
+            MaterialStateProperty.all<Color>(const Color(0xFFFFFFFF)),
+      ),
+      onPressed: null,
+      child: const Text(
+        'Закончить готовить',
+        style: TextStyle(
+          fontFamily: 'Roboto',
+          fontStyle: FontStyle.normal,
+          fontWeight: FontWeight.w500,
+          fontSize: 16.0,
+          color: Color(0xFF165932),
         ),
       ),
     ),

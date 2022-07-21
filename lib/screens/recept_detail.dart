@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:otus_food_app/constants.dart';
@@ -20,23 +23,54 @@ class RecipeDetail extends StatefulWidget {
 class _RecipeDetailState extends State<RecipeDetail> {
   late bool isCooking;
   late ScrollController _scrollController;
+  late Timer cookingTimer;
+  late int cookingTime;
+
+  void startTimer(int time) {
+    cookingTime = time;
+    const oneSec = Duration(seconds: 1);
+    cookingTimer = Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        if (cookingTime == 0 || !isCooking) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            cookingTime--;
+          });
+        }
+      },
+    );
+  }
+
+  String showTime(int time) {
+    int minute = cookingTime ~/ 60;
+    int second = cookingTime % 60;
+
+    return '${minute < 10 ? '0$minute' : minute}:${second < 10 ? '0$second' : second}';
+  }
 
   @override
   void initState() {
     super.initState();
-    isCooking = true;
+    isCooking = false;
+    cookingTime = 0;
+
     _scrollController = ScrollController()..addListener(() {});
   }
 
   @override
   void dispose() {
+    cookingTimer.cancel();
     _scrollController.dispose();
     super.dispose();
   }
 
   void _scrollToTop() {
-    _scrollController.animateTo(0,
-        duration: const Duration(seconds: 3), curve: Curves.linear);
+    _scrollController.animateTo(isCooking ? 65 : 0,
+        duration: const Duration(microseconds: 500), curve: Curves.linear);
   }
 
   //final Future<RecipesModel> recipes = Future.value(RecipeApi().fetchRecipes());
@@ -47,41 +81,43 @@ class _RecipeDetailState extends State<RecipeDetail> {
     return Scaffold(
       // extendBodyBehindAppBar: false,
       appBar: AppBar(
-        bottom: PreferredSize(
-          preferredSize: const Size.fromHeight(59.0),
-          child: Theme(
-            data: Theme.of(context).copyWith(accentColor: Colors.white),
-            child: Container(
-              height: 59.0,
-              alignment: Alignment.center,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: const [
-                  Text(
-                    'Таймер',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Roboto',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 20.0,
+        bottom: isCooking
+            ? PreferredSize(
+                preferredSize: const Size.fromHeight(59.0),
+                child: Theme(
+                  data: Theme.of(context).copyWith(accentColor: Colors.white),
+                  child: Container(
+                    height: 59.0,
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        const Text(
+                          'Таймер',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Roboto',
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        Text(
+                          showTime(cookingTime),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontFamily: 'Roboto',
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.w900,
+                            fontSize: 24.0,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  Text(
-                    '38:59',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Roboto',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 24.0,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+                ),
+              )
+            : null,
         systemOverlayStyle:
             isCooking ? StatusOverlay.green : StatusOverlay.white,
         backgroundColor: isCooking ? const Color(0xFF2ECC71) : Colors.white,
@@ -192,38 +228,47 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 const SizedBox(
                   height: 27,
                 ),
-                InkWell(
-                  child: cookingButton(),
+                GestureDetector(
+                  child: isCooking ? stopCookingButton() : cookingButton(),
                   onTap: () {
                     setState(() {
-                      isCooking = true;
+                      isCooking = !isCooking;
                     });
+                    if (isCooking) {
+                      startTimer(2400);
+                    }
                     _scrollToTop();
                   },
                 ),
                 const SizedBox(
                   height: 32,
                 ),
-                const Divider(
-                  height: 20,
-                  thickness: 1,
-                  indent: 0,
-                  endIndent: 0,
-                  color: Colors.black,
-                ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 17.0, right: 16, top: 25),
-                  child: Column(
-                    children: [
-                      commentView(),
-                      const SizedBox(
-                        height: 48,
-                      ),
-                      const CommentPost(),
-                    ],
-                  ),
-                ),
+                !isCooking
+                    ? Column(
+                        children: [
+                          const Divider(
+                            height: 20,
+                            thickness: 1,
+                            indent: 0,
+                            endIndent: 0,
+                            color: Colors.black,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 17.0, right: 16, top: 25),
+                            child: Column(
+                              children: [
+                                commentView(),
+                                const SizedBox(
+                                  height: 48,
+                                ),
+                                const CommentPost(),
+                              ],
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
               ],
             ),
           );
