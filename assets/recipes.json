@@ -105,6 +105,15 @@
           "duration": "04:00",
           "status": null
         }
+      ],
+      "comments": [
+        {
+          "author": "anna_obraztsova",
+          "avatar": "assets/images/avatar.png",
+          "date": "25.05.2022",
+          "comment": "Я не большой любитель рыбы, но решила приготовить по этому рецепту и просто влюбилась!",
+          "image": "assets/images/comment_image_1.png"
+        }
       ]
     },
     {
@@ -137,7 +146,8 @@
           "duration": "2min",
           "status": null
         }
-      ]
+      ],
+      "comments": []
     },
     {
       "id": 3,
@@ -169,7 +179,8 @@
           "duration": "2min",
           "status": null
         }
-      ]
+      ],
+      "comments": []
     },
     {
       "id": 4,
@@ -199,7 +210,8 @@
           "duration": "2min",
           "status": null
         }
-      ]
+      ],
+      "comments": []
     },
     {
       "id": 5,
@@ -231,7 +243,8 @@
           "duration": "2min",
           "status": null
         }
-      ]
+      ],
+      "comments": []
     },
     {
       "id": 6,
@@ -263,7 +276,8 @@
           "duration": "2min",
           "status": null
         }
-      ]
+      ],
+      "comments": []
     },
     {
       "id": 7,
@@ -295,7 +309,8 @@
           "duration": "2min",
           "status": null
         }
-      ]
+      ],
+      "comments": []
     }
   ]
 }
