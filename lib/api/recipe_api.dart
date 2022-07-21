@@ -45,4 +45,11 @@ class RecipeApi {
         .loadString(assetsPath)
         .then((json) => FridgeModel.fromJson(jsonDecode(json)));
   }
+
+  String showTime(int cookingTime) {
+    int minute = cookingTime ~/ 60;
+    int second = cookingTime % 60;
+
+    return '${minute < 10 ? '0$minute' : minute}:${second < 10 ? '0$second' : second}';
+  }
 }

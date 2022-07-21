@@ -4,9 +4,9 @@ import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 
 class HeaderDetail extends StatefulWidget {
-  const HeaderDetail({Key? key, required this.snapshot}) : super(key: key);
+  const HeaderDetail({Key? key, required this.recipe}) : super(key: key);
 
-  final AsyncSnapshot<Recipe> snapshot;
+  final Recipe recipe;
 
   @override
   State<HeaderDetail> createState() => _HeaderDetailState();
@@ -14,16 +14,18 @@ class HeaderDetail extends StatefulWidget {
 
 class _HeaderDetailState extends State<HeaderDetail> {
   late bool isFavorites;
+  late Recipe recipe;
 
   @override
   void initState() {
     super.initState();
+    recipe = widget.recipe;
     isFavorites = false;
   }
 
   @override
   Widget build(BuildContext context) {
-    var recept = widget.snapshot.data;
+    //var recept = widget.snapshot.data;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +40,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
               height: 31,
               width: 314,
               child: Text(
-                recept?.name ?? "Название рецепта",
+                recipe.name ?? "Название рецепта",
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.left,
                 style: const TextStyle(
@@ -83,7 +85,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
               width: 11,
             ),
             Text(
-              recept?.time ?? "Время приготовления",
+              recipe.time ?? "Время приготовления",
               style: const TextStyle(
                 fontFamily: 'Roboto',
                 fontStyle: FontStyle.normal,

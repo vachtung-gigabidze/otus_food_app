@@ -80,7 +80,8 @@ class _FridgeScreenState extends State<FridgeScreen> {
                         height: 37,
                       ),
                       IngredientsDetails(
-                          snapshot: snap.data?.fridge, title: 'В холодильнике'),
+                          ingrediens: snap.data?.fridge,
+                          title: 'В холодильнике'),
                       const SizedBox(
                         height: 21,
                       ),

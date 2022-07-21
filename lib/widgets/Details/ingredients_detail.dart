@@ -3,14 +3,14 @@ import 'package:otus_food_app/model.dart';
 
 class IngredientsDetails extends StatelessWidget {
   const IngredientsDetails(
-      {Key? key, required this.snapshot, this.title = 'Ингредиенты'})
+      {Key? key, required this.ingrediens, this.title = 'Ингредиенты'})
       : super(key: key);
 
-  final List<Ingredient>? snapshot;
+  final List<Ingredient>? ingrediens;
   final String title;
   @override
   Widget build(BuildContext context) {
-    var ingredients = snapshot;
+    var ingredients = ingrediens;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

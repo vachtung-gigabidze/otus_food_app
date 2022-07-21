@@ -3,14 +3,13 @@ import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/Details/cooking_step.dart';
 
 class CookingStepsDetail extends StatelessWidget {
-  const CookingStepsDetail({Key? key, required this.snapshot})
-      : super(key: key);
+  const CookingStepsDetail({Key? key, required this.recipe}) : super(key: key);
 
-  final AsyncSnapshot<Recipe> snapshot;
+  final Recipe recipe;
 
   @override
   Widget build(BuildContext context) {
-    var recept = snapshot.data;
+    //var recipe = recipe;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -32,11 +31,11 @@ class CookingStepsDetail extends StatelessWidget {
             physics: const ClampingScrollPhysics(),
             //padding: const EdgeInsets.all(8),
 
-            itemCount: recept?.cookingSteps?.length ?? 0,
+            itemCount: recipe.cookingSteps?.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 margin: const EdgeInsets.only(bottom: 16),
-                child: cookingStepCard(recept?.cookingSteps?[index]),
+                child: cookingStepCard(recipe.cookingSteps?[index]),
               );
             })
       ],

@@ -1,9 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-// import 'package:flutter/services.dart';
+
 import 'package:otus_food_app/constants.dart';
+import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/Details/comment_post.dart';
 import 'package:otus_food_app/widgets/Details/comment_view.dart';
@@ -25,6 +24,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   late ScrollController _scrollController;
   late Timer cookingTimer;
   late int cookingTime;
+  late Recipe recipe;
 
   void startTimer(int time) {
     cookingTime = time;
@@ -45,16 +45,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
     );
   }
 
-  String showTime(int time) {
-    int minute = cookingTime ~/ 60;
-    int second = cookingTime % 60;
-
-    return '${minute < 10 ? '0$minute' : minute}:${second < 10 ? '0$second' : second}';
-  }
-
   @override
   void initState() {
     super.initState();
+    cookingTimer = Timer(const Duration(seconds: 1), () {});
     isCooking = false;
     cookingTime = 0;
 
@@ -76,8 +70,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   //final Future<RecipesModel> recipes = Future.value(RecipeApi().fetchRecipes());
   @override
   Widget build(BuildContext context) {
-    final Recipe recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
-
+    recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
     return Scaffold(
       // extendBodyBehindAppBar: false,
       appBar: AppBar(
@@ -103,7 +96,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                           ),
                         ),
                         Text(
-                          showTime(cookingTime),
+                          RecipeApi().showTime(cookingTime),
                           style: const TextStyle(
                             color: Colors.white,
                             fontFamily: 'Roboto',
@@ -196,83 +189,77 @@ class _RecipeDetailState extends State<RecipeDetail> {
         unselectedItemColor: AppColors.greyColor,
         // onTap: () {},
       ),
-      body: FutureBuilder<Recipe>(
-        future: Future<Recipe>(() => recipe),
-        builder: (context, snapshot) {
-          return SingleChildScrollView(
-            controller: _scrollController,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.only(left: 15, right: 15, top: 27.6),
-                  child: Column(
-                    children: [
-                      HeaderDetail(snapshot: snapshot),
-                      const SizedBox(
-                        height: 16.54,
-                      ),
-                      IngredientsDetails(snapshot: snapshot.data?.ingredients),
-                      const SizedBox(
-                        height: 19,
-                      ),
-                      checkIngredients(),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      CookingStepsDetail(snapshot: snapshot),
-                    ],
+      body: SingleChildScrollView(
+        controller: _scrollController,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15, top: 27.6),
+              child: Column(
+                children: [
+                  HeaderDetail(recipe: recipe),
+                  const SizedBox(
+                    height: 16.54,
                   ),
-                ),
-                const SizedBox(
-                  height: 27,
-                ),
-                GestureDetector(
-                  child: isCooking ? stopCookingButton() : cookingButton(),
-                  onTap: () {
-                    setState(() {
-                      isCooking = !isCooking;
-                    });
-                    if (isCooking) {
-                      startTimer(2400);
-                    }
-                    _scrollToTop();
-                  },
-                ),
-                const SizedBox(
-                  height: 32,
-                ),
-                !isCooking
-                    ? Column(
-                        children: [
-                          const Divider(
-                            height: 20,
-                            thickness: 1,
-                            indent: 0,
-                            endIndent: 0,
-                            color: Colors.black,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                left: 17.0, right: 16, top: 25),
-                            child: Column(
-                              children: [
-                                commentView(),
-                                const SizedBox(
-                                  height: 48,
-                                ),
-                                const CommentPost(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )
-                    : Container(),
-              ],
+                  IngredientsDetails(ingrediens: recipe.ingredients),
+                  const SizedBox(
+                    height: 19,
+                  ),
+                  checkIngredients(),
+                  const SizedBox(
+                    height: 18,
+                  ),
+                  CookingStepsDetail(recipe: recipe),
+                ],
+              ),
             ),
-          );
-        },
+            const SizedBox(
+              height: 27,
+            ),
+            GestureDetector(
+              child: isCooking ? stopCookingButton() : cookingButton(),
+              onTap: () {
+                setState(() {
+                  isCooking = !isCooking;
+                });
+                if (isCooking) {
+                  startTimer(2400);
+                }
+                _scrollToTop();
+              },
+            ),
+            const SizedBox(
+              height: 32,
+            ),
+            !isCooking
+                ? Column(
+                    children: [
+                      const Divider(
+                        height: 20,
+                        thickness: 1,
+                        indent: 0,
+                        endIndent: 0,
+                        color: Colors.black,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 17.0, right: 16, top: 25),
+                        child: Column(
+                          children: [
+                            commentView(),
+                            const SizedBox(
+                              height: 48,
+                            ),
+                            const CommentPost(),
+                          ],
+                        ),
+                      ),
+                    ],
+                  )
+                : Container(),
+          ],
+        ),
       ),
     );
   }
