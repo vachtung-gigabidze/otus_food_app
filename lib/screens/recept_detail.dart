@@ -222,6 +222,11 @@ class _RecipeDetailState extends State<RecipeDetail> {
               onTap: () {
                 setState(() {
                   isCooking = !isCooking;
+                  for (int i = 0; i < recipe.cookingSteps!.length; i++) {
+                    recipe.cookingSteps?[i].status =
+                        CookingStepsStatus.notPassed;
+                  }
+                  recipe.cookingSteps?[0].status = CookingStepsStatus.passed;
                 });
                 if (isCooking) {
                   startTimer(2400);

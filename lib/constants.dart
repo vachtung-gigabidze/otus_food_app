@@ -113,8 +113,8 @@ class AppColors {
   // static const Color step_duration_nostart = Color.fromARGB(255, 121, 118, 118);
 
   //green
-  static const Color stepBackgroundStart = Color(0xFF2ECC71);
-  static const Color stepOrderStart = Color(0xFF2ECC71);
+  static const Color stepBackgroundStart = Color(0xFFe0f8ea);
+  static const Color stepOrderStart = Color.fromRGBO(46, 204, 113, 1);
   static const Color stepTextStart = Color(0xFF2D490C);
   static const Color stepCheckboxStart = Color(0xFF165932);
   // static const Color step_duration_start = Color(0xFF165932);
