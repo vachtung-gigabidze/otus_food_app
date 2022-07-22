@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 
 import 'package:otus_food_app/model.dart';
@@ -85,7 +86,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
               width: 11,
             ),
             Text(
-              recipe.time ?? "Время приготовления",
+              RecipeApi().nameTime(recipe.time!),
               style: const TextStyle(
                 fontFamily: 'Roboto',
                 fontStyle: FontStyle.normal,

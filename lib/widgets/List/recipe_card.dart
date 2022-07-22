@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 
@@ -81,7 +82,7 @@ class RecipeCard extends StatelessWidget {
                         child: SizedBox(
                           height: 19,
                           child: Text(
-                            recipe?.time ?? "",
+                            RecipeApi().nameTime(recipe?.time ?? 0),
                             style: const TextStyle(
                               fontFamily: defaultFont,
                               fontStyle: FontStyle.normal,

@@ -20,11 +20,10 @@ class RecipeDetail extends StatefulWidget {
 }
 
 class _RecipeDetailState extends State<RecipeDetail> {
-  late bool isCooking;
   late ScrollController _scrollController;
   late Timer cookingTimer;
   late int cookingTime;
-  late Recipe recipe;
+  late Recipe? recipe;
 
   void startTimer(int time) {
     cookingTime = time;
@@ -32,7 +31,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
     cookingTimer = Timer.periodic(
       oneSec,
       (Timer timer) {
-        if (cookingTime == 0 || !isCooking) {
+        if (cookingTime == 0 || !(recipe?.isCooking ?? false)) {
           setState(() {
             timer.cancel();
           });
@@ -49,7 +48,6 @@ class _RecipeDetailState extends State<RecipeDetail> {
   void initState() {
     super.initState();
     cookingTimer = Timer(const Duration(seconds: 1), () {});
-    isCooking = false;
     cookingTime = 0;
 
     _scrollController = ScrollController()..addListener(() {});
@@ -63,18 +61,17 @@ class _RecipeDetailState extends State<RecipeDetail> {
   }
 
   void _scrollToTop() {
-    _scrollController.animateTo(isCooking ? 65 : 0,
+    _scrollController.animateTo(recipe?.isCooking ?? false ? 65 : 0,
         duration: const Duration(microseconds: 500), curve: Curves.linear);
   }
 
-  //final Future<RecipesModel> recipes = Future.value(RecipeApi().fetchRecipes());
   @override
   Widget build(BuildContext context) {
     recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
     return Scaffold(
       // extendBodyBehindAppBar: false,
       appBar: AppBar(
-        bottom: isCooking
+        bottom: recipe?.isCooking ?? false
             ? PreferredSize(
                 preferredSize: const Size.fromHeight(59.0),
                 child: Theme(
@@ -111,9 +108,11 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 ),
               )
             : null,
-        systemOverlayStyle:
-            isCooking ? StatusOverlay.green : StatusOverlay.white,
-        backgroundColor: isCooking ? const Color(0xFF2ECC71) : Colors.white,
+        systemOverlayStyle: recipe?.isCooking ?? false
+            ? StatusOverlay.green
+            : StatusOverlay.white,
+        backgroundColor:
+            recipe?.isCooking ?? false ? const Color(0xFF2ECC71) : Colors.white,
         title: const Text(
           'Рецепты',
           style: TextStyle(
@@ -198,11 +197,11 @@ class _RecipeDetailState extends State<RecipeDetail> {
               padding: const EdgeInsets.only(left: 15, right: 15, top: 27.6),
               child: Column(
                 children: [
-                  HeaderDetail(recipe: recipe),
+                  HeaderDetail(recipe: recipe!),
                   const SizedBox(
                     height: 16.54,
                   ),
-                  IngredientsDetails(ingredients: recipe.ingredients),
+                  IngredientsDetails(ingredients: recipe?.ingredients),
                   const SizedBox(
                     height: 19,
                   ),
@@ -210,7 +209,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                   const SizedBox(
                     height: 18,
                   ),
-                  CookingStepsDetail(recipe: recipe),
+                  CookingStepsDetail(recipe: recipe!),
                 ],
               ),
             ),
@@ -218,18 +217,24 @@ class _RecipeDetailState extends State<RecipeDetail> {
               height: 27,
             ),
             GestureDetector(
-              child: isCooking ? stopCookingButton() : cookingButton(),
+              child: recipe?.isCooking ?? false
+                  ? stopCookingButton()
+                  : cookingButton(),
               onTap: () {
                 setState(() {
-                  isCooking = !isCooking;
-                  for (int i = 0; i < recipe.cookingSteps!.length; i++) {
-                    recipe.cookingSteps?[i].status =
-                        CookingStepsStatus.notPassed;
+                  recipe?.isCooking = !(recipe?.isCooking ?? false);
+                  for (int i = 0; i < recipe!.cookingSteps!.length; i++) {
+                    recipe?.cookingSteps![i].status =
+                        (recipe?.isCooking ?? false)
+                            ? CookingStepsStatus.notPassed
+                            : CookingStepsStatus.notStarted;
                   }
-                  recipe.cookingSteps?[0].status = CookingStepsStatus.passed;
+                  recipe?.cookingSteps![0].status = (recipe?.isCooking ?? false)
+                      ? CookingStepsStatus.passed
+                      : CookingStepsStatus.notStarted;
                 });
-                if (isCooking) {
-                  startTimer(2400);
+                if ((recipe?.isCooking ?? false)) {
+                  startTimer(recipe?.time ?? 0);
                 }
                 _scrollToTop();
               },
@@ -237,7 +242,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
             const SizedBox(
               height: 32,
             ),
-            !isCooking
+            !(recipe?.isCooking ?? false)
                 ? Column(
                     children: [
                       const Divider(

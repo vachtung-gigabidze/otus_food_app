@@ -23,8 +23,9 @@ class RecipesModel {
 
 class Recipe {
   int? id;
+  bool? isCooking;
   String? name;
-  String? time;
+  int? time;
   int? cookingCount;
   String? imageUrl;
   List<Ingredient>? ingredients;
@@ -32,6 +33,7 @@ class Recipe {
 
   Recipe(
       {this.id,
+      this.isCooking = false,
       this.name,
       this.time,
       this.cookingCount,
@@ -64,7 +66,7 @@ class Recipe {
     final Map<String, dynamic> data = {};
     data['id'] = id;
     data['name'] = name;
-    data['time'] = time;
+    data['time'] = time.toString();
     data['cookingCount'] = cookingCount;
     data['imageUrl'] = imageUrl;
     if (ingredients != null) {

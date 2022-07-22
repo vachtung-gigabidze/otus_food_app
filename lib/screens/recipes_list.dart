@@ -82,7 +82,9 @@ class RecipesList extends StatelessWidget {
                   },
                 );
               } else {
-                return Container();
+                return Container(
+                  child: Text('No data'),
+                );
               }
             },
           ),
