@@ -35,7 +35,8 @@ class CookingStepsDetail extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return Container(
                 margin: const EdgeInsets.only(bottom: 16),
-                child: cookingStepCard(recipe.cookingSteps?[index]),
+                child:
+                    CookingStepCard(cookingStep: recipe.cookingSteps?[index]),
               );
             })
       ],

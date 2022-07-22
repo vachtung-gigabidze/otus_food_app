@@ -79,7 +79,7 @@ class AppColors {
     }
   }
 
-  Color stepText(CookingStepsStatus cookingStepsStatus) {
+  Color stepText(CookingStepsStatus? cookingStepsStatus) {
     switch (cookingStepsStatus) {
       case CookingStepsStatus.notStarted:
         return stepTextNoStart;
@@ -92,7 +92,7 @@ class AppColors {
     }
   }
 
-  Color stepCheckbox(CookingStepsStatus cookingStepsStatus) {
+  Color stepCheckbox(CookingStepsStatus? cookingStepsStatus) {
     switch (cookingStepsStatus) {
       case CookingStepsStatus.notStarted:
         return stepCheckboxNoStart;
