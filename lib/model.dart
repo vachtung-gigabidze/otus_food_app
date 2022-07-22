@@ -30,6 +30,7 @@ class Recipe {
   String? imageUrl;
   List<Ingredient>? ingredients;
   List<CookingStep>? cookingSteps;
+  List<Comments>? comments;
 
   Recipe(
       {this.id,
@@ -39,7 +40,8 @@ class Recipe {
       this.cookingCount,
       this.imageUrl,
       this.ingredients,
-      this.cookingSteps});
+      this.cookingSteps,
+      this.comments});
 
   Recipe.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -60,6 +62,12 @@ class Recipe {
         cookingSteps!.add(CookingStep.fromJson(v));
       });
     }
+    if (json['comments'] != null) {
+      comments = <Comments>[];
+      json['comments'].forEach((v) {
+        comments!.add(Comments.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -74,6 +82,9 @@ class Recipe {
     }
     if (cookingSteps != null) {
       data['cookingSteps'] = cookingSteps!.map((v) => v.toJson()).toList();
+    }
+    if (comments != null) {
+      data['comments'] = comments!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -173,6 +184,34 @@ class FridgeModel {
     if (fridge != null) {
       data['fridge'] = fridge!.map((v) => v.toJson()).toList();
     }
+    return data;
+  }
+}
+
+class Comments {
+  String? author;
+  String? avatar;
+  String? date;
+  String? comment;
+  String? image;
+
+  Comments({this.author, this.avatar, this.date, this.comment, this.image});
+
+  Comments.fromJson(Map<String, dynamic> json) {
+    author = json['author'];
+    avatar = json['avatar'];
+    date = json['date'];
+    comment = json['comment'];
+    image = json['image'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['author'] = author;
+    data['avatar'] = avatar;
+    data['date'] = date;
+    data['comment'] = comment;
+    data['image'] = image;
     return data;
   }
 }
