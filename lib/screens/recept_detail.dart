@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:otus_food_app/constants.dart';
@@ -25,6 +26,13 @@ class _RecipeDetailState extends State<RecipeDetail> {
   late Timer cookingTimer;
   late int cookingTime;
   late Recipe? recipe;
+
+  void addComment(Comment newComment) {
+    log('new comment');
+    setState(() {
+      recipe?.comments?.add(newComment);
+    });
+  }
 
   void startTimer(int time) {
     cookingTime = time;
@@ -265,7 +273,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                             const SizedBox(
                               height: 48,
                             ),
-                            const CommentPost(),
+                            CommentPost(addComment: addComment),
                           ],
                         ),
                       ),

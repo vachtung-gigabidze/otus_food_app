@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
+import 'package:otus_food_app/model.dart';
 
 class CommentPost extends StatefulWidget {
-  const CommentPost({Key? key}) : super(key: key);
-
+  const CommentPost({Key? key, required this.addComment}) : super(key: key);
+  final Function(Comment) addComment;
   @override
   State<CommentPost> createState() => _CommentPostState();
 }
@@ -31,6 +34,19 @@ class _CommentPostState extends State<CommentPost> {
         SizedBox(
           height: 72,
           child: TextField(
+            controller: _controller,
+            onEditingComplete: () {
+              DateTime today = DateTime.now();
+              widget.addComment(Comment(
+                  author: 'Unknown User',
+                  comment: _controller.text,
+                  date: '${today.day}.${today.month}.${today.year}',
+                  avatar: Constants.imageProfile,
+                  image: ""));
+              _controller.clear();
+              FocusScope.of(context).nextFocus();
+              //log('edit complete');
+            },
             decoration: InputDecoration(
               suffixIcon: GestureDetector(
                   onTap: () {},

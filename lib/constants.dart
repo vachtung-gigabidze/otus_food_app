@@ -4,8 +4,8 @@ import 'package:otus_food_app/model.dart';
 // ignore: constant_identifier_names
 class Constants {
   static const String logoIMAGE = 'assets/images/logo.png';
-  static const String avatar_1 = 'assets/images/avatar_1.png';
-  static const String commentImage_1 = 'assets/images/comment_image_1.png';
+  // static const String avatar_1 = 'assets/images/avatar_1.png';
+  // static const String commentImage_1 = 'assets/images/comment_image_1.png';
   static const String imageIcon = 'assets/icons/image_green.png';
   static const String lockIcon = 'assets/icons/lock_grey.png';
   static const String flagIcon = 'assets/icons/flag_green.png';
