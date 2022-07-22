@@ -26,10 +26,10 @@ class Constants {
 
   static const String imageProfile = 'assets/images/profile.png';
 
-  static const String iconMegafon = 'assets/icons/megafon.png';
+  static const String iconMegaphone = 'assets/icons/megaphone.png';
   static const String iconClock = 'assets/icons/clock.png';
   static const String checkboxPassed = 'assets/icons/checkbox_passed.png';
-  static const String checkboxNoPassed = 'assets/icons/checkbox_nopassed.png';
+  static const String checkboxNoPassed = 'assets/icons/checkbox_noPassed.png';
   static const String checkboxNoStarted = 'assets/icons/checkbox_noStarted.png';
 
   String checkBoxIcon(CookingStepsStatus cookingStepsStatus) {
@@ -46,7 +46,7 @@ class Constants {
   }
 }
 
-//enum CookingStepsStatus { nostart, start, complite }
+//enum CookingStepsStatus { noStart, start, complete }
 
 class AppColors {
   static const Color main = Color(0xFF165932);

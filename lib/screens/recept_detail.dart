@@ -129,7 +129,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
           IconButton(
             onPressed: () {},
             icon: Image.asset(
-              Constants.iconMegafon,
+              Constants.iconMegaphone,
               height: 24,
               width: 24,
             ),
@@ -171,7 +171,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
           //     height: 24,
           //     width: 24,
           //   ).image),
-          //   label: 'Избраное',
+          //   label: 'Избранное',
           // ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
@@ -202,7 +202,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                   const SizedBox(
                     height: 16.54,
                   ),
-                  IngredientsDetails(ingrediens: recipe.ingredients),
+                  IngredientsDetails(ingredients: recipe.ingredients),
                   const SizedBox(
                     height: 19,
                   ),

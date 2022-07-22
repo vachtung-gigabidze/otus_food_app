@@ -47,7 +47,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
               height: 24,
               width: 24,
             ).image),
-            label: 'Избраное',
+            label: 'Избранное',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(
@@ -80,7 +80,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                         height: 37,
                       ),
                       IngredientsDetails(
-                          ingrediens: snap.data?.fridge,
+                          ingredients: snap.data?.fridge,
                           title: 'В холодильнике'),
                       const SizedBox(
                         height: 21,
