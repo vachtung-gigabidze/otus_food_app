@@ -7,7 +7,6 @@ import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/Details/comment_list.dart';
 import 'package:otus_food_app/widgets/Details/comment_post.dart';
-import 'package:otus_food_app/widgets/Details/comment_view.dart';
 import 'package:otus_food_app/widgets/Details/cooking_button.dart';
 import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
 import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';

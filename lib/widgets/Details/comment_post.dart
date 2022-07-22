@@ -49,7 +49,9 @@ class _CommentPostState extends State<CommentPost> {
             },
             decoration: InputDecoration(
               suffixIcon: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    log('image');
+                  },
                   child: Container(
                     padding: const EdgeInsets.all(10.0),
                     color: Colors.transparent,
