@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/model.dart';
 
@@ -81,6 +83,11 @@ Widget commentView(Comment? comment) {
                 ? Image(
                     image: AssetImage(comment?.image ?? ""),
                     fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.file(
+                        File(comment?.image ?? ""),
+                      );
+                    },
                     //height: 160,
                     //width: 314,
                   )
