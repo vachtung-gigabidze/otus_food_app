@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/widgets/Details/comment_list.dart';
 import 'package:otus_food_app/widgets/Details/comment_post.dart';
 import 'package:otus_food_app/widgets/Details/comment_view.dart';
 import 'package:otus_food_app/widgets/Details/cooking_button.dart';
@@ -71,6 +72,21 @@ class _RecipeDetailState extends State<RecipeDetail> {
     return Scaffold(
       // extendBodyBehindAppBar: false,
       appBar: AppBar(
+        systemOverlayStyle: recipe?.isCooking ?? false
+            ? StatusOverlay.green
+            : StatusOverlay.white,
+        backgroundColor:
+            recipe?.isCooking ?? false ? const Color(0xFF2ECC71) : Colors.white,
+        title: const Text(
+          'Рецепты',
+          style: TextStyle(
+            color: Color(0xFF165932),
+            fontFamily: 'Roboto',
+            fontStyle: FontStyle.normal,
+            fontWeight: FontWeight.w400,
+            fontSize: 20.0,
+          ),
+        ),
         bottom: recipe?.isCooking ?? false
             ? PreferredSize(
                 preferredSize: const Size.fromHeight(59.0),
@@ -108,21 +124,6 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 ),
               )
             : null,
-        systemOverlayStyle: recipe?.isCooking ?? false
-            ? StatusOverlay.green
-            : StatusOverlay.white,
-        backgroundColor:
-            recipe?.isCooking ?? false ? const Color(0xFF2ECC71) : Colors.white,
-        title: const Text(
-          'Рецепты',
-          style: TextStyle(
-            color: Color(0xFF165932),
-            fontFamily: 'Roboto',
-            fontStyle: FontStyle.normal,
-            fontWeight: FontWeight.w400,
-            fontSize: 20.0,
-          ),
-        ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -257,7 +258,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
                             left: 17.0, right: 16, top: 25),
                         child: Column(
                           children: [
-                            commentView(),
+                            CommentList(
+                              comments: recipe?.comments!,
+                            ),
+                            //commentView(recipe?.comments![2]),
                             const SizedBox(
                               height: 48,
                             ),

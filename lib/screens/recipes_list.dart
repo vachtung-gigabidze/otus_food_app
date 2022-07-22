@@ -40,7 +40,7 @@ class RecipesList extends StatelessWidget {
             //     height: 24,
             //     width: 24,
             //   ).image),
-            //   label: 'Избраное',
+            //   label: 'Избранное',
             // ),
             BottomNavigationBarItem(
               icon: ImageIcon(Image.asset(
@@ -82,9 +82,7 @@ class RecipesList extends StatelessWidget {
                   },
                 );
               } else {
-                return Container(
-                  child: Text('No data'),
-                );
+                return const Text('No data');
               }
             },
           ),

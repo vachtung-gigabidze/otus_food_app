@@ -109,10 +109,24 @@
       "comments": [
         {
           "author": "anna_obraztsova",
-          "avatar": "assets/images/avatar.png",
+          "avatar": "assets/images/avatar_1.png",
           "date": "25.05.2022",
           "comment": "Я не большой любитель рыбы, но решила приготовить по этому рецепту и просто влюбилась!",
           "image": "assets/images/comment_image_1.png"
+        },
+        {
+          "author": "Реми",
+          "avatar": "assets/images/avatar_2.png",
+          "date": "05.06.2022",
+          "comment": "Я думаю, что если я — это то, что я ем, то мусор я есть не буду! Папа считал, что: «еда — это бензин. Будешь привередничать, не заправишь бак — мотор сдохнет. Так что заткнись и жри!»",
+          "image": ""
+        },
+        {
+          "author": "Антуан Эго",
+          "avatar": "assets/images/avatar_3.png",
+          "date": "26.06.2022",
+          "comment": "Я вовсе не любитель, я профессионал. Если еда так себе, я её не глотаю!",
+          "image": ""
         }
       ]
     },

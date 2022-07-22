@@ -30,7 +30,7 @@ class Recipe {
   String? imageUrl;
   List<Ingredient>? ingredients;
   List<CookingStep>? cookingSteps;
-  List<Comments>? comments;
+  List<Comment>? comments;
 
   Recipe(
       {this.id,
@@ -63,9 +63,9 @@ class Recipe {
       });
     }
     if (json['comments'] != null) {
-      comments = <Comments>[];
+      comments = <Comment>[];
       json['comments'].forEach((v) {
-        comments!.add(Comments.fromJson(v));
+        comments!.add(Comment.fromJson(v));
       });
     }
   }
@@ -188,16 +188,16 @@ class FridgeModel {
   }
 }
 
-class Comments {
+class Comment {
   String? author;
   String? avatar;
   String? date;
   String? comment;
   String? image;
 
-  Comments({this.author, this.avatar, this.date, this.comment, this.image});
+  Comment({this.author, this.avatar, this.date, this.comment, this.image});
 
-  Comments.fromJson(Map<String, dynamic> json) {
+  Comment.fromJson(Map<String, dynamic> json) {
     author = json['author'];
     avatar = json['avatar'];
     date = json['date'];
