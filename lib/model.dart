@@ -24,6 +24,7 @@ class RecipesModel {
 class Recipe {
   int? id;
   bool? isCooking;
+  int? favorites;
   String? name;
   int? time;
   int? cookingCount;
@@ -36,6 +37,7 @@ class Recipe {
       {this.id,
       this.isCooking = false,
       this.name,
+      this.favorites,
       this.time,
       this.cookingCount,
       this.imageUrl,
@@ -47,6 +49,7 @@ class Recipe {
     id = json['id'];
     name = json['name'];
     time = json['time'];
+    favorites = json['favorites'];
     cookingCount = json['cookingCount'];
     imageUrl = json['imageUrl'];
 
@@ -75,6 +78,7 @@ class Recipe {
     data['id'] = id;
     data['name'] = name;
     data['time'] = time.toString();
+    data['favorites'] = favorites;
     data['cookingCount'] = cookingCount;
     data['imageUrl'] = imageUrl;
     if (ingredients != null) {

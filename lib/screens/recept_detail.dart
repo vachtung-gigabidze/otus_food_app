@@ -33,14 +33,15 @@ class _RecipeDetailState extends State<RecipeDetail> {
     });
   }
 
-  void startTimer(int time) {
-    cookingTime = time;
+  void startCooking() {
+    cookingTime = recipe?.time ?? 0;
     const oneSec = Duration(seconds: 1);
     cookingTimer = Timer.periodic(
       oneSec,
       (Timer timer) {
         if (cookingTime == 0 || !(recipe?.isCooking ?? false)) {
           setState(() {
+            recipe?.isCooking = false;
             timer.cancel();
           });
         } else {
@@ -218,7 +219,9 @@ class _RecipeDetailState extends State<RecipeDetail> {
                   const SizedBox(
                     height: 18,
                   ),
-                  CookingStepsDetail(recipe: recipe!),
+                  IgnorePointer(
+                      ignoring: !(recipe?.isCooking ?? false),
+                      child: CookingStepsDetail(recipe: recipe!)),
                 ],
               ),
             ),
@@ -243,7 +246,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                       : CookingStepsStatus.notStarted;
                 });
                 if ((recipe?.isCooking ?? false)) {
-                  startTimer(recipe?.time ?? 0);
+                  startCooking();
                 }
                 _scrollToTop();
               },

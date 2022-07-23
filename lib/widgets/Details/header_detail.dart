@@ -59,6 +59,11 @@ class _HeaderDetailState extends State<HeaderDetail> {
               child: InkWell(
                 onTap: () => setState(() {
                   isFavorites = !isFavorites;
+                  if (isFavorites) {
+                    recipe.favorites = recipe.favorites! + 1;
+                  } else {
+                    recipe.favorites = recipe.favorites! - 1;
+                  }
                 }),
                 child: Image.asset(
                   isFavorites
@@ -101,9 +106,39 @@ class _HeaderDetailState extends State<HeaderDetail> {
         const SizedBox(
           height: 12,
         ),
-        const Image(
-          image: AssetImage('assets/images/1_full.png'),
-        ),
+        Stack(children: [
+          const Image(
+            image: AssetImage('assets/images/1_full.png'),
+          ),
+          recipe.favorites! > 0
+              ? const Positioned(
+                  bottom: 13.9,
+                  right: 0,
+                  child: Image(
+                    image: AssetImage(Constants.flagIcon),
+                    height: 43,
+                    width: 66,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              : Container(),
+          recipe.favorites! > 0
+              ? Positioned(
+                  bottom: 30,
+                  right: 7,
+                  child: Text(
+                    '${recipe.favorites!}',
+                    style: const TextStyle(
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w800,
+                      fontSize: 18.0,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                  ),
+                )
+              : Container(),
+        ]),
       ],
     );
   }
