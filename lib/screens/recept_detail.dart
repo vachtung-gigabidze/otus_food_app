@@ -98,7 +98,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
             ? PreferredSize(
                 preferredSize: const Size.fromHeight(59.0),
                 child: Theme(
-                  data: Theme.of(context).copyWith(accentColor: Colors.white),
+                  data: Theme.of(context)
+                      .copyWith(secondaryHeaderColor: Colors.white),
                   child: Container(
                     height: 59.0,
                     alignment: Alignment.center,

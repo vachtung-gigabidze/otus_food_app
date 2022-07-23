@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
@@ -85,8 +83,6 @@ class _MyWidgetState extends State<CookingStepCard> {
                             cookingStep?.status = CookingStepsStatus.passed;
                           }
                         });
-
-                        log('message');
                       },
                       child: checkBoxView(cookingStep?.status),
                     ),

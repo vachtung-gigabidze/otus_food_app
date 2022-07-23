@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-// import 'package:otus_food_app/features/view/select_foto.dart';
+
 import 'package:otus_food_app/screens/favorites_screen.dart';
 import 'package:otus_food_app/screens/fridge_screen.dart';
 import 'package:otus_food_app/screens/login_screen.dart';
 import 'package:otus_food_app/screens/logo_screen.dart';
 import 'package:otus_food_app/screens/profile_screen.dart';
-// import 'package:flutter/services.dart';
-// import 'package:otus_food_app/screens/logo_screen.dart';
 import 'package:otus_food_app/screens/recept_detail.dart';
 import 'package:otus_food_app/screens/recipes_list.dart';
 
@@ -32,15 +30,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Otus Food App',
-
-      //theme: ThemeData(
-      //primarySwatch: Colors.blue,
-      //visualDensity: VisualDensity.adaptivePlatformDensity,
-      //textTheme: const TextTheme(bodyText2: TextStyle(color: Colors.purple)),
-      //appBarTheme: AppBarTheme
-      //),
-      //home:
-
       routes: routes,
       initialRoute: '/logo',
     );

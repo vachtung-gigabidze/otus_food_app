@@ -32,7 +32,7 @@ class ProfileScreen extends StatelessWidget {
               height: 24,
               width: 24,
             ).image),
-            label: 'Избраное',
+            label: 'Избранное',
           ),
           BottomNavigationBarItem(
             icon: ImageIcon(Image.asset(

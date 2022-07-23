@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -15,17 +14,19 @@ class CommentPost extends StatefulWidget {
 }
 
 class _CommentPostState extends State<CommentPost> {
-  late TextEditingController _controller;
-  late XFile? _image;
+  late TextEditingController _controllerTextComment;
+  late XFile? _newImageComment;
   @override
   void initState() {
+    _newImageComment = null;
+    _controllerTextComment = TextEditingController();
+
     super.initState();
-    _controller = TextEditingController();
   }
 
   @override
   void dispose() {
-    _controller.dispose();
+    _controllerTextComment.dispose();
     super.dispose();
   }
 
@@ -35,7 +36,7 @@ class _CommentPostState extends State<CommentPost> {
     XFile? image = await _picker.pickImage(source: ImageSource.camera);
 
     setState(() {
-      _image = image;
+      _newImageComment = image;
     });
   }
 
@@ -44,7 +45,7 @@ class _CommentPostState extends State<CommentPost> {
         await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
 
     setState(() {
-      _image = image;
+      _newImageComment = image;
     });
   }
 
@@ -53,26 +54,24 @@ class _CommentPostState extends State<CommentPost> {
         context: context,
         builder: (BuildContext bc) {
           return SafeArea(
-            child: Container(
-              child: Wrap(
-                children: <Widget>[
-                  ListTile(
-                      leading: const Icon(Icons.photo_library),
-                      title: const Text('Photo Library'),
-                      onTap: () {
-                        _imgFromGallery();
-                        Navigator.of(context).pop();
-                      }),
-                  ListTile(
-                    leading: const Icon(Icons.photo_camera),
-                    title: const Text('Camera'),
+            child: Wrap(
+              children: <Widget>[
+                ListTile(
+                    leading: const Icon(Icons.photo_library),
+                    title: const Text('Галерея'),
                     onTap: () {
-                      _imgFromCamera();
+                      _imgFromGallery();
                       Navigator.of(context).pop();
-                    },
-                  ),
-                ],
-              ),
+                    }),
+                ListTile(
+                  leading: const Icon(Icons.photo_camera),
+                  title: const Text('Камера'),
+                  onTap: () {
+                    _imgFromCamera();
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
             ),
           );
         });
@@ -86,18 +85,21 @@ class _CommentPostState extends State<CommentPost> {
         SizedBox(
           height: 72,
           child: TextField(
-            controller: _controller,
+            controller: _controllerTextComment,
             onEditingComplete: () {
-              DateTime today = DateTime.now();
-              widget.addComment(Comment(
-                  author: 'Unknown User',
-                  comment: _controller.text,
-                  date: '${today.day}.${today.month}.${today.year}',
-                  avatar: Constants.imageProfile,
-                  image: _image!.path));
-              _controller.clear();
-              FocusScope.of(context).nextFocus();
-              //log('edit complete');
+              if (_controllerTextComment.text.isNotEmpty) {
+                DateTime today = DateTime.now();
+                widget.addComment(Comment(
+                    author: 'Unknown User',
+                    comment: _controllerTextComment.text,
+                    date:
+                        '${today.day < 10 ? 0 : ''}${today.day}.${today.month < 10 ? 0 : ''}${today.month}.${today.year}',
+                    avatar: Constants.imageProfile,
+                    image: _newImageComment?.path ?? ""));
+                _newImageComment = null;
+                _controllerTextComment.clear();
+              }
+              FocusScope.of(context).previousFocus();
             },
             decoration: InputDecoration(
               suffixIcon: GestureDetector(
@@ -111,9 +113,9 @@ class _CommentPostState extends State<CommentPost> {
                       maxHeight: 24.0,
                       maxWidth: 24.0,
                     ),
-                    child: _image != null
+                    child: _newImageComment != null
                         ? Image.file(
-                            File(_image!.path),
+                            File(_newImageComment!.path),
                             width: 24,
                             height: 19.2,
                             fit: BoxFit.fitHeight,
