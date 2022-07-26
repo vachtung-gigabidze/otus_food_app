@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/utils/recipe_utils.dart';
 import 'package:otus_food_app/widgets/Details/comment_list.dart';
 import 'package:otus_food_app/widgets/Details/comment_post.dart';
 import 'package:otus_food_app/widgets/Details/cooking_button.dart';
@@ -118,7 +118,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                           ),
                         ),
                         Text(
-                          RecipeApi().showTime(cookingTime),
+                          RecipeUtils().showTime(cookingTime),
                           style: const TextStyle(
                             color: Colors.white,
                             fontFamily: 'Roboto',

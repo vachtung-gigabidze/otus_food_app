@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/api/recipe_api.dart';
-import 'package:otus_food_app/constants.dart';
 
+import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/utils/recipe_utils.dart';
 
 class HeaderDetail extends StatefulWidget {
   const HeaderDetail({Key? key, required this.recipe}) : super(key: key);
@@ -55,7 +55,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(right: 20),
+              margin: const EdgeInsets.only(right: 10),
               child: InkWell(
                 onTap: () => setState(() {
                   isFavorites = !isFavorites;
@@ -91,7 +91,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
               width: 11,
             ),
             Text(
-              RecipeApi().nameTime(recipe.time!),
+              RecipeUtils().nameTime(recipe.time!),
               style: const TextStyle(
                 fontFamily: 'Roboto',
                 fontStyle: FontStyle.normal,
