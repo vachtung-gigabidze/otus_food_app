@@ -42,12 +42,10 @@ class BottomNavBar extends StatelessWidget {
           label: 'Профиль',
         ),
       ],
-
       currentIndex: 0,
       showUnselectedLabels: true,
       selectedItemColor: AppColors.accent,
       unselectedItemColor: AppColors.greyColor,
-      // onTap: () {},
     );
   }
 }
