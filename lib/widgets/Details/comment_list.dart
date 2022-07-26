@@ -18,7 +18,7 @@ class CommentList extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return Container(
             margin: const EdgeInsets.only(bottom: 16),
-            child: commentView(comments?[index]),
+            child: CommentView(comment: comments?[index]),
           );
         });
   }

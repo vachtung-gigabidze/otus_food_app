@@ -11,6 +11,7 @@ import 'package:otus_food_app/widgets/Details/cooking_button.dart';
 import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
 import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/Details/header_detail.dart';
+import 'package:otus_food_app/widgets/bottomNavBar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
 class RecipeDetail extends StatefulWidget {
@@ -149,55 +150,11 @@ class _RecipeDetailState extends State<RecipeDetail> {
           tooltip: 'Show Snackbar',
           color: Colors.black87,
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/recipes');
-            //ScaffoldMessenger.of(context).showSnackBar(
-            //  const SnackBar(content: Text('This is a snackbar')));
+            Navigator.of(context, rootNavigator: true).pop(context);
           },
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconPizza,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Рецепты',
-            backgroundColor: Colors.white,
-          ),
-          // BottomNavigationBarItem(
-          //   icon: ImageIcon(Image.asset(
-          //     Constants.iconFridge,
-          //     height: 24,
-          //     width: 24,
-          //   ).image),
-          //   label: 'Холодильник',
-          // ),
-          // BottomNavigationBarItem(
-          //   icon: ImageIcon(Image.asset(
-          //     Constants.iconHeart,
-          //     height: 24,
-          //     width: 24,
-          //   ).image),
-          //   label: 'Избранное',
-          // ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconProfile,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Профиль',
-          ),
-        ],
-
-        currentIndex: 0,
-        showUnselectedLabels: true,
-        selectedItemColor: AppColors.accent,
-        unselectedItemColor: AppColors.greyColor,
-        // onTap: () {},
-      ),
+      bottomNavigationBar: const BottomNavBar(),
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(

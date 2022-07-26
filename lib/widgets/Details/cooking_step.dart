@@ -84,7 +84,8 @@ class _MyWidgetState extends State<CookingStepCard> {
                           }
                         });
                       },
-                      child: checkBoxView(cookingStep?.status),
+                      child:
+                          CheckBoxView(cookingStepsStatus: cookingStep?.status),
                     ),
                     Text(
                       '${cookingStep?.duration}',
