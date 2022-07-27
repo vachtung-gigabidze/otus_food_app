@@ -78,7 +78,7 @@ class RecipeCard extends StatelessWidget {
                       child: SizedBox(
                         height: 19,
                         child: Text(
-                          RecipeUtils().nameTime(recipe?.time ?? 0),
+                          RecipeUtils.nameTime(recipe?.time ?? 0),
                           style: const TextStyle(
                             fontFamily: defaultFont,
                             fontStyle: FontStyle.normal,

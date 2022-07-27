@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
+import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -7,49 +8,7 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconPizza,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Рецепты',
-            backgroundColor: Colors.white,
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconFridge,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Холодильник',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconHeartGreen,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Избранное',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconProfile,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Профиль',
-          ),
-        ],
-
-        currentIndex: 3,
-        showUnselectedLabels: true,
-        selectedItemColor: AppColors.accent,
-        unselectedItemColor: AppColors.greyColor,
-        // onTap: () {},
-      ),
+      bottomNavigationBar: const BottomNavBar(),
       backgroundColor: const Color(0xFFC2C2C2),
       body: Center(
         child: Column(

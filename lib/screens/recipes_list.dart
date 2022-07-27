@@ -4,7 +4,7 @@ import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/List/recipe_card.dart';
-import 'package:otus_food_app/widgets/bottomNavBar.dart';
+import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
 class RecipesList extends StatefulWidget {

@@ -55,7 +55,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
               ),
             ),
             Container(
-              margin: const EdgeInsets.only(right: 10),
+              margin: const EdgeInsets.only(right: 2),
               child: InkWell(
                 onTap: () => setState(() {
                   isFavorites = !isFavorites;
@@ -91,7 +91,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
               width: 11,
             ),
             Text(
-              RecipeUtils().nameTime(recipe.time!),
+              RecipeUtils.nameTime(recipe.time!),
               style: const TextStyle(
                 fontFamily: 'Roboto',
                 fontStyle: FontStyle.normal,

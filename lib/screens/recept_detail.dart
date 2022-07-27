@@ -11,7 +11,7 @@ import 'package:otus_food_app/widgets/Details/cooking_button.dart';
 import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
 import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/Details/header_detail.dart';
-import 'package:otus_food_app/widgets/bottomNavBar.dart';
+import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
 class RecipeDetail extends StatefulWidget {
@@ -54,19 +54,39 @@ class _RecipeDetailState extends State<RecipeDetail> {
     );
   }
 
+  void _updateCookingSteps() {
+    for (int i = 0; i < recipe!.cookingSteps!.length; i++) {
+      recipe?.cookingSteps![i].status = (recipe?.isCooking ?? false)
+          ? CookingStepsStatus.notPassed
+          : CookingStepsStatus.notStarted;
+    }
+    recipe?.cookingSteps![0].status = (recipe?.isCooking ?? false)
+        ? CookingStepsStatus.passed
+        : CookingStepsStatus.notStarted;
+
+    if ((recipe?.isCooking ?? false)) {
+      startCooking();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+
     cookingTimer = Timer(const Duration(seconds: 1), () {});
     cookingTime = 0;
-
     _scrollController = ScrollController()..addListener(() {});
   }
 
   @override
   void dispose() {
-    cookingTimer.cancel();
     _scrollController.dispose();
+    //stop cooking
+    cookingTime = 0;
+    recipe?.isCooking = false;
+    cookingTimer.cancel();
+    _updateCookingSteps();
+
     super.dispose();
   }
 
@@ -119,7 +139,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                           ),
                         ),
                         Text(
-                          RecipeUtils().showTime(cookingTime),
+                          RecipeUtils.showTime(cookingTime),
                           style: const TextStyle(
                             color: Colors.white,
                             fontFamily: 'Roboto',
@@ -192,19 +212,9 @@ class _RecipeDetailState extends State<RecipeDetail> {
               onTap: () {
                 setState(() {
                   recipe?.isCooking = !(recipe?.isCooking ?? false);
-                  for (int i = 0; i < recipe!.cookingSteps!.length; i++) {
-                    recipe?.cookingSteps![i].status =
-                        (recipe?.isCooking ?? false)
-                            ? CookingStepsStatus.notPassed
-                            : CookingStepsStatus.notStarted;
-                  }
-                  recipe?.cookingSteps![0].status = (recipe?.isCooking ?? false)
-                      ? CookingStepsStatus.passed
-                      : CookingStepsStatus.notStarted;
                 });
-                if ((recipe?.isCooking ?? false)) {
-                  startCooking();
-                }
+                _updateCookingSteps();
+
                 _scrollToTop();
               },
             ),

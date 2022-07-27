@@ -1,5 +1,5 @@
 class RecipeUtils {
-  String showTime(int cookingTime) {
+  static String showTime(int cookingTime) {
     int hour = cookingTime ~/ 3600;
     int minute = (cookingTime - (hour * 3600)) ~/ 60;
     int second = (cookingTime - (hour * 3600)) % 60;
@@ -16,7 +16,7 @@ class RecipeUtils {
     return hourStr + minuteStr + secondStr;
   }
 
-  String nameTime(int cookingTime) {
+  static String nameTime(int cookingTime) {
     int hour = cookingTime ~/ 3600;
     int minute = (cookingTime - (hour * 3600)) ~/ 60;
 
