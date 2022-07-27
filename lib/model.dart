@@ -132,9 +132,9 @@ class Ingredient {
   Ingredient({this.name, this.quantity, this.unit});
 
   Ingredient.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    quantity = json['quantity'];
-    unit = json['unit'];
+    name = json['name'] ?? "";
+    quantity = json['quantity'] ?? "";
+    unit = json['unit'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -142,6 +142,7 @@ class Ingredient {
     data['name'] = name;
     data['quantity'] = quantity;
     data['unit'] = unit;
+
     return data;
   }
 }
