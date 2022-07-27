@@ -6,13 +6,13 @@
       "time": 2700,
       "favorites": [
         {
-          "user": "anonymous"
+          "username": "anonymous"
         },
         {
-          "user": "john"
+          "username": "john"
         },
         {
-          "user": "peter"
+          "username": "peter"
         }
       ],
       "imageUrl": "1.png",

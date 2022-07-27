@@ -84,7 +84,7 @@ class Recipe {
     data['name'] = name;
     data['time'] = time.toString();
     if (favorites != null) {
-      data['favorites'] = favorites!.map((v) => v.toJson()).toSet();
+      data['favorites'] = favorites!.map((v) => v.toJson()).toList();
     }
     data['cookingCount'] = cookingCount;
     data['imageUrl'] = imageUrl;

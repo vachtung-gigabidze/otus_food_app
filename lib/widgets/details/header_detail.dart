@@ -16,12 +16,12 @@ class HeaderDetail extends StatefulWidget {
 class _HeaderDetailState extends State<HeaderDetail> {
   late bool isFavorites;
   late Recipe recipe;
-
+  String username = 'anonymous';
   @override
   void initState() {
     super.initState();
     recipe = widget.recipe;
-    isFavorites = false;
+    isFavorites = recipe.isFavorite(username);
   }
 
   @override
@@ -63,11 +63,11 @@ class _HeaderDetailState extends State<HeaderDetail> {
                 child: InkWell(
                   onTap: () => setState(() {
                     isFavorites = !isFavorites;
-                    // if (isFavorites) {
-                    //   recipe.favorites = recipe.favorites! + 1;
-                    // } else {
-                    //   recipe.favorites = recipe.favorites! - 1;
-                    // }
+                    if (isFavorites) {
+                      recipe.addFavorite(username);
+                    } else {
+                      recipe.removeFavorite(username);
+                    }
                   }),
                   child: Image.asset(
                     isFavorites
@@ -115,7 +115,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
           const Image(
             image: AssetImage('assets/images/1_full.png'),
           ),
-          (recipe.favorites!.isNotEmpty)
+          (isFavorites)
               ? const Positioned(
                   bottom: 13.9,
                   right: 0,
@@ -127,7 +127,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
                   ),
                 )
               : Container(),
-          recipe.favorites!.isNotEmpty
+          (isFavorites)
               ? Positioned(
                   bottom: 30,
                   right: 7,
