@@ -27,14 +27,13 @@ class _RecipeDetailState extends State<RecipeDetail> {
   late int cookingTime;
   late Recipe? recipe;
 
-  void addComment(Comment newComment) {
-    log('new comment');
+  void _addComment(Comment newComment) {
     setState(() {
       recipe?.comments?.add(newComment);
     });
   }
 
-  void startCooking() {
+  void _startCooking() {
     cookingTime = recipe?.time ?? 0;
     const oneSec = Duration(seconds: 1);
     cookingTimer = Timer.periodic(
@@ -54,21 +53,6 @@ class _RecipeDetailState extends State<RecipeDetail> {
     );
   }
 
-  void _updateCookingSteps() {
-    for (int i = 0; i < recipe!.cookingSteps!.length; i++) {
-      recipe?.cookingSteps![i].status = (recipe?.isCooking ?? false)
-          ? CookingStepsStatus.notPassed
-          : CookingStepsStatus.notStarted;
-    }
-    recipe?.cookingSteps![0].status = (recipe?.isCooking ?? false)
-        ? CookingStepsStatus.passed
-        : CookingStepsStatus.notStarted;
-
-    if ((recipe?.isCooking ?? false)) {
-      startCooking();
-    }
-  }
-
   @override
   void initState() {
     super.initState();
@@ -81,11 +65,11 @@ class _RecipeDetailState extends State<RecipeDetail> {
   @override
   void dispose() {
     _scrollController.dispose();
-    //stop cooking
+
     cookingTime = 0;
     recipe?.isCooking = false;
     cookingTimer.cancel();
-    _updateCookingSteps();
+    recipe?.updateCookingSteps();
 
     super.dispose();
   }
@@ -213,7 +197,11 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 setState(() {
                   recipe?.isCooking = !(recipe?.isCooking ?? false);
                 });
-                _updateCookingSteps();
+                recipe!.updateCookingSteps();
+
+                if ((recipe?.isCooking ?? false)) {
+                  _startCooking();
+                }
 
                 _scrollToTop();
               },
@@ -243,7 +231,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                             const SizedBox(
                               height: 48,
                             ),
-                            CommentPost(addComment: addComment),
+                            CommentPost(addComment: _addComment),
                           ],
                         ),
                       ),

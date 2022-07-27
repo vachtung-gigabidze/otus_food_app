@@ -37,9 +37,11 @@ class _HeaderDetailState extends State<HeaderDetail> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            SizedBox(
-              height: 31,
-              width: 314,
+            Flexible(
+              fit: FlexFit.tight,
+              flex: 5,
+              // height: 31,
+              // width: 314,
               child: Text(
                 recipe.name ?? "Название рецепта",
                 overflow: TextOverflow.ellipsis,
@@ -54,23 +56,26 @@ class _HeaderDetailState extends State<HeaderDetail> {
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(right: 2),
-              child: InkWell(
-                onTap: () => setState(() {
-                  isFavorites = !isFavorites;
-                  if (isFavorites) {
-                    recipe.favorites = recipe.favorites! + 1;
-                  } else {
-                    recipe.favorites = recipe.favorites! - 1;
-                  }
-                }),
-                child: Image.asset(
-                  isFavorites
-                      ? Constants.iconHeartRed
-                      : Constants.iconHeartBlack,
-                  height: 30,
-                  width: 30,
+            Flexible(
+              flex: 1,
+              child: Container(
+                margin: const EdgeInsets.only(right: 20),
+                child: InkWell(
+                  onTap: () => setState(() {
+                    isFavorites = !isFavorites;
+                    if (isFavorites) {
+                      recipe.favorites = recipe.favorites! + 1;
+                    } else {
+                      recipe.favorites = recipe.favorites! - 1;
+                    }
+                  }),
+                  child: Image.asset(
+                    isFavorites
+                        ? Constants.iconHeartRed
+                        : Constants.iconHeartBlack,
+                    height: 30,
+                    width: 30,
+                  ),
                 ),
               ),
             ),

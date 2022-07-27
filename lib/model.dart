@@ -92,6 +92,21 @@ class Recipe {
     }
     return data;
   }
+
+  void updateCookingSteps() {
+    cookingSteps![0].status = (isCooking ?? false)
+        ? CookingStepsStatus.passed
+        : CookingStepsStatus.notStarted;
+    for (int i = 1; i < cookingSteps!.length; i++) {
+      cookingSteps![i].status = (isCooking ?? false)
+          ? CookingStepsStatus.notPassed
+          : CookingStepsStatus.notStarted;
+    }
+
+    // if ((recipe?.isCooking ?? false)) {
+    //   startCooking();
+    // }
+  }
 }
 
 class Ingredient {
