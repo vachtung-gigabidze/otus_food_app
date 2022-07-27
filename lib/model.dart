@@ -24,7 +24,7 @@ class RecipesModel {
 class Recipe {
   int? id;
   bool? isCooking;
-  int? favorites;
+  Set<Favorites>? favorites;
   String? name;
   int? time;
   int? cookingCount;
@@ -49,7 +49,12 @@ class Recipe {
     id = json['id'];
     name = json['name'];
     time = json['time'];
-    favorites = json['favorites'];
+    if (json['favorites'] != null) {
+      favorites = <Favorites>{};
+      json['favorites'].forEach((v) {
+        favorites!.add(Favorites.fromJson(v));
+      });
+    }
     cookingCount = json['cookingCount'];
     imageUrl = json['imageUrl'];
 
@@ -78,7 +83,9 @@ class Recipe {
     data['id'] = id;
     data['name'] = name;
     data['time'] = time.toString();
-    data['favorites'] = favorites;
+    if (favorites != null) {
+      data['favorites'] = favorites!.map((v) => v.toJson()).toSet();
+    }
     data['cookingCount'] = cookingCount;
     data['imageUrl'] = imageUrl;
     if (ingredients != null) {
@@ -102,10 +109,18 @@ class Recipe {
           ? CookingStepsStatus.notPassed
           : CookingStepsStatus.notStarted;
     }
+  }
 
-    // if ((recipe?.isCooking ?? false)) {
-    //   startCooking();
-    // }
+  bool isFavorite(String username) {
+    return favorites!.any((element) => element.username == username);
+  }
+
+  void addFavorite(String username) {
+    favorites!.add(Favorites(username: username));
+  }
+
+  void removeFavorite(String username) {
+    favorites!.remove(Favorites(username: username));
   }
 }
 
@@ -231,6 +246,47 @@ class Comment {
     data['date'] = date;
     data['comment'] = comment;
     data['image'] = image;
+    return data;
+  }
+}
+
+class Favorites {
+  String? username;
+
+  Favorites({this.username});
+
+  Favorites.fromJson(Map<String, dynamic> json) {
+    username = json['username'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['username'] = username;
+    return data;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      other is Favorites &&
+      other.runtimeType == runtimeType &&
+      other.username == username;
+
+  @override
+  int get hashCode => username.hashCode;
+}
+
+class User {
+  String? username;
+
+  User({this.username});
+
+  User.fromJson(Map<String, dynamic> json) {
+    username = json['username'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['username'] = username;
     return data;
   }
 }

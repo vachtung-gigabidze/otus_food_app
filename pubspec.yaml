@@ -64,6 +64,7 @@ flutter:
     - assets/icons/
     - assets/recipes.json
     - assets/fridge.json
+    - assets/user.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

@@ -45,4 +45,12 @@ class RecipeApi {
         .loadString(assetsPath)
         .then((json) => FridgeModel.fromJson(jsonDecode(json)));
   }
+
+  Future<User> fetchUser({String assetsPath = "assets/user.json"}) async {
+    log('read recept: $assetsPath');
+
+    return rootBundle
+        .loadString(assetsPath)
+        .then((json) => User.fromJson(jsonDecode(json)));
+  }
 }

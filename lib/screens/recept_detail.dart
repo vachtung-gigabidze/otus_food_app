@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:otus_food_app/api/recipe_api.dart';
 
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
@@ -26,6 +27,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   late Timer cookingTimer;
   late int cookingTime;
   late Recipe? recipe;
+  late User user;
 
   void _addComment(Comment newComment) {
     setState(() {
@@ -53,10 +55,15 @@ class _RecipeDetailState extends State<RecipeDetail> {
     );
   }
 
+  void _getUser() async {
+    user = await RecipeApi().fetchUser();
+    log(user.username!);
+  }
+
   @override
   void initState() {
     super.initState();
-
+    _getUser();
     cookingTimer = Timer(const Duration(seconds: 1), () {});
     cookingTime = 0;
     _scrollController = ScrollController()..addListener(() {});
