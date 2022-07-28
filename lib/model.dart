@@ -147,28 +147,6 @@ class Ingredient {
   }
 }
 
-// class Fridge {
-//   String? name;
-//   String? quantity;
-//   String? unit;
-
-//   Fridge({this.name, this.quantity, this.unit});
-
-//   Fridge.fromJson(Map<String, dynamic> json) {
-//     name = json['name'];
-//     quantity = json['quantity'];
-//     unit = json['unit'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = Map<String, dynamic>();
-//     data['name'] = name;
-//     data['quantity'] = quantity;
-//     data['unit'] = unit;
-//     return data;
-//   }
-// }
-
 enum CookingStepsStatus {
   passed,
   notPassed,
