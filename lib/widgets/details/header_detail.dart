@@ -62,12 +62,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
                 margin: const EdgeInsets.only(right: 20),
                 child: InkWell(
                   onTap: () => setState(() {
-                    isFavorites = !isFavorites;
-                    if (isFavorites) {
-                      recipe.addFavorite(username);
-                    } else {
-                      recipe.removeFavorite(username);
-                    }
+                    isFavorites = recipe.changeFavorite(isFavorites, username);
                   }),
                   child: Image.asset(
                     isFavorites
@@ -115,34 +110,32 @@ class _HeaderDetailState extends State<HeaderDetail> {
           const Image(
             image: AssetImage('assets/images/1_full.png'),
           ),
-          (isFavorites)
-              ? const Positioned(
-                  bottom: 13.9,
-                  right: 0,
-                  child: Image(
-                    image: AssetImage(Constants.flagIcon),
-                    height: 43,
-                    width: 66,
-                    fit: BoxFit.cover,
-                  ),
-                )
-              : Container(),
-          (isFavorites)
-              ? Positioned(
-                  bottom: 30,
-                  right: 7,
-                  child: Text(
-                    '${recipe.favorites!.length}',
-                    style: const TextStyle(
-                      fontFamily: 'Roboto',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w800,
-                      fontSize: 18.0,
-                      color: Color(0xFFFFFFFF),
-                    ),
-                  ),
-                )
-              : Container(),
+          if (isFavorites)
+            const Positioned(
+              bottom: 13.9,
+              right: 0,
+              child: Image(
+                image: AssetImage(Constants.flagIcon),
+                height: 43,
+                width: 66,
+                fit: BoxFit.cover,
+              ),
+            ),
+          if (isFavorites)
+            Positioned(
+              bottom: 30,
+              right: 7,
+              child: Text(
+                '${recipe.favorites!.length}',
+                style: const TextStyle(
+                  fontFamily: 'Roboto',
+                  fontStyle: FontStyle.normal,
+                  fontWeight: FontWeight.w800,
+                  fontSize: 18.0,
+                  color: Color(0xFFFFFFFF),
+                ),
+              ),
+            ),
         ]),
       ],
     );

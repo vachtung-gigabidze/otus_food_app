@@ -111,6 +111,15 @@ class Recipe {
     }
   }
 
+  bool changeFavorite(bool prevFavorite, String username) {
+    if (prevFavorite) {
+      removeFavorite(username);
+    } else {
+      addFavorite(username);
+    }
+    return !prevFavorite;
+  }
+
   bool isFavorite(String username) {
     return favorites!.any((element) => element.username == username);
   }

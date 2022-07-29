@@ -14,7 +14,7 @@ class Button extends StatelessWidget {
     this.text,
     // this.color = ColorButton.primary,
     this.size = SizeButton.medium,
-    this.pressed,
+    this.onPressed,
     //this.disable = false
   }) : super(key: key);
 
@@ -22,14 +22,14 @@ class Button extends StatelessWidget {
   // final ColorButton color;
   final SizeButton size;
   final String? text;
-  final VoidCallback? pressed;
+  final VoidCallback? onPressed;
   //final bool disable;
 
   @override
   Widget build(BuildContext context) {
     return _size(TextButton(
       style: _buttonStyle(),
-      onPressed: pressed,
+      onPressed: onPressed,
       child: Text(
         _text(),
         style: _textStyle(),

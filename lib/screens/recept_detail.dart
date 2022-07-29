@@ -86,6 +86,19 @@ class _RecipeDetailState extends State<RecipeDetail> {
         duration: const Duration(microseconds: 500), curve: Curves.linear);
   }
 
+  void _onCooking() {
+    setState(() {
+      recipe?.isCooking = !(recipe?.isCooking ?? false);
+    });
+    recipe!.updateCookingSteps();
+
+    if ((recipe?.isCooking ?? false)) {
+      _startCooking();
+    }
+
+    _scrollToTop();
+  }
+
   @override
   Widget build(BuildContext context) {
     recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
@@ -183,9 +196,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                   const SizedBox(
                     height: 19,
                   ),
-                  const Button(
-                      variant: VariantButton
-                          .checkIngredients), // checkIngredients(),
+                  const Button(variant: VariantButton.checkIngredients),
                   const SizedBox(
                     height: 18,
                   ),
@@ -198,24 +209,11 @@ class _RecipeDetailState extends State<RecipeDetail> {
             const SizedBox(
               height: 27,
             ),
-            GestureDetector(
-              child: recipe?.isCooking ?? false
-                  ? const Button(
-                      variant: VariantButton.stopCooking) //stopCookingButton()
-                  : const Button(
-                      variant: VariantButton.startCooking), //cookingButton(),
-              onTap: () {
-                setState(() {
-                  recipe?.isCooking = !(recipe?.isCooking ?? false);
-                });
-                recipe!.updateCookingSteps();
-
-                if ((recipe?.isCooking ?? false)) {
-                  _startCooking();
-                }
-
-                _scrollToTop();
-              },
+            Button(
+              variant: ((recipe?.isCooking ?? false)
+                  ? VariantButton.stopCooking
+                  : VariantButton.startCooking),
+              onPressed: _onCooking,
             ),
             const SizedBox(
               height: 32,
