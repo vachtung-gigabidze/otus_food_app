@@ -1,17 +1,17 @@
 import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/api/recipe_api.dart';
 
+import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
-import 'package:otus_food_app/widgets/Details/comment_list.dart';
-import 'package:otus_food_app/widgets/Details/comment_post.dart';
-import 'package:otus_food_app/widgets/Details/cooking_button.dart';
-import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
-import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
-import 'package:otus_food_app/widgets/Details/header_detail.dart';
+import 'package:otus_food_app/widgets/details/comment_list.dart';
+import 'package:otus_food_app/widgets/details/comment_post.dart';
+import 'package:otus_food_app/widgets/details/cooking_button.dart';
+import 'package:otus_food_app/widgets/details/cooking_steps_detail.dart';
+import 'package:otus_food_app/widgets/details/ingredients_detail.dart';
+import 'package:otus_food_app/widgets/details/header_detail.dart';
 import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
@@ -183,7 +183,9 @@ class _RecipeDetailState extends State<RecipeDetail> {
                   const SizedBox(
                     height: 19,
                   ),
-                  checkIngredients(),
+                  const Button(
+                      variant: VariantButton
+                          .checkIngredients), // checkIngredients(),
                   const SizedBox(
                     height: 18,
                   ),
@@ -198,8 +200,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
             ),
             GestureDetector(
               child: recipe?.isCooking ?? false
-                  ? stopCookingButton()
-                  : cookingButton(),
+                  ? const Button(
+                      variant: VariantButton.stopCooking) //stopCookingButton()
+                  : const Button(
+                      variant: VariantButton.startCooking), //cookingButton(),
               onTap: () {
                 setState(() {
                   recipe?.isCooking = !(recipe?.isCooking ?? false);

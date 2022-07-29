@@ -10,8 +10,6 @@ class IngredientsDetails extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    //var ingredients = ingredients;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
