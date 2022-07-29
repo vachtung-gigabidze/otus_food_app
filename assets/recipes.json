@@ -4,7 +4,17 @@
       "id": 1,
       "name": "Лосось в соусе терияки Лосось в соусе терияки Лосось в соусе терияки",
       "time": 2700,
-      "favorites": 2,
+      "favorites": [
+        {
+          "username": "anonymous"
+        },
+        {
+          "username": "john"
+        },
+        {
+          "username": "peter"
+        }
+      ],
       "imageUrl": "1.png",
       "ingredients": [
         {
@@ -135,13 +145,12 @@
       "id": 2,
       "name": "Поке боул с сыром тофу",
       "time": 1800,
-      "favorites": 0,
+      "favorites": [],
       "imageUrl": "2.png",
       "ingredients": [
         {
           "name": "Coco Milk",
-          "quantity": "1l.",
-          "unit": ""
+          "quantity": "1l."
         },
         {
           "name": "Milk",
@@ -169,7 +178,7 @@
       "id": 3,
       "name": "Стейк из говядины по-грузински",
       "time": 4500,
-      "favorites": 0,
+      "favorites": [],
       "imageUrl": "3.png",
       "ingredients": [
         {
@@ -203,16 +212,18 @@
       "id": 4,
       "name": "Тосты с голубикой и бананом",
       "time": 2700,
-      "favorites": 0,
+      "favorites": [],
       "imageUrl": "4.png",
       "ingredients": [
         {
           "name": "Coco Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         },
         {
           "name": "Milk",
-          "quantity": "1l."
+          "quantity": "1l.",
+          "unit": ""
         }
       ],
       "cookingSteps": [
@@ -235,7 +246,7 @@
       "id": 5,
       "name": "Паста с морепродуктами",
       "time": 1500,
-      "favorites": 0,
+      "favorites": [],
       "imageUrl": "5.png",
       "ingredients": [
         {
@@ -269,7 +280,7 @@
       "id": 6,
       "name": "Бургер с двумя котлетами",
       "time": 3600,
-      "favorites": 0,
+      "favorites": [],
       "imageUrl": "6.png",
       "ingredients": [
         {
@@ -303,7 +314,7 @@
       "id": 7,
       "name": "Пицца Маргарита домашняя",
       "time": 1500,
-      "favorites": 0,
+      "favorites": [],
       "imageUrl": "7.png",
       "ingredients": [
         {

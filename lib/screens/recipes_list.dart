@@ -4,10 +4,25 @@ import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/List/recipe_card.dart';
+import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
-class RecipesList extends StatelessWidget {
+class RecipesList extends StatefulWidget {
   const RecipesList({Key? key}) : super(key: key);
+
+  @override
+  State<RecipesList> createState() => _RecipesListState();
+}
+
+class _RecipesListState extends State<RecipesList> {
+  Future<RecipesModel>? recipes;
+
+  @override
+  void initState() {
+    recipes ??= RecipeApi().fetchRecipes();
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,56 +30,14 @@ class RecipesList extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: StatusOverlay.grey,
       child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: ImageIcon(Image.asset(
-                Constants.iconPizza,
-                height: 24,
-                width: 24,
-              ).image),
-              label: 'Рецепты',
-              backgroundColor: Colors.white,
-            ),
-            // BottomNavigationBarItem(
-            //   icon: ImageIcon(Image.asset(
-            //     Constants.iconFridge,
-            //     height: 24,
-            //     width: 24,
-            //   ).image),
-            //   label: 'Холодильник',
-            // ),
-            // BottomNavigationBarItem(
-            //   icon: ImageIcon(Image.asset(
-            //     Constants.iconHeart,
-            //     height: 24,
-            //     width: 24,
-            //   ).image),
-            //   label: 'Избранное',
-            // ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(Image.asset(
-                Constants.iconProfile,
-                height: 24,
-                width: 24,
-              ).image),
-              label: 'Профиль',
-            ),
-          ],
-
-          currentIndex: 0,
-          showUnselectedLabels: true,
-          selectedItemColor: AppColors.accent,
-          unselectedItemColor: AppColors.greyColor,
-          // onTap: () {},
-        ),
+        bottomNavigationBar: const BottomNavBar(),
         body: Container(
           padding: const EdgeInsets.only(top: 45, left: 16, right: 16),
           decoration: const BoxDecoration(
             color: AppColors.greyColor,
           ),
           child: FutureBuilder<RecipesModel>(
-            future: RecipeApi().fetchRecipes(),
+            future: recipes,
             builder:
                 (BuildContext context, AsyncSnapshot<RecipesModel> recipes) {
               if (recipes.hasData) {
@@ -77,7 +50,13 @@ class RecipesList extends StatelessWidget {
                       margin: const EdgeInsets.only(
                         bottom: 16,
                       ),
-                      child: RecipeCard(recipe: recipes.data?.recipes?[index]),
+                      child: InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(context, '/detail',
+                                arguments: recipes.data?.recipes?[index]);
+                          },
+                          child: RecipeCard(
+                              recipe: recipes.data?.recipes?[index])),
                     );
                   },
                 );

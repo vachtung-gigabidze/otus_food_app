@@ -1,9 +1,16 @@
 # otus_food_app
 
-OTUS_FOOT_APP
+# Домашнее задание 3
+## Создание страницы описания рецепта с возможностью переключения отметки избранного и шагов ##приготовления
 
-## Getting Started
+# Цель:
+## Создание страницы описания кулинарного рецепта с возможностью добавления комментария. Разработанный виджет должен запускаться как на мобильном устройстве, так и в web.
 
-### 1. Create logo screen. TODO: It is necessary to rewrite the functions using ShadowMask, it seems not optimal.
+# Описание/Пошаговая инструкция выполнения домашнего задания:
+## Дизайн приложения: https://www.figma.com/file/alUTMeT3w9XlbNf3orwyFA/Otus-Food-App?node-id=135%3A691 (эскизы с возможностью получить цвета, размеры и отступы) и https://www.figma.com/proto/alUTMeT3w9XlbNf3orwyFA/Otus-Food-App?node-id=102%3A3&scaling=scale-down&page-id=0%3A1&starting-point-node-id=135%3A691 (навигация по приложению)
 
-### 2. First time screen. TODO: It is necessary that he does not return to it when tap back.
+1. Расширить описание рецепта (добавить список ингредиентов и шаги приготовления)
+2. Создать виджет для визуализации рецепта
+3. Реализовать переключение кнопки "Избранное"
+4. Реализовать отметку шагов приготовления (checkbox)
+5. Возможность добавить комментарий к рецепту (текстовое поле + кнопка + изменение состояния)

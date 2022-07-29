@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/api/recipe_api.dart';
 
-import 'package:otus_food_app/constants.dart';
+// import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/List/recipe_card.dart';
+import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
@@ -21,49 +22,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconPizza,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Рецепты',
-            backgroundColor: Colors.white,
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconFridge,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Холодильник',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconHeartGreen,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Избранное',
-          ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconProfile,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Профиль',
-          ),
-        ],
-
-        currentIndex: 2,
-        showUnselectedLabels: true,
-        selectedItemColor: AppColors.accent,
-        unselectedItemColor: AppColors.greyColor,
-        // onTap: () {},
-      ),
+      bottomNavigationBar: const BottomNavBar(),
       backgroundColor: const Color(0xFFC2C2C2),
       body: SingleChildScrollView(
         child: Padding(

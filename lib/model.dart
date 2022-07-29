@@ -24,7 +24,7 @@ class RecipesModel {
 class Recipe {
   int? id;
   bool? isCooking;
-  int? favorites;
+  Set<Favorites>? favorites;
   String? name;
   int? time;
   int? cookingCount;
@@ -49,7 +49,12 @@ class Recipe {
     id = json['id'];
     name = json['name'];
     time = json['time'];
-    favorites = json['favorites'];
+    if (json['favorites'] != null) {
+      favorites = <Favorites>{};
+      json['favorites'].forEach((v) {
+        favorites!.add(Favorites.fromJson(v));
+      });
+    }
     cookingCount = json['cookingCount'];
     imageUrl = json['imageUrl'];
 
@@ -78,7 +83,9 @@ class Recipe {
     data['id'] = id;
     data['name'] = name;
     data['time'] = time.toString();
-    data['favorites'] = favorites;
+    if (favorites != null) {
+      data['favorites'] = favorites!.map((v) => v.toJson()).toList();
+    }
     data['cookingCount'] = cookingCount;
     data['imageUrl'] = imageUrl;
     if (ingredients != null) {
@@ -92,6 +99,38 @@ class Recipe {
     }
     return data;
   }
+
+  void updateCookingSteps() {
+    cookingSteps![0].status = (isCooking ?? false)
+        ? CookingStepsStatus.passed
+        : CookingStepsStatus.notStarted;
+    for (int i = 1; i < cookingSteps!.length; i++) {
+      cookingSteps![i].status = (isCooking ?? false)
+          ? CookingStepsStatus.notPassed
+          : CookingStepsStatus.notStarted;
+    }
+  }
+
+  bool changeFavorite(bool prevFavorite, String username) {
+    if (prevFavorite) {
+      removeFavorite(username);
+    } else {
+      addFavorite(username);
+    }
+    return !prevFavorite;
+  }
+
+  bool isFavorite(String username) {
+    return favorites!.any((element) => element.username == username);
+  }
+
+  void addFavorite(String username) {
+    favorites!.add(Favorites(username: username));
+  }
+
+  void removeFavorite(String username) {
+    favorites!.remove(Favorites(username: username));
+  }
 }
 
 class Ingredient {
@@ -102,9 +141,9 @@ class Ingredient {
   Ingredient({this.name, this.quantity, this.unit});
 
   Ingredient.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    quantity = json['quantity'];
-    unit = json['unit'];
+    name = json['name'] ?? "";
+    quantity = json['quantity'] ?? "";
+    unit = json['unit'] ?? "";
   }
 
   Map<String, dynamic> toJson() {
@@ -112,31 +151,14 @@ class Ingredient {
     data['name'] = name;
     data['quantity'] = quantity;
     data['unit'] = unit;
+
     return data;
   }
+
+  String showQuantity() {
+    return '$quantity $unit';
+  }
 }
-
-// class Fridge {
-//   String? name;
-//   String? quantity;
-//   String? unit;
-
-//   Fridge({this.name, this.quantity, this.unit});
-
-//   Fridge.fromJson(Map<String, dynamic> json) {
-//     name = json['name'];
-//     quantity = json['quantity'];
-//     unit = json['unit'];
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     final Map<String, dynamic> data = Map<String, dynamic>();
-//     data['name'] = name;
-//     data['quantity'] = quantity;
-//     data['unit'] = unit;
-//     return data;
-//   }
-// }
 
 enum CookingStepsStatus {
   passed,
@@ -216,6 +238,47 @@ class Comment {
     data['date'] = date;
     data['comment'] = comment;
     data['image'] = image;
+    return data;
+  }
+}
+
+class Favorites {
+  String? username;
+
+  Favorites({this.username});
+
+  Favorites.fromJson(Map<String, dynamic> json) {
+    username = json['username'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['username'] = username;
+    return data;
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      other is Favorites &&
+      other.runtimeType == runtimeType &&
+      other.username == username;
+
+  @override
+  int get hashCode => username.hashCode;
+}
+
+class User {
+  String? username;
+
+  User({this.username});
+
+  User.fromJson(Map<String, dynamic> json) {
+    username = json['username'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    data['username'] = username;
     return data;
   }
 }

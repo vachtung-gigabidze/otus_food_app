@@ -2,15 +2,17 @@ import 'dart:async';
 import 'dart:developer';
 import 'package:flutter/material.dart';
 
-import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/api/recipe_api.dart';
+import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
-import 'package:otus_food_app/widgets/Details/comment_list.dart';
-import 'package:otus_food_app/widgets/Details/comment_post.dart';
-import 'package:otus_food_app/widgets/Details/cooking_button.dart';
-import 'package:otus_food_app/widgets/Details/cooking_steps_detail.dart';
-import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
-import 'package:otus_food_app/widgets/Details/header_detail.dart';
+import 'package:otus_food_app/utils/recipe_utils.dart';
+import 'package:otus_food_app/widgets/details/comment_list.dart';
+import 'package:otus_food_app/widgets/details/comment_post.dart';
+import 'package:otus_food_app/widgets/details/cooking_button.dart';
+import 'package:otus_food_app/widgets/details/cooking_steps_detail.dart';
+import 'package:otus_food_app/widgets/details/ingredients_detail.dart';
+import 'package:otus_food_app/widgets/details/header_detail.dart';
+import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
 class RecipeDetail extends StatefulWidget {
@@ -25,15 +27,15 @@ class _RecipeDetailState extends State<RecipeDetail> {
   late Timer cookingTimer;
   late int cookingTime;
   late Recipe? recipe;
+  late User user;
 
-  void addComment(Comment newComment) {
-    log('new comment');
+  void _addComment(Comment newComment) {
     setState(() {
       recipe?.comments?.add(newComment);
     });
   }
 
-  void startCooking() {
+  void _startCooking() {
     cookingTime = recipe?.time ?? 0;
     const oneSec = Duration(seconds: 1);
     cookingTimer = Timer.periodic(
@@ -53,25 +55,48 @@ class _RecipeDetailState extends State<RecipeDetail> {
     );
   }
 
+  void _getUser() async {
+    user = await RecipeApi().fetchUser();
+    log(user.username!);
+  }
+
   @override
   void initState() {
     super.initState();
+    _getUser();
     cookingTimer = Timer(const Duration(seconds: 1), () {});
     cookingTime = 0;
-
     _scrollController = ScrollController()..addListener(() {});
   }
 
   @override
   void dispose() {
-    cookingTimer.cancel();
     _scrollController.dispose();
+
+    cookingTime = 0;
+    recipe?.isCooking = false;
+    cookingTimer.cancel();
+    recipe?.updateCookingSteps();
+
     super.dispose();
   }
 
   void _scrollToTop() {
     _scrollController.animateTo(recipe?.isCooking ?? false ? 65 : 0,
         duration: const Duration(microseconds: 500), curve: Curves.linear);
+  }
+
+  void _onCooking() {
+    setState(() {
+      recipe?.isCooking = !(recipe?.isCooking ?? false);
+    });
+    recipe!.updateCookingSteps();
+
+    if ((recipe?.isCooking ?? false)) {
+      _startCooking();
+    }
+
+    _scrollToTop();
   }
 
   @override
@@ -118,7 +143,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                           ),
                         ),
                         Text(
-                          RecipeApi().showTime(cookingTime),
+                          RecipeUtils.showTime(cookingTime),
                           style: const TextStyle(
                             color: Colors.white,
                             fontFamily: 'Roboto',
@@ -149,55 +174,11 @@ class _RecipeDetailState extends State<RecipeDetail> {
           tooltip: 'Show Snackbar',
           color: Colors.black87,
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/recipes');
-            //ScaffoldMessenger.of(context).showSnackBar(
-            //  const SnackBar(content: Text('This is a snackbar')));
+            Navigator.of(context, rootNavigator: true).pop(context);
           },
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconPizza,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Рецепты',
-            backgroundColor: Colors.white,
-          ),
-          // BottomNavigationBarItem(
-          //   icon: ImageIcon(Image.asset(
-          //     Constants.iconFridge,
-          //     height: 24,
-          //     width: 24,
-          //   ).image),
-          //   label: 'Холодильник',
-          // ),
-          // BottomNavigationBarItem(
-          //   icon: ImageIcon(Image.asset(
-          //     Constants.iconHeart,
-          //     height: 24,
-          //     width: 24,
-          //   ).image),
-          //   label: 'Избранное',
-          // ),
-          BottomNavigationBarItem(
-            icon: ImageIcon(Image.asset(
-              Constants.iconProfile,
-              height: 24,
-              width: 24,
-            ).image),
-            label: 'Профиль',
-          ),
-        ],
-
-        currentIndex: 0,
-        showUnselectedLabels: true,
-        selectedItemColor: AppColors.accent,
-        unselectedItemColor: AppColors.greyColor,
-        // onTap: () {},
-      ),
+      bottomNavigationBar: const BottomNavBar(),
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(
@@ -215,7 +196,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                   const SizedBox(
                     height: 19,
                   ),
-                  checkIngredients(),
+                  const Button(variant: VariantButton.checkIngredients),
                   const SizedBox(
                     height: 18,
                   ),
@@ -228,28 +209,11 @@ class _RecipeDetailState extends State<RecipeDetail> {
             const SizedBox(
               height: 27,
             ),
-            GestureDetector(
-              child: recipe?.isCooking ?? false
-                  ? stopCookingButton()
-                  : cookingButton(),
-              onTap: () {
-                setState(() {
-                  recipe?.isCooking = !(recipe?.isCooking ?? false);
-                  for (int i = 0; i < recipe!.cookingSteps!.length; i++) {
-                    recipe?.cookingSteps![i].status =
-                        (recipe?.isCooking ?? false)
-                            ? CookingStepsStatus.notPassed
-                            : CookingStepsStatus.notStarted;
-                  }
-                  recipe?.cookingSteps![0].status = (recipe?.isCooking ?? false)
-                      ? CookingStepsStatus.passed
-                      : CookingStepsStatus.notStarted;
-                });
-                if ((recipe?.isCooking ?? false)) {
-                  startCooking();
-                }
-                _scrollToTop();
-              },
+            Button(
+              variant: ((recipe?.isCooking ?? false)
+                  ? VariantButton.stopCooking
+                  : VariantButton.startCooking),
+              onPressed: _onCooking,
             ),
             const SizedBox(
               height: 32,
@@ -276,7 +240,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                             const SizedBox(
                               height: 48,
                             ),
-                            CommentPost(addComment: addComment),
+                            CommentPost(addComment: _addComment),
                           ],
                         ),
                       ),
