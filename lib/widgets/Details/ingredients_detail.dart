@@ -76,7 +76,7 @@ class IngredientsDetails extends StatelessWidget {
                       SizedBox(
                         width: 90,
                         child: Text(
-                          '${ingredients?[index].quantity} ${ingredients?[index].unit}',
+                          '${ingredients?[index].showQuantity()}',
                           style: const TextStyle(
                             fontFamily: 'Roboto',
                             fontStyle: FontStyle.normal,

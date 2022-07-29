@@ -154,6 +154,10 @@ class Ingredient {
 
     return data;
   }
+
+  String showQuantity() {
+    return '$quantity $unit';
+  }
 }
 
 enum CookingStepsStatus {
