@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'package:otus_food_app/widgets/Logo/logo.dart';
+import 'package:otus_food_app/widgets/logos/logo.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
 class LogoScreen extends StatefulWidget {

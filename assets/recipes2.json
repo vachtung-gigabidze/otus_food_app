@@ -1,0 +1,348 @@
+{
+  "Recipes": [
+    {
+      "id": 1,
+      "name": "Лосось в соусе терияки Лосось в соусе терияки Лосось в соусе терияки",
+      "time": 2700,
+      "favorites": [
+        {
+          "username": "anonymous"
+        },
+        {
+          "username": "john"
+        },
+        {
+          "username": "peter"
+        }
+      ],
+      "imageUrl": "1.png",
+      "ingredients": [
+        {
+          "name": "Соевый соус",
+          "quantity": "8",
+          "unit": "ст. ложек"
+        },
+        {
+          "name": "Вода",
+          "quantity": "8",
+          "unit": "ст. ложек"
+        },
+        {
+          "name": "Мёд",
+          "quantity": "3",
+          "unit": "ст. ложки"
+        },
+        {
+          "name": "Коричневый сахар",
+          "quantity": "2",
+          "unit": "ст. ложки"
+        },
+        {
+          "name": "Чеснок",
+          "quantity": "3",
+          "unit": "зубчика"
+        },
+        {
+          "name": "Тёртый свежий имбирь",
+          "quantity": "1",
+          "unit": "ст. ложка"
+        },
+        {
+          "name": "Лимонный сок",
+          "quantity": "1¹⁄₂",
+          "unit": "ст. ложки"
+        },
+        {
+          "name": "Кукурузный крахмал",
+          "quantity": "1",
+          "unit": "ст. ложка"
+        },
+        {
+          "name": "Растительное масло",
+          "quantity": "1",
+          "unit": "ч. ложка"
+        },
+        {
+          "name": "Филе лосося или сёмги",
+          "quantity": "680",
+          "unit": "г"
+        },
+        {
+          "name": "Кунжут",
+          "quantity": "по вкусу",
+          "unit": ""
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "В маленькой кастрюле соедините соевый соус, 6 столовых ложек воды, мёд, сахар, измельчённый чеснок, имбирь и лимонный сок.",
+          "duration": "06:00",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "Поставьте на средний огонь и, помешивая, доведите до лёгкого кипения.",
+          "duration": "07:00",
+          "status": null
+        },
+        {
+          "order": 3,
+          "step": "Смешайте оставшуюся воду с крахмалом. Добавьте в кастрюлю и перемешайте.",
+          "duration": "06:00",
+          "status": null
+        },
+        {
+          "order": 4,
+          "step": "Готовьте, непрерывно помешивая венчиком, 1 минуту. Снимите с огня и немного остудите.",
+          "duration": "01:00",
+          "status": null
+        },
+        {
+          "order": 5,
+          "step": "Смажьте форму маслом и выложите туда рыбу. Полейте её соусом.",
+          "duration": "06:00",
+          "status": null
+        },
+        {
+          "order": 6,
+          "step": "Поставьте в разогретую до 200 °C духовку примерно на 15 минут.",
+          "duration": "15:00",
+          "status": null
+        },
+        {
+          "order": 7,
+          "step": "Перед подачей полейте соусом из формы и посыпьте кунжутом.",
+          "duration": "04:00",
+          "status": null
+        }
+      ],
+      "comments": [
+        {
+          "author": "anna_obraztsova",
+          "avatar": "assets/images/avatar_1.png",
+          "date": "25.05.2022",
+          "comment": "Я не большой любитель рыбы, но решила приготовить по этому рецепту и просто влюбилась!",
+          "image": "assets/images/comment_image_1.png"
+        },
+        {
+          "author": "Реми",
+          "avatar": "assets/images/avatar_2.png",
+          "date": "05.06.2022",
+          "comment": "Я думаю, что если я — это то, что я ем, то мусор я есть не буду! Папа считал, что: «еда — это бензин. Будешь привередничать, не заправишь бак — мотор сдохнет. Так что заткнись и жри!»",
+          "image": ""
+        },
+        {
+          "author": "Антуан Эго",
+          "avatar": "assets/images/avatar_3.png",
+          "date": "26.06.2022",
+          "comment": "Я вовсе не любитель, я профессионал. Если еда так себе, я её не глотаю!",
+          "image": ""
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Поке боул с сыром тофу",
+      "time": 1800,
+      "favorites": [],
+      "imageUrl": "2.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
+          "quantity": "1l."
+        },
+        {
+          "name": "Milk",
+          "quantity": "1l.",
+          "unit": ""
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ],
+      "comments": []
+    },
+    {
+      "id": 3,
+      "name": "Стейк из говядины по-грузински",
+      "time": 4500,
+      "favorites": [],
+      "imageUrl": "3.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
+          "quantity": "1l.",
+          "unit": ""
+        },
+        {
+          "name": "Milk",
+          "quantity": "1l.",
+          "unit": ""
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ],
+      "comments": []
+    },
+    {
+      "id": 4,
+      "name": "Тосты с голубикой и бананом",
+      "time": 2700,
+      "favorites": [],
+      "imageUrl": "4.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
+          "quantity": "1l.",
+          "unit": ""
+        },
+        {
+          "name": "Milk",
+          "quantity": "1l.",
+          "unit": ""
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ],
+      "comments": []
+    },
+    {
+      "id": 5,
+      "name": "Паста с морепродуктами",
+      "time": 1500,
+      "favorites": [],
+      "imageUrl": "5.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
+          "quantity": "1l.",
+          "unit": ""
+        },
+        {
+          "name": "Milk",
+          "quantity": "1l.",
+          "unit": ""
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ],
+      "comments": []
+    },
+    {
+      "id": 6,
+      "name": "Бургер с двумя котлетами",
+      "time": 3600,
+      "favorites": [],
+      "imageUrl": "6.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
+          "quantity": "1l.",
+          "unit": ""
+        },
+        {
+          "name": "Milk",
+          "quantity": "1l.",
+          "unit": ""
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ],
+      "comments": []
+    },
+    {
+      "id": 7,
+      "name": "Пицца Маргарита домашняя",
+      "time": 1500,
+      "favorites": [],
+      "imageUrl": "7.png",
+      "ingredients": [
+        {
+          "name": "Coco Milk",
+          "quantity": "1l.",
+          "unit": ""
+        },
+        {
+          "name": "Milk",
+          "quantity": "1l.",
+          "unit": ""
+        }
+      ],
+      "cookingSteps": [
+        {
+          "order": 1,
+          "step": "step1",
+          "duration": "1min",
+          "status": null
+        },
+        {
+          "order": 2,
+          "step": "step2",
+          "duration": "2min",
+          "status": null
+        }
+      ],
+      "comments": []
+    }
+  ]
+}

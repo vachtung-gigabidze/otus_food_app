@@ -28,7 +28,7 @@ class RecipeCard extends StatelessWidget {
             height: 136, // default\minimum height
           ),
           FadeInImage(
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
             height: 136,
             width: 149,
             placeholder: _blankImage().image,
