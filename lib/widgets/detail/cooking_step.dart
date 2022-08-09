@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
-import 'package:otus_food_app/widgets/Details/check_box.dart';
+import 'package:otus_food_app/widgets/detail/check_box.dart';
 
 class CookingStepCard extends StatefulWidget {
   const CookingStepCard({super.key, this.cookingStep});

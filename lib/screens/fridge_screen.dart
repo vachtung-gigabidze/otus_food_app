@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:otus_food_app/api/recipe_api.dart';
 
 import 'package:otus_food_app/model.dart';
-import 'package:otus_food_app/widgets/Details/ingredients_detail.dart';
-import 'package:otus_food_app/widgets/List/recipe_card.dart';
+import 'package:otus_food_app/widgets/detail/ingredients_detail.dart';
+import 'package:otus_food_app/widgets/lists/recipe_card.dart';
 import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 
 class FridgeScreen extends StatefulWidget {

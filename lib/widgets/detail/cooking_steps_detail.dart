@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/model.dart';
-import 'package:otus_food_app/widgets/details/cooking_step.dart';
+import 'package:otus_food_app/widgets/detail/cooking_step.dart';
 
 class CookingStepsDetail extends StatelessWidget {
   const CookingStepsDetail({Key? key, required this.recipe}) : super(key: key);

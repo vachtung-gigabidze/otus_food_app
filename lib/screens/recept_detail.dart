@@ -6,12 +6,12 @@ import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
-import 'package:otus_food_app/widgets/details/comment_list.dart';
-import 'package:otus_food_app/widgets/details/comment_post.dart';
-import 'package:otus_food_app/widgets/details/cooking_button.dart';
-import 'package:otus_food_app/widgets/details/cooking_steps_detail.dart';
-import 'package:otus_food_app/widgets/details/ingredients_detail.dart';
-import 'package:otus_food_app/widgets/details/header_detail.dart';
+import 'package:otus_food_app/widgets/detail/comment_list.dart';
+import 'package:otus_food_app/widgets/detail/comment_post.dart';
+import 'package:otus_food_app/widgets/detail/cooking_button.dart';
+import 'package:otus_food_app/widgets/detail/cooking_steps_detail.dart';
+import 'package:otus_food_app/widgets/detail/ingredients_detail.dart';
+import 'package:otus_food_app/widgets/detail/header_detail.dart';
 import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
