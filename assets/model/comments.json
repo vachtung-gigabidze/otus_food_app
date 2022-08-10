@@ -1,0 +1,11 @@
+[
+  {
+    "id": 0,
+    "text": "string",
+    "photo": "string",
+    "datetime": "2022-08-10T07:03:11.427Z",
+    "user": {
+      "id": 1
+    }
+  }
+]

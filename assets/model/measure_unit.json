@@ -1,0 +1,8 @@
+[
+  {
+    "id": 0,
+    "one": "string",
+    "few": "string",
+    "many": "string"
+  }
+]

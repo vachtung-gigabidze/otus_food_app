@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "string",
+    "measureUnit": {
+      "id": 0
+    }
+  },
+  {
+    "id": 2,
+    "name": "string",
+    "measureUnit": {
+      "id": 0
+    }
+  }
+]

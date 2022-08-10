@@ -1,0 +1,29 @@
+[
+  {
+    "id": 1,
+    "login": "john",
+    "password": "123",
+    "token": "",
+    "userFreezer": [],
+    "favoriteRecipes": [],
+    "comments": []
+  },
+  {
+    "id": 2,
+    "login": "peter",
+    "password": "123",
+    "token": "",
+    "userFreezer": [],
+    "favoriteRecipes": [],
+    "comments": []
+  },
+  {
+    "id": 3,
+    "login": "dmitry",
+    "password": "123",
+    "token": "",
+    "userFreezer": [],
+    "favoriteRecipes": [],
+    "comments": []
+  }
+]
