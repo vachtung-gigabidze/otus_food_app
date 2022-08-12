@@ -2,13 +2,13 @@ part of swagger.api;
 
 class RecipeStepLink {
   /* This is the primary identifier for this object.  */
-  int? id = null;
+  int? id;
 
-  int? number = null;
+  int? number;
 
-  Recipe? recipe = null;
+  Recipe? recipe;
 
-  Step? step = null;
+  Step? step;
 
   RecipeStepLink();
 
@@ -18,11 +18,11 @@ class RecipeStepLink {
   }
 
   RecipeStepLink.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
     number = json['number'];
-    recipe = new Recipe.fromJson(json['recipe']);
-    step = new Step.fromJson(json['step']);
+    recipe = Recipe.fromJson(json['recipe']);
+    step = Step.fromJson(json['step']);
   }
 
   Map<String, dynamic> toJson() {
@@ -30,17 +30,17 @@ class RecipeStepLink {
   }
 
   static List<RecipeStepLink> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new RecipeStepLink.fromJson(value)).toList();
+        : json.map((value) => RecipeStepLink.fromJson(value)).toList();
   }
 
   static Map<String, RecipeStepLink> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, RecipeStepLink>();
-    if (json != null && json.length > 0) {
+    var map = <String, RecipeStepLink>{};
+    if (json.isEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new RecipeStepLink.fromJson(value));
+          map[key] = RecipeStepLink.fromJson(value));
     }
     return map;
   }

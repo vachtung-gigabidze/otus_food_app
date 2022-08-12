@@ -1,7 +1,7 @@
 part of swagger.api;
 
 class User {
-  int? id = null;
+  int? id;
 
   User();
 
@@ -11,7 +11,7 @@ class User {
   }
 
   User.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
   }
 
@@ -20,16 +20,16 @@ class User {
   }
 
   static List<User> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new User.fromJson(value)).toList();
+        : json.map((value) => User.fromJson(value)).toList();
   }
 
   static Map<String, User> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, User>();
-    if (json != null && json.length > 0) {
+    var map = <String, User>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new User.fromJson(value));
+          map[key] = User.fromJson(value));
     }
     return map;
   }

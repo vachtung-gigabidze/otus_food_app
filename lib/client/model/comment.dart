@@ -2,15 +2,15 @@ part of swagger.api;
 
 class Comment {
   /* This is the primary identifier for this object.  */
-  int? id = null;
+  int? id;
 
-  String? text = null;
+  String? text;
 
-  String? photo = null;
+  String? photo;
 
-  DateTime? datetime = null;
+  DateTime? datetime;
 
-  User? user = null;
+  User? user;
 
   Comment();
 
@@ -20,13 +20,13 @@ class Comment {
   }
 
   Comment.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
     text = json['text'];
     photo = json['photo'];
     datetime =
         json['datetime'] == null ? null : DateTime.parse(json['datetime']);
-    user = new User.fromJson(json['user']);
+    user = User.fromJson(json['user']);
   }
 
   Map<String, dynamic> toJson() {
@@ -40,17 +40,17 @@ class Comment {
   }
 
   static List<Comment> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new Comment.fromJson(value)).toList();
+        : json.map((value) => Comment.fromJson(value)).toList();
   }
 
   static Map<String, Comment> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, Comment>();
-    if (json != null && json.length > 0) {
+    var map = <String, Comment>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new Comment.fromJson(value));
+          map[key] = Comment.fromJson(value));
     }
     return map;
   }

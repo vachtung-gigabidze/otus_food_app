@@ -12,15 +12,15 @@ class ApiKeyAuth implements Authentication {
   void applyToParams(
       List<QueryParam> queryParams, Map<String, String> headerParams) {
     String value;
-    if (apiKeyPrefix != null) {
+    if (apiKeyPrefix.isEmpty) {
       value = '$apiKeyPrefix $apiKey';
     } else {
       value = apiKey;
     }
 
-    if (location == 'query' && value != null) {
-      queryParams.add(new QueryParam(paramName, value));
-    } else if (location == 'header' && value != null) {
+    if (location == 'query' && value.isNotEmpty) {
+      queryParams.add(QueryParam(paramName, value));
+    } else if (location == 'header' && value.isNotEmpty) {
       headerParams[paramName] = value;
     }
   }

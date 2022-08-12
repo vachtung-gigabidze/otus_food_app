@@ -1,7 +1,7 @@
 part of swagger.api;
 
 class MeasureUnit {
-  int? id = null;
+  int? id;
 
   MeasureUnit();
 
@@ -11,7 +11,7 @@ class MeasureUnit {
   }
 
   MeasureUnit.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
   }
 
@@ -20,17 +20,17 @@ class MeasureUnit {
   }
 
   static List<MeasureUnit> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new MeasureUnit.fromJson(value)).toList();
+        : json.map((value) => MeasureUnit.fromJson(value)).toList();
   }
 
   static Map<String, MeasureUnit> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, MeasureUnit>();
-    if (json != null && json.length > 0) {
+    var map = <String, MeasureUnit>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new MeasureUnit.fromJson(value));
+          map[key] = MeasureUnit.fromJson(value));
     }
     return map;
   }

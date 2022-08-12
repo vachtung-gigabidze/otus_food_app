@@ -2,13 +2,13 @@ part of swagger.api;
 
 class Freezer {
   /* This is the primary identifier for this object.  */
-  int? id = null;
+  int? id;
 
-  double? count = null;
+  double? count;
 
-  User? user = null;
+  User? user;
 
-  Ingredient? ingredient = null;
+  Ingredient? ingredient;
 
   Freezer();
 
@@ -18,11 +18,11 @@ class Freezer {
   }
 
   Freezer.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
     count = json['count'];
-    user = new User.fromJson(json['user']);
-    ingredient = new Ingredient.fromJson(json['ingredient']);
+    user = User.fromJson(json['user']);
+    ingredient = Ingredient.fromJson(json['ingredient']);
   }
 
   Map<String, dynamic> toJson() {
@@ -30,17 +30,17 @@ class Freezer {
   }
 
   static List<Freezer> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new Freezer.fromJson(value)).toList();
+        : json.map((value) => Freezer.fromJson(value)).toList();
   }
 
   static Map<String, Freezer> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, Freezer>();
-    if (json != null && json.length > 0) {
+    var map = <String, Freezer>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new Freezer.fromJson(value));
+          map[key] = Freezer.fromJson(value));
     }
     return map;
   }

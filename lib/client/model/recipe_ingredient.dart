@@ -2,13 +2,13 @@ part of swagger.api;
 
 class RecipeIngredient {
   /* This is the primary identifier for this object.  */
-  int? id = null;
+  int? id;
 
-  int? count = null;
+  int? count;
 
-  Ingredient? ingredient = null;
+  Ingredient? ingredient;
 
-  Recipe? recipe = null;
+  Recipe? recipe;
 
   RecipeIngredient();
 
@@ -18,11 +18,11 @@ class RecipeIngredient {
   }
 
   RecipeIngredient.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
     count = json['count'];
-    ingredient = new Ingredient.fromJson(json['ingredient']);
-    recipe = new Recipe.fromJson(json['recipe']);
+    ingredient = Ingredient.fromJson(json['ingredient']);
+    recipe = Recipe.fromJson(json['recipe']);
   }
 
   Map<String, dynamic> toJson() {
@@ -35,17 +35,17 @@ class RecipeIngredient {
   }
 
   static List<RecipeIngredient> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new RecipeIngredient.fromJson(value)).toList();
+        : json.map((value) => RecipeIngredient.fromJson(value)).toList();
   }
 
   static Map<String, RecipeIngredient> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, RecipeIngredient>();
-    if (json != null && json.length > 0) {
+    var map = <String, RecipeIngredient>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new RecipeIngredient.fromJson(value));
+          map[key] = RecipeIngredient.fromJson(value));
     }
     return map;
   }

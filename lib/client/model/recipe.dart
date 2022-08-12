@@ -1,7 +1,7 @@
 part of swagger.api;
 
 class Recipe {
-  int? id = null;
+  int? id;
 
   Recipe();
 
@@ -11,7 +11,7 @@ class Recipe {
   }
 
   Recipe.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
   }
 
@@ -20,17 +20,17 @@ class Recipe {
   }
 
   static List<Recipe> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new Recipe.fromJson(value)).toList();
+        : json.map((value) => Recipe.fromJson(value)).toList();
   }
 
   static Map<String, Recipe> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, Recipe>();
-    if (json != null && json.length > 0) {
+    var map = <String, Recipe>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new Recipe.fromJson(value));
+          map[key] = Recipe.fromJson(value));
     }
     return map;
   }

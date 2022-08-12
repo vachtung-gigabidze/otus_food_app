@@ -1,7 +1,7 @@
 part of swagger.api;
 
 class Error {
-  String? error = null;
+  String? error;
 
   Error();
 
@@ -11,7 +11,7 @@ class Error {
   }
 
   Error.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     error = json['error'];
   }
 
@@ -20,17 +20,17 @@ class Error {
   }
 
   static List<Error> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new Error.fromJson(value)).toList();
+        : json.map((value) => Error.fromJson(value)).toList();
   }
 
   static Map<String, Error> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, Error>();
-    if (json != null && json.length > 0) {
+    var map = <String, Error>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new Error.fromJson(value));
+          map[key] = Error.fromJson(value));
     }
     return map;
   }

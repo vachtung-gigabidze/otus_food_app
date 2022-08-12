@@ -1,7 +1,7 @@
 part of swagger.api;
 
 class Status {
-  String? status = null;
+  String? status;
 
   Status();
 
@@ -11,7 +11,7 @@ class Status {
   }
 
   Status.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     status = json['status'];
   }
 
@@ -20,17 +20,17 @@ class Status {
   }
 
   static List<Status> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new Status.fromJson(value)).toList();
+        : json.map((value) => Status.fromJson(value)).toList();
   }
 
   static Map<String, Status> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, Status>();
-    if (json != null && json.length > 0) {
+    var map = <String, Status>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new Status.fromJson(value));
+          map[key] = Status.fromJson(value));
     }
     return map;
   }

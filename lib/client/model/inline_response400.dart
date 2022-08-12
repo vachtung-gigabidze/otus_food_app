@@ -1,7 +1,7 @@
 part of swagger.api;
 
 class InlineResponse400 {
-  String? error = null;
+  String? error;
 
   InlineResponse400();
 
@@ -11,7 +11,7 @@ class InlineResponse400 {
   }
 
   InlineResponse400.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     error = json['error'];
   }
 
@@ -20,17 +20,17 @@ class InlineResponse400 {
   }
 
   static List<InlineResponse400> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new InlineResponse400.fromJson(value)).toList();
+        : json.map((value) => InlineResponse400.fromJson(value)).toList();
   }
 
   static Map<String, InlineResponse400> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, InlineResponse400>();
-    if (json != null && json.length > 0) {
+    var map = <String, InlineResponse400>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new InlineResponse400.fromJson(value));
+          map[key] = InlineResponse400.fromJson(value));
     }
     return map;
   }

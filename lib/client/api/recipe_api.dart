@@ -8,12 +8,12 @@ class RecipeApi {
   ///
   ///
   ///
-  Future<Recipe?> createRecipe(Recipe body) async {
-    Object postBody = body;
+  Future<Recipe?> createRecipe(Recipe? body) async {
+    Object? postBody = body;
 
     // verify required params are set
     if (body == null) {
-      throw new ApiException(400, "Missing required param: body");
+      throw ApiException(400, "Missing required param: body");
     }
 
     // create path and map variables
@@ -27,7 +27,7 @@ class RecipeApi {
     List<String> contentTypes = ["application/json"];
 
     String contentType =
-        contentTypes.length > 0 ? contentTypes[0] : "application/json";
+        contentTypes.isNotEmpty ? contentTypes[0] : "application/json";
     List<String> authNames = [];
 
     if (contentType.startsWith("multipart/form-data")) {
@@ -40,8 +40,8 @@ class RecipeApi {
         postBody, headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if (response.body != null) {
+      throw ApiException(response.statusCode, response.body);
+    } else if (response.body.isNotEmpty) {
       return apiClient.deserialize(response.body, 'Recipe') as Recipe;
     } else {
       return null;
@@ -52,17 +52,17 @@ class RecipeApi {
   ///
   ///
   Future deleteRecipe(String id) async {
-    Object? postBody = null;
+    Object? postBody;
 
     // verify required params are set
-    if (id == null) {
-      throw new ApiException(400, "Missing required param: id");
+    if (id.isEmpty) {
+      throw ApiException(400, "Missing required param: id");
     }
 
     // create path and map variables
     String path = "/recipe/{id}"
         .replaceAll("{format}", "json")
-        .replaceAll("{" + "id" + "}", id.toString());
+        .replaceAll("{$id}", id.toString());
 
     // query params
     List<QueryParam> queryParams = [];
@@ -72,7 +72,7 @@ class RecipeApi {
     List<String> contentTypes = [];
 
     String contentType =
-        contentTypes.length > 0 ? contentTypes[0] : "application/json";
+        contentTypes.isNotEmpty ? contentTypes[0] : "application/json";
     List<String> authNames = [];
 
     if (contentType.startsWith("multipart/form-data")) {
@@ -85,8 +85,8 @@ class RecipeApi {
         postBody, headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if (response.body != null) {
+      throw ApiException(response.statusCode, response.body);
+    } else if (response.body.isNotEmpty) {
       return;
     } else {
       return;
@@ -97,7 +97,7 @@ class RecipeApi {
   ///
   ///
   Future<Recipe?> getRecipe(String id) async {
-    Object? postBody = null;
+    Object? postBody;
 
     // verify required params are set
     if (id == null) {
@@ -130,7 +130,7 @@ class RecipeApi {
         headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
+      throw ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
       return apiClient.deserialize(response.body, 'Recipe') as Recipe;
     } else {
@@ -200,7 +200,7 @@ class RecipeApi {
         headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
+      throw ApiException(response.statusCode, response.body);
     } else if (response.body != null) {
       return (apiClient.deserialize(response.body, 'List<Recipe>') as List)
           .map((item) => item as Recipe)
@@ -213,21 +213,21 @@ class RecipeApi {
   ///
   ///
   ///
-  Future<Recipe?> updateRecipe(Recipe body, String id) async {
-    Object postBody = body;
+  Future<Recipe?> updateRecipe(Recipe? body, String? id) async {
+    Object? postBody = body;
 
     // verify required params are set
     if (body == null) {
-      throw new ApiException(400, "Missing required param: body");
+      throw ApiException(400, "Missing required param: body");
     }
     if (id == null) {
-      throw new ApiException(400, "Missing required param: id");
+      throw ApiException(400, "Missing required param: id");
     }
 
     // create path and map variables
     String path = "/recipe/{id}"
         .replaceAll("{format}", "json")
-        .replaceAll("{" + "id" + "}", id.toString());
+        .replaceAll("{$id}", id.toString());
 
     // query params
     List<QueryParam> queryParams = [];
@@ -237,7 +237,7 @@ class RecipeApi {
     List<String> contentTypes = ["application/json"];
 
     String contentType =
-        contentTypes.length > 0 ? contentTypes[0] : "application/json";
+        contentTypes.isNotEmpty ? contentTypes[0] : "application/json";
     List<String> authNames = [];
 
     if (contentType.startsWith("multipart/form-data")) {
@@ -250,8 +250,8 @@ class RecipeApi {
         headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if (response.body != null) {
+      throw ApiException(response.statusCode, response.body);
+    } else if (response.body.isNotEmpty) {
       return apiClient.deserialize(response.body, 'Recipe') as Recipe;
     } else {
       return null;

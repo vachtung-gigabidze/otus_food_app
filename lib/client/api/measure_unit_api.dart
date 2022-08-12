@@ -9,12 +9,12 @@ class MeasureUnitApi {
   ///
   ///
   ///
-  Future<MeasureUnit> createMeasureUnit(MeasureUnit body) async {
-    Object postBody = body;
+  Future<MeasureUnit> createMeasureUnit(MeasureUnit? body) async {
+    Object? postBody = body;
 
     // verify required params are set
     if (body == null) {
-      throw new ApiException(400, "Missing required param: body");
+      throw ApiException(400, "Missing required param: body");
     }
 
     // create path and map variables
@@ -28,7 +28,7 @@ class MeasureUnitApi {
     List<String> contentTypes = ["application/json"];
 
     String contentType =
-        contentTypes.length > 0 ? contentTypes[0] : "application/json";
+        contentTypes.isNotEmpty ? contentTypes[0] : "application/json";
     List<String> authNames = [];
 
     if (contentType.startsWith("multipart/form-data")) {
@@ -41,8 +41,8 @@ class MeasureUnitApi {
         postBody, headerParams, formParams, contentType, authNames);
 
     if (response.statusCode >= 400) {
-      throw new ApiException(response.statusCode, response.body);
-    } else if (response.body != null) {
+      throw ApiException(response.statusCode, response.body);
+    } else if (response.body.isNotEmpty) {
       return apiClient.deserialize(response.body, 'MeasureUnit') as MeasureUnit;
     } else {
       return MeasureUnit();
@@ -52,18 +52,18 @@ class MeasureUnitApi {
   ///
   ///
   ///
-  Future deleteMeasureUnit(String id) async {
-    Object? postBody = null;
+  Future deleteMeasureUnit(String? id) async {
+    Object? postBody;
 
     // verify required params are set
     if (id == null) {
-      throw new ApiException(400, "Missing required param: id");
+      throw ApiException(400, "Missing required param: id");
     }
 
     // create path and map variables
     String path = "/measure_unit/{id}"
         .replaceAll("{format}", "json")
-        .replaceAll("{" + "id" + "}", id.toString());
+        .replaceAll("{id}", id.toString());
 
     // query params
     List<QueryParam> queryParams = [];

@@ -2,11 +2,10 @@ part of swagger.api;
 
 class RecipeStep {
   /* This is the primary identifier for this object.  */
-  int? id = null;
+  int? id;
+  String? name;
 
-  String? name = null;
-
-  int? duration = null;
+  int? duration;
 
   List<RecipeStepLink> recipeStepLinks = [];
 
@@ -18,7 +17,7 @@ class RecipeStep {
   }
 
   RecipeStep.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
     name = json['name'];
     duration = json['duration'];
@@ -35,17 +34,17 @@ class RecipeStep {
   }
 
   static List<RecipeStep> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new RecipeStep.fromJson(value)).toList();
+        : json.map((value) => RecipeStep.fromJson(value)).toList();
   }
 
   static Map<String, RecipeStep> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, RecipeStep>();
-    if (json != null && json.length > 0) {
+    var map = <String, RecipeStep>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new RecipeStep.fromJson(value));
+          map[key] = RecipeStep.fromJson(value));
     }
     return map;
   }

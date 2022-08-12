@@ -9,7 +9,7 @@ class OAuth implements Authentication {
   void applyToParams(
       List<QueryParam> queryParams, Map<String, String> headerParams) {
     if (accessToken != null) {
-      headerParams["Authorization"] = "Bearer " + accessToken!;
+      headerParams["Authorization"] = "Bearer ${accessToken!}";
     }
   }
 

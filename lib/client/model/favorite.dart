@@ -2,11 +2,11 @@ part of swagger.api;
 
 class Favorite {
   /* This is the primary identifier for this object.  */
-  int? id = null;
+  int? id;
 
-  Recipe? recipe = null;
+  Recipe? recipe;
 
-  User? user = null;
+  User? user;
 
   Favorite();
 
@@ -16,10 +16,10 @@ class Favorite {
   }
 
   Favorite.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
-    recipe = new Recipe.fromJson(json['recipe']);
-    user = new User.fromJson(json['user']);
+    recipe = Recipe.fromJson(json['recipe']);
+    user = User.fromJson(json['user']);
   }
 
   Map<String, dynamic> toJson() {
@@ -27,17 +27,17 @@ class Favorite {
   }
 
   static List<Favorite> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new Favorite.fromJson(value)).toList();
+        : json.map((value) => Favorite.fromJson(value)).toList();
   }
 
   static Map<String, Favorite> mapFromJson(
       Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, Favorite>();
-    if (json != null && json.length > 0) {
+    var map = <String, Favorite>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new Favorite.fromJson(value));
+          map[key] = Favorite.fromJson(value));
     }
     return map;
   }

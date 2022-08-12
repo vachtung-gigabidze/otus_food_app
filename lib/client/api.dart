@@ -36,4 +36,4 @@ part 'model/status.dart';
 part 'model/step.dart';
 part 'model/user.dart';
 
-ApiClient defaultApiClient = new ApiClient();
+ApiClient defaultApiClient = ApiClient();

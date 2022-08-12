@@ -9,13 +9,13 @@ class QueryParam {
 
 class ApiClient {
   String basePath;
-  var client = new BrowserClient();
+  var client = BrowserClient();
 
   Map<String, String> _defaultHeaderMap = {};
   Map<String, Authentication> _authentications = {};
 
-  final _RegList = new RegExp(r'^List<(.*)>$');
-  final _RegMap = new RegExp(r'^Map<String,(.*)>$');
+  final _RegList = RegExp(r'^List<(.*)>$');
+  final _RegMap = RegExp(r'^Map<String,(.*)>$');
 
   ApiClient({this.basePath: "http://localhost:8888"}) {
     // Setup authentications (key: authentication name, value: authentication).
@@ -37,21 +37,21 @@ class ApiClient {
         case 'double':
           return value is double ? value : double.parse('$value');
         case 'Comment':
-          return new Comment.fromJson(value);
+          return Comment.fromJson(value);
         case 'Error':
-          return new Error.fromJson(value);
+          return Error.fromJson(value);
         case 'Favorite':
-          return new Favorite.fromJson(value);
+          return Favorite.fromJson(value);
         case 'Freezer':
-          return new Freezer.fromJson(value);
+          return Freezer.fromJson(value);
         case 'Ingredient':
-          return new Ingredient.fromJson(value);
+          return Ingredient.fromJson(value);
         case 'InlineResponse400':
-          return new InlineResponse400.fromJson(value);
+          return InlineResponse400.fromJson(value);
         case 'MeasureUnit':
-          return new MeasureUnit.fromJson(value);
+          return MeasureUnit.fromJson(value);
         case 'Recipe':
-          return new Recipe.fromJson(value);
+          return Recipe.fromJson(value);
         case 'RecipeIngredient':
           return RecipeIngredient.fromJson(value);
         case 'RecipeStep':
@@ -83,7 +83,7 @@ class ApiClient {
       throw ApiException.withInner(
           500, 'Exception during deserialization.', e as Exception, stack);
     }
-    throw new ApiException(
+    throw ApiException(
         500, 'Could not find a suitable class for deserialization');
   }
 

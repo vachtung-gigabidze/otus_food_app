@@ -1,8 +1,7 @@
 part of swagger.api;
 
 class Step {
-  int? id = null;
-
+  int? id;
   Step();
 
   @override
@@ -11,7 +10,7 @@ class Step {
   }
 
   Step.fromJson(Map<String, dynamic> json) {
-    if (json == null) return;
+    if (json.isEmpty) return;
     id = json['id'];
   }
 
@@ -20,16 +19,16 @@ class Step {
   }
 
   static List<Step> listFromJson(List<dynamic> json) {
-    return json == null
+    return json.isEmpty
         ? []
-        : json.map((value) => new Step.fromJson(value)).toList();
+        : json.map((value) => Step.fromJson(value)).toList();
   }
 
   static Map<String, Step> mapFromJson(Map<String, Map<String, dynamic>> json) {
-    var map = new Map<String, Step>();
-    if (json != null && json.length > 0) {
+    var map = <String, Step>{};
+    if (json.isNotEmpty) {
       json.forEach((String key, Map<String, dynamic> value) =>
-          map[key] = new Step.fromJson(value));
+          map[key] = Step.fromJson(value));
     }
     return map;
   }
