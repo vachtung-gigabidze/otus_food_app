@@ -9,7 +9,8 @@ class QueryParam {
 
 class ApiClient {
   String basePath;
-  var client = BrowserClient();
+  var client = Client();
+  // BrowserClient();
 
   Map<String, String> _defaultHeaderMap = {};
   Map<String, Authentication> _authentications = {};
