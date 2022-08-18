@@ -273,12 +273,12 @@ class User {
   User({this.username});
 
   User.fromJson(Map<String, dynamic> json) {
-    username = json['username'];
+    username = json['login'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
-    data['username'] = username;
+    data['login'] = username;
     return data;
   }
 }

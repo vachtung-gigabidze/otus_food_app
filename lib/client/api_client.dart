@@ -12,8 +12,8 @@ class ApiClient {
   var client = Client();
   // BrowserClient();
 
-  Map<String, String> _defaultHeaderMap = {};
-  Map<String, Authentication> _authentications = {};
+  final Map<String, String> _defaultHeaderMap = {};
+  final Map<String, Authentication> _authentications = {};
 
   final _RegList = RegExp(r'^List<(.*)>$');
   final _RegMap = RegExp(r'^Map<String,(.*)>$');
