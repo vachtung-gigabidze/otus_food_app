@@ -51,8 +51,14 @@ class RecipeApi {
   Future<User> fetchUser({String assetsPath = "assets/model/user.json"}) async {
     log('read recept: $assetsPath');
 
-    return rootBundle
-        .loadString(assetsPath)
-        .then((json) => User.fromJson(jsonDecode(json)));
+    return rootBundle.loadString(assetsPath).then((json) {
+      List<User> users = [];
+
+      jsonDecode(json).forEach((v) {
+        users.add(User.fromJson(v));
+      });
+
+      return users.first;
+    });
   }
 }
