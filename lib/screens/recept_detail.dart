@@ -16,8 +16,9 @@ import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
 class RecipeDetail extends StatefulWidget {
-  const RecipeDetail({Key? key}) : super(key: key);
+  RecipeDetail({Key? key, this.recipe}) : super(key: key);
 
+  Recipe? recipe;
   @override
   State<RecipeDetail> createState() => _RecipeDetailState();
 }
@@ -26,8 +27,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
   late ScrollController _scrollController;
   late Timer cookingTimer;
   late int cookingTime;
-  late Recipe? recipe;
   late User user;
+  late Recipe? recipe;
 
   void _addComment(Comment newComment) {
     setState(() {
@@ -101,7 +102,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
 
   @override
   Widget build(BuildContext context) {
-    recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
+    recipe = widget.recipe;
+    //recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
     return Scaffold(
       // extendBodyBehindAppBar: false,
       appBar: AppBar(

@@ -268,17 +268,20 @@ class Favorites {
 }
 
 class User {
+  int? id;
   String? username;
 
   User({this.username});
 
   User.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
     username = json['login'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = {};
     data['login'] = username;
+    data['id'] = id;
     return data;
   }
 }

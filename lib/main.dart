@@ -15,7 +15,7 @@ void main() {
 class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
     '/recipes': (BuildContext context) => const RecipesList(),
-    '/detail': (BuildContext context) => const RecipeDetail(),
+    '/detail': (BuildContext context) => RecipeDetail(),
     '/login': (BuildContext context) => const LoginScreen(),
     '/logo': (BuildContext context) => const LogoScreen(nextRoute: '/recipes'),
     '/fridge': (BuildContext context) => const FridgeScreen(),
