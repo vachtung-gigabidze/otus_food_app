@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+class HeartWidget extends StatefulWidget {
+  const HeartWidget({Key? key, required this.asset}) : super(key: key);
+
+  final String asset;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _HeartWidgetState createState() => _HeartWidgetState();
 }
 
-class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+class _HeartWidgetState extends State<HeartWidget>
+    with TickerProviderStateMixin {
   bool _isPlaying = false;
   late AnimationController _animationController;
   late Animation<double> _pulseAnimation;
@@ -39,48 +41,25 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       else if (status == AnimationStatus.dismissed)
         _animationController.forward();
     });
+
+    animate();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.teal,
-//      appBar: AppBar(
-//        title: Text(widget.title),
-//      ),
-      body: Center(
-        child: Card(
-          elevation: 4,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          margin: EdgeInsets.all(16.0),
-          child: Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                ScaleTransition(
-                  scale: _pulseAnimation,
-                  child: Container(
-                    child: Icon(Icons.reduce_capacity_outlined),
-                  ),
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-                Text('I need you like a heart needs a beat.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.black, fontSize: 24, letterSpacing: 2)),
-              ],
-            ),
-          ),
-        ),
+    return ScaleTransition(
+      scale: _pulseAnimation,
+      child: Image.asset(
+        widget.asset,
+        height: 30,
+        width: 30,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: animate,
-        tooltip: 'Increment',
-        child: _isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }

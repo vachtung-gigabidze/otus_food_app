@@ -12,27 +12,42 @@ class CheckBoxView extends StatefulWidget {
 
 class _CheckBoxViewState extends State<CheckBoxView>
     with TickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(
-    duration: const Duration(seconds: 2),
-    vsync: this,
-  )..repeat(reverse: true);
-  late final Animation<double> _animation = CurvedAnimation(
-    parent: _controller,
-    curve: Curves.fastOutSlowIn,
-  );
+  late AnimationController _animationController;
+  late Animation<double> _pulseAnimation;
+
+  void animate() {
+    _animationController.forward();
+  }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
+    _animationController =
+        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
 
-    _controller.forward();
+    _pulseAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
+        CurvedAnimation(parent: _animationController, curve: Curves.easeIn));
+
+    _pulseAnimation.addStatusListener((status) {
+      if (status == AnimationStatus.completed)
+        _animationController.reverse();
+      else if (status == AnimationStatus.dismissed)
+        _animationController.forward();
+    });
+
+    animate();
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return ScaleTransition(
-      scale: _animation,
+      scale: _pulseAnimation,
       child: Image(
         image: AssetImage(Constants().checkBoxIcon(widget.cookingStepsStatus!)),
         height: 30,

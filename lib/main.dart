@@ -7,7 +7,6 @@ import 'package:otus_food_app/screens/logo_screen.dart';
 import 'package:otus_food_app/screens/profile_screen.dart';
 import 'package:otus_food_app/screens/recept_detail.dart';
 import 'package:otus_food_app/screens/recipes_list.dart';
-import 'package:otus_food_app/widgets/detail/heart.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,10 +20,7 @@ class MyApp extends StatelessWidget {
     '/logo': (BuildContext context) => const LogoScreen(nextRoute: '/recipes'),
     '/fridge': (BuildContext context) => const FridgeScreen(),
     '/favorites': (BuildContext context) => const FavoritesScreen(),
-    '/profile': (BuildContext context) => const ProfileScreen(),
-    '/heart': (BuildContext context) => MyHomePage(
-          title: "Title",
-        ),
+    '/profile': (BuildContext context) => const ProfileScreen()
   };
 
   MyApp({Key? key}) : super(key: key);
@@ -35,7 +31,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Otus Food App',
       routes: routes,
-      initialRoute: '/heart',
+      initialRoute: '/logo',
     );
   }
 }

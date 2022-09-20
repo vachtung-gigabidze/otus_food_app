@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
+import 'package:otus_food_app/widgets/detail/heart.dart';
 
 class HeaderDetail extends StatefulWidget {
   const HeaderDetail({Key? key, required this.recipe}) : super(key: key);
@@ -64,13 +65,21 @@ class _HeaderDetailState extends State<HeaderDetail> {
                   onTap: () => setState(() {
                     isFavorites = recipe.changeFavorite(isFavorites, username);
                   }),
-                  child: Image.asset(
-                    isFavorites
-                        ? Constants.iconHeartRed
-                        : Constants.iconHeartBlack,
-                    height: 30,
-                    width: 30,
-                  ),
+                  child: isFavorites
+                      ? const HeartWidget(asset: Constants.iconHeartRed)
+                      : Image.asset(
+                          Constants.iconHeartBlack,
+                          height: 30,
+                          width: 30,
+                        ),
+
+                  //Image.asset(
+                  // isFavorites
+                  //     ? Constants.iconHeartRed
+                  //     : Constants.iconHeartBlack,
+                  // height: 30,
+                  // width: 30,
+                  //  ),
                 ),
               ),
             ),
