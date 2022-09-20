@@ -4,6 +4,7 @@ import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/screens/recept_detail.dart';
+import 'package:otus_food_app/slider_page_route.dart';
 import 'package:otus_food_app/widgets/lists/recipe_card.dart';
 import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
@@ -55,22 +56,9 @@ class _RecipesListState extends State<RecipesList> {
                           onTap: () {
                             //Navigator.pushNamed(context, '/detail',
                             //   arguments: recipes.data?.recipes?[index]);
-                            Navigator.of(context).push(PageRouteBuilder(
-                              pageBuilder: (context, animation,
-                                      secondaryAnimation) =>
-                                  RecipeDetail(
-                                      recipe: recipes.data?.recipes?[index]),
-                              transitionsBuilder: (context, animation,
-                                  secondaryAnimation, child) {
-                                return SlideTransition(
-                                  position: Tween<Offset>(
-                                    begin: const Offset(1, 0),
-                                    end: Offset.zero,
-                                  ).animate(animation),
-                                  child: child,
-                                );
-                              },
-                            ));
+                            Navigator.of(context).push(SliderPageRoute(
+                                widget: RecipeDetail(
+                                    recipe: recipes.data?.recipes?[index])));
                           },
                           child: RecipeCard(
                               recipe: recipes.data?.recipes?[index])),

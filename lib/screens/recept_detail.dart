@@ -176,7 +176,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
           tooltip: 'Show Snackbar',
           color: Colors.black87,
           onPressed: () {
-            Navigator.of(context, rootNavigator: true).pop(context);
+            Navigator.of(context).pushReplacementNamed('/recipes');
+            //Navigator.of(context, rootNavigator: true).pushReplacement(context);
           },
         ),
       ),
