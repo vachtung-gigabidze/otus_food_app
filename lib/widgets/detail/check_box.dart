@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
@@ -15,27 +17,43 @@ class _CheckBoxViewState extends State<CheckBoxView>
   late AnimationController _animationController;
   late Animation<double> _pulseAnimation;
 
+  late CookingStepsStatus? cookingStepsStatus;
+
   void animate() {
+    log('animate');
     _animationController.forward();
+    // _animationController.reverse();
   }
 
   @override
   void initState() {
     super.initState();
-    _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 500));
+
+    cookingStepsStatus = widget.cookingStepsStatus;
+
+    _animationController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 100));
 
     _pulseAnimation = Tween<double>(begin: 1.0, end: 1.2).animate(
         CurvedAnimation(parent: _animationController, curve: Curves.easeIn));
 
     _pulseAnimation.addStatusListener((status) {
-      if (status == AnimationStatus.completed)
-        _animationController.reverse();
-      else if (status == AnimationStatus.dismissed)
-        _animationController.forward();
+      if (status == AnimationStatus.completed) _animationController.reverse();
+      // else if (status == AnimationStatus.dismissed)
+      //   _animationController.forward();
     });
 
-    animate();
+    //log(widget.cookingStepsStatus!.toString());
+  }
+
+  @override
+  void didUpdateWidget(covariant CheckBoxView oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.cookingStepsStatus != widget.cookingStepsStatus) {
+      cookingStepsStatus = widget.cookingStepsStatus;
+      animate();
+    }
   }
 
   @override
