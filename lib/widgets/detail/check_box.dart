@@ -17,8 +17,6 @@ class _CheckBoxViewState extends State<CheckBoxView>
   late AnimationController _animationController;
   late Animation<double> _pulseAnimation;
 
-  late CookingStepsStatus? cookingStepsStatus;
-
   void animate() {
     log('animate');
     _animationController.forward();
@@ -28,8 +26,6 @@ class _CheckBoxViewState extends State<CheckBoxView>
   @override
   void initState() {
     super.initState();
-
-    cookingStepsStatus = widget.cookingStepsStatus;
 
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 100));
@@ -48,10 +44,8 @@ class _CheckBoxViewState extends State<CheckBoxView>
 
   @override
   void didUpdateWidget(covariant CheckBoxView oldWidget) {
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
     if (oldWidget.cookingStepsStatus != widget.cookingStepsStatus) {
-      cookingStepsStatus = widget.cookingStepsStatus;
       animate();
     }
   }

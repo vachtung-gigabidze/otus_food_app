@@ -66,7 +66,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
                     isFavorites = recipe.changeFavorite(isFavorites, username);
                   }),
                   child: isFavorites
-                      ? const HeartWidget(asset: Constants.iconHeartRed)
+                      ? const HeartWidget() //asset: Constants.iconHeartRed)
                       : Image.asset(
                           Constants.iconHeartBlack,
                           height: 30,
