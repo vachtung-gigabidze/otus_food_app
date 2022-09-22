@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
 
+//rive animation
 class HeartWidget extends StatelessWidget {
   const HeartWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Simple Animation'),
-      ),
-      body: const Center(
-        child: RiveAnimation.network(
-          'https://cdn.rive.app/animations/vehicles.riv',
-          fit: BoxFit.cover,
-        ),
+    return const SizedBox(
+      height: 30,
+      width: 30,
+      child: RiveAnimation.asset(
+        'assets/animate/heart.riv',
+        // fit: BoxFit.cover,
       ),
     );
   }
 }
 
-
+//flutter animation
 // class HeartWidget extends StatefulWidget {
 //   const HeartWidget({Key? key, required this.asset}) : super(key: key);
 

@@ -65,6 +65,7 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/animate/
     - assets/model/recipes.json
     - assets/model/fridge.json
     - assets/model/user.json

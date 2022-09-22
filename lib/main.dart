@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Otus Food App',
       routes: routes,
-      initialRoute: '/h',
+      initialRoute: '/logo',
     );
   }
 }
