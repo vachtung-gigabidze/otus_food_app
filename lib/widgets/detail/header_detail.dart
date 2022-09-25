@@ -145,6 +145,17 @@ class _HeaderDetailState extends State<HeaderDetail> {
                 ),
               ),
             ),
+          const Positioned(
+            bottom: 10,
+            left: 7,
+            child: IconButton(
+                onPressed: null,
+                iconSize: 32,
+                icon: Icon(
+                  Icons.image,
+                  color: Colors.white,
+                )),
+          )
         ]),
       ],
     );
