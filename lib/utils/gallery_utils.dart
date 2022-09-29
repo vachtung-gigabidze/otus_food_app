@@ -22,7 +22,8 @@ class Utility {
   }
 
   pickImageFromGallery() async {
-    await ImagePicker.pickImage(source: ImageSource.gallery)
+    await ImagePicker()
+        .pickImage(source: ImageSource.gallery)
         .then((imgFile) async {
       String imgString = Utility.base64String(await imgFile!.readAsBytes());
     });
