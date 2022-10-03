@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/screens/gallery_screen.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
 import 'package:otus_food_app/widgets/detail/heart.dart';
 
@@ -145,13 +146,16 @@ class _HeaderDetailState extends State<HeaderDetail> {
                 ),
               ),
             ),
-          const Positioned(
+          Positioned(
             bottom: 10,
             left: 7,
             child: IconButton(
-                onPressed: null,
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(SaveImageDemoSQLite(recipeId: recipe.id));
+                },
                 iconSize: 32,
-                icon: Icon(
+                icon: const Icon(
                   Icons.image,
                   color: Colors.white,
                 )),
