@@ -26,6 +26,11 @@ class _HeaderDetailState extends State<HeaderDetail> {
     isFavorites = recipe.isFavorite(username);
   }
 
+  void openGalleryPage() {
+    Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => SaveImageDemoSQLite(recipeId: recipe.id)));
+  }
+
   @override
   Widget build(BuildContext context) {
     //var recept = widget.snapshot.data;
@@ -150,10 +155,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
             bottom: 10,
             left: 7,
             child: IconButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(SaveImageDemoSQLite(recipeId: recipe.id));
-                },
+                onPressed: () => openGalleryPage(),
                 iconSize: 32,
                 icon: const Icon(
                   Icons.image,
