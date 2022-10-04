@@ -60,6 +60,11 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    aaptOption {
+        noCompress 'tflite'
+        noCompress 'lite'
+    }
 }
 
 flutter {
