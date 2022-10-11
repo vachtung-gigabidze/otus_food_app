@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "661877004548",
+    "project_id": "recipes-754a9",
+    "storage_bucket": "recipes-754a9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661877004548:android:b8dab1b9abe61333e01851",
+        "android_client_info": {
+          "package_name": "com.zyadik.otus_food_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661877004548-tj5kju0nstpupurdfvu7tdmo3rp9ccl2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBv9U3t7zwQzwMZUxPtPfy6DCLoKFPQzvg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661877004548-tj5kju0nstpupurdfvu7tdmo3rp9ccl2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
