@@ -39,9 +39,12 @@ dependencies:
   path: ^1.8.2
   sqflite: ^2.1.0
   # image: ^3.2.0
-  # tflite: ^1.1.2
+  
   # tflite_flutter: ^0.9.0
-  tflite_flutter_helper: ^0.3.1
+  # tflite_flutter_helper: 
+  #   git: 
+  #     url: https://github.com/elephantum/tflite_flutter_helper.git
+  #     ref: a7d7a59a33f7cffa0a2a12ab05625807622cc97a
   # firebase_core: ^1.24.0
   # cloud_firestore: ^3.5.1
 
@@ -78,9 +81,9 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/animate/
-    - assets/model/recipes.json
-    - assets/model/fridge.json
-    - assets/model/user.json
+    # - assets/model/recipes.json
+    # - assets/model/fridge.json
+    # - assets/model/user.json
     - assets/tensorflow/labels.txt
     - assets/tensorflow/model_unquant.tflite
   #   - images/a_dot_burr.jpeg
