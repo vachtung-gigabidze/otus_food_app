@@ -2,19 +2,32 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:otus_food_app/model.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class RecipeApi {
-  Future<RecipesModel> fetchRecipes(
-      {String assetsPath = "assets/model/recipes.json"}) async {
-    log('read recept: $assetsPath');
+  Future<RecipesModel> fetchRecipes() async {
+    var response;
 
-    //final client.Recipe r = client.Recipe();
+    try {
+      response = await Dio().get(
+          'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/Recipes');
+    } catch (e) {
+      log('error: e');
+    }
 
     return rootBundle
-        .loadString(assetsPath)
+        .loadString(response.toString())
         .then((json) => RecipesModel.fromJson(jsonDecode(json)));
+    //   {String assetsPath = "assets/model/recipes.json"}) async {
+    // log('read recept: $assetsPath');
+
+    // //final client.Recipe r = client.Recipe();
+
+    // return rootBundle
+    //     .loadString(assetsPath)
+    //     .then((json) => RecipesModel.fromJson(jsonDecode(json)));
   }
 
   Future<List<Recipe>?> fetchFavoritesRecipes(
