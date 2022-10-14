@@ -3,19 +3,8 @@
     {
       "id": 1,
       "name": "Лосось в соусе терияки",
-      "time": 2700,
-      "favorites": [
-        {
-          "username": "anonymous"
-        },
-        {
-          "username": "john"
-        },
-        {
-          "username": "peter"
-        }
-      ],
-      "imageUrl": "1.png",
+      "duration": 2700,
+      "photo": "1.png",
       "ingredients": [
         {
           "name": "Соевый соус",
@@ -144,9 +133,8 @@
     {
       "id": 2,
       "name": "Поке боул с сыром тофу",
-      "time": 1800,
-      "favorites": [],
-      "imageUrl": "2.png",
+      "duration": 1800,
+      "photo": "2.png",
       "ingredients": [
         {
           "name": "Coco Milk",
@@ -177,9 +165,8 @@
     {
       "id": 3,
       "name": "Стейк из говядины по-грузински",
-      "time": 4500,
-      "favorites": [],
-      "imageUrl": "3.png",
+      "duration": 4500,
+      "photo": "3.png",
       "ingredients": [
         {
           "name": "Coco Milk",
@@ -211,9 +198,8 @@
     {
       "id": 4,
       "name": "Тосты с голубикой и бананом",
-      "time": 2700,
-      "favorites": [],
-      "imageUrl": "4.png",
+      "duration": 2700,
+      "photo": "4.png",
       "ingredients": [
         {
           "name": "Coco Milk",
@@ -245,9 +231,8 @@
     {
       "id": 5,
       "name": "Паста с морепродуктами",
-      "time": 1500,
-      "favorites": [],
-      "imageUrl": "5.png",
+      "duration": 1500,
+      "photo": "5.png",
       "ingredients": [
         {
           "name": "Coco Milk",
@@ -279,9 +264,8 @@
     {
       "id": 6,
       "name": "Бургер с двумя котлетами",
-      "time": 3600,
-      "favorites": [],
-      "imageUrl": "6.png",
+      "duration": 3600,
+      "photo": "6.png",
       "ingredients": [
         {
           "name": "Coco Milk",
@@ -313,9 +297,8 @@
     {
       "id": 7,
       "name": "Пицца Маргарита домашняя",
-      "time": 1500,
-      "favorites": [],
-      "imageUrl": "7.png",
+      "duration": 1500,
+      "photo": "7.png",
       "ingredients": [
         {
           "name": "Coco Milk",
@@ -343,6 +326,222 @@
         }
       ],
       "comments": []
+    }
+  ],
+  "RecipeIngredients": [
+    {
+      "id": 0,
+      "count": 1,
+      "ingredient": {
+        "id": 1
+      },
+      "recipe": {
+        "id": 1
+      }
+    }
+  ],
+  "RecipeSteps": [
+    {
+      "id": 1,
+      "name": "",
+      "duration": 0
+    }
+  ],
+  "RecipeStepLink": [
+    {
+      "id": 0,
+      "number": 1,
+      "recipe": 1,
+      "step": 1
+    }
+  ],
+  "MeasureUnits": [
+    {
+      "id": 1,
+      "one": "ст. ложка",
+      "few": "ст. ложки",
+      "many": "ст. ложек"
+    },
+    {
+      "id": 2,
+      "one": "зубчик",
+      "few": "зубчика",
+      "many": "зубчиков"
+    },
+    {
+      "id": 3,
+      "one": "ч. ложка",
+      "few": "ч. ложки",
+      "many": "ч. ложек"
+    },
+    {
+      "id": 4,
+      "one": "г",
+      "few": "г",
+      "many": "г"
+    }
+  ],
+  "Ingredient": [
+    {
+      "id": 1,
+      "name": "Соевый соус",
+      "measureUnit": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "name": "Вода",
+      "measureUnit": {
+        "id": 1
+      }
+    },
+    {
+      "id": 3,
+      "name": "Мёд",
+      "measureUnit": {
+        "id": 1
+      }
+    },
+    {
+      "id": 4,
+      "name": "Коричневый сахар",
+      "measureUnit": {
+        "id": 1
+      }
+    },
+    {
+      "id": 5,
+      "name": "Чеснок",
+      "measureUnit": {
+        "id": 2
+      }
+    },
+    {
+      "id": 6,
+      "name": "Тёртый свежий имбирь",
+      "measureUnit": {
+        "id": 1
+      }
+    },
+    {
+      "id": 7,
+      "name": "Лимонный сок",
+      "measureUnit": {
+        "id": 1
+      }
+    },
+    {
+      "id": 8,
+      "name": "Кукурузный крахмал",
+      "measureUnit": {
+        "id": 1
+      }
+    },
+    {
+      "id": 9,
+      "name": "Растительное масло",
+      "measureUnit": {
+        "id": 3
+      }
+    },
+    {
+      "id": 10,
+      "name": "Филе лосося или сёмги",
+      "measureUnit": {
+        "id": 4
+      }
+    },
+    {
+      "id": 11,
+      "name": "Кунжут",
+      "measureUnit": {
+        "id": 4
+      }
+    }
+  ],
+  "Freezer": [
+    {
+      "id": 0,
+      "count": 0,
+      "user": {
+        "id": 1
+      },
+      "ingredient": {
+        "id": 1
+      }
+    }
+  ],
+  "Users": [
+    {
+      "id": 1,
+      "login": "anna_obraztsova",
+      "photo": "assets/images/avatar_1.png",
+      "password": "password1",
+      "token": ""
+    },
+    {
+      "id": 2,
+      "login": "Реми",
+      "photo": "assets/images/avatar_2.png",
+      "password": "password2",
+      "token": ""
+    },
+    {
+      "id": 3,
+      "login": "Антуан Эго",
+      "photo": "assets/images/avatar_3.png",
+      "password": "password3",
+      "token": ""
+    }
+  ],
+  "Favorites": [
+    {
+      "id": 0,
+      "recipe": {
+        "id": 0
+      },
+      "user": {
+        "id": 0
+      }
+    },
+    {
+      "id": 1,
+      "recipe": {
+        "id": 0
+      },
+      "user": {
+        "id": 1
+      }
+    }
+  ],
+  "Comments": [
+    {
+      "id": 1,
+      "text": "Я не большой любитель рыбы, но решила приготовить по этому рецепту и просто влюбилась!",
+      "photo": "assets/images/comment_image_1.png",
+      "datetime": "2022-05-22T05:06:44.434Z",
+      "user": {
+        "id": 1
+      }
+    },
+    {
+      "id": 2,
+      "text": "Я думаю, что если я — это то, что я ем, то мусор я есть не буду! Папа считал, что: «еда — это бензин. Будешь привередничать, не заправишь бак — мотор сдохнет. Так что заткнись и жри!»",
+      "photo": "assets/images/comment_image_2.png",
+      "datetime": "2022-06-22T05:06:44.434Z",
+      "user": {
+        "id": 2
+      }
+    },
+    {
+      "id": 3,
+      "text": "Я вовсе не любитель, я профессионал. Если еда так себе, я её не глотаю!",
+      "photo": "assets/images/comment_image_3.png",
+      "datetime": "2022-07-22T05:06:44.434Z",
+      "user": {
+        "id": 3
+      }
     }
   ]
 }

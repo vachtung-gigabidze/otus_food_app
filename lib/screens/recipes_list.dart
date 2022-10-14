@@ -17,7 +17,7 @@ class RecipesList extends StatefulWidget {
 }
 
 class _RecipesListState extends State<RecipesList> {
-  Future<RecipesModel>? recipes;
+  Future<RecipesModel?>? recipes;
 
   @override
   void initState() {
@@ -38,10 +38,10 @@ class _RecipesListState extends State<RecipesList> {
           decoration: const BoxDecoration(
             color: AppColors.greyColor,
           ),
-          child: FutureBuilder<RecipesModel>(
+          child: FutureBuilder<RecipesModel?>(
             future: recipes,
             builder:
-                (BuildContext context, AsyncSnapshot<RecipesModel> recipes) {
+                (BuildContext context, AsyncSnapshot<RecipesModel?> recipes) {
               if (recipes.hasData) {
                 return ListView.builder(
                   physics: const BouncingScrollPhysics(

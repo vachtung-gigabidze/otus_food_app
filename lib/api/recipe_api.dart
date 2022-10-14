@@ -7,19 +7,19 @@ import 'package:otus_food_app/model.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class RecipeApi {
-  Future<RecipesModel> fetchRecipes() async {
-    var response;
+  Future<RecipesModel?> fetchRecipes() async {
+    RecipesModel? recipes;
 
     try {
-      response = await Dio().get(
-          'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/Recipes');
+      var response = await Dio().get(
+          'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
+
+      recipes = RecipesModel.fromJson(response.data);
     } catch (e) {
-      log('error: e');
+      log('error: $e');
     }
 
-    return rootBundle
-        .loadString(response.toString())
-        .then((json) => RecipesModel.fromJson(jsonDecode(json)));
+    return recipes;
     //   {String assetsPath = "assets/model/recipes.json"}) async {
     // log('read recept: $assetsPath');
 
