@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
+// import 'package:otus_food_app/model.dart';
 
 class CheckBoxView extends StatefulWidget {
   const CheckBoxView({Key? key, this.cookingStepsStatus}) : super(key: key);

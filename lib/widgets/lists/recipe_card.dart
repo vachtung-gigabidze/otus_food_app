@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
+// import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
 
 class RecipeCard extends StatelessWidget {
@@ -32,7 +33,7 @@ class RecipeCard extends StatelessWidget {
             height: 136,
             width: 149,
             placeholder: _blankImage().image,
-            image: AssetImage('assets/images/${recipe?.imageUrl}'),
+            image: AssetImage('assets/images/${recipe?.photo}'),
             imageErrorBuilder: (context, error, stackTrace) {
               return _blankImage();
             },
@@ -78,7 +79,7 @@ class RecipeCard extends StatelessWidget {
                       child: SizedBox(
                         height: 19,
                         child: Text(
-                          RecipeUtils.nameTime(recipe?.time ?? 0),
+                          RecipeUtils.nameTime(recipe?.duration ?? 0),
                           style: const TextStyle(
                             fontFamily: defaultFont,
                             fontStyle: FontStyle.normal,

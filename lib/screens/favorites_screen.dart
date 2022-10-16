@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/api/recipe_api.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
 
 // import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/model.dart';
+// import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/lists/recipe_card.dart';
 import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 
@@ -14,7 +15,7 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
-  Future<FridgeModel> fridge = Future.value(RecipeApi().fetchFridge());
+  Future<Freezer> fridge = Future.value(RecipeApi().fetchFridge());
 
   Future<List<Recipe>?> recipes =
       Future.value(RecipeApi().fetchFavoritesRecipes());

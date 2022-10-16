@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
+// import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/detail/comment_view.dart';
 
 class CommentList extends StatelessWidget {

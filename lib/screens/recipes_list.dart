@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
+// import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/screens/recept_detail.dart';
 import 'package:otus_food_app/slider_page_route.dart';
 import 'package:otus_food_app/widgets/lists/recipe_card.dart';
@@ -17,7 +18,7 @@ class RecipesList extends StatefulWidget {
 }
 
 class _RecipesListState extends State<RecipesList> {
-  Future<RecipesModel?>? recipes;
+  Future<RecipeModel?>? recipes;
 
   @override
   void initState() {
@@ -38,10 +39,10 @@ class _RecipesListState extends State<RecipesList> {
           decoration: const BoxDecoration(
             color: AppColors.greyColor,
           ),
-          child: FutureBuilder<RecipesModel?>(
+          child: FutureBuilder<RecipeModel?>(
             future: recipes,
             builder:
-                (BuildContext context, AsyncSnapshot<RecipesModel?> recipes) {
+                (BuildContext context, AsyncSnapshot<RecipeModel?> recipes) {
               if (recipes.hasData) {
                 return ListView.builder(
                   physics: const BouncingScrollPhysics(

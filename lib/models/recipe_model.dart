@@ -125,9 +125,14 @@ class RecipeModel {
 
 class Recipe {
   int? id;
+  bool? isCooking;
   String? name;
   int? duration;
   String? photo;
+  List<RecipeIngredient>? recipeIngredients;
+  List<RecipeStepLink>? recipeStepLinks;
+  List<Favorite>? favoriteRecipes;
+  List<Comment>? comments;
 
   Recipe({this.id, this.name, this.duration, this.photo});
 
@@ -145,6 +150,38 @@ class Recipe {
     data['duration'] = this.duration;
     data['photo'] = this.photo;
     return data;
+  }
+
+  void updateCookingSteps() {
+    recipeStepLinks![0].status = (isCooking ?? false)
+        ? CookingStepsStatus.passed
+        : CookingStepsStatus.notStarted;
+    for (int i = 1; i < recipeStepLinks!.length; i++) {
+      recipeStepLinks![i].status = (isCooking ?? false)
+          ? CookingStepsStatus.notPassed
+          : CookingStepsStatus.notStarted;
+    }
+  }
+
+  bool changeFavorite(bool prevFavorite, String username) {
+    if (prevFavorite) {
+      removeFavorite(username);
+    } else {
+      addFavorite(username);
+    }
+    return !prevFavorite;
+  }
+
+  bool isFavorite(String username) {
+    return favoriteRecipes!.any((element) => element.user == username);
+  }
+
+  void addFavorite(String username) {
+    favoriteRecipes!.add(Favorite(user: null));
+  }
+
+  void removeFavorite(String username) {
+    favoriteRecipes!.remove(Favorite(user: null));
   }
 }
 
@@ -177,23 +214,27 @@ class RecipeIngredient {
     }
     return data;
   }
-}
 
-class Ingredient {
-  int? id;
-
-  Ingredient({this.id});
-
-  Ingredient.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    return data;
+  String showQuantity() {
+    return '$count ${ingredient?.measureUnit?.one}';
   }
 }
+
+// class Ingredient {
+//   int? id;
+
+//   Ingredient({this.id});
+
+//   Ingredient.fromJson(Map<String, dynamic> json) {
+//     id = json['id'];
+//   }
+
+//   Map<String, dynamic> toJson() {
+//     final Map<String, dynamic> data = Map<String, dynamic>();
+//     data['id'] = this.id;
+//     return data;
+//   }
+// }
 
 class RecipeStep {
   int? id;
@@ -217,19 +258,31 @@ class RecipeStep {
   }
 }
 
+enum CookingStepsStatus {
+  passed,
+  notPassed,
+  notStarted,
+}
+
 class RecipeStepLink {
   int? id;
   int? number;
   Recipe? recipe;
-  RecipeStepLink? step;
+  RecipeStep? step;
+  CookingStepsStatus? status;
 
-  RecipeStepLink({this.id, this.number, this.recipe, this.step});
+  RecipeStepLink(
+      {this.id,
+      this.number,
+      this.recipe,
+      this.step,
+      this.status = CookingStepsStatus.notStarted});
 
   RecipeStepLink.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     number = json['number'];
     recipe = json['recipe'] != null ? Recipe.fromJson(json['recipe']) : null;
-    step = json['step'] != null ? RecipeStepLink.fromJson(json['step']) : null;
+    step = json['step'] != null ? RecipeStep.fromJson(json['step']) : null;
   }
 
   Map<String, dynamic> toJson() {

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:otus_food_app/api/recipe_api.dart';
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
+// import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
 import 'package:otus_food_app/widgets/detail/comment_list.dart';
 import 'package:otus_food_app/widgets/detail/comment_post.dart';
@@ -37,7 +38,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   }
 
   void _startCooking() {
-    cookingTime = recipe?.time ?? 0;
+    cookingTime = recipe?.duration ?? 0;
     const oneSec = Duration(seconds: 1);
     cookingTimer = Timer.periodic(
       oneSec,
@@ -195,7 +196,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
                   const SizedBox(
                     height: 16.54,
                   ),
-                  IngredientsDetails(ingredients: recipe?.ingredients),
+                  IngredientsDetails(ingredients: recipe?.recipeIngredients),
                   const SizedBox(
                     height: 19,
                   ),

@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
+// import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/detail/check_box.dart';
 
 class CookingStepCard extends StatefulWidget {
   const CookingStepCard({super.key, this.cookingStep});
 
-  final CookingStep? cookingStep;
+  final RecipeStepLink? cookingStep;
   @override
   State<CookingStepCard> createState() => _MyWidgetState();
 }
 
 class _MyWidgetState extends State<CookingStepCard> {
-  late CookingStep? cookingStep;
+  late RecipeStepLink? cookingStep;
   @override
   void initState() {
     cookingStep = widget.cookingStep;
@@ -46,7 +47,7 @@ class _MyWidgetState extends State<CookingStepCard> {
               Container(
                 margin: const EdgeInsets.all(24),
                 child: Text(
-                  '${cookingStep?.order}',
+                  '${cookingStep?.number}',
                   style: TextStyle(
                     fontFamily: 'Roboto',
                     fontStyle: FontStyle.normal,
@@ -88,7 +89,7 @@ class _MyWidgetState extends State<CookingStepCard> {
                           CheckBoxView(cookingStepsStatus: cookingStep?.status),
                     ),
                     Text(
-                      '${cookingStep?.duration}',
+                      '${cookingStep?.step?.duration}',
                       style: TextStyle(
                         fontFamily: 'Roboto',
                         fontStyle: FontStyle.normal,

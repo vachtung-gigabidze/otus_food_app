@@ -1,7 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 
-import 'package:otus_food_app/model.dart';
+// import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
 
 class CommentView extends StatelessWidget {
   const CommentView({Key? key, this.comment}) : super(key: key);
@@ -14,7 +15,7 @@ class CommentView extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(31.5),
           child: Image(
-            image: AssetImage(comment?.avatar ?? ""),
+            image: AssetImage(comment?.user?.photo ?? ""),
             errorBuilder: (context, error, stackTrace) {
               return Container(
                 height: 63,
@@ -39,7 +40,7 @@ class CommentView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    comment?.author ?? "",
+                    comment?.user?.photo ?? "",
                     style: const TextStyle(
                       fontFamily: 'Roboto',
                       fontStyle: FontStyle.normal,
@@ -49,7 +50,7 @@ class CommentView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    comment?.date ?? "",
+                    comment?.datetime ?? "",
                     style: const TextStyle(
                       fontFamily: 'Roboto',
                       fontStyle: FontStyle.normal,
@@ -67,7 +68,7 @@ class CommentView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      comment?.comment ?? '',
+                      comment?.text ?? '',
                       style: const TextStyle(
                         fontFamily: 'Roboto',
                         fontStyle: FontStyle.normal,
@@ -83,13 +84,13 @@ class CommentView extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              comment?.image != ""
+              comment?.photo != ""
                   ? Image(
-                      image: AssetImage(comment?.image ?? ""),
+                      image: AssetImage(comment?.photo ?? ""),
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Image.file(
-                          File(comment?.image ?? ""),
+                          File(comment?.photo ?? ""),
                         );
                       },
                       //height: 160,

@@ -3,18 +3,19 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:otus_food_app/model.dart';
+// import 'package:otus_food_app/model.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:otus_food_app/models/recipe_model.dart';
 
 class RecipeApi {
-  Future<RecipesModel?> fetchRecipes() async {
-    RecipesModel? recipes;
+  Future<RecipeModel?> fetchRecipes() async {
+    RecipeModel? recipes;
 
     try {
       var response = await Dio().get(
           'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
 
-      recipes = RecipesModel.fromJson(response.data);
+      recipes = RecipeModel.fromJson(response.data);
     } catch (e) {
       log('error: $e');
     }
@@ -35,7 +36,7 @@ class RecipeApi {
     log('read recept: $assetsPath');
 
     return rootBundle.loadString(assetsPath).then((json) {
-      var recipesModel = RecipesModel.fromJson(jsonDecode(json));
+      var recipesModel = RecipeModel.fromJson(jsonDecode(json));
 
       return recipesModel.recipes?.take(3).toList();
     });
@@ -46,19 +47,19 @@ class RecipeApi {
     log('read recept: $assetsPath');
 
     return rootBundle.loadString(assetsPath).then((json) {
-      var recipesModel = RecipesModel.fromJson(jsonDecode(json));
+      var recipesModel = RecipeModel.fromJson(jsonDecode(json));
 
       return recipesModel.recipes?.take(3).toList();
     });
   }
 
-  Future<FridgeModel> fetchFridge(
+  Future<Freezer> fetchFridge(
       {String assetsPath = "assets/fridge.json"}) async {
     log('read fridge: $assetsPath');
 
     return rootBundle
         .loadString(assetsPath)
-        .then((json) => FridgeModel.fromJson(jsonDecode(json)));
+        .then((json) => Freezer.fromJson(jsonDecode(json)));
   }
 
   Future<User> fetchUser({String assetsPath = "assets/model/user.json"}) async {

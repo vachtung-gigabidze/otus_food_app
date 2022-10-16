@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
+// import 'package:otus_food_app/model.dart';
 
 class IngredientsDetails extends StatelessWidget {
   const IngredientsDetails(
       {Key? key, required this.ingredients, this.title = 'Ингредиенты'})
       : super(key: key);
 
-  final List<Ingredient>? ingredients;
+  final List<RecipeIngredient>? ingredients;
   final String title;
   @override
   Widget build(BuildContext context) {
@@ -62,7 +63,7 @@ class IngredientsDetails extends StatelessWidget {
                             width: 6,
                           ),
                           Text(
-                            '${ingredients?[index].name}',
+                            '${ingredients?[index].ingredient?.name}',
                             style: const TextStyle(
                               fontFamily: 'Roboto',
                               fontStyle: FontStyle.normal,

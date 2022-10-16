@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/api/recipe_api.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
 
-import 'package:otus_food_app/model.dart';
+// import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/widgets/detail/ingredients_detail.dart';
 import 'package:otus_food_app/widgets/lists/recipe_card.dart';
 import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
@@ -14,7 +15,7 @@ class FridgeScreen extends StatefulWidget {
 }
 
 class _FridgeScreenState extends State<FridgeScreen> {
-  Future<FridgeModel> fridge = Future.value(RecipeApi().fetchFridge());
+  Future<Freezer> fridge = Future.value(RecipeApi().fetchFridge());
 
   Future<List<Recipe>?> recipes =
       Future.value(RecipeApi().fetchAvailableRecipes());
@@ -25,7 +26,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
       bottomNavigationBar: const BottomNavBar(),
       backgroundColor: const Color(0xFFC2C2C2),
       body: SingleChildScrollView(
-        child: FutureBuilder<FridgeModel>(
+        child: FutureBuilder<Freezer>(
             future: fridge,
             builder: (context, snap) {
               return Padding(
@@ -38,7 +39,8 @@ class _FridgeScreenState extends State<FridgeScreen> {
                         height: 37,
                       ),
                       IngredientsDetails(
-                          ingredients: snap.data?.fridge,
+                          ingredients: null, //snap.data.ingredient,
+                          //TODO: Написать виджет для ингредиентов в холодильнике
                           title: 'В холодильнике'),
                       const SizedBox(
                         height: 21,

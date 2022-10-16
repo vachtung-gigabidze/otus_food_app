@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
+// import 'package:otus_food_app/model.dart';
 
 // ignore: constant_identifier_names
 class Constants {

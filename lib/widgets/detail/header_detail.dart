@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/model.dart';
+import 'package:otus_food_app/models/recipe_model.dart';
+// import 'package:otus_food_app/model.dart';
 import 'package:otus_food_app/screens/gallery_screen.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
 import 'package:otus_food_app/widgets/detail/heart.dart';
@@ -23,7 +24,8 @@ class _HeaderDetailState extends State<HeaderDetail> {
   void initState() {
     super.initState();
     recipe = widget.recipe;
-    isFavorites = recipe.isFavorite(username);
+    isFavorites = false; //recipe.isFavorite(username);
+    // TODO: Отметка любимого рецепта
   }
 
   void openGalleryPage() {
@@ -69,7 +71,9 @@ class _HeaderDetailState extends State<HeaderDetail> {
                 margin: const EdgeInsets.only(right: 20),
                 child: InkWell(
                   onTap: () => setState(() {
-                    isFavorites = recipe.changeFavorite(isFavorites, username);
+                    isFavorites =
+                        !isFavorites; // recipe.changeFavorite(isFavorites, username);
+                    // TODO: Отметка любимого рецепта
                   }),
                   child: isFavorites
                       ? HeartWidget() //asset: Constants.iconHeartRed)
@@ -106,7 +110,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
               width: 11,
             ),
             Text(
-              RecipeUtils.nameTime(recipe.time!),
+              RecipeUtils.nameTime(recipe.duration!),
               style: const TextStyle(
                 fontFamily: 'Roboto',
                 fontStyle: FontStyle.normal,
@@ -141,7 +145,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
               bottom: 30,
               right: 7,
               child: Text(
-                '${recipe.favorites!.length}',
+                '${recipe.favoriteRecipes!.length}',
                 style: const TextStyle(
                   fontFamily: 'Roboto',
                   fontStyle: FontStyle.normal,
