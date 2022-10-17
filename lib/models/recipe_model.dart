@@ -23,9 +23,9 @@ class RecipeModel {
       this.comments});
 
   RecipeModel.fromJson(Map<String, dynamic> json) {
-    if (json['Recipes'] != null) {
+    if (json['Recipe'] != null) {
       recipes = <Recipe>[];
-      json['Recipes'].forEach((v) {
+      json['Recipe'].forEach((v) {
         recipes!.add(Recipe.fromJson(v));
       });
     }
@@ -195,7 +195,7 @@ class RecipeIngredient {
 
   RecipeIngredient.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    count = json['count'];
+    count = json['count'] + .0;
     ingredient = json['ingredient'] != null
         ? Ingredient.fromJson(json['ingredient'])
         : null;

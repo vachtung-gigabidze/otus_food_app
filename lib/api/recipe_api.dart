@@ -13,9 +13,10 @@ class RecipeApi {
 
     try {
       var response = await Dio().get(
-          'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
+          // 'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
+          'https://raw.githubusercontent.com/vachtung-gigabidze/otus_food_app/main/db.json');
 
-      recipes = RecipeModel.fromJson(response.data);
+      recipes = RecipeModel.fromJson(jsonDecode(response.data));
     } catch (e) {
       log('error: $e');
     }
