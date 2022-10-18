@@ -5,10 +5,91 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 // import 'package:otus_food_app/model.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:flutter_network_connectivity/flutter_network_connectivity.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:otus_food_app/models/recipe_model.dart';
+import 'package:path_provider/path_provider.dart';
 
 class RecipeApi {
+
+
+  final url ='https://raw.githubusercontent.com/vachtung-gigabidze/otus_food_app/main/db.json';// 'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
+  late Box box;
+  bool? isInternetAvailableOnCall;
+  bool? isInternetAvailableStreamStatus;
+
+  Future openBox() async {
+
+    var dir = await getApplicationDocumentsDirectory();
+    Hive.init(dir.path);
+    box = await Hive.openBox('recipes');
+    return;
+    
+  }
+
+  initBox() async{
+    await Hive.initFlutter();
+
+    flutterNetworkConnectivity.getInternetAvailabilityStream().listen((event) {
+      isInternetAvailableStreamStatus = event;
+     
+    });
+      
+  }
+
+  getAllData() async{
+      await openBox();
+
+      fetchDB();
+  }
+
+  final FlutterNetworkConnectivity flutterNetworkConnectivity =
+        FlutterNetworkConnectivity(
+      isContinousLookUp:
+          true, // optional, false if you cont want continous lookup
+      lookUpDuration: const Duration(
+          seconds: 5), // optional, to override default lookup duration
+      lookUpUrl: 'example.com', // optional, to override default lookup url
+    );
+
+
+
+  putData(RecipeModel data) async {
+    await box.clear();
+    box.add(data);
+  }
+
+  fetchDB() async {
+
+    RecipeModel? recipes;
+
+    try {
+      var response = await Dio().get(url);
+
+      //recipes = RecipeModel.fromJson(jsonDecode(response.data));
+      await putData(response.data);
+    }     
+    catch (e) {
+      log('error: $e');
+
+    }
+
+    return recipes;
+    
+  }
+
+  }
+
   Future<RecipeModel?> fetchRecipes() async {
+    FlutterNetworkConnectivity flutterNetworkConnectivity =
+        FlutterNetworkConnectivity(
+      isContinousLookUp:
+          true, // optional, false if you cont want continous lookup
+      lookUpDuration: const Duration(
+          seconds: 5), // optional, to override default lookup duration
+      lookUpUrl: 'example.com', // optional, to override default lookup url
+    );
+
     RecipeModel? recipes;
 
     try {
