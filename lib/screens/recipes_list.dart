@@ -18,11 +18,11 @@ class RecipesList extends StatefulWidget {
 }
 
 class _RecipesListState extends State<RecipesList> {
-  Future<RecipeModel?>? recipes;
+  late Future<List<Recipe>?> recipes;
 
   @override
   void initState() {
-    recipes ??= RecipeApi().fetchRecipes();
+    recipes = RecipeApi().fetchRecipes();
 
     super.initState();
   }
@@ -39,15 +39,15 @@ class _RecipesListState extends State<RecipesList> {
           decoration: const BoxDecoration(
             color: AppColors.greyColor,
           ),
-          child: FutureBuilder<RecipeModel?>(
+          child: FutureBuilder<List<Recipe>?>(
             future: recipes,
             builder:
-                (BuildContext context, AsyncSnapshot<RecipeModel?> recipes) {
+                (BuildContext context, AsyncSnapshot<List<Recipe>?> recipes) {
               if (recipes.hasData) {
                 return ListView.builder(
                   physics: const BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
-                  itemCount: recipes.data?.recipes?.length ?? 1,
+                  itemCount: recipes.data?.length ?? 1,
                   itemBuilder: (context, index) {
                     return Container(
                       margin: const EdgeInsets.only(
@@ -59,10 +59,9 @@ class _RecipesListState extends State<RecipesList> {
                             //   arguments: recipes.data?.recipes?[index]);
                             Navigator.of(context).push(SliderPageRoute(
                                 widget: RecipeDetail(
-                                    recipe: recipes.data?.recipes?[index])));
+                                    recipe: recipes.data?[index])));
                           },
-                          child: RecipeCard(
-                              recipe: recipes.data?.recipes?[index])),
+                          child: RecipeCard(recipe: recipes.data?[index])),
                     );
                   },
                 );

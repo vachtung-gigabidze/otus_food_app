@@ -11,48 +11,41 @@ import 'package:otus_food_app/models/recipe_model.dart';
 import 'package:path_provider/path_provider.dart';
 
 class RecipeApi {
-
-
-  final url ='https://raw.githubusercontent.com/vachtung-gigabidze/otus_food_app/main/db.json';// 'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
+  //final url ='https://raw.githubusercontent.com/vachtung-gigabidze/otus_food_app/main/db.json';// 'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
+  final url = 'http://172.20.20.4:8888/recipe';
   late Box box;
   bool? isInternetAvailableOnCall;
   bool? isInternetAvailableStreamStatus;
 
   Future openBox() async {
-
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
     box = await Hive.openBox('recipes');
     return;
-    
   }
 
-  initBox() async{
+  initBox() async {
     await Hive.initFlutter();
 
     flutterNetworkConnectivity.getInternetAvailabilityStream().listen((event) {
       isInternetAvailableStreamStatus = event;
-     
     });
-      
   }
 
-  getAllData() async{
-      await openBox();
+  getAllData() async {
+    await openBox();
 
-      fetchDB();
+    fetchDB();
   }
 
   final FlutterNetworkConnectivity flutterNetworkConnectivity =
-        FlutterNetworkConnectivity(
-      isContinousLookUp:
-          true, // optional, false if you cont want continous lookup
-      lookUpDuration: const Duration(
-          seconds: 5), // optional, to override default lookup duration
-      lookUpUrl: 'example.com', // optional, to override default lookup url
-    );
-
-
+      FlutterNetworkConnectivity(
+    isContinousLookUp:
+        true, // optional, false if you cont want continous lookup
+    lookUpDuration: const Duration(
+        seconds: 5), // optional, to override default lookup duration
+    lookUpUrl: 'example.com', // optional, to override default lookup url
+  );
 
   putData(RecipeModel data) async {
     await box.clear();
@@ -60,27 +53,21 @@ class RecipeApi {
   }
 
   fetchDB() async {
-
     RecipeModel? recipes;
 
     try {
-      var response = await Dio().get(url);
+      var response = await Dio().get("http://172.20.20.4:8888/recipe");
 
       //recipes = RecipeModel.fromJson(jsonDecode(response.data));
       await putData(response.data);
-    }     
-    catch (e) {
+    } catch (e) {
       log('error: $e');
-
     }
 
     return recipes;
-    
   }
 
-  }
-
-  Future<RecipeModel?> fetchRecipes() async {
+  Future<List<Recipe>?> fetchRecipes() async {
     FlutterNetworkConnectivity flutterNetworkConnectivity =
         FlutterNetworkConnectivity(
       isContinousLookUp:
@@ -90,14 +77,15 @@ class RecipeApi {
       lookUpUrl: 'example.com', // optional, to override default lookup url
     );
 
-    RecipeModel? recipes;
+    List<Recipe>? recipes;
 
     try {
-      var response = await Dio().get(
+      var response = await Dio().get(url
           // 'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
-          'https://raw.githubusercontent.com/vachtung-gigabidze/otus_food_app/main/db.json');
-
-      recipes = RecipeModel.fromJson(jsonDecode(response.data));
+          //'https://raw.githubusercontent.com/vachtung-gigabidze/otus_food_app/main/db.json'
+          );
+      List responseJson = response.data;
+      recipes = responseJson.map((v) => Recipe.fromJson(v)).toList();
     } catch (e) {
       log('error: $e');
     }
