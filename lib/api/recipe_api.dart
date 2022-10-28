@@ -12,7 +12,12 @@ import 'package:path_provider/path_provider.dart';
 
 class RecipeApi {
   //final url ='https://raw.githubusercontent.com/vachtung-gigabidze/otus_food_app/main/db.json';// 'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
-  final url = 'http://172.20.20.4:8888/recipe';
+
+  // final url = 'http://172.20.20.4:8888/recipe';
+  final recipeUrl = 'http://172.20.20.4:8888/recipe';
+  final userUrl = 'http://172.20.20.4:8888/user';
+  // final commentUrl = 'http://172.20.20.4:8888/comment';
+
   late Box box;
   bool? isInternetAvailableOnCall;
   bool? isInternetAvailableStreamStatus;
@@ -80,10 +85,7 @@ class RecipeApi {
     List<Recipe>? recipes;
 
     try {
-      var response = await Dio().get(url
-          // 'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
-          //'https://raw.githubusercontent.com/vachtung-gigabidze/otus_food_app/main/db.json'
-          );
+      var response = await Dio().get(recipeUrl);
       List responseJson = response.data;
       recipes = responseJson.map((v) => Recipe.fromJson(v)).toList();
     } catch (e) {
@@ -132,17 +134,26 @@ class RecipeApi {
         .then((json) => Freezer.fromJson(jsonDecode(json)));
   }
 
-  Future<User> fetchUser({String assetsPath = "assets/model/user.json"}) async {
-    log('read recept: $assetsPath');
+  //Future<User> fetchUser({String assetsPath = "assets/model/user.json"}) async {
+  Future<User> fetchUser() async {
+    User? user;
 
-    return rootBundle.loadString(assetsPath).then((json) {
-      List<User> users = [];
+    try {
+      var response = await Dio().get(userUrl);
+      List responseJson = response.data;
+      user = User.fromJson(responseJson.first);
+    } catch (e) {
+      log('error: $e');
+    }
+    return user!;
+    // return rootBundle.loadString(assetsPath).then((json) {
+    //   List<User> users = [];
 
-      jsonDecode(json).forEach((v) {
-        users.add(User.fromJson(v));
-      });
+    //   jsonDecode(json).forEach((v) {
+    //     users.add(User.fromJson(v));
+    //   });
 
-      return users.first;
-    });
+    //   return users.first;
+    // });
   }
 }
