@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food_app/app/ui/main_app_builder.dart';
+import 'package:otus_food_app/app/ui/main_app_runner.dart';
 
 import 'package:otus_food_app/screens/favorites_screen.dart';
 import 'package:otus_food_app/screens/fridge_screen.dart';
@@ -11,7 +13,13 @@ import 'package:otus_food_app/screens/recipes_list.dart';
 import 'package:otus_food_app/widgets/detail/heart.dart';
 
 void main() {
-  runApp(MyApp());
+  const env = String.fromEnvironment("env", defaultValue: "test");
+  const runner = MainAppRunner(env);
+  final builder = MainAppBuilder();
+
+  runner.run(builder);
+
+  // runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
