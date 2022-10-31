@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
 import 'package:otus_food_app/constants.dart';
 
@@ -143,35 +144,15 @@ class LoginScreen extends StatelessWidget {
                     height: 40,
                   ),
                   SizedBox(
-                    height: 48,
-                    width: 232,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(24.0),
-                        )),
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            const Color(0xFF165932)),
-                      ),
-                      onPressed: () {
-                        if (formKey.currentState?.validate() == true) {
-                          print("OK");
-                        }
-                      },
-                      child: const Text(
-                        'Войти',
-                        style: TextStyle(
-                          fontFamily: 'Roboto',
-                          fontStyle: FontStyle.normal,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 16.0,
-                          color: Color(0xFFFFFFFF),
-                        ),
-                      ),
-                    ),
-                  ),
+                      height: 48,
+                      width: 232,
+                      child: AppTextButton(
+                          onPressed: () {
+                            if (formKey.currentState?.validate() == true) {
+                              print("OK");
+                            }
+                          },
+                          text: 'Войти')),
                 ],
               ),
             ),
