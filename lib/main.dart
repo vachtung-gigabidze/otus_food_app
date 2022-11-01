@@ -13,7 +13,7 @@ import 'package:otus_food_app/screens/recipes_list.dart';
 import 'package:otus_food_app/widgets/detail/heart.dart';
 
 void main() {
-  const env = String.fromEnvironment("env", defaultValue: "test");
+  const env = String.fromEnvironment("env", defaultValue: "prod");
   const runner = MainAppRunner(env);
   final builder = MainAppBuilder();
 

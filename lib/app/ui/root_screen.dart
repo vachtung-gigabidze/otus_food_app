@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/app/ui/app_loader.dart';
 import 'package:otus_food_app/feature/auth/ui/components/auth_builder.dart';
-import 'package:otus_food_app/feature/auth/ui/components/login_screen.dart';
+import 'package:otus_food_app/feature/auth/ui/login_screen.dart';
 import 'package:otus_food_app/feature/main/main_screen.dart';
 
 class RootScreen extends StatelessWidget {

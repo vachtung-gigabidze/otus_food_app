@@ -1,10 +1,16 @@
 import 'package:injectable/injectable.dart';
+import 'package:otus_food_app/app/data/dio_container.dart';
+import 'package:otus_food_app/feature/auth/data/dto/user_dto.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_repository.dart';
 import 'package:otus_food_app/feature/auth/domain/entities/user_entity/user_entity.dart';
 
 @Injectable(as: AuthRepository)
-@test
-class MockAuthRepository implements AuthRepository {
+@prod
+class NetworkAuthRepository implements AuthRepository {
+  final DioContainer dioContainer;
+
+  NetworkAuthRepository(this.dioContainer);
+
   @override
   Future getProfile() {
     // TODO: implement getProfile
@@ -25,30 +31,26 @@ class MockAuthRepository implements AuthRepository {
   }
 
   @override
-  Future singIn({required String password, required String login}) {
-    return Future.delayed(const Duration(seconds: 2), () {
-      //throw Exception("Test error");
-      return UserEntity(
-        email: "email",
-        login: login,
-        id: "-1",
+  Future<UserEntity> singIn(
+      {required String password, required String login}) async {
+    try {
+      final response = await dioContainer.dio.post(
+        "/token",
+        data: {"username": login, "password": password},
       );
-    });
+      return UserDto.fromJson(response.data["data"]).toEntity();
+    } catch (error) {
+      rethrow;
+    }
   }
 
   @override
-  Future singUp({
-    required String password,
-    required String login,
-    required String email,
-  }) {
-    return Future.delayed(const Duration(seconds: 2), () {
-      return UserEntity(
-        email: email,
-        login: login,
-        id: "-1",
-      );
-    });
+  Future singUp(
+      {required String password,
+      required String login,
+      required String email}) {
+    // TODO: implement singUp
+    throw UnimplementedError();
   }
 
   @override

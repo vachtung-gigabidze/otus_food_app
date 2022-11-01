@@ -5,7 +5,7 @@ import 'package:otus_food_app/app/domain/app_config.dart';
 @prod
 class ProdAppConfig implements AppConfig {
   @override
-  String get baseUrl => "https://172.20.20.4:8888";
+  String get baseUrl => "http://172.20.20.4:8888";
 
   @override
   String get host => Environment.prod;
@@ -15,7 +15,7 @@ class ProdAppConfig implements AppConfig {
 @dev
 class DevAppConfig implements AppConfig {
   @override
-  String get baseUrl => "https://172.20.20.4:8888";
+  String get baseUrl => "http://172.20.20.4:8888";
 
   @override
   String get host => Environment.dev;
