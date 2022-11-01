@@ -19,11 +19,15 @@ class ErrorEntity {
     if (error is DioError) {
       try {
         return ErrorEntity(
+          stackTrace: error.stackTrace,
+          error: error,
           message: error.response?.data["message"] ?? "Неизвестная ошибка",
+          errorMessage: error.response?.data["error"] ?? "Неизвестная ошибка",
         );
       } catch (_) {
         return entity;
       }
     }
+    return entity;
   }
 }
