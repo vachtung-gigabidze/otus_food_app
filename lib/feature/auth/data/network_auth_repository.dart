@@ -39,18 +39,30 @@ class NetworkAuthRepository implements AuthRepository {
         data: {"username": login, "password": password},
       );
       return UserDto.fromJson(response.data["data"]).toEntity();
-    } catch (error) {
+    } catch (_) {
       rethrow;
     }
   }
 
   @override
-  Future singUp(
-      {required String password,
-      required String login,
-      required String email}) {
-    // TODO: implement singUp
-    throw UnimplementedError();
+  Future singUp({
+    required String password,
+    required String login,
+    required String email,
+  }) async {
+    try {
+      final response = await dioContainer.dio.put(
+        "/token",
+        data: {
+          "username": login,
+          "password": password,
+          "email": email,
+        },
+      );
+      return UserDto.fromJson(response.data["data"]).toEntity();
+    } catch (_) {
+      rethrow;
+    }
   }
 
   @override
