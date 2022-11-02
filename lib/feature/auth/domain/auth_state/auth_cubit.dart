@@ -19,9 +19,8 @@ class AuthCubit extends HydratedCubit<AuthState> {
       final UserEntity userEntity =
           await authRepository.singIn(password: password, login: login);
       emit(AuthState.authorized(userEntity));
-    } catch (error) {
-      emit(AuthState.error(error));
-      rethrow;
+    } catch (error, st) {
+      addError(error, st);
     }
   }
 
@@ -38,9 +37,20 @@ class AuthCubit extends HydratedCubit<AuthState> {
         email: email,
       );
       emit(AuthState.authorized(userEntity));
-    } catch (error) {
-      emit(AuthState.error(error));
-      rethrow;
+    } catch (error, st) {
+      addError(error, st);
+    }
+  }
+
+  Future<void> refreshToken() async {
+    final refreshToken =
+        state.whenOrNull(authorized: (userEntity) => userEntity.refreshToken);
+    try {
+      final UserEntity userEntity =
+          await authRepository.refreshToken(refreshToken: refreshToken);
+      emit(AuthState.authorized(userEntity));
+    } catch (error, st) {
+      addError(error, st);
     }
   }
 
@@ -62,5 +72,11 @@ class AuthCubit extends HydratedCubit<AuthState> {
             )
             ?.toJson() ??
         AuthState.notAuthorized().toJson();
+  }
+
+  @override
+  void addError(Object error, [StackTrace? stackTrace]) {
+    emit(AuthState.error(error));
+    super.addError(error, stackTrace);
   }
 }

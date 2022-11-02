@@ -30,4 +30,8 @@ class ErrorEntity {
     }
     return entity;
   }
+
+  String show() {
+    return "Error: $errorMessage, Message: $message";
+  }
 }
