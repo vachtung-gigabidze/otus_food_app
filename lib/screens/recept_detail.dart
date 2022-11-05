@@ -58,7 +58,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   }
 
   void _getUser() async {
-    user = await RecipeApi().fetchUser();
+    user = User(id: 1, login: "User"); //await RecipeApi().fetchUser();
     //log(user.username!);
   }
 

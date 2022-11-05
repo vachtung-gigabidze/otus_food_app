@@ -9,8 +9,11 @@ import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
 import '../../feature/auth/data/mock_auth.dart' as _i6;
-import '../../feature/auth/data/network_auth_repository.dart' as _i8;
+import '../../feature/auth/data/network_auth_repository.dart' as _i10;
 import '../../feature/auth/domain/auth_repository.dart' as _i5;
+import '../../feature/recipe_list/data/network_%20recipe_list_repository.dart'
+    as _i9;
+import '../../feature/recipe_list/domain/recipe_list_repository.dart' as _i8;
 import '../data/dio_container.dart' as _i7;
 import '../data/main_app_config.dart' as _i4;
 import '../domain/app_config.dart' as _i3;
@@ -48,8 +51,12 @@ _i1.GetIt $initGetIt(
     registerFor: {_test},
   );
   gh.singleton<_i7.DioContainer>(_i7.DioContainer(get<_i3.AppConfig>()));
+  gh.factory<_i8.RecipeListRepository>(
+    () => _i9.NetworkRecipeListRepository(get<_i7.DioContainer>()),
+    registerFor: {_prod},
+  );
   gh.factory<_i5.AuthRepository>(
-    () => _i8.NetworkAuthRepository(get<_i7.DioContainer>()),
+    () => _i10.NetworkAuthRepository(get<_i7.DioContainer>()),
     registerFor: {_prod},
   );
   return get;

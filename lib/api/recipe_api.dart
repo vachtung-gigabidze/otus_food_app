@@ -11,10 +11,11 @@ import 'package:otus_food_app/models/recipe_model.dart';
 import 'package:path_provider/path_provider.dart';
 
 class RecipeApi {
-  //final url ='https://raw.githubusercontent.com/vachtung-gigabidze/otus_food_app/main/db.json';// 'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
+  //final url ='https://raw.githubusercontent.com/vachtung-gigabidze/otus_food_app/main/db.json';
+  //// 'https://my-json-server.typicode.com/vachtung-gigabidze/otus_food_app/db');
 
   // final url = 'http://172.20.20.4:8888/recipe';
-  final recipeUrl = 'http://172.20.20.4:8888/recipe';
+  final recipeUrl = 'https://dart.nvavia.ru/recipe';
   final userUrl = 'http://172.20.20.4:8888/user';
   // final commentUrl = 'http://172.20.20.4:8888/comment';
 
@@ -37,11 +38,11 @@ class RecipeApi {
     });
   }
 
-  getAllData() async {
-    await openBox();
+  // getAllData() async {
+  //   await openBox();
 
-    fetchDB();
-  }
+  //   fetchDB();
+  // }
 
   final FlutterNetworkConnectivity flutterNetworkConnectivity =
       FlutterNetworkConnectivity(
@@ -57,20 +58,20 @@ class RecipeApi {
     box.add(data);
   }
 
-  fetchDB() async {
-    RecipeModel? recipes;
+  // fetchDB() async {
+  //   RecipeModel? recipes;
 
-    try {
-      var response = await Dio().get("http://172.20.20.4:8888/recipe");
+  //   try {
+  //     var response = await Dio().get("http://172.20.20.4:8888/recipe");
 
-      //recipes = RecipeModel.fromJson(jsonDecode(response.data));
-      await putData(response.data);
-    } catch (e) {
-      log('error: $e');
-    }
+  //     //recipes = RecipeModel.fromJson(jsonDecode(response.data));
+  //     await putData(response.data);
+  //   } catch (e) {
+  //     log('error: $e');
+  //   }
 
-    return recipes;
-  }
+  //   return recipes;
+  // }
 
   Future<List<Recipe>?> fetchRecipes() async {
     FlutterNetworkConnectivity flutterNetworkConnectivity =
@@ -135,25 +136,25 @@ class RecipeApi {
   }
 
   //Future<User> fetchUser({String assetsPath = "assets/model/user.json"}) async {
-  Future<User> fetchUser() async {
-    User? user;
+  // Future<User> fetchUser() async {
+  //   User? user;
 
-    try {
-      var response = await Dio().get(userUrl);
-      List responseJson = response.data;
-      user = User.fromJson(responseJson.first);
-    } catch (e) {
-      log('error: $e');
-    }
-    return user!;
-    // return rootBundle.loadString(assetsPath).then((json) {
-    //   List<User> users = [];
+  //   try {
+  //     var response = await Dio().get(userUrl);
+  //     List responseJson = response.data;
+  //     user = User.fromJson(responseJson.first);
+  //   } catch (e) {
+  //     log('error: $e');
+  //   }
+  //   return user!;
+  //   // return rootBundle.loadString(assetsPath).then((json) {
+  //   //   List<User> users = [];
 
-    //   jsonDecode(json).forEach((v) {
-    //     users.add(User.fromJson(v));
-    //   });
+  //   //   jsonDecode(json).forEach((v) {
+  //   //     users.add(User.fromJson(v));
+  //   //   });
 
-    //   return users.first;
-    // });
-  }
+  //   //   return users.first;
+  //   // });
+  // }
 }

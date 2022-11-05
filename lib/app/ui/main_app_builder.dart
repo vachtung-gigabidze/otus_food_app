@@ -6,6 +6,8 @@ import 'package:otus_food_app/app/ui/root_screen.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_repository.dart';
 import 'package:otus_food_app/feature/logo/logo_screen.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_repository.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 import 'package:otus_food_app/screens/recipes_list.dart';
 
 class MainAppBuilder implements AppBuilder {
@@ -13,7 +15,7 @@ class MainAppBuilder implements AppBuilder {
     '/recipes': (BuildContext context) => const RecipesList(),
     // '/detail': (BuildContext context) => RecipeDetail(),
     // '/login': (BuildContext context) => const LoginScreen(),
-    '/logo': (BuildContext context) => const LogoScreen(nextRoute: '/recipes'),
+    '/logo': (BuildContext context) => const LogoScreen(nextRoute: '/root'),
     '/root': (BuildContext context) => const RootScreen(),
     // '/fridge': (BuildContext context) => const FridgeScreen(),
     // '/favorites': (BuildContext context) => const FavoritesScreen(),
@@ -38,7 +40,7 @@ return MaterialApp(
         title: 'Otus Food App',
         routes: routes,
         initialRoute: '/logo',
-        home: RootScreen(),
+        // home: RootScreen(),
       ),
     );
   }
@@ -55,6 +57,10 @@ class _GlobalProviders extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => AuthCubit(locator<AuthRepository>()),
+        ),
+        BlocProvider(
+          create: (context) =>
+              RecipeListCubit(locator<RecipeListRepository>())..getRecipeList(),
         )
       ],
       child: child,
