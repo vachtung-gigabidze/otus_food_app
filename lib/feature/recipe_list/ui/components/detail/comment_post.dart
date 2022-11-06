@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
-// import 'package:otus_food_app/models/recipe_model.dart';
 
 class CommentPost extends StatefulWidget {
   const CommentPost({Key? key, required this.addComment}) : super(key: key);
@@ -89,12 +88,13 @@ class _CommentPostState extends State<CommentPost> {
             controller: _controllerTextComment,
             onEditingComplete: () {
               if (_controllerTextComment.text.isNotEmpty) {
-                DateTime today = DateTime.now();
+                // DateTime today = DateTime.now();
                 widget.addComment(Comment(
-                    user: User(),
+                    id: 3,
+                    user: User(id: 2, login: "dime", photo: null),
                     text: _controllerTextComment.text,
-                    datetime:
-                        '${today.day < 10 ? 0 : ''}${today.day}.${today.month < 10 ? 0 : ''}${today.month}.${today.year}',
+                    datetime: DateTime.now().toString(),
+                    // '${today.day < 10 ? 0 : ''}${today.day}.${today.month < 10 ? 0 : ''}${today.month}.${today.year}',
                     photo: _newImageComment?.path ?? ""));
                 _newImageComment = null;
                 _controllerTextComment.clear();

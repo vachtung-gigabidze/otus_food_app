@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/cooking_step.dart';
-// import 'package:otus_food_app/models/recipe_model.dart';
-// import 'package:otus_food_app/model.dart';
-// import 'package:otus_food_app/widgets/detail/cooking_step.dart';
 
 class CookingStepsDetail extends StatelessWidget {
   const CookingStepsDetail({Key? key, required this.recipe}) : super(key: key);
@@ -39,7 +36,7 @@ class CookingStepsDetail extends StatelessWidget {
               return Container(
                 margin: const EdgeInsets.only(bottom: 16),
                 child: CookingStepCard(
-                    cookingStep: recipe.recipeStepLinks?[index]),
+                    cookingStepLink: recipe.recipeStepLinks?[index]),
               );
             })
       ],

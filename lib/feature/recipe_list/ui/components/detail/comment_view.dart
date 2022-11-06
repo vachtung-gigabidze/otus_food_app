@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
-
-// import 'package:otus_food_app/model.dart';
-// import 'package:otus_food_app/models/recipe_model.dart';
+import 'package:intl/intl.dart';
 
 class CommentView extends StatelessWidget {
   const CommentView({Key? key, this.comment}) : super(key: key);
@@ -15,19 +13,25 @@ class CommentView extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(31.5),
-          child: Image(
-            image: AssetImage(comment?.user?.photo ?? ""),
-            errorBuilder: (context, error, stackTrace) {
-              return Container(
-                height: 63,
-                width: 63,
-                color: Colors.grey,
-              );
-            },
-            fit: BoxFit.cover,
-            height: 63,
-            width: 63,
-          ),
+          child: comment?.user?.photo != null
+              ? Image(
+                  image: AssetImage(comment?.user?.photo ?? ""),
+                  errorBuilder: (context, error, stackTrace) {
+                    return Container(
+                      height: 63,
+                      width: 63,
+                      color: Colors.grey,
+                    );
+                  },
+                  fit: BoxFit.cover,
+                  height: 63,
+                  width: 63,
+                )
+              : Container(
+                  height: 63,
+                  width: 63,
+                  color: Colors.grey,
+                ),
         ),
         const SizedBox(
           width: 18,
@@ -41,7 +45,7 @@ class CommentView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    comment?.user?.photo ?? "",
+                    comment?.user?.login ?? "",
                     style: const TextStyle(
                       fontFamily: 'Roboto',
                       fontStyle: FontStyle.normal,
@@ -51,7 +55,9 @@ class CommentView extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    comment?.datetime ?? "",
+                    DateFormat('dd-MM-yyyy')
+                        .format(DateTime.parse(comment?.datetime ?? ""))
+                        .toString(),
                     style: const TextStyle(
                       fontFamily: 'Roboto',
                       fontStyle: FontStyle.normal,

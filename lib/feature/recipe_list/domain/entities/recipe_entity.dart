@@ -73,6 +73,9 @@ class Recipe {
   }
 
   void updateCookingSteps() {
+    if (recipeStepLinks!.isEmpty) {
+      return;
+    }
     recipeStepLinks![0].status = (isCooking ?? false)
         ? CookingStepsStatus.passed
         : CookingStepsStatus.notStarted;
@@ -136,7 +139,21 @@ class RecipeIngredient {
   }
 
   String showQuantity() {
-    return '$count ${ingredient?.measureUnit?.one}';
+    if (count == 0) {
+      return 'по вкусу';
+    }
+
+    RegExp regex = RegExp(r'([.]*0)(?!.*\d)');
+
+    String s = count.toString().replaceAll(regex, '');
+
+    if (count! > 4) {
+      return '$s ${ingredient?.measureUnit?.many}';
+    }
+    if (count! == 1) {
+      return '$s ${ingredient?.measureUnit?.one}';
+    }
+    return '$s ${ingredient?.measureUnit?.few}';
   }
 }
 
@@ -258,26 +275,21 @@ class User {
   int? id;
   String? login;
   String? photo;
-  String? password;
-  String? token;
 
-  User({this.id, this.login, this.photo, this.password, this.token});
+  User({this.id, this.login, this.photo});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    login = json['login'];
+    login = json['username'];
     photo = json['photo'];
-    password = json['password'];
-    token = json['token'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['login'] = login;
+    data['username'] = login;
     data['photo'] = photo;
-    data['password'] = password;
-    data['token'] = token;
+
     return data;
   }
 }
