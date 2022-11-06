@@ -12,8 +12,8 @@ class RecipeListCubit extends HydratedCubit<RecipeListState> {
 
   final RecipeListRepository recipeListRepository;
 
-  Future<void> getRecipeList() async {
-    if (state is _RecipeListStateLoaded) {
+  Future<void> getRecipeList({bool refresh = false}) async {
+    if (state is _RecipeListStateLoaded && !refresh) {
       return;
     }
     emit(RecipeListState.waiting());

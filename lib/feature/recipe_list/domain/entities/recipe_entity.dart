@@ -16,6 +16,32 @@ class Recipe {
     name = json['name'];
     duration = json['duration'];
     photo = json['photo'];
+
+    // if (json['RecipeIngredient'] != null) {
+    //   recipeIngredients = <RecipeIngredient>[];
+    //   json['RecipeIngredient'].forEach((v) {
+    //     recipeIngredients!.add(RecipeIngredient.fromJson(v));
+    //   });
+    // }
+
+    // if (json['RecipeStepLink'] != null) {
+    //   recipeStepLinks = <RecipeStepLink>[];
+    //   json['RecipeStepLink'].forEach((v) {
+    //     recipeStepLinks!.add(RecipeStepLink.fromJson(v));
+    //   });
+    // }
+    // if (json['Favorite'] != null) {
+    //   favoriteRecipes = <Favorite>[];
+    //   json['Favorite'].forEach((v) {
+    //     favoriteRecipes!.add(Favorite.fromJson(v));
+    //   });
+    // }
+    // if (json['Comment'] != null) {
+    //   comments = <Comment>[];
+    //   json['Comment'].forEach((v) {
+    //     comments!.add(Comment.fromJson(v));
+    //   });
+    // }
   }
 
   Map<String, dynamic> toJson() {
