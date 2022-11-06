@@ -4,7 +4,7 @@ import 'package:otus_food_app/feature/auth/ui/components/auth_builder.dart';
 import 'package:otus_food_app/feature/auth/ui/login_screen.dart';
 import 'package:otus_food_app/feature/main/main_screen.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/recipe_list_builder.dart';
-import 'package:otus_food_app/feature/recipe_list/ui/recipes_list_screen.dart';
+import 'package:otus_food_app/feature/recipe_list/ui/recipe_list_screen.dart';
 
 class RootScreen extends StatelessWidget {
   const RootScreen({super.key});

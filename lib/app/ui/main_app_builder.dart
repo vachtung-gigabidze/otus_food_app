@@ -8,11 +8,11 @@ import 'package:otus_food_app/feature/auth/domain/auth_repository.dart';
 import 'package:otus_food_app/feature/logo/logo_screen.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_repository.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
-import 'package:otus_food_app/screens/recipes_list.dart';
+import 'package:otus_food_app/feature/recipe_list/ui/recipe_list_screen.dart';
 
 class MainAppBuilder implements AppBuilder {
   final routes = <String, WidgetBuilder>{
-    '/recipes': (BuildContext context) => const RecipesList(),
+    // '/recipes': (BuildContext context) => const RecipesListScreen(),
     // '/detail': (BuildContext context) => RecipeDetail(),
     // '/login': (BuildContext context) => const LoginScreen(),
     '/logo': (BuildContext context) => const LogoScreen(nextRoute: '/root'),

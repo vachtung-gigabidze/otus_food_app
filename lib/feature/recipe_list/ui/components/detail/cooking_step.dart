@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/models/recipe_model.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
+import 'package:otus_food_app/feature/recipe_list/ui/components/detail/check_box.dart';
+// import 'package:otus_food_app/models/recipe_model.dart';
 // import 'package:otus_food_app/model.dart';
-import 'package:otus_food_app/widgets/detail/check_box.dart';
+// import 'package:otus_food_app/widgets/detail/check_box.dart';
 
 class CookingStepCard extends StatefulWidget {
   const CookingStepCard({super.key, this.cookingStep});
@@ -40,7 +42,8 @@ class _MyWidgetState extends State<CookingStepCard> {
         height: 120, //double.infinity,
 
         child: Card(
-          //color: AppColors().stepBackground(cookingStep!.status!),
+          color: AppColors().stepBackground(
+              cookingStep!.status ?? CookingStepsStatus.notStarted),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -53,7 +56,7 @@ class _MyWidgetState extends State<CookingStepCard> {
                     fontStyle: FontStyle.normal,
                     fontWeight: FontWeight.w900,
                     fontSize: 40.0,
-                    // color: AppColors().stepText(cookingStep?.status),
+                    color: AppColors().stepText(cookingStep?.status),
                   ),
                 ),
               ),
@@ -61,12 +64,11 @@ class _MyWidgetState extends State<CookingStepCard> {
                 child: Text(
                   '${cookingStep?.step}',
                   style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontStyle: FontStyle.normal,
-                    fontWeight: FontWeight.w400,
-                    fontSize: 12.0,
-                    // color: AppColors().stepText(cookingStep?.status!),
-                  ),
+                      fontFamily: 'Roboto',
+                      fontStyle: FontStyle.normal,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12.0,
+                      color: AppColors().stepText(cookingStep?.status)),
                   overflow: TextOverflow.clip,
                 ),
               ),
@@ -96,7 +98,7 @@ class _MyWidgetState extends State<CookingStepCard> {
                         fontStyle: FontStyle.normal,
                         fontWeight: FontWeight.w700,
                         fontSize: 13.0,
-                        // color: AppColors().stepCheckbox(cookingStep?.status),
+                        color: AppColors().stepCheckbox(cookingStep?.status),
                       ),
                     ),
                   ],

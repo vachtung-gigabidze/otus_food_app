@@ -2,7 +2,8 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/models/recipe_model.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
+// import 'package:otus_food_app/models/recipe_model.dart';
 // import 'package:otus_food_app/model.dart';
 
 class CheckBoxView extends StatefulWidget {
@@ -61,9 +62,9 @@ class _CheckBoxViewState extends State<CheckBoxView>
   Widget build(BuildContext context) {
     return ScaleTransition(
       scale: _pulseAnimation,
-      child: const Image(
-        //image: AssetImage(Constants().checkBoxIcon(widget.cookingStepsStatus!)),
-        image: AssetImage(""),
+      child: Image(
+        image: AssetImage(Constants().checkBoxIcon(
+            widget.cookingStepsStatus ?? CookingStepsStatus.notStarted)),
         height: 30,
         width: 30,
         fit: BoxFit.cover,

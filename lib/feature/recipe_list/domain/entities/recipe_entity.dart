@@ -17,31 +17,31 @@ class Recipe {
     duration = json['duration'];
     photo = json['photo'];
 
-    // if (json['RecipeIngredient'] != null) {
-    //   recipeIngredients = <RecipeIngredient>[];
-    //   json['RecipeIngredient'].forEach((v) {
-    //     recipeIngredients!.add(RecipeIngredient.fromJson(v));
-    //   });
-    // }
+    if (json['recipeIngredients'] != null) {
+      recipeIngredients = <RecipeIngredient>[];
+      json['recipeIngredients'].forEach((v) {
+        recipeIngredients!.add(RecipeIngredient.fromJson(v));
+      });
+    }
 
-    // if (json['RecipeStepLink'] != null) {
-    //   recipeStepLinks = <RecipeStepLink>[];
-    //   json['RecipeStepLink'].forEach((v) {
-    //     recipeStepLinks!.add(RecipeStepLink.fromJson(v));
-    //   });
-    // }
-    // if (json['Favorite'] != null) {
-    //   favoriteRecipes = <Favorite>[];
-    //   json['Favorite'].forEach((v) {
-    //     favoriteRecipes!.add(Favorite.fromJson(v));
-    //   });
-    // }
-    // if (json['Comment'] != null) {
-    //   comments = <Comment>[];
-    //   json['Comment'].forEach((v) {
-    //     comments!.add(Comment.fromJson(v));
-    //   });
-    // }
+    if (json['recipeStepLinks'] != null) {
+      recipeStepLinks = <RecipeStepLink>[];
+      json['recipeStepLinks'].forEach((v) {
+        recipeStepLinks!.add(RecipeStepLink.fromJson(v));
+      });
+    }
+    if (json['favoriteRecipes'] != null) {
+      favoriteRecipes = <Favorite>[];
+      json['favoriteRecipes'].forEach((v) {
+        favoriteRecipes!.add(Favorite.fromJson(v));
+      });
+    }
+    if (json['comments'] != null) {
+      comments = <Comment>[];
+      json['comments'].forEach((v) {
+        comments!.add(Comment.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -50,6 +50,25 @@ class Recipe {
     data['name'] = name;
     data['duration'] = duration;
     data['photo'] = photo;
+
+    if (recipeIngredients != null) {
+      data['recipeIngredients'] =
+          recipeIngredients!.map((v) => v.toJson()).toList();
+    }
+
+    if (recipeStepLinks != null) {
+      data['recipeStepLinks'] =
+          recipeStepLinks!.map((v) => v.toJson()).toList();
+    }
+
+    if (favoriteRecipes != null) {
+      data['favoriteRecipes'] =
+          favoriteRecipes!.map((v) => v.toJson()).toList();
+    }
+    if (comments != null) {
+      data['comments'] = comments!.map((v) => v.toJson()).toList();
+    }
+
     return data;
   }
 
