@@ -2,10 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:otus_food_app/models/Photo.dart';
 import 'package:otus_food_app/utils/db_helper.dart';
 import 'package:otus_food_app/utils/gallery_utils.dart';
+import 'package:otus_food_app/utils/tensorflow/classifier.dart';
+import 'package:otus_food_app/utils/tensorflow/classifier_quant.dart';
+import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
 class SaveImageDemoSQLite extends StatefulWidget {
   final int? recipeId;
@@ -24,6 +28,10 @@ class _SaveImageDemoSQLiteState extends State<SaveImageDemoSQLite> {
   Image? image;
   late DBHelper dbHelper;
   late List<Photo> images;
+  late Classifier _classifier;
+
+  File? _image;
+  Category? category;
 
   @override
   void initState() {
@@ -31,6 +39,7 @@ class _SaveImageDemoSQLiteState extends State<SaveImageDemoSQLite> {
     images = [];
     dbHelper = DBHelper();
     refreshImages();
+    _classifier = ClassifierQuant();
   }
 
   refreshImages() {
@@ -67,6 +76,15 @@ class _SaveImageDemoSQLiteState extends State<SaveImageDemoSQLite> {
         }).toList(),
       ),
     );
+  }
+
+  void _predict() async {
+    img.Image imageInput = img.decodeImage(_image!.readAsBytesSync())!;
+    var pred = _classifier.predict(imageInput);
+
+    setState(() {
+      this.category = pred;
+    });
   }
 
   @override

@@ -5,8 +5,8 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 // import 'package:otus_food_app/model.dart';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:flutter_network_connectivity/flutter_network_connectivity.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+// import 'package:flutter_network_connectivity/flutter_network_connectivity.dart';
+// import 'package:hive_flutter/hive_flutter.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:otus_food_app/models/recipe_model.dart';
 // import 'package:otus_food_app/models/recipe_model.dart';
@@ -21,16 +21,16 @@ class RecipeApi {
   final userUrl = 'http://172.20.20.4:8888/user';
   // final commentUrl = 'http://172.20.20.4:8888/comment';
 
-  late Box box;
-  bool? isInternetAvailableOnCall;
-  bool? isInternetAvailableStreamStatus;
+  // late Box box;
+  // bool? isInternetAvailableOnCall;
+  // bool? isInternetAvailableStreamStatus;
 
-  Future openBox() async {
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
-    box = await Hive.openBox('recipes');
-    return;
-  }
+  // Future openBox() async {
+  //   var dir = await getApplicationDocumentsDirectory();
+  //   Hive.init(dir.path);
+  //   box = await Hive.openBox('recipes');
+  //   return;
+  // }
 
   // initBox() async {
   //   await Hive.initFlutter();
@@ -76,14 +76,14 @@ class RecipeApi {
   // }
 
   Future<List<Recipe>?> fetchRecipes() async {
-    FlutterNetworkConnectivity flutterNetworkConnectivity =
-        FlutterNetworkConnectivity(
-      isContinousLookUp:
-          true, // optional, false if you cont want continous lookup
-      lookUpDuration: const Duration(
-          seconds: 5), // optional, to override default lookup duration
-      lookUpUrl: 'example.com', // optional, to override default lookup url
-    );
+    // FlutterNetworkConnectivity flutterNetworkConnectivity =
+    //     FlutterNetworkConnectivity(
+    //   isContinousLookUp:
+    //       true, // optional, false if you cont want continous lookup
+    //   lookUpDuration: const Duration(
+    //       seconds: 5), // optional, to override default lookup duration
+    //   lookUpUrl: 'example.com', // optional, to override default lookup url
+    // );
 
     List<Recipe>? recipes;
 
