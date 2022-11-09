@@ -3,6 +3,7 @@ import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:otus_food_app/constants.dart';
+import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -28,33 +29,7 @@ class RegisterScreen extends StatelessWidget {
     return Form(
       key: formKey,
       child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          items: <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: ImageIcon(Image.asset(
-                Constants.iconPizza,
-                height: 24,
-                width: 24,
-              ).image),
-              label: 'Рецепты',
-              backgroundColor: Colors.white,
-            ),
-            BottomNavigationBarItem(
-              icon: ImageIcon(Image.asset(
-                Constants.iconProfile,
-                height: 24,
-                width: 24,
-              ).image),
-              label: 'Вход',
-            ),
-          ],
-
-          currentIndex: 0,
-          showUnselectedLabels: true,
-          selectedItemColor: AppColors.accent,
-          unselectedItemColor: AppColors.greyColor,
-          // onTap: () {},
-        ),
+        bottomNavigationBar: const BottomNavBar(),
         backgroundColor: const Color(0xFF2ECC71),
         body: Stack(
           children: [

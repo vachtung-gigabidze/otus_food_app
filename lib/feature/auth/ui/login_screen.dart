@@ -23,33 +23,6 @@ class LoginScreen extends StatelessWidget {
       key: formKey,
       child: Scaffold(
         bottomNavigationBar: const BottomNavBar(),
-        // BottomNavigationBar(
-        //   items: <BottomNavigationBarItem>[
-        //     BottomNavigationBarItem(
-        //       icon: ImageIcon(Image.asset(
-        //         Constants.iconPizza,
-        //         height: 24,
-        //         width: 24,
-        //       ).image),
-        //       label: 'Рецепты',
-        //       backgroundColor: Colors.white,
-        //     ),
-        //     BottomNavigationBarItem(
-        //       icon: ImageIcon(Image.asset(
-        //         Constants.iconProfile,
-        //         height: 24,
-        //         width: 24,
-        //       ).image),
-        //       label: 'Вход',
-        //     ),
-        //   ],
-
-        //   currentIndex: 0,
-        //   showUnselectedLabels: true,
-        //   selectedItemColor: AppColors.accent,
-        //   unselectedItemColor: AppColors.greyColor,
-        //   // onTap: () {},
-        // ),
         backgroundColor: const Color(0xFF2ECC71),
         body: Stack(
           children: [
