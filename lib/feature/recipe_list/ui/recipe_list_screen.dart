@@ -6,6 +6,7 @@ import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recip
 import 'package:otus_food_app/feature/recipe_list/ui/components/recipe_card.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/recipe_detail_screen.dart';
 import 'package:otus_food_app/slider_page_route.dart';
+import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 // import 'package:otus_food_app/screens/recept_detail.dart';
 // import 'package:otus_food_app/widgets/lists/recipe_card.dart';
 // import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
@@ -23,7 +24,7 @@ class RecipesListScreen extends StatelessWidget {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: StatusOverlay.grey,
       child: Scaffold(
-        //bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: const BottomNavBar(),
         body: Container(
           padding: const EdgeInsets.only(top: 45, left: 16, right: 16),
           decoration: const BoxDecoration(

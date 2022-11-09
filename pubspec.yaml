@@ -58,7 +58,7 @@ dependencies:
   flutter_network_connectivity: ^0.0.6
   # image: ^3.2.0
   
-  # tflite_flutter: ^0.9.0
+  # tflite_flutter:^0.9.0 
   # tflite_flutter_helper: 
   #   git: 
   #     url: https://github.com/elephantum/tflite_flutter_helper.git

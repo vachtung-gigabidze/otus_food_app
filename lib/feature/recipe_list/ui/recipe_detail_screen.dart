@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
-import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
+import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/comment_list.dart';

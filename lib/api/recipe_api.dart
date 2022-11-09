@@ -7,7 +7,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:flutter_network_connectivity/flutter_network_connectivity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:otus_food_app/models/recipe_model.dart';
+// import 'package:otus_food_app/models/recipe_model.dart';
 import 'package:path_provider/path_provider.dart';
 
 class RecipeApi {
@@ -30,13 +32,13 @@ class RecipeApi {
     return;
   }
 
-  initBox() async {
-    await Hive.initFlutter();
+  // initBox() async {
+  //   await Hive.initFlutter();
 
-    flutterNetworkConnectivity.getInternetAvailabilityStream().listen((event) {
-      isInternetAvailableStreamStatus = event;
-    });
-  }
+  //   flutterNetworkConnectivity.getInternetAvailabilityStream().listen((event) {
+  //     isInternetAvailableStreamStatus = event;
+  //   });
+  // }
 
   // getAllData() async {
   //   await openBox();
@@ -44,19 +46,19 @@ class RecipeApi {
   //   fetchDB();
   // }
 
-  final FlutterNetworkConnectivity flutterNetworkConnectivity =
-      FlutterNetworkConnectivity(
-    isContinousLookUp:
-        true, // optional, false if you cont want continous lookup
-    lookUpDuration: const Duration(
-        seconds: 5), // optional, to override default lookup duration
-    lookUpUrl: 'example.com', // optional, to override default lookup url
-  );
+  // final FlutterNetworkConnectivity flutterNetworkConnectivity =
+  //     FlutterNetworkConnectivity(
+  //   isContinousLookUp:
+  //       true, // optional, false if you cont want continous lookup
+  //   lookUpDuration: const Duration(
+  //       seconds: 5), // optional, to override default lookup duration
+  //   lookUpUrl: 'example.com', // optional, to override default lookup url
+  // );
 
-  putData(RecipeModel data) async {
-    await box.clear();
-    box.add(data);
-  }
+  // putData(RecipeModel data) async {
+  //   await box.clear();
+  //   box.add(data);
+  // }
 
   // fetchDB() async {
   //   RecipeModel? recipes;
@@ -106,24 +108,26 @@ class RecipeApi {
 
   Future<List<Recipe>?> fetchFavoritesRecipes(
       {String assetsPath = "assets/model/recipes.json"}) async {
-    log('read recept: $assetsPath');
+    // log('read recept: $assetsPath');
 
-    return rootBundle.loadString(assetsPath).then((json) {
-      var recipesModel = RecipeModel.fromJson(jsonDecode(json));
+    // return rootBundle.loadString(assetsPath).then((json) {
+    //   var recipe = Recipe.fromJson(jsonDecode(json));
 
-      return recipesModel.recipes?.take(3).toList();
-    });
+    //   return recipe.take(3).toList();
+    // });
+    return null;
   }
 
   Future<List<Recipe>?> fetchAvailableRecipes(
       {String assetsPath = "assets/model/recipes.json"}) async {
     log('read recept: $assetsPath');
 
-    return rootBundle.loadString(assetsPath).then((json) {
-      var recipesModel = RecipeModel.fromJson(jsonDecode(json));
+    // return rootBundle.loadString(assetsPath).then((json) {
+    //   var recipesModel = RecipeModel.fromJson(jsonDecode(json));
 
-      return recipesModel.recipes?.take(3).toList();
-    });
+    //   return recipesModel.recipes?.take(3).toList();
+    // });
+    return null;
   }
 
   Future<Freezer> fetchFridge(

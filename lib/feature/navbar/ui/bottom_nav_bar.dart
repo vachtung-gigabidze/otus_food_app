@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/constants.dart';
+// import 'package:path/path.dart';
 
-class BottomNavBar extends StatelessWidget {
+class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key}) : super(key: key);
+
+  @override
+  State<BottomNavBar> createState() => _BottomNavBarState();
+}
+
+class _BottomNavBarState extends State<BottomNavBar> {
+  late int currentIndex;
+
+  @override
+  void initState() {
+    currentIndex = 0;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +41,7 @@ class BottomNavBar extends StatelessWidget {
         // ),
         // BottomNavigationBarItem(
         //   icon: ImageIcon(Image.asset(
-        //     Constants.iconHeart,
+        //     Constants.iconHeartBlack,
         //     height: 24,
         //     width: 24,
         //   ).image),
@@ -39,13 +53,24 @@ class BottomNavBar extends StatelessWidget {
             height: 24,
             width: 24,
           ).image),
-          label: 'Профиль',
+          label: 'Вход',
         ),
       ],
-      currentIndex: 0,
+      currentIndex: currentIndex,
       showUnselectedLabels: true,
       selectedItemColor: AppColors.accent,
       unselectedItemColor: AppColors.greyColor,
+      onTap: (index) {
+        setState(() {
+          currentIndex = index;
+        });
+        if (index == 0) {
+          Navigator.of(context).pushNamed('/root');
+        } else if (index == 1) {
+          Navigator.of(context).pushNamed('/login');
+        } else if (index == 2) {
+        } else if (index == 3) {}
+      },
     );
   }
 }
