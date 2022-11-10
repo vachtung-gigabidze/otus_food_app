@@ -1,18 +1,14 @@
-import 'dart:io';
+// import 'dart:io';
 
 import 'package:flutter/foundation.dart' as f;
 import 'package:flutter/material.dart';
-import 'package:image/image.dart' as img;
+// import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:otus_food_app/models/Photo.dart';
 import 'package:otus_food_app/utils/db_helper.dart';
 import 'package:otus_food_app/utils/gallery_utils.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tflite/tflite.dart';
-import 'package:flutter/services.dart' show rootBundle;
-// import 'package:otus_food_app/utils/tensorflow/classifier.dart';
-// import 'package:otus_food_app/utils/tensorflow/classifier_quant.dart';
-// import 'package:tflite_flutter_helper/tflite_flutter_helper.dart';
 
 class SaveImageSQLite extends StatefulWidget {
   final int? recipeId;
@@ -26,21 +22,15 @@ class SaveImageSQLite extends StatefulWidget {
 }
 
 class _SaveImageSQLiteState extends State<SaveImageSQLite> {
-  //
-  // Future<File>? imageFile;
-  // Image? image;
   late DBHelper dbHelper;
   late List<Photo> images;
-  // late Classifier _classifier;
-
   XFile? _image;
 
-  late List _result;
-  late String _Confid = "";
-  String _name = '';
-  String _number = '';
-
-  // Category? category;
+  loadModel() async {
+    await Tflite.loadModel(
+        labels: 'assets/tensorflow/labels.txt',
+        model: 'assets/tensorflow/model_unquant.tflite');
+  }
 
   @override
   void initState() {
@@ -48,8 +38,12 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
     images = [];
     dbHelper = DBHelper();
     refreshImages();
-    loadImageModel();
-    // _classifier = ClassifierQuant();
+    loadModel();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   refreshImages() {
@@ -65,13 +59,42 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
     ImagePicker().pickImage(source: ImageSource.gallery).then((imgFile) {
       _image = imgFile;
       Future<f.Uint8List> u8 = imgFile!.readAsBytes();
-      u8.then((value) {
+      u8.then((value) async {
+        var detectedInfo = await detectImage(_image!);
         String imgString = Utility.base64String(value);
-        Photo photo = Photo(0, imgString, widget.recipeId!);
+        Photo photo = Photo(0, imgString, widget.recipeId!, detectedInfo);
         dbHelper.save(photo);
         refreshImages();
       });
     });
+  }
+
+  pickImageFromCamera() {
+    ImagePicker().pickImage(source: ImageSource.camera).then((imgFile) {
+      _image = imgFile;
+      Future<f.Uint8List> u8 = imgFile!.readAsBytes();
+      u8.then((value) async {
+        var detectedInfo = await detectImage(_image!);
+        String imgString = Utility.base64String(value);
+        Photo photo = Photo(0, imgString, widget.recipeId!, detectedInfo);
+        dbHelper.save(photo);
+        refreshImages();
+      });
+    });
+  }
+
+  Future<String> detectImage(XFile image) async {
+    List<dynamic>? output = await Tflite.runModelOnImage(
+      path: image.path,
+      numResults: 1,
+      threshold: 0.5,
+      imageMean: 127.5,
+      imageStd: 127.5,
+    );
+    print(output);
+    return output!.isNotEmpty
+        ? '${output![0]['label'].substring(2)} (${(output![0]['confidence'] * 100.0).toString().substring(0, 2)}%)'
+        : "Не распознал фото";
   }
 
   gridView() {
@@ -84,48 +107,25 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
         crossAxisSpacing: 4.0,
         children: images.map((photo) {
           Image img = Utility.imageFromBase64String(photo.photo_name);
-
-          return GestureDetector(
-              //onTap: applyImageModel(img.),
-              child: img);
+          return Column(
+            children: [
+              SizedBox(
+                height: 100,
+                width: 100,
+                child: img,
+              ),
+              Text(
+                photo.detected_info,
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.left,
+                style: const TextStyle(fontSize: 14),
+              ),
+            ],
+          );
         }).toList(),
       ),
     );
-  }
-
-  // void _predict() async {
-  //   img.Image imageInput = img.decodeImage(_image!.readAsBytesSync())!;
-  //   var pred = _classifier.predict(imageInput);
-
-  //   setState(() {
-  //     this.category = pred;
-  //   });
-  // }
-
-  loadImageModel() async {
-    var result = await Tflite.loadModel(
-        labels: 'assets/tensorflow/labels.txt',
-        model: 'assets/tensorflow/model_unquant.tflite');
-    print("Result is $result");
-  }
-
-  applyImageModel(String path) async {
-    var res = await Tflite.runModelOnImage(
-      path: path,
-      numResults: 2,
-      threshold: 0.5,
-      imageMean: 127.5,
-    );
-
-    setState(() {
-      _result = res!;
-    });
-
-    String str = _result[0]["label"];
-    _name = str.substring(2);
-    _Confid = _result != null
-        ? (_result[0]['confidence'] * 100.0).toString().substring(0, 2) + '%'
-        : "";
   }
 
   @override
@@ -135,29 +135,23 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.image),
             onPressed: () {
               pickImageFromGallery();
             },
           ),
           IconButton(
-            icon: const Icon(Icons.check),
-            onPressed: () async {
-              Directory directory = await getApplicationDocumentsDirectory();
-              print('${directory.path}/assets/images/1_full.png');
-              applyImageModel('${directory.path}/assets/images/1_full.png');
+            icon: const Icon(Icons.camera),
+            onPressed: () {
+              pickImageFromCamera();
             },
-          )
+          ),
         ],
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            Image.asset('assets/images/1_full.png'),
-            // Image.file(File('.../assets/images/1_full.png')),
-            Text('$_Confid'),
-            Text('$_name'),
             Flexible(
               child: gridView(),
             )

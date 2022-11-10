@@ -11,6 +11,7 @@ class DBHelper {
   static const String ID = 'id';
   static const String NAME = 'photo_name';
   static const String RECIPE_ID = 'recipe_id';
+  static const String DETECTED_INFO = 'detected_info';
   static const String TABLE = 'RecipesPhoto';
   static const String DB_NAME = 'photos.db';
 
@@ -31,7 +32,7 @@ class DBHelper {
 
   _onCreate(Database db, int version) async {
     await db.execute(
-        "CREATE TABLE $TABLE ($ID INTEGER, $NAME TEXT, $RECIPE_ID INTEGER)");
+        "CREATE TABLE $TABLE ($ID INTEGER, $NAME TEXT, $RECIPE_ID INTEGER, $DETECTED_INFO TEXT)");
   }
 
   Future<Photo> save(Photo photo) async {
@@ -43,7 +44,8 @@ class DBHelper {
   Future<List<Photo>> getPhotos(int recipeId) async {
     var dbClient = await db;
     List<Map<String, dynamic>> maps = await dbClient.query(TABLE,
-        columns: [ID, NAME, RECIPE_ID], where: '$RECIPE_ID = $recipeId');
+        columns: [ID, NAME, RECIPE_ID, DETECTED_INFO],
+        where: '$RECIPE_ID = $recipeId');
     List<Photo> photos = [];
     if (maps.isNotEmpty) {
       for (int i = 0; i < maps.length; i++) {
