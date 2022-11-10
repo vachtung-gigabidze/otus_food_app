@@ -5,6 +5,7 @@ import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/heart.dart';
 import 'package:otus_food_app/screens/gallery_screen.dart';
+import 'package:otus_food_app/screens/test.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
 
 class HeaderDetail extends StatefulWidget {
@@ -30,7 +31,8 @@ class _HeaderDetailState extends State<HeaderDetail> {
 
   void openGalleryPage() {
     Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => SaveImageDemoSQLite(recipeId: recipe.id)));
+        // builder: (context) => SaveImageSQLite(recipeId: recipe.id)));
+        builder: (context) => TestTensorFlow()));
   }
 
   @override
