@@ -16,9 +16,7 @@ class NetworkRecipeListRepository implements RecipeListRepository {
   Future<List<Recipe>?> getAllRecipe() async {
     List<Recipe>? recipes;
     try {
-      final response = await dioContainer.dio.get(
-        "/recipe",
-      );
+      final response = await dioContainer.dio.get("/recipe");
       List responseJson = response.data;
       recipes = responseJson.map((v) => Recipe.fromJson(v)).toList();
       return recipes;

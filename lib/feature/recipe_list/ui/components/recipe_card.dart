@@ -66,6 +66,7 @@ class RecipeCard extends StatelessWidget {
                         height: 19,
                         child: Text(
                           RecipeUtils.nameTime(recipe.duration!),
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                             fontFamily: defaultFont,
                             fontStyle: FontStyle.normal,

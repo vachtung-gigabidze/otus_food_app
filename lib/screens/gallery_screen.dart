@@ -4,16 +4,18 @@ import 'package:flutter/foundation.dart' as f;
 import 'package:flutter/material.dart';
 // import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
+import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/models/Photo.dart';
 import 'package:otus_food_app/utils/db_helper.dart';
 import 'package:otus_food_app/utils/gallery_utils.dart';
+import 'package:otus_food_app/widgets/status_style.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:tflite/tflite.dart';
 
 class SaveImageSQLite extends StatefulWidget {
   final int? recipeId;
   //
-  SaveImageSQLite({this.recipeId, super.key});
+  const SaveImageSQLite({this.recipeId, super.key});
 
   final String title = "Галерея рецепта";
 
@@ -93,7 +95,7 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
     );
     print(output);
     return output!.isNotEmpty
-        ? '${output![0]['label'].substring(2)} (${(output![0]['confidence'] * 100.0).toString().substring(0, 2)}%)'
+        ? '${output[0]['label'].substring(2)} (${(output[0]['confidence'] * 100.0).toString().substring(0, 2)}%)'
         : "Не распознал фото";
   }
 
@@ -132,6 +134,8 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        systemOverlayStyle: StatusOverlay.green,
+        backgroundColor: AppColors.accent,
         title: Text(widget.title),
         actions: <Widget>[
           IconButton(

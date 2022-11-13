@@ -8,6 +8,7 @@ import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_repository.dart';
 import 'package:otus_food_app/feature/auth/ui/components/auth_builder.dart';
 import 'package:otus_food_app/feature/auth/ui/login_screen.dart';
+import 'package:otus_food_app/feature/internet/domain/internet_state/internet_cubit.dart';
 import 'package:otus_food_app/feature/logo/logo_screen.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_repository.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
@@ -65,6 +66,9 @@ class _GlobalProviders extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider(
+          create: (context) => InternetConnectionCubit(),
+        ),
         BlocProvider(
           create: (context) => AuthCubit(locator<AuthRepository>()),
         ),

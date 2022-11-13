@@ -22,6 +22,7 @@ class RecipeListCubit extends HydratedCubit<RecipeListState> {
           await recipeListRepository.getAllRecipe();
       emit(RecipeListState.loaded(recipeList!));
     } catch (error, st) {
+      emit(RecipeListState.loaded([]));
       addError(error, st);
     }
   }
