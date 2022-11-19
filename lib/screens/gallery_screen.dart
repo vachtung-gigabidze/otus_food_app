@@ -81,6 +81,11 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
     });
   }
 
+  deletePhoto(Photo photo) {
+    dbHelper.delete(photo);
+    refreshImages();
+  }
+
   Future<String> detectImage(XFile image) async {
     List<dynamic>? output = await Tflite.runModelOnImage(
       path: image.path,
@@ -96,6 +101,7 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
   }
 
   gridView() {
+    double width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: GridView.count(
@@ -105,22 +111,40 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
         crossAxisSpacing: 4.0,
         children: images.map((photo) {
           Image img = Utility.imageFromBase64String(photo.photo_name);
-          return Column(
-            children: [
-              SizedBox(
-                height: 100,
-                width: 100,
-                child: img,
+          return Stack(children: [
+            Column(
+              children: [
+                SizedBox(
+                  //height: 100,
+                  width: width / 3,
+
+                  child: img,
+                ),
+                Text(
+                  photo.detected_info,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
+                  style: const TextStyle(fontSize: 14),
+                ),
+              ],
+            ),
+            Text(photo.id.toString()),
+            Positioned(
+              top: 10,
+              left: -10,
+              child: IconButton(
+                onPressed: () {
+                  deletePhoto(photo);
+                },
+                icon: const Icon(
+                  Icons.delete_forever,
+                  size: 24,
+                  color: AppColors.main,
+                ),
               ),
-              Text(
-                photo.detected_info,
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                textAlign: TextAlign.left,
-                style: const TextStyle(fontSize: 14),
-              ),
-            ],
-          );
+            )
+          ]);
         }).toList(),
       ),
     );

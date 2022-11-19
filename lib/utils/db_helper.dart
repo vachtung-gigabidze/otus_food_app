@@ -31,14 +31,28 @@ class DBHelper {
   }
 
   _onCreate(Database db, int version) async {
-    await db.execute(
-        "CREATE TABLE $TABLE ($ID INTEGER, $NAME TEXT, $RECIPE_ID INTEGER, $DETECTED_INFO TEXT)");
+    await db.execute('''
+                    create table $TABLE ( 
+                      $ID integer primary key autoincrement, 
+                      $NAME text not null,
+                      $RECIPE_ID integer not null,
+                      $DETECTED_INFO text not null)
+                    ''');
+
+    // await db.execute(
+    //   "CREATE TABLE $TABLE ($ID INTEGER PRIMARY KEY AUTOINCREMENT, $NAME TEXT, $RECIPE_ID INTEGER, $DETECTED_INFO TEXT)");
   }
 
   Future<Photo> save(Photo photo) async {
     var dbClient = await db;
+
     photo.id = await dbClient.insert(TABLE, photo.toMap());
     return photo;
+  }
+
+  Future<int> delete(Photo photo) async {
+    var dbClient = await db;
+    return await dbClient.delete(TABLE, where: "ID = ?", whereArgs: [photo.id]);
   }
 
   Future<List<Photo>> getPhotos(int recipeId) async {
