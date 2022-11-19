@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
-import 'package:otus_food_app/constants.dart';
+// import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/auth/ui/register_screen.dart';
 import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';

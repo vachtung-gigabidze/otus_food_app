@@ -207,13 +207,13 @@ class RecipeStepLink {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['number'] = number;
     if (recipe != null) {
       data['recipe'] = recipe!.toJson();
     }
-    if (this.step != null) {
+    if (step != null) {
       data['step'] = step!.toJson();
     }
     return data;

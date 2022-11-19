@@ -72,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      '${userEntity.login}',
+                      userEntity.login,
                       style: const TextStyle(
                         fontFamily: 'Roboto',
                         fontStyle: FontStyle.normal,

@@ -58,7 +58,7 @@ return MaterialApp(
 }
 
 class _GlobalProviders extends StatelessWidget {
-  const _GlobalProviders({super.key, required this.child});
+  const _GlobalProviders({required this.child});
 
   final Widget child;
 

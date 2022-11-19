@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'dart:developer';
 import 'package:flutter/material.dart';
-
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
 import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';

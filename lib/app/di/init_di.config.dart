@@ -11,7 +11,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../../feature/auth/data/mock_auth.dart' as _i6;
 import '../../feature/auth/data/network_auth_repository.dart' as _i10;
 import '../../feature/auth/domain/auth_repository.dart' as _i5;
-import '../../feature/recipe_list/data/network_%20recipe_list_repository.dart'
+import '../../feature/recipe_list/data/network_recipe_list_repository.dart'
     as _i9;
 import '../../feature/recipe_list/domain/recipe_list_repository.dart' as _i8;
 import '../data/dio_container.dart' as _i7;

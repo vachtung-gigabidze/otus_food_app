@@ -7,11 +7,7 @@ import 'package:otus_food_app/feature/recipe_list/ui/components/recipe_card.dart
 import 'package:otus_food_app/feature/recipe_list/ui/recipe_detail_screen.dart';
 import 'package:otus_food_app/slider_page_route.dart';
 import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
-// import 'package:otus_food_app/screens/recept_detail.dart';
-// import 'package:otus_food_app/widgets/lists/recipe_card.dart';
-// import 'package:otus_food_app/widgets/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
-import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 
 class RecipesListScreen extends StatelessWidget {

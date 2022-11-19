@@ -40,7 +40,7 @@ class _FridgeScreenState extends State<FridgeScreen> {
                       const SizedBox(
                         height: 37,
                       ),
-                      IngredientsDetails(
+                      const IngredientsDetails(
                           ingredients: null, //snap.data.ingredient,
                           //TODO: Написать виджет для ингредиентов в холодильнике
                           title: 'В холодильнике'),

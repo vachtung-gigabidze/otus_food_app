@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:injectable/injectable.dart';
 import 'package:otus_food_app/app/data/dio_container.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
