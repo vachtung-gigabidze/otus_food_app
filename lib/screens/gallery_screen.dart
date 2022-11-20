@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/models/photo_entity.dart';
 import 'package:otus_food_app/utils/db_helper.dart';
@@ -23,6 +24,7 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
   late DBHelper dbHelper;
   late List<Photo> images;
   XFile? _image;
+  dynamic _pickImageError;
 
   loadModel() async {
     await Tflite.loadModel(
@@ -54,31 +56,32 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
   }
 
   pickImageFromGallery() {
-    ImagePicker().pickImage(source: ImageSource.gallery).then((imgFile) {
-      _image = imgFile;
-      Future<f.Uint8List> u8 = imgFile!.readAsBytes();
-      u8.then((value) async {
-        var detectedInfo = await detectImage(_image!);
-        String imgString = Utility.base64String(value);
-        Photo photo = Photo(0, imgString, widget.recipeId!, detectedInfo);
-        dbHelper.save(photo);
-        refreshImages();
+    pickImage(ImageSource.gallery);
+  }
+
+  pickImage(ImageSource imageSource) {
+    try {
+      ImagePicker().pickImage(source: imageSource).then((imgFile) {
+        _image = imgFile;
+        Future<f.Uint8List> u8 = imgFile!.readAsBytes();
+        u8.then((value) async {
+          var detectedInfo = await detectImage(_image!);
+          String imgString = Utility.base64String(value);
+          Photo photo = Photo(0, imgString, widget.recipeId!, detectedInfo);
+          dbHelper.save(photo);
+          refreshImages();
+        });
       });
-    });
+    } catch (e) {
+      _showSnackBar(context, ErrorEntity.fromException(e));
+      // setState(() {
+      //   _pickImageError = e;
+      // });
+    }
   }
 
   pickImageFromCamera() {
-    ImagePicker().pickImage(source: ImageSource.camera).then((imgFile) {
-      _image = imgFile;
-      Future<f.Uint8List> u8 = imgFile!.readAsBytes();
-      u8.then((value) async {
-        var detectedInfo = await detectImage(_image!);
-        String imgString = Utility.base64String(value);
-        Photo photo = Photo(0, imgString, widget.recipeId!, detectedInfo);
-        dbHelper.save(photo);
-        refreshImages();
-      });
-    });
+    pickImage(ImageSource.camera);
   }
 
   deletePhoto(Photo photo) {
@@ -110,7 +113,7 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
         children: images.map((photo) {
-          Image img = Utility.imageFromBase64String(photo.photo_name);
+          Image img = Utility.imageFromBase64String(photo.photoName);
           return Stack(children: [
             Column(
               children: [
@@ -121,7 +124,7 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
                   child: img,
                 ),
                 Text(
-                  photo.detected_info,
+                  photo.detectedInfo,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
@@ -129,7 +132,7 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
                 ),
               ],
             ),
-            Text(photo.id.toString()),
+            // Text(photo.id.toString()),
             Positioned(
               top: 10,
               left: -10,
@@ -148,6 +151,14 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
         }).toList(),
       ),
     );
+  }
+
+  void _showSnackBar(BuildContext context, ErrorEntity error) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: const Duration(seconds: 5),
+        content: SingleChildScrollView(
+          child: Text(maxLines: 5, error.show()),
+        )));
   }
 
   @override

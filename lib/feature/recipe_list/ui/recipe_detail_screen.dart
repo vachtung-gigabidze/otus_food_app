@@ -13,9 +13,9 @@ import 'package:otus_food_app/feature/recipe_list/ui/components/detail/header_de
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/ingredients_detail.dart';
 
 class RecipeDetail extends StatefulWidget {
-  RecipeDetail({Key? key, this.recipe}) : super(key: key);
+  const RecipeDetail({Key? key, this.recipe}) : super(key: key);
 
-  Recipe? recipe;
+  final Recipe? recipe;
   @override
   State<RecipeDetail> createState() => _RecipeDetailState();
 }

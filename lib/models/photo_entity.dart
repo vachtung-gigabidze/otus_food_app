@@ -1,25 +1,25 @@
 class Photo {
   late int id;
-  late String photo_name;
-  late int recipe_id;
-  late String detected_info;
+  late String photoName;
+  late int recipeId;
+  late String detectedInfo;
 
-  Photo(this.id, this.photo_name, this.recipe_id, this.detected_info);
+  Photo(this.id, this.photoName, this.recipeId, this.detectedInfo);
 
   Map<String, dynamic> toMap() {
     var map = <String, dynamic>{
-      'id': id,
-      'photo_name': photo_name,
-      'recipe_id': recipe_id,
-      'detected_info': detected_info,
+      // 'id': id,
+      'photo_name': photoName,
+      'recipe_id': recipeId,
+      'detected_info': detectedInfo,
     };
     return map;
   }
 
   Photo.fromMap(Map<String, dynamic> map) {
-    id = map['id'];
-    photo_name = map['photo_name'];
-    recipe_id = map['recipe_id'];
-    detected_info = map['detected_info'];
+    id = map['rowid'];
+    photoName = map['photo_name'];
+    recipeId = map['recipe_id'];
+    detectedInfo = map['detected_info'];
   }
 }
