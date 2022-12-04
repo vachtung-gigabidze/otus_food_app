@@ -5,15 +5,12 @@ import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/models/photo_entity.dart';
 import 'package:otus_food_app/utils/db_helper.dart';
-import 'package:otus_food_app/utils/gallery_utils.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 import 'package:tflite/tflite.dart';
 
 class SaveImageSQLite extends StatefulWidget {
   final int? recipeId;
-  //
   const SaveImageSQLite({this.recipeId, super.key});
-
   final String title = "Галерея рецепта";
 
   @override
@@ -61,24 +58,25 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
 
   pickImage(ImageSource imageSource) {
     try {
-      ImagePicker().pickImage(source: imageSource).then((imgFile) {
+      ImagePicker()
+          .pickImage(source: imageSource, maxHeight: 600, maxWidth: 800)
+          .then((imgFile) {
+        if (imgFile == null) {
+          return;
+        }
+
         _image = imgFile;
-        Future<f.Uint8List> u8 = imgFile!.readAsBytes();
+        Future<f.Uint8List> u8 = imgFile.readAsBytes();
         u8.then((value) async {
           var detectedInfo = await detectImage(_image!);
-          //String imgString = Utility.base64String(value);
-          String imgString = imgFile.name;
           Photo photo =
-              Photo(0, imgString, widget.recipeId!, detectedInfo, value);
+              Photo(0, imgFile.name, widget.recipeId!, detectedInfo, value);
           dbHelper.save(photo);
           refreshImages();
         });
       });
     } catch (e) {
       _showSnackBar(context, ErrorEntity.fromException(e));
-      // setState(() {
-      //   _pickImageError = e;
-      // });
     }
   }
 
@@ -120,10 +118,8 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
             Column(
               children: [
                 SizedBox(
-                  //height: 100,
                   width: width / 3,
-
-                  child: Image.memory(photo.pict), //img,
+                  child: Image.memory(photo.pict),
                 ),
                 Text(
                   photo.detectedInfo,
@@ -134,7 +130,6 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
                 ),
               ],
             ),
-            // Text(photo.id.toString()),
             Positioned(
               top: 10,
               left: -10,
