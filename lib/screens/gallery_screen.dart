@@ -66,8 +66,10 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
         Future<f.Uint8List> u8 = imgFile!.readAsBytes();
         u8.then((value) async {
           var detectedInfo = await detectImage(_image!);
-          String imgString = Utility.base64String(value);
-          Photo photo = Photo(0, imgString, widget.recipeId!, detectedInfo);
+          //String imgString = Utility.base64String(value);
+          String imgString = imgFile.name;
+          Photo photo =
+              Photo(0, imgString, widget.recipeId!, detectedInfo, value);
           dbHelper.save(photo);
           refreshImages();
         });
@@ -113,7 +115,7 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
         children: images.map((photo) {
-          Image img = Utility.imageFromBase64String(photo.photoName);
+          //Image img = Utility.imageFromBase64String(photo.pict);
           return Stack(children: [
             Column(
               children: [
@@ -121,7 +123,7 @@ class _SaveImageSQLiteState extends State<SaveImageSQLite> {
                   //height: 100,
                   width: width / 3,
 
-                  child: img,
+                  child: Image.memory(photo.pict), //img,
                 ),
                 Text(
                   photo.detectedInfo,

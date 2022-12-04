@@ -12,6 +12,7 @@ class DBHelper {
   static const String name = 'photo_name';
   static const String recipeId = 'recipe_id';
   static const String detectedInfo = 'detected_info';
+  static const String pict = 'pict';
   static const String tableName = 'RecipesPhoto';
   static const String dbName = 'photos.db';
 
@@ -36,7 +37,8 @@ class DBHelper {
                     create table $tableName (                      
                       $name text not null,
                       $recipeId integer not null,
-                      $detectedInfo text not null)
+                      $detectedInfo text not null,
+                      $pict BLOB )
                     ''');
   }
 
@@ -56,7 +58,7 @@ class DBHelper {
   Future<List<Photo>> getPhotos(int recipeId) async {
     var dbClient = await db;
     List<Map<String, dynamic>> maps = await dbClient.query(tableName,
-        columns: ["rowid", name, DBHelper.recipeId, detectedInfo],
+        columns: ["rowid", name, DBHelper.recipeId, detectedInfo, pict],
         where: '${DBHelper.recipeId} = $recipeId');
     List<Photo> photos = [];
     if (maps.isNotEmpty) {
