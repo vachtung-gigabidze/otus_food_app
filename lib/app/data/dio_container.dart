@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:otus_food_app/app/domain/app_config.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 @Singleton()
 class DioContainer {
@@ -13,6 +15,7 @@ class DioContainer {
     );
 
     dio = Dio(options);
+    if (kDebugMode) addInterceptor(PrettyDioLogger());
   }
 
   void addInterceptor(Interceptor interceptor) {

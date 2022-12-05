@@ -70,7 +70,8 @@ class _GlobalProviders extends StatelessWidget {
           create: (context) => InternetConnectionCubit(),
         ),
         BlocProvider(
-          create: (context) => AuthCubit(locator<AuthRepository>()),
+          create: (context) =>
+              locator.get<AuthCubit>(), //AuthCubit(locator<AuthRepository>()),
         ),
         BlocProvider(
           create: (context) =>

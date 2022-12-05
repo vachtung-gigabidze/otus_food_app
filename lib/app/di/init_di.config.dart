@@ -8,13 +8,13 @@
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../../feature/auth/data/mock_auth.dart' as _i6;
-import '../../feature/auth/data/network_auth_repository.dart' as _i10;
-import '../../feature/auth/domain/auth_repository.dart' as _i5;
+import '../../feature/auth/data/network_auth_repository.dart' as _i9;
+import '../../feature/auth/domain/auth_repository.dart' as _i8;
+import '../../feature/auth/domain/auth_state/auth_cubit.dart' as _i10;
 import '../../feature/recipe_list/data/network_recipe_list_repository.dart'
-    as _i9;
-import '../../feature/recipe_list/domain/recipe_list_repository.dart' as _i8;
-import '../data/dio_container.dart' as _i7;
+    as _i7;
+import '../../feature/recipe_list/domain/recipe_list_repository.dart' as _i6;
+import '../data/dio_container.dart' as _i5;
 import '../data/main_app_config.dart' as _i4;
 import '../domain/app_config.dart' as _i3;
 
@@ -46,18 +46,13 @@ _i1.GetIt $initGetIt(
     _i4.TestAppConfig(),
     registerFor: {_test},
   );
-  gh.factory<_i5.AuthRepository>(
-    () => _i6.MockAuthRepository(),
-    registerFor: {_test},
-  );
-  gh.singleton<_i7.DioContainer>(_i7.DioContainer(get<_i3.AppConfig>()));
-  gh.factory<_i8.RecipeListRepository>(
-    () => _i9.NetworkRecipeListRepository(get<_i7.DioContainer>()),
+  gh.singleton<_i5.DioContainer>(_i5.DioContainer(get<_i3.AppConfig>()));
+  gh.factory<_i6.RecipeListRepository>(
+    () => _i7.NetworkRecipeListRepository(get<_i5.DioContainer>()),
     registerFor: {_prod},
   );
-  gh.factory<_i5.AuthRepository>(
-    () => _i10.NetworkAuthRepository(get<_i7.DioContainer>()),
-    registerFor: {_prod},
-  );
+  gh.factory<_i8.AuthRepository>(
+      () => _i9.NetworkAuthRepository(get<_i5.DioContainer>()));
+  gh.singleton<_i10.AuthCubit>(_i10.AuthCubit(get<_i8.AuthRepository>()));
   return get;
 }

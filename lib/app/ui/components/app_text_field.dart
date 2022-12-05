@@ -6,11 +6,13 @@ class AppTextField extends StatelessWidget {
       {super.key,
       required this.controller,
       required this.labelText,
-      this.obscureText = false});
+      this.obscureText = false,
+      this.iconName = Constants.iconProfile});
 
   final TextEditingController controller;
   final String labelText;
   final bool obscureText;
+  final String iconName;
 
   String? emptyValidator(String? value) {
     if (value?.isEmpty == true) {
@@ -40,11 +42,11 @@ class AppTextField extends StatelessWidget {
               maxHeight: 24.0,
               maxWidth: 24.0,
             ),
-            child: const Image(
+            child: Image(
               image: AssetImage(
-                Constants.iconProfile,
+                iconName,
               ),
-              color: Color(0xFFC2C2C2),
+              color: const Color(0xFFC2C2C2),
               height: 24,
               width: 24,
             ),
