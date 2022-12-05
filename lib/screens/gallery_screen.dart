@@ -14,14 +14,14 @@ class SaveImageSQLite extends StatefulWidget {
   final String title = "Галерея рецепта";
 
   @override
-  _SaveImageSQLiteState createState() => _SaveImageSQLiteState();
+  SaveImageSQLiteState createState() => SaveImageSQLiteState();
 }
 
-class _SaveImageSQLiteState extends State<SaveImageSQLite> {
+class SaveImageSQLiteState extends State<SaveImageSQLite> {
   late DBHelper dbHelper;
   late List<Photo> images;
   XFile? _image;
-  dynamic _pickImageError;
+  // dynamic _pickImageError;
 
   loadModel() async {
     await Tflite.loadModel(
