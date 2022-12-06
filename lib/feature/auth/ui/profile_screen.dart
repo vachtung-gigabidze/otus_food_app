@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food_app/app/ui/components/app_text_button.dart';
+import 'package:otus_food_app/app/ui/components/app_text_field.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 
@@ -14,14 +16,23 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         actions: [
           IconButton(
               onPressed: () => context.read<AuthCubit>().getProfile(),
               icon: const Icon(Icons.refresh)),
+          IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => _UserUpdateDialog(),
+                );
+              },
+              icon: const Icon(Icons.edit)),
         ],
       ),
-      bottomNavigationBar: const BottomNavBar(),
+      bottomNavigationBar: const BottomNavBar(screenIdx: 3),
       backgroundColor: const Color(0xFFC2C2C2),
       body: Center(
         child: Column(
@@ -115,5 +126,57 @@ class ProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class _UserUpdateDialog extends StatefulWidget {
+  const _UserUpdateDialog({super.key});
+
+  @override
+  State<_UserUpdateDialog> createState() => __UserUpdateDialogState();
+}
+
+class __UserUpdateDialogState extends State<_UserUpdateDialog> {
+  final emailController = TextEditingController();
+  final loginController = TextEditingController();
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    loginController.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SimpleDialog(children: [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            AppTextField(controller: loginController, labelText: "Логин"),
+            const SizedBox(
+              height: 16,
+            ),
+            AppTextField(
+                controller: emailController,
+                labelText: "email",
+                iconName: Constants.iconFridge),
+            const SizedBox(
+              height: 16,
+            ),
+            AppTextButton(
+                onPressed: () {
+                  context.read<AuthCubit>().userUpdate(
+                        email: emailController.text,
+                        login: loginController.text,
+                      );
+                },
+                text: "Сохранить")
+          ],
+        ),
+      ),
+    ]);
   }
 }

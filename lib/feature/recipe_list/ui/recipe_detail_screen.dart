@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
 import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
@@ -11,6 +12,7 @@ import 'package:otus_food_app/feature/recipe_list/ui/components/detail/cooking_b
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/cooking_steps_detail.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/header_detail.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/ingredients_detail.dart';
+import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 
 class RecipeDetail extends StatefulWidget {
   const RecipeDetail({Key? key, this.recipe}) : super(key: key);
@@ -240,7 +242,14 @@ class _RecipeDetailState extends State<RecipeDetail> {
                             const SizedBox(
                               height: 48,
                             ),
-                            CommentPost(addComment: _addComment),
+                            BlocBuilder<AuthCubit, AuthState>(
+                                builder: (context, state) {
+                              return state.maybeWhen(
+                                authorized: (userEntity) =>
+                                    CommentPost(addComment: _addComment),
+                                orElse: () => Container(),
+                              );
+                            }),
                           ],
                         ),
                       ),

@@ -25,7 +25,7 @@ class RegisterScreen extends StatelessWidget {
     return Form(
       key: formKey,
       child: Scaffold(
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: const BottomNavBar(screenIdx: 1),
         backgroundColor: const Color(0xFF2ECC71),
         body: Stack(
           children: [
