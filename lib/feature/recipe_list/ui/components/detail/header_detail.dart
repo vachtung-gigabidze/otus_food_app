@@ -1,11 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/heart.dart';
 import 'package:otus_food_app/screens/gallery_screen.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
+import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 
 class HeaderDetail extends StatefulWidget {
   const HeaderDetail({Key? key, required this.recipe}) : super(key: key);
@@ -66,34 +68,29 @@ class _HeaderDetailState extends State<HeaderDetail> {
                 ),
               ),
             ),
-            Flexible(
-              flex: 1,
-              child: Container(
-                margin: const EdgeInsets.only(right: 20),
-                child: InkWell(
-                  onTap: () => setState(() {
-                    isFavorites =
-                        !isFavorites; // recipe.changeFavorite(isFavorites, username);
-                    // TODO: Отметка любимого рецепта
-                  }),
-                  child: isFavorites
-                      ? const HeartWidget() //asset: Constants.iconHeartRed)
-                      : Image.asset(
-                          Constants.iconHeartBlack,
-                          height: 30,
-                          width: 30,
-                        ),
-
-                  //Image.asset(
-                  // isFavorites
-                  //     ? Constants.iconHeartRed
-                  //     : Constants.iconHeartBlack,
-                  // height: 30,
-                  // width: 30,
-                  //  ),
+            BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
+              return state.maybeWhen(
+                authorized: (userEntity) => Flexible(
+                  flex: 1,
+                  child: Container(
+                    margin: const EdgeInsets.only(right: 20),
+                    child: InkWell(
+                      onTap: () => setState(() {
+                        isFavorites = !isFavorites;
+                      }),
+                      child: isFavorites
+                          ? const HeartWidget()
+                          : Image.asset(
+                              Constants.iconHeartBlack,
+                              height: 30,
+                              width: 30,
+                            ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
+                orElse: () => Container(),
+              );
+            }),
           ],
         ),
         const SizedBox(

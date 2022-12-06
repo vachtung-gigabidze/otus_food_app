@@ -1,4 +1,5 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -46,6 +47,7 @@ class AuthCubit extends HydratedCubit<AuthState> {
 
   Future<void> getProfile() async {
     try {
+      _updateUserState(const AsyncSnapshot.waiting());
       final UserEntity newUserEntity = await authRepository.getProfile();
 
       emit(state.maybeWhen(
@@ -55,9 +57,19 @@ class AuthCubit extends HydratedCubit<AuthState> {
           login: newUserEntity.login,
         )),
       ));
-    } catch (error, st) {
-      addError(error, st);
+      _updateUserState(const AsyncSnapshot.withData(
+          ConnectionState.done, "Успешное получение данных"));
+    } catch (error) {
+      _updateUserState(AsyncSnapshot.withError(ConnectionState.done, error));
     }
+  }
+
+  void _updateUserState(AsyncSnapshot asyncSnapshot) {
+    emit(state.maybeWhen(
+      orElse: () => state,
+      authorized: (userEntity) =>
+          AuthState.authorized(userEntity.copyWith(userState: asyncSnapshot)),
+    ));
   }
 
   Future<void> userUpdate({
@@ -65,6 +77,8 @@ class AuthCubit extends HydratedCubit<AuthState> {
     String? email,
   }) async {
     try {
+      _updateUserState(const AsyncSnapshot.waiting());
+      await Future.delayed(const Duration(seconds: 1));
       final bool isEmptyEmail = email?.trim().isEmpty == true;
       final bool isEmptyLogin = login?.trim().isEmpty == true;
 
@@ -80,8 +94,10 @@ class AuthCubit extends HydratedCubit<AuthState> {
           login: newUserEntity.login,
         )),
       ));
-    } catch (error, st) {
-      addError(error, st);
+      _updateUserState(const AsyncSnapshot.withData(
+          ConnectionState.done, "Успешное обновление данных"));
+    } catch (error) {
+      _updateUserState(AsyncSnapshot.withError(ConnectionState.done, error));
     }
   }
 

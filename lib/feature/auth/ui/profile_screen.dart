@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
+import 'package:otus_food_app/app/ui/components/app_snackbar.dart';
 import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
 import 'package:otus_food_app/constants.dart';
@@ -26,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (context) => _UserUpdateDialog(),
+                  builder: (context) => const _UserUpdateDialog(),
                 );
               },
               icon: const Icon(Icons.edit)),
@@ -34,95 +36,111 @@ class ProfileScreen extends StatelessWidget {
       ),
       bottomNavigationBar: const BottomNavBar(screenIdx: 3),
       backgroundColor: const Color(0xFFC2C2C2),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(
-              height: 123,
-              width: 123,
-              padding: const EdgeInsets.all(13),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: const Color(0xFF165932),
-                  width: 4,
-                ),
-              ),
-              child: Image.asset(
-                Constants.imageProfile,
-                height: 96,
-                width: 96,
-                fit: BoxFit.fitWidth,
-              ),
-            ),
-            const SizedBox(
-              height: 29,
-            ),
-            Container(
-              width: 396.0,
-              height: 64.0,
-              decoration: const BoxDecoration(
-                color: Color(0xFFFFFFFF),
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      'Логин',
-                      style: TextStyle(
-                        fontFamily: 'Roboto',
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16.0,
-                        color: Color(0xFF165932),
-                      ),
-                    ),
-                    Text(
-                      userEntity.login,
-                      style: const TextStyle(
-                        fontFamily: 'Roboto',
-                        fontStyle: FontStyle.normal,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 16.0,
-                        color: Color(0xFF165932),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 16,
-            ),
-            Container(
-              width: 396.0,
-              height: 64.0,
-              decoration: const BoxDecoration(
-                color: Color(0xFFFFFFFF),
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              ),
-              child: Center(
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    textStyle: const TextStyle(
-                      fontFamily: 'Roboto',
-                      fontStyle: FontStyle.normal,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 16.0,
-                      color: Color(0xFFF54848),
-                    ),
+      body: BlocConsumer<AuthCubit, AuthState>(
+        listener: (context, state) {
+          state.whenOrNull(
+            authorized: (userEntity) {
+              if (userEntity.userState?.hasData == true) {
+                AppSnackBar.showSnackBarWithMessage(
+                    context, userEntity.userState?.data);
+              }
+              if (userEntity.userState?.hasError == true) {
+                AppSnackBar.showSnackBarWithError(context,
+                    ErrorEntity.fromException(userEntity.userState?.error));
+              }
+            },
+          );
+        },
+        builder: (context, state) => Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 123,
+                width: 123,
+                padding: const EdgeInsets.all(13),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: const Color(0xFF165932),
+                    width: 4,
                   ),
-                  onPressed: () => context.read<AuthCubit>().logOut(),
-                  child: const Text('Выход'),
+                ),
+                child: Image.asset(
+                  Constants.imageProfile,
+                  height: 96,
+                  width: 96,
+                  fit: BoxFit.fitWidth,
                 ),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 29,
+              ),
+              Container(
+                width: 396.0,
+                height: 64.0,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFFFFF),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Логин',
+                        style: TextStyle(
+                          fontFamily: 'Roboto',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16.0,
+                          color: Color(0xFF165932),
+                        ),
+                      ),
+                      Text(
+                        userEntity.login,
+                        style: const TextStyle(
+                          fontFamily: 'Roboto',
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 16.0,
+                          color: Color(0xFF165932),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              Container(
+                width: 396.0,
+                height: 64.0,
+                decoration: const BoxDecoration(
+                  color: Color(0xFFFFFFFF),
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                ),
+                child: Center(
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: const TextStyle(
+                        fontFamily: 'Roboto',
+                        fontStyle: FontStyle.normal,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 16.0,
+                        color: Color(0xFFF54848),
+                      ),
+                    ),
+                    onPressed: () => context.read<AuthCubit>().logOut(),
+                    child: const Text('Выход'),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -130,7 +148,7 @@ class ProfileScreen extends StatelessWidget {
 }
 
 class _UserUpdateDialog extends StatefulWidget {
-  const _UserUpdateDialog({super.key});
+  const _UserUpdateDialog();
 
   @override
   State<_UserUpdateDialog> createState() => __UserUpdateDialogState();
@@ -168,6 +186,7 @@ class __UserUpdateDialogState extends State<_UserUpdateDialog> {
             ),
             AppTextButton(
                 onPressed: () {
+                  Navigator.pop(context);
                   context.read<AuthCubit>().userUpdate(
                         email: emailController.text,
                         login: loginController.text,

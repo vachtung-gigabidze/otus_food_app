@@ -17,7 +17,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   void initState() {
-    currentIndex = widget.screenIdx!;
+    //currentIndex = widget.screenIdx ?? 0;
     super.initState();
   }
 
@@ -29,6 +29,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
       final userEntity = state.whenOrNull(
         authorized: (userEntity) => userEntity,
       );
+      currentIndex = widget.screenIdx ?? 0;
+      if (userEntity == null && widget.screenIdx! > 1) {
+        currentIndex = 0;
+      }
+
       return BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
