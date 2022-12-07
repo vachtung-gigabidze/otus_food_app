@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+// import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 // import 'package:otus_food_app/app/data/dio_container.dart';
 import 'package:otus_food_app/app/domain/app_api.dart';
@@ -23,10 +25,18 @@ class NetworkAuthRepository implements AuthRepository {
   }
 
   @override
-  Future passwordUpdate(
-      {required String? oldPassword, required String? newPassword}) {
-    // TODO: implement passwordUpdate
-    throw UnimplementedError();
+  Future<String> passwordUpdate(
+      {required String? oldPassword, required String? newPassword}) async {
+    try {
+      final Response response = await api.passwordUpdate(
+        oldPassword: oldPassword,
+        newPassword: newPassword,
+      );
+
+      return response.data["message"];
+    } catch (_) {
+      rethrow;
+    }
   }
 
   @override

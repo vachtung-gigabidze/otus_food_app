@@ -32,6 +32,14 @@ class ProfileScreen extends StatelessWidget {
                 );
               },
               icon: const Icon(Icons.edit)),
+          IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const _UserUpdatePasswordDialog(),
+                );
+              },
+              icon: const Icon(Icons.password)),
         ],
       ),
       bottomNavigationBar: const BottomNavBar(screenIdx: 3),
@@ -191,6 +199,72 @@ class __UserUpdateDialogState extends State<_UserUpdateDialog> {
                         email: emailController.text,
                         login: loginController.text,
                       );
+                },
+                text: "Сохранить")
+          ],
+        ),
+      ),
+    ]);
+  }
+}
+
+class _UserUpdatePasswordDialog extends StatefulWidget {
+  const _UserUpdatePasswordDialog();
+
+  @override
+  State<_UserUpdatePasswordDialog> createState() =>
+      __UserUpdatePasswordDialogState();
+}
+
+class __UserUpdatePasswordDialogState extends State<_UserUpdatePasswordDialog> {
+  final oldPasswordController = TextEditingController();
+  final newPasswordController = TextEditingController();
+  final newPasswordConfirmController = TextEditingController();
+
+  @override
+  void dispose() {
+    oldPasswordController.dispose();
+    newPasswordController.dispose();
+    newPasswordConfirmController.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SimpleDialog(children: [
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            AppTextField(
+              controller: oldPasswordController,
+              labelText: "Старый пароль",
+              iconName: Constants.lockIcon,
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            AppTextField(
+                controller: newPasswordController,
+                labelText: "Новый пароль",
+                iconName: Constants.lockIcon),
+            const SizedBox(
+              height: 16,
+            ),
+            AppTextField(
+                controller: newPasswordConfirmController,
+                labelText: "Повторите пароль",
+                iconName: Constants.lockIcon),
+            const SizedBox(
+              height: 16,
+            ),
+            AppTextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.read<AuthCubit>().passwordUpdate(
+                      oldPassword: oldPasswordController.text,
+                      newPassword: newPasswordController.text);
                 },
                 text: "Сохранить")
           ],

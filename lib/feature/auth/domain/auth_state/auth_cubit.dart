@@ -1,8 +1,10 @@
 // import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_repository.dart';
 import 'package:otus_food_app/feature/auth/domain/entities/user_entity/user_entity.dart';
 
@@ -96,6 +98,27 @@ class AuthCubit extends HydratedCubit<AuthState> {
       ));
       _updateUserState(const AsyncSnapshot.withData(
           ConnectionState.done, "Успешное обновление данных"));
+    } catch (error) {
+      _updateUserState(AsyncSnapshot.withError(ConnectionState.done, error));
+    }
+  }
+
+  Future<void> passwordUpdate({
+    required String oldPassword,
+    required String newPassword,
+  }) async {
+    try {
+      _updateUserState(const AsyncSnapshot.waiting());
+      await Future.delayed(const Duration(seconds: 1));
+
+      if (newPassword.trim().isEmpty == true) {
+        throw ErrorEntity(message: "Новый пароль пустой");
+      }
+
+      final message = await authRepository.passwordUpdate(
+          oldPassword: oldPassword, newPassword: newPassword);
+
+      _updateUserState(AsyncSnapshot.withData(ConnectionState.done, message));
     } catch (error) {
       _updateUserState(AsyncSnapshot.withError(ConnectionState.done, error));
     }
