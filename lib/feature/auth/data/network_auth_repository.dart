@@ -34,6 +34,8 @@ class NetworkAuthRepository implements AuthRepository {
       );
 
       return response.data["message"];
+    } on DioError catch (error) {
+      return error.response?.data["message"];
     } catch (_) {
       rethrow;
     }

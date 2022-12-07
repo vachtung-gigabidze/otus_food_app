@@ -219,13 +219,13 @@ class _UserUpdatePasswordDialog extends StatefulWidget {
 class __UserUpdatePasswordDialogState extends State<_UserUpdatePasswordDialog> {
   final oldPasswordController = TextEditingController();
   final newPasswordController = TextEditingController();
-  final newPasswordConfirmController = TextEditingController();
+  // final newPasswordConfirmController = TextEditingController();
 
   @override
   void dispose() {
     oldPasswordController.dispose();
     newPasswordController.dispose();
-    newPasswordConfirmController.dispose();
+    // newPasswordConfirmController.dispose();
 
     super.dispose();
   }
@@ -252,13 +252,13 @@ class __UserUpdatePasswordDialogState extends State<_UserUpdatePasswordDialog> {
             const SizedBox(
               height: 16,
             ),
-            AppTextField(
-                controller: newPasswordConfirmController,
-                labelText: "Повторите пароль",
-                iconName: Constants.lockIcon),
-            const SizedBox(
-              height: 16,
-            ),
+            // AppTextField(
+            //     controller: newPasswordConfirmController,
+            //     labelText: "Повторите пароль",
+            //     iconName: Constants.lockIcon),
+            // const SizedBox(
+            //   height: 16,
+            // ),
             AppTextButton(
                 onPressed: () {
                   Navigator.pop(context);
