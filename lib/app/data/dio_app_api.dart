@@ -142,4 +142,9 @@ class DioAppApi implements AppApi {
       rethrow;
     }
   }
+
+  @override
+  Future<Response> fetchFavorite(int userId) {
+    return dio.get("/favorites/$userId");
+  }
 }

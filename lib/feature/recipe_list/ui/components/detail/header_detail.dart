@@ -26,14 +26,12 @@ class _HeaderDetailState extends State<HeaderDetail> {
   void initState() {
     super.initState();
     recipe = widget.recipe;
-    isFavorites = false; //recipe.isFavorite(username);
-    // TODO: Отметка любимого рецепта
+    isFavorites = recipe.isFavorite(3);
   }
 
   void openGalleryPage() {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => SaveImageSQLite(recipeId: recipe.id)));
-    // builder: (context) => TestTensorFlow()));
   }
 
   @override
@@ -129,18 +127,18 @@ class _HeaderDetailState extends State<HeaderDetail> {
           ),
           if (isFavorites)
             const Positioned(
-              bottom: 13.9,
+              bottom: 13.46,
               right: 0,
               child: Image(
                 image: AssetImage(Constants.flagIcon),
-                height: 43,
+                height: 23,
                 width: 66,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               ),
             ),
           if (isFavorites)
             Positioned(
-              bottom: 30,
+              bottom: 17.46,
               right: 7,
               child: Text(
                 '${recipe.favoriteRecipes!.length}',
@@ -148,7 +146,7 @@ class _HeaderDetailState extends State<HeaderDetail> {
                   fontFamily: 'Roboto',
                   fontStyle: FontStyle.normal,
                   fontWeight: FontWeight.w800,
-                  fontSize: 18.0,
+                  fontSize: 14.0,
                   color: Color(0xFFFFFFFF),
                 ),
               ),

@@ -88,6 +88,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
           } else if (index == 1 && (userEntity == null)) {
             Navigator.of(context).pushNamed('/login');
           } else if (index == 2) {
+            Navigator.of(context).pushNamed('/favorites');
           } else if (index == 3 && (userEntity != null)) {
             Navigator.of(context).pushNamed('/login');
           }

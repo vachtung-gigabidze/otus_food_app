@@ -95,8 +95,8 @@ class Recipe {
     return !prevFavorite;
   }
 
-  bool isFavorite(String username) {
-    return favoriteRecipes!.any((element) => element.user?.login == username);
+  bool isFavorite(int userId) {
+    return favoriteRecipes!.any((element) => element.user?.id == userId);
   }
 
   void addFavorite(String username) {
