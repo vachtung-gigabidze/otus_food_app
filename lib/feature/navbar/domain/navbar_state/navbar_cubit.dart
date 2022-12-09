@@ -16,8 +16,7 @@ class NavbarCubit extends HydratedCubit<NavBarState> {
 
   @override
   Map<String, dynamic>? toJson(state) {
-    // TODO: implement toJson
-    throw UnimplementedError();
+    return state.toJson();
   }
 }
 

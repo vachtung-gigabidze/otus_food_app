@@ -32,5 +32,5 @@ abstract class AppApi {
 
   Future<dynamic> fetch(RequestOptions requestOptions);
 
-  Future<dynamic> fetchFavorite(int userId);
+  Future<dynamic> fetchFreezer(int userId);
 }

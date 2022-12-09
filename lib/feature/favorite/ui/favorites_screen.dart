@@ -47,7 +47,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                   ListView.builder(
                       shrinkWrap: true,
                       physics: const ScrollPhysics(),
-                      itemCount: recipes?.length ?? 1,
+                      itemCount: recipes?.length ?? 0,
                       itemBuilder: (context, index) {
                         return RecipeCard(
                             recipe: recipes![index], showFavorites: true);

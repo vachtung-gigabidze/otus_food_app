@@ -8,6 +8,9 @@ import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:otus_food_app/feature/auth/ui/components/auth_builder.dart';
 import 'package:otus_food_app/feature/auth/ui/login_screen.dart';
 import 'package:otus_food_app/feature/favorite/ui/favorites_screen.dart';
+import 'package:otus_food_app/feature/freezer/domain/state/cubit/freezer_cubit.dart';
+import 'package:otus_food_app/feature/freezer/freezer_repository.dart';
+import 'package:otus_food_app/feature/freezer/ui/freezer_screen.dart';
 import 'package:otus_food_app/feature/internet/domain/internet_state/internet_cubit.dart';
 import 'package:otus_food_app/feature/logo/logo_screen.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_repository.dart';
@@ -29,6 +32,7 @@ class MainAppBuilder implements AppBuilder {
     '/root': (BuildContext context) => const RootScreen(),
     // '/fridge': (BuildContext context) => const FridgeScreen(),
     '/favorites': (BuildContext context) => const FavoritesScreen(),
+    '/freezer': (BuildContext context) => const FreezerScreen(),
     //'/profile': (BuildContext context) => const ProfileScreen(),
     // // '/h': (BuildContext context) => const HeartWidget()
     // '/gallery': (BuildContext context) => SaveImageDemoSQLite()
@@ -75,6 +79,9 @@ class _GlobalProviders extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               RecipeListCubit(locator<RecipeListRepository>())..getRecipeList(),
+        ),
+        BlocProvider(
+          create: (context) => FreezerCubit(locator.get<FreezerRepository>()),
         )
       ],
       child: child,

@@ -13,6 +13,7 @@ class UserEntity with _$UserEntity {
     required String id,
     String? accessToken,
     String? refreshToken,
+    // ignore: invalid_annotation_target
     @JsonKey(ignore: true) AsyncSnapshot? userState,
   }) = _UserEntity;
 

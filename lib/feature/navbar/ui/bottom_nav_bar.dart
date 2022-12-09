@@ -85,8 +85,12 @@ class _BottomNavBarState extends State<BottomNavBar> {
           });
           if (index == 0) {
             Navigator.of(context).pushNamed('/root');
-          } else if (index == 1 && (userEntity == null)) {
-            Navigator.of(context).pushNamed('/login');
+          } else if (index == 1) {
+            if (userEntity == null) {
+              Navigator.of(context).pushNamed('/login');
+            } else {
+              Navigator.of(context).pushNamed('/freezer');
+            }
           } else if (index == 2) {
             Navigator.of(context).pushNamed('/favorites');
           } else if (index == 3 && (userEntity != null)) {

@@ -1,13 +1,30 @@
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 
-//TODO: перенести в feature Freezer
 class Freezer {
   int? id;
-  int? count;
+  double? count;
   User? user;
   Ingredient? ingredient;
 
   Freezer({this.id, this.count, this.user, this.ingredient});
+
+  String showQuantity() {
+    if (count == 0) {
+      return 'по вкусу';
+    }
+
+    RegExp regex = RegExp(r'([.]*0)(?!.*\d)');
+
+    String s = count.toString().replaceAll(regex, '');
+
+    if (count! > 4) {
+      return '$s ${ingredient?.measureUnit?.many}';
+    }
+    if (count! == 1) {
+      return '$s ${ingredient?.measureUnit?.one}';
+    }
+    return '$s ${ingredient?.measureUnit?.few}';
+  }
 
   Freezer.fromJson(Map<String, dynamic> json) {
     id = json['id'];
