@@ -81,7 +81,8 @@ class _GlobalProviders extends StatelessWidget {
               RecipeListCubit(locator<RecipeListRepository>())..getRecipeList(),
         ),
         BlocProvider(
-          create: (context) => FreezerCubit(locator.get<FreezerRepository>()),
+          create: (context) =>
+              FreezerCubit(locator<FreezerRepository>())..fetchFreezer(),
         )
       ],
       child: child,

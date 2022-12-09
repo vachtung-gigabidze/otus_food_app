@@ -18,9 +18,10 @@ class FreezerCubit extends HydratedCubit<FreezerState> {
   Future<void> fetchFreezer() async {
     await repository.fetchFreezer(3).then((value) {
       // final List<Freezer> freezerValues = value;
-      final Iterable iterable = value;
+      //final Iterable iterable = value;
       emit(state.copyWith(
-          freezerList: iterable.map((f) => Freezer.fromJson(f)).toList(),
+          //freezerList: iterable.map((f) => Freezer.fromJson(f)).toList(),
+          freezerList: value,
           asyncSnapshot:
               const AsyncSnapshot.withData(ConnectionState.done, true)));
     }).catchError((error) {

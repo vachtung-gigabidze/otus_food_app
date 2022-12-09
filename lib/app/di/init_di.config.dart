@@ -11,7 +11,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../../feature/auth/data/network_auth_repository.dart' as _i8;
 import '../../feature/auth/domain/auth_repository.dart' as _i7;
 import '../../feature/auth/domain/auth_state/auth_cubit.dart' as _i13;
-import '../../feature/freezer/data/network_favorite_repository.dart' as _i10;
+import '../../feature/freezer/data/network_freezer_repository.dart' as _i10;
 import '../../feature/freezer/freezer_repository.dart' as _i9;
 import '../../feature/recipe_list/data/network_recipe_list_repository.dart'
     as _i12;

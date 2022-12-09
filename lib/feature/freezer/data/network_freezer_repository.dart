@@ -1,6 +1,7 @@
 // import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:otus_food_app/app/domain/app_api.dart';
+import 'package:otus_food_app/feature/freezer/domain/entities/freezer.dart';
 // import 'package:otus_food_app/feature/freezer/domain/entities/freezer.dart';
 import 'package:otus_food_app/feature/freezer/freezer_repository.dart';
 
@@ -11,12 +12,14 @@ class NetworkFreezerRepository implements FreezerRepository {
   NetworkFreezerRepository(this.api);
 
   @override
-  Future<Iterable> fetchFreezer(int userId) async {
+  Future<List<Freezer>?> fetchFreezer(int userId) async {
+    List<Freezer>? freezers;
     try {
       // final freezer;
       final response = await api.fetchFreezer(userId);
-      // freezer = response.data.map((f) => Freezer.fromJson(f));
-      return response;
+      List responseJson = response.data;
+      freezers = responseJson.map((f) => Freezer.fromJson(f)).toList();
+      return freezers;
     } catch (_) {
       rethrow;
     }

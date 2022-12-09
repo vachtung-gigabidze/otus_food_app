@@ -144,9 +144,9 @@ class DioAppApi implements AppApi {
   }
 
   @override
-  Future fetchFreezer(int userId) {
+  Future<Response> fetchFreezer(int userId) {
     try {
-      return dio.get("/freezer");
+      return dio.get("/freezers");
     } catch (_) {
       rethrow;
     }

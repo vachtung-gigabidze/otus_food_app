@@ -5,7 +5,7 @@ import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_repository.dart';
 
 @Injectable(as: RecipeListRepository)
-@prod
+// @prod
 class NetworkRecipeListRepository implements RecipeListRepository {
   final AppApi api;
 
