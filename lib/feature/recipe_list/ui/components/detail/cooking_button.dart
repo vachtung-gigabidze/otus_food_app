@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 enum VariantButton { startCooking, stopCooking, checkIngredients }
 
-//TODO: All commented code for the next version ;)
 // enum ColorButton { primary, secondary, success, error }
 
 enum SizeButton { small, medium, large }

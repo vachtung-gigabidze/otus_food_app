@@ -22,7 +22,7 @@ class RecipeListBuilder extends StatelessWidget {
               empty: () => isEmpty(context),
               loaded: (recipeList) => isLoaded(context, recipeList, this),
               waiting: () => isWaiting(context),
-              error: (error) => isEmpty(context),
+              error: (error) => isLoaded(context, [], this), //isEmpty(context),
             ),
         listenWhen: ((previous, current) =>
             previous.mapOrNull(

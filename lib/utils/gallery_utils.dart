@@ -1,8 +1,6 @@
 import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'dart:convert';
 
 class Utility {
@@ -26,6 +24,7 @@ class Utility {
         .pickImage(source: ImageSource.gallery)
         .then((imgFile) async {
       String imgString = Utility.base64String(await imgFile!.readAsBytes());
+      return imgString;
     });
   }
 }

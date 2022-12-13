@@ -21,8 +21,9 @@ class ErrorEntity {
         return ErrorEntity(
           stackTrace: error.stackTrace,
           error: error,
-          message: error.response?.data["message"] ?? "Неизвестная ошибка",
-          errorMessage: error.response?.data["error"] ?? "Неизвестная ошибка",
+          // message: error.response?.data["message"] ?? "Неизвестная ошибка",
+          message: error.message,
+          errorMessage: error.error.toString(),
         );
       } catch (_) {
         return entity;

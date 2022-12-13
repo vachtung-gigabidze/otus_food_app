@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
-import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -15,9 +14,6 @@ class RegisterScreen extends StatelessWidget {
   final controllerEmail = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
 
-  void _onTapToSingIn(AuthCubit authCubit) => authCubit.singIn(
-      login: controllerLogin.text, password: controllerPassword.text);
-
   void _onTapToSingUp(AuthCubit authCubit) => authCubit.singUp(
         login: controllerLogin.text,
         password: controllerPassword.text,
@@ -29,7 +25,7 @@ class RegisterScreen extends StatelessWidget {
     return Form(
       key: formKey,
       child: Scaffold(
-        bottomNavigationBar: const BottomNavBar(),
+        bottomNavigationBar: const BottomNavBar(screenIdx: 1),
         backgroundColor: const Color(0xFF2ECC71),
         body: Stack(
           children: [
