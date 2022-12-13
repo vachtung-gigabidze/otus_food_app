@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:otus_food_app/app/di/init_di.dart';
 import 'package:otus_food_app/app/domain/app_builder.dart';
 import 'package:otus_food_app/app/ui/app_loader.dart';
@@ -18,43 +19,40 @@ import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recip
 import 'package:otus_food_app/feature/auth/ui/profile_screen.dart';
 
 class MainAppBuilder implements AppBuilder {
-  final routes = <String, WidgetBuilder>{
-    // '/recipes': (BuildContext context) => const RecipesListScreen(),
-    // '/detail': (BuildContext context) => RecipeDetail(),
-    '/login': (BuildContext context) => AuthBuilder(
-          //Эту логику нужно привязать к кнопкам навигации и к доступу редактированию
-          isNotAuthorized: (context) => LoginScreen(),
-          isWaiting: (context) => const AppLoader(),
-          isAuthorized: (context, value, child) =>
-              ProfileScreen(userEntity: value),
-        ),
-    '/logo': (BuildContext context) => const LogoScreen(nextRoute: '/root'),
-    '/root': (BuildContext context) => const RootScreen(),
-    // '/fridge': (BuildContext context) => const FridgeScreen(),
-    '/favorites': (BuildContext context) => const FavoritesScreen(),
-    '/freezer': (BuildContext context) => const FreezerScreen(),
-    //'/profile': (BuildContext context) => const ProfileScreen(),
-    // // '/h': (BuildContext context) => const HeartWidget()
-    // '/gallery': (BuildContext context) => SaveImageDemoSQLite()
-  };
-/*
-return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Otus Food App',
-      routes: routes,
-      initialRoute: '/logo',
-    );
- */
+  final _routes = GoRouter(
+    routes: [
+      // <String, WidgetBuilder>{
+      GoRoute(
+          path: '/login',
+          builder: (context, state) => AuthBuilder(
+                isNotAuthorized: (context) => LoginScreen(),
+                isWaiting: (context) => const AppLoader(),
+                isAuthorized: (context, value, child) =>
+                    ProfileScreen(userEntity: value),
+              )),
+      GoRoute(
+          path: '/logo',
+          builder: (context, state) => const LogoScreen(nextRoute: 'root')),
+      GoRoute(
+          name: "root",
+          path: '/',
+          builder: (context, state) => const RootScreen()),
+      GoRoute(
+          path: '/favorites',
+          builder: (context, state) => const FavoritesScreen()),
+      GoRoute(
+          path: '/freezer', builder: (context, state) => const FreezerScreen()),
+    ],
+  );
+
   @override
   Widget buildApp() {
     return _GlobalProviders(
-      //child: MaterialApp(home: RootScreen()),
-      child: MaterialApp(
+      child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Otus Food App',
-        routes: routes,
-        initialRoute: '/logo',
-        // home: RootScreen(),
+        routerConfig: _routes,
+        //initialRoute: '/logo',
       ),
     );
   }

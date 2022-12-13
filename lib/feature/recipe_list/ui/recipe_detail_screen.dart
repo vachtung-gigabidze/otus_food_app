@@ -13,6 +13,7 @@ import 'package:otus_food_app/feature/recipe_list/ui/components/detail/cooking_s
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/header_detail.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/ingredients_detail.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
+import 'package:go_router/go_router.dart';
 
 class RecipeDetail extends StatefulWidget {
   const RecipeDetail({Key? key, this.recipe}) : super(key: key);
@@ -175,8 +176,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
           tooltip: 'Show Snackbar',
           color: Colors.black87,
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/root');
-            //Navigator.of(context, rootNavigator: true).pushReplacement(context);
+            context.pop();
+            //Navigator.of(context).pushReplacementNamed('/');
           },
         ),
       ),

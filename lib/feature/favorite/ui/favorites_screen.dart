@@ -4,6 +4,8 @@ import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/recipe_card.dart';
 import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
+import 'package:otus_food_app/feature/recipe_list/ui/recipe_detail_screen.dart';
+import 'package:otus_food_app/slider_page_route.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
@@ -49,8 +51,14 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                       physics: const ScrollPhysics(),
                       itemCount: recipes?.length ?? 0,
                       itemBuilder: (context, index) {
-                        return RecipeCard(
-                            recipe: recipes![index], showFavorites: true);
+                        return InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(SliderPageRoute(
+                                widget: RecipeDetail(recipe: recipes![index])));
+                          },
+                          child: RecipeCard(
+                              recipe: recipes![index], showFavorites: true),
+                        );
                       }),
                 ],
               ),

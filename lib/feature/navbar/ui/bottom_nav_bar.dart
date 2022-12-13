@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
+import 'package:go_router/go_router.dart';
 // import 'package:path/path.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -17,19 +18,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   @override
   void initState() {
-    //currentIndex = widget.screenIdx ?? 0;
     super.initState();
+    currentIndex = widget.screenIdx ?? 0;
   }
 
   @override
   Widget build(BuildContext context) {
-    //authState = context.of
-
     return BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
       final userEntity = state.whenOrNull(
         authorized: (userEntity) => userEntity,
       );
-      currentIndex = widget.screenIdx ?? 0;
+
       if (userEntity == null && widget.screenIdx! > 1) {
         currentIndex = 0;
       }
@@ -73,7 +72,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
         ],
         currentIndex: currentIndex,
-        showUnselectedLabels: true,
+        type: BottomNavigationBarType.fixed,
+        //showUnselectedLabels: true,
         selectedItemColor: AppColors.accent,
         unselectedItemColor: AppColors.greyColor,
         onTap: (index) {
@@ -84,17 +84,17 @@ class _BottomNavBarState extends State<BottomNavBar> {
             currentIndex = index;
           });
           if (index == 0) {
-            Navigator.of(context).pushNamed('/root');
+            context.go('/');
           } else if (index == 1) {
             if (userEntity == null) {
-              Navigator.of(context).pushNamed('/login');
+              context.go('/login');
             } else {
-              Navigator.of(context).pushNamed('/freezer');
+              context.go('/freezer');
             }
           } else if (index == 2) {
-            Navigator.of(context).pushNamed('/favorites');
+            context.go('/favorites');
           } else if (index == 3 && (userEntity != null)) {
-            Navigator.of(context).pushNamed('/login');
+            context.go('/login');
           }
         },
       );
