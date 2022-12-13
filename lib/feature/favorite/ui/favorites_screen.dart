@@ -15,24 +15,12 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
-  // Future<Freezer> fridge = Future.value(RecipeApi().fetchFridge());
-
-  //late List<Recipe>? recipes;
-  //     Future.value(RecipeApi().fetchFavoritesRecipes());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const BottomNavBar(screenIdx: 2),
       backgroundColor: const Color(0xFFC2C2C2),
       body: BlocBuilder<RecipeListCubit, RecipeListState>(
-          // listener: (context, state) {
-          //   recipes = state.whenOrNull(
-          //     loaded: (recipeList) => recipeList
-          //         .where((r) => r.favoriteRecipes!.any((f) => f.user?.id == 3))
-          //         .toList(),
-          //   );
-          // },
           builder: (context, state) {
         List<Recipe>? recipes = state.whenOrNull(
           loaded: (recipeList) => recipeList

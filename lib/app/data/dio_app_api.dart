@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:otus_food_app/app/domain/app_api.dart';
 import 'package:otus_food_app/app/domain/app_config.dart';
 import 'package:otus_food_app/feature/auth/data/auth_interceptor.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 @Singleton(as: AppApi)
@@ -147,6 +148,24 @@ class DioAppApi implements AppApi {
   Future<Response> fetchFreezer(int userId) {
     try {
       return dio.get("/freezers");
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Response> createFavorite(Favorite favorite) {
+    try {
+      return dio.post("/favorite");
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Response> deleteFavorite(int id) {
+    try {
+      return dio.delete("/favorite/$id");
     } catch (_) {
       rethrow;
     }

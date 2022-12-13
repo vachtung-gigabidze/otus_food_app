@@ -21,7 +21,6 @@ import 'package:otus_food_app/feature/auth/ui/profile_screen.dart';
 class MainAppBuilder implements AppBuilder {
   final _routes = GoRouter(
     routes: [
-      // <String, WidgetBuilder>{
       GoRoute(
           path: '/login',
           builder: (context, state) => AuthBuilder(
@@ -52,7 +51,6 @@ class MainAppBuilder implements AppBuilder {
         debugShowCheckedModeBanner: false,
         title: 'Otus Food App',
         routerConfig: _routes,
-        //initialRoute: '/logo',
       ),
     );
   }

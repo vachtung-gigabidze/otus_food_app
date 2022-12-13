@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 
 abstract class AppApi {
   Future<dynamic> singUp({
@@ -33,4 +34,8 @@ abstract class AppApi {
   Future<dynamic> fetch(RequestOptions requestOptions);
 
   Future<dynamic> fetchFreezer(int userId);
+
+  Future<dynamic> createFavorite(Favorite favorite);
+
+  Future<dynamic> deleteFavorite(int id);
 }
