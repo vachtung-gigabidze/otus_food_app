@@ -24,9 +24,10 @@ class _HeaderDetailState extends State<HeaderDetail> {
   String username = 'anonymous';
   @override
   void initState() {
-    super.initState();
     recipe = widget.recipe;
-    isFavorites = recipe.isFavorite(3);
+    isFavorites = false;
+    super.initState();
+    // recipe.isFavorite(3);
   }
 
   void openGalleryPage() {
@@ -37,7 +38,8 @@ class _HeaderDetailState extends State<HeaderDetail> {
   @override
   Widget build(BuildContext context) {
     //var recept = widget.snapshot.data;
-
+    int id = context.read<AuthCubit>().state.maybeWhen(
+        authorized: (userEntity) => int.parse(userEntity.id), orElse: () => -1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -68,24 +70,30 @@ class _HeaderDetailState extends State<HeaderDetail> {
             ),
             BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
               return state.maybeWhen(
-                authorized: (userEntity) => Flexible(
-                  flex: 1,
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 20),
-                    child: InkWell(
-                      onTap: () => setState(() {
-                        isFavorites = !isFavorites;
-                      }),
-                      child: isFavorites
-                          ? const HeartWidget()
-                          : Image.asset(
-                              Constants.iconHeartBlack,
-                              height: 30,
-                              width: 30,
-                            ),
+                authorized: (userEntity) {
+                  // setState(() {
+                  //   isFavorites = recipe.isFavorite(int.parse(userEntity.id));
+                  // });
+
+                  return Flexible(
+                    flex: 1,
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      child: InkWell(
+                        onTap: () => setState(() {
+                          isFavorites = !isFavorites;
+                        }),
+                        child: isFavorites
+                            ? const HeartWidget()
+                            : Image.asset(
+                                Constants.iconHeartBlack,
+                                height: 30,
+                                width: 30,
+                              ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
                 orElse: () => Container(),
               );
             }),
