@@ -33,6 +33,24 @@ class _HeaderDetailState extends State<HeaderDetail> {
     //
   }
 
+  void _addFavorite(int userId, int recipeId) async {
+    final id = await context
+        .read<RecipeListCubit>()
+        .createFavorite(User(id: userId), Recipe(id: recipeId));
+
+    setState(() {
+      recipe.favoriteRecipes?.add(Favorite(
+          id: id, user: User(id: userId), recipe: Recipe(id: recipeId)));
+    });
+  }
+
+  void _deleteFavorite(Favorite favorite) {
+    context.read<RecipeListCubit>().deleteFavorite(favorite.id ?? 0);
+    setState(() {
+      recipe.favoriteRecipes?.remove(favorite);
+    });
+  }
+
   void openGalleryPage() {
     Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => SaveImageSQLite(recipeId: recipe.id)));
@@ -41,8 +59,8 @@ class _HeaderDetailState extends State<HeaderDetail> {
   @override
   Widget build(BuildContext context) {
     //var recept = widget.snapshot.data;
-    int id = context.read<AuthCubit>().state.maybeWhen(
-        authorized: (userEntity) => int.parse(userEntity.id), orElse: () => -1);
+    // int id = context.read<AuthCubit>().state.maybeWhen(
+    //     authorized: (userEntity) => int.parse(userEntity.id), orElse: () => -1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -83,18 +101,15 @@ class _HeaderDetailState extends State<HeaderDetail> {
                     child: Container(
                       margin: const EdgeInsets.only(right: 20),
                       child: InkWell(
-                        onTap: () => setState(() {
+                        onTap: () {
                           isFavorites = !isFavorites;
                           if (isFavorites) {
-                            context.read<RecipeListCubit>().createFavorite(
-                                User(id: int.parse(userEntity.id)),
-                                Recipe(id: recipe.id));
+                            _addFavorite(int.parse(userEntity.id), recipe.id!);
                           } else {
-                            context.read<RecipeListCubit>().deleteFavorite(
-                                recipe.findFavorite(
-                                    userId: int.parse(userEntity.id)));
+                            _deleteFavorite(recipe.findFavorite(
+                                userId: int.parse(userEntity.id))!);
                           }
-                        }),
+                        },
                         child: isFavorites
                             ? const HeartWidget()
                             : Image.asset(

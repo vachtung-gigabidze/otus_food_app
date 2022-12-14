@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_repository.dart';
@@ -27,9 +29,13 @@ class RecipeListCubit extends HydratedCubit<RecipeListState> {
     }
   }
 
-  Future<void> createFavorite(User user, Recipe recipe) async {
+  Future<int?> createFavorite(User user, Recipe recipe) async {
     try {
-      await recipeListRepository.addFavorite(user, recipe);
+      int? id = await recipeListRepository.addFavorite(user, recipe);
+      final List<Recipe>? recipeList =
+          await recipeListRepository.getAllRecipe();
+      emit(RecipeListState.loaded(recipeList!));
+      return id;
     } catch (error, st) {
       addError(error, st);
     }
@@ -38,6 +44,9 @@ class RecipeListCubit extends HydratedCubit<RecipeListState> {
   Future<void> deleteFavorite(int id) async {
     try {
       await recipeListRepository.deleteFavorite(id);
+      final List<Recipe>? recipeList =
+          await recipeListRepository.getAllRecipe();
+      emit(RecipeListState.loaded(recipeList!));
     } catch (error, st) {
       addError(error, st);
     }
