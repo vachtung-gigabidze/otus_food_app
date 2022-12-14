@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
@@ -156,7 +158,12 @@ class DioAppApi implements AppApi {
   @override
   Future<Response> createFavorite(Favorite favorite) {
     try {
-      return dio.post("/favorite");
+      log('{"recipe": {"id": ${favorite.recipe?.id}}, "user": {"id": ${favorite.user?.id}}}');
+      //{"id":1,"recipe":{"id":1},"user":{"id":3}}
+
+      return dio.post("/favorite",
+          data:
+              '{"recipe": {"id": ${favorite.recipe?.id}}, "user": {"id": ${favorite.user?.id}}}');
     } catch (_) {
       rethrow;
     }

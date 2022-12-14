@@ -4,15 +4,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/heart.dart';
 import 'package:otus_food_app/screens/gallery_screen.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 
 class HeaderDetail extends StatefulWidget {
-  const HeaderDetail({Key? key, required this.recipe}) : super(key: key);
+  const HeaderDetail({Key? key, required this.recipe, required this.userId})
+      : super(key: key);
 
   final Recipe recipe;
+  final int userId;
 
   @override
   State<HeaderDetail> createState() => _HeaderDetailState();
@@ -25,9 +28,9 @@ class _HeaderDetailState extends State<HeaderDetail> {
   @override
   void initState() {
     recipe = widget.recipe;
-    isFavorites = false;
+    isFavorites = recipe.isFavorite(widget.userId);
     super.initState();
-    // recipe.isFavorite(3);
+    //
   }
 
   void openGalleryPage() {
@@ -82,6 +85,15 @@ class _HeaderDetailState extends State<HeaderDetail> {
                       child: InkWell(
                         onTap: () => setState(() {
                           isFavorites = !isFavorites;
+                          if (isFavorites) {
+                            context.read<RecipeListCubit>().createFavorite(
+                                User(id: int.parse(userEntity.id)),
+                                Recipe(id: recipe.id));
+                          } else {
+                            context.read<RecipeListCubit>().deleteFavorite(
+                                recipe.findFavorite(
+                                    userId: int.parse(userEntity.id)));
+                          }
                         }),
                         child: isFavorites
                             ? const HeartWidget()

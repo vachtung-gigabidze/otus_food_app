@@ -27,7 +27,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   late ScrollController _scrollController;
   late Timer cookingTimer;
   late int cookingTime;
-  late User user;
+  late int userId;
   late Recipe? recipe;
 
   void _addComment(Comment newComment) {
@@ -57,17 +57,22 @@ class _RecipeDetailState extends State<RecipeDetail> {
   }
 
   void _getUser() async {
-    user = User(id: 1, login: "User"); //await RecipeApi().fetchUser();
+    userId = context.read<AuthCubit>().state.maybeWhen(
+          authorized: (userEntity) => int.parse(userEntity.id),
+          orElse: () => 0,
+        );
+
+    //User(id: 1, login: "User"); //await RecipeApi().fetchUser();
     //log(user.username!);
   }
 
   @override
   void initState() {
-    super.initState();
     _getUser();
     cookingTimer = Timer(const Duration(seconds: 1), () {});
     cookingTime = 0;
     _scrollController = ScrollController()..addListener(() {});
+    super.initState();
   }
 
   @override
@@ -103,6 +108,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   @override
   Widget build(BuildContext context) {
     recipe = widget.recipe;
+
     //recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
     return Scaffold(
       // extendBodyBehindAppBar: false,
@@ -191,7 +197,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
               padding: const EdgeInsets.only(left: 15, right: 15, top: 27.6),
               child: Column(
                 children: [
-                  HeaderDetail(recipe: recipe!),
+                  HeaderDetail(
+                    recipe: recipe!,
+                    userId: userId,
+                  ),
                   const SizedBox(
                     height: 16.54,
                   ),

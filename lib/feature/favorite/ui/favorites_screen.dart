@@ -6,6 +6,7 @@ import 'package:otus_food_app/feature/recipe_list/ui/components/recipe_card.dart
 import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/recipe_detail_screen.dart';
 import 'package:otus_food_app/slider_page_route.dart';
+import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({Key? key}) : super(key: key);
@@ -17,6 +18,10 @@ class FavoritesScreen extends StatefulWidget {
 class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   Widget build(BuildContext context) {
+    final userId = context.read<AuthCubit>().state.maybeWhen(
+          authorized: (userEntity) => int.parse(userEntity.id),
+          orElse: () => 0,
+        );
     return Scaffold(
       bottomNavigationBar: const BottomNavBar(screenIdx: 2),
       backgroundColor: const Color(0xFFC2C2C2),
@@ -24,7 +29,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           builder: (context, state) {
         List<Recipe>? recipes = state.whenOrNull(
           loaded: (recipeList) => recipeList
-              .where((r) => r.favoriteRecipes!.any((f) => f.user?.id == 3))
+              .where((r) => r.favoriteRecipes!.any((f) => f.user?.id == userId))
               .toList(),
         );
         return SingleChildScrollView(

@@ -27,6 +27,22 @@ class RecipeListCubit extends HydratedCubit<RecipeListState> {
     }
   }
 
+  Future<void> createFavorite(User user, Recipe recipe) async {
+    try {
+      await recipeListRepository.addFavorite(user, recipe);
+    } catch (error, st) {
+      addError(error, st);
+    }
+  }
+
+  Future<void> deleteFavorite(int id) async {
+    try {
+      await recipeListRepository.deleteFavorite(id);
+    } catch (error, st) {
+      addError(error, st);
+    }
+  }
+
   @override
   RecipeListState? fromJson(Map<String, dynamic> json) {
     final state = RecipeListState.fromJson(json);
