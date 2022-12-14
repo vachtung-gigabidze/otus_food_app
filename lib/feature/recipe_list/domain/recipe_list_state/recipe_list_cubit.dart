@@ -39,6 +39,7 @@ class RecipeListCubit extends HydratedCubit<RecipeListState> {
     } catch (error, st) {
       addError(error, st);
     }
+    return null;
   }
 
   Future<void> deleteFavorite(int id) async {
