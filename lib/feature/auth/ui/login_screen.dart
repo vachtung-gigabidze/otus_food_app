@@ -6,6 +6,7 @@ import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 // import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/auth/ui/register_screen.dart';
 import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -74,6 +75,7 @@ class LoginScreen extends StatelessWidget {
                             onPressed: () {
                               if (formKey.currentState?.validate() == true) {
                                 _onTapToSingIn(context.read<AuthCubit>());
+                                context.read<RecipeListCubit>().getRecipeList();
                               }
                             },
                             text: 'Войти')),

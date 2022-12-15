@@ -9,6 +9,7 @@ import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:otus_food_app/feature/auth/domain/entities/user_entity/user_entity.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key, required this.userEntity}) : super(key: key);
@@ -142,7 +143,10 @@ class ProfileScreen extends StatelessWidget {
                         color: Color(0xFFF54848),
                       ),
                     ),
-                    onPressed: () => context.read<AuthCubit>().logOut(),
+                    onPressed: () {
+                      context.read<AuthCubit>().logOut();
+                      context.read<RecipeListCubit>().getRecipeList();
+                    },
                     child: const Text('Выход'),
                   ),
                 ),
