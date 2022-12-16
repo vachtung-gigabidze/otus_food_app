@@ -167,7 +167,8 @@ class DioAppApi implements AppApi {
   @override
   Future<Response> deleteFavorite(int id) {
     try {
-      return dio.delete("/favorite/$id");
+      //return dio.delete("/favorite/$id");
+      return dio.post("/favorites/$id");
     } catch (_) {
       rethrow;
     }
