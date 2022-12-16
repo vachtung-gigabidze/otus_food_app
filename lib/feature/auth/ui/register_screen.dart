@@ -18,7 +18,7 @@ class RegisterScreen extends StatelessWidget {
   void _onTapToSingUp(AuthCubit authCubit) => authCubit.singUp(
         login: controllerLogin.text,
         password: controllerPassword.text,
-        email: '', //controllerEmail.text,
+        email: controllerLogin.text, //controllerEmail.text,
       );
 
   @override
