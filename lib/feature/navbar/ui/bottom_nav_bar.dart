@@ -5,6 +5,58 @@ import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:go_router/go_router.dart';
 // import 'package:path/path.dart';
 
+// class ScaffoldWithBottomNavBar extends StatefulWidget {
+//   const ScaffoldWithBottomNavBar({Key? key, required this.child})
+//       : super(key: key);
+//   final Widget child;
+
+//   @override
+//   State<ScaffoldWithBottomNavBar> createState() =>
+//       _ScaffoldWithBottomNavBarState();
+// }
+
+// class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
+
+// void _onTapItem(index) {
+//         if (index == widget.screenIdx) {
+//           return;
+//         }
+//         setState(() {
+//           currentIndex = index;
+//         });
+//         if (index == 0) {
+//           context.go('/');
+//         } else if (index == 1) {
+//           if (userEntity == null) {
+//             context.go('/login');
+//           } else {
+//             context.go('/freezer');
+//           }
+//         } else if (index == 2) {
+//           context.go('/favorites');
+//         } else if (index == 3 && (userEntity != null)) {
+//           context.go('/login');
+//         }
+//       }
+
+//   @override
+//   Widget build(BuildContext context) {
+
+//     return Scaffold(
+//       body: widget.child,
+//       bottomNavigationBar:  BottomNavigationBar(
+//         // items: _tabs,
+//         // currentIndex: currentIndex,
+//         type: BottomNavigationBarType.fixed,
+//         //showUnselectedLabels: true,
+//         selectedItemColor: AppColors.accent,
+//         unselectedItemColor: AppColors.greyColor,
+//         onTap: ,
+//       ),
+//     );
+//   }
+// }
+
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({Key? key, this.screenIdx = 0}) : super(key: key);
   final int? screenIdx;
