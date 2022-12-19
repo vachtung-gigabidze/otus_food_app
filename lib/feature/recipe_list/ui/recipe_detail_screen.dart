@@ -187,7 +187,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
           },
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(),
+      // bottomNavigationBar: const BottomNavBar(),
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(

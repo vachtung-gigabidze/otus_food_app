@@ -26,6 +26,9 @@ class MainAppBuilder implements AppBuilder {
     // navigatorKey: _rootNavigatorKey,
     initialLocation: '/logo',
     routes: [
+      GoRoute(
+          path: '/logo',
+          builder: (context, state) => const LogoScreen(nextRoute: '/')),
       ShellRoute(
           builder: (context, state, child) => ScaffoldWithBottomNavBar(
                 child: child,
@@ -40,10 +43,10 @@ class MainAppBuilder implements AppBuilder {
                       isAuthorized: (context, value, child) =>
                           ProfileScreen(userEntity: value),
                     )),
-            GoRoute(
-                path: '/logo',
-                builder: (context, state) =>
-                    const LogoScreen(nextRoute: 'root')),
+            // GoRoute(
+            //     path: '/logo',
+            //     builder: (context, state) =>
+            //         const LogoScreen(nextRoute: 'root')),
             GoRoute(
                 name: "root",
                 path: '/',

@@ -16,7 +16,7 @@ class _FridgeScreenState extends State<FreezerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const BottomNavBar(screenIdx: 1),
+      // bottomNavigationBar: const BottomNavBar(screenIdx: 1),
       backgroundColor: const Color(0xFFC2C2C2),
       body: BlocConsumer<FreezerCubit, FreezerState>(
         listener: (context, state) {

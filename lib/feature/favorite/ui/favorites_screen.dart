@@ -23,7 +23,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           orElse: () => 0,
         );
     return Scaffold(
-      bottomNavigationBar: const BottomNavBar(screenIdx: 2),
+      // bottomNavigationBar: const BottomNavBar(screenIdx: 2),
       backgroundColor: const Color(0xFFC2C2C2),
       body: BlocBuilder<RecipeListCubit, RecipeListState>(
           builder: (context, state) {

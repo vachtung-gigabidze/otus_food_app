@@ -43,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
               icon: const Icon(Icons.password)),
         ],
       ),
-      bottomNavigationBar: const BottomNavBar(screenIdx: 3),
+      //bottomNavigationBar: const BottomNavBar(screenIdx: 3),
       backgroundColor: const Color(0xFFC2C2C2),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {

@@ -20,51 +20,53 @@ class RecipesListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: StatusOverlay.grey,
-      child: Scaffold(
-        bottomNavigationBar: const BottomNavBar(),
-        body: Container(
-          padding: const EdgeInsets.only(top: 45, left: 16, right: 16),
-          decoration: const BoxDecoration(
-            color: AppColors.greyColor,
-          ),
-          child: RefreshIndicator(
-            onRefresh: () {
-              if (isInternetConnectivity) {
-                context.read<RecipeListCubit>().getRecipeList(refresh: true);
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Не соединения c интернетов')));
-              }
-              return Future(() => null);
-            },
-            child: ListView.builder(
-              physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
-              itemCount: recipes!.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: const EdgeInsets.only(
-                    bottom: 16,
-                  ),
-                  child: InkWell(
-                    onTap: () {
-                      //Navigator.pushNamed(context, '/detail',
-                      //   arguments: recipes.data?.recipes?[index]);
-                      Navigator.of(context).push(SliderPageRoute(
-                          widget: RecipeDetail(recipe: recipes![index])));
-                    },
-                    child: RecipeCard(
-                      recipe: recipes![index],
-                    ),
-                  ),
-                );
-              },
-            ),
-          ),
+    return
+        // AnnotatedRegion<SystemUiOverlayStyle>(
+        //   value: StatusOverlay.grey,
+        //   child: Scaffold(
+        //     bottomNavigationBar: const BottomNavBar(),
+        //     body:
+        Container(
+      padding: const EdgeInsets.only(top: 45, left: 16, right: 16),
+      decoration: const BoxDecoration(
+        color: AppColors.greyColor,
+      ),
+      child: RefreshIndicator(
+        onRefresh: () {
+          if (isInternetConnectivity) {
+            context.read<RecipeListCubit>().getRecipeList(refresh: true);
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Не соединения c интернетов')));
+          }
+          return Future(() => null);
+        },
+        child: ListView.builder(
+          physics: const BouncingScrollPhysics(
+              parent: AlwaysScrollableScrollPhysics()),
+          itemCount: recipes!.length,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: const EdgeInsets.only(
+                bottom: 16,
+              ),
+              child: InkWell(
+                onTap: () {
+                  //Navigator.pushNamed(context, '/detail',
+                  //   arguments: recipes.data?.recipes?[index]);
+                  Navigator.of(context).push(SliderPageRoute(
+                      widget: RecipeDetail(recipe: recipes![index])));
+                },
+                child: RecipeCard(
+                  recipe: recipes![index],
+                ),
+              ),
+            );
+          },
         ),
       ),
-    );
+    ); //,
+    //   ),
+    // );
   }
 }
