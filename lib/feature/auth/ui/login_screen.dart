@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
     return Form(
       key: formKey,
       child: Scaffold(
-        // resizeToAvoidBottomInset: false,
+        //resizeToAvoidBottomInset: false,
         //bottomNavigationBar: const BottomNavBar(screenIdx: 1),
         backgroundColor: const Color(0xFF2ECC71),
         body: Stack(

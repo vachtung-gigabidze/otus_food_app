@@ -2,10 +2,11 @@ part of 'navbar_cubit.dart';
 
 @freezed
 class NavBarState with _$NavBarState {
-  factory NavBarState.notAuthorized() = _NavBarStateNonAuthorized;
-  factory NavBarState.authorized() = _NavBarStateAuthorized;
-  factory NavBarState.waiting() = _NavBarStateWaiting;
-  factory NavBarState.error(dynamic error) = _NavBarStateStateError;
+  const NavBarState._();
+  const factory NavBarState(
+      // ignore: invalid_annotation_target
+      {@JsonKey(ignore: true) AsyncSnapshot? asyncSnapshot,
+      @Default(0) int index}) = _NavBarState;
 
   factory NavBarState.fromJson(Map<String, dynamic> json) =>
       _$NavBarStateFromJson(json);
