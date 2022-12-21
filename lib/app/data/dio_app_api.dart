@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import 'package:otus_food_app/app/domain/app_api.dart';
 import 'package:otus_food_app/app/domain/app_config.dart';
 import 'package:otus_food_app/feature/auth/data/auth_interceptor.dart';
+// import 'package:otus_food_app/feature/favorite/data/dto/favorite_dto.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -155,6 +156,11 @@ class DioAppApi implements AppApi {
 
   @override
   Future<Response> createFavorite(Favorite favorite) {
+    // final dto = FavoriteDto(
+    //         recipe: IdDto(id: favorite.recipe?.id),
+    //         user: IdDto(id: favorite.user?.id))
+    //     .toJson();
+    // dto Криво парсится в json
     try {
       return dio.post("/favorite",
           data:
@@ -167,7 +173,7 @@ class DioAppApi implements AppApi {
   @override
   Future<Response> deleteFavorite(int id) {
     try {
-      //return dio.delete("/favorite/$id"); //HTTPS METHOD DELETE IGNORE NGINX RETURN 504
+      //return dio.delete("/favorite/$id"); //HTTPS METHOD DELETE IGNORE NGINX AND RETURN 504
       return dio.post("/favorites/$id");
     } catch (_) {
       rethrow;
