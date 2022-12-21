@@ -71,7 +71,7 @@ class AuthScreen extends StatelessWidget {
                               if (formKey.currentState?.validate() == true) {
                                 _onTapToSingIn(context.read<AuthCubit>());
                                 context.read<RecipeListCubit>().getRecipeList();
-                                context.read<NavbarCubit>().selectPage(0);
+                                context.read<NavbarCubit>().selectPage(3);
                               }
                             },
                             text: 'Войти')),

@@ -40,12 +40,4 @@ class AuthBuilder extends StatelessWidget {
           );
         });
   }
-
-  // void _showSnackBar(BuildContext context, ErrorEntity error) {
-  //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-  //       duration: const Duration(seconds: 5),
-  //       content: SingleChildScrollView(
-  //         child: Text(maxLines: 5, error.show()),
-  //       )));
-  // }
 }

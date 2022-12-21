@@ -32,12 +32,22 @@ class MainAppBuilder implements AppBuilder {
                 child: child,
               ),
           routes: [
-            GoRoute(path: '/auth', builder: (context, state) => AuthScreen()),
+            GoRoute(
+                path: '/auth',
+                builder: (context, state) => AuthBuilder(
+                      isNotAuthorized: (context) => AuthScreen(),
+                      isWaiting: (context) => const AppLoader(),
+                      isAuthorized: (context, value, child) =>
+                          const ProfileScreen(),
+                    )),
             GoRoute(
                 path: '/profile',
-                builder: (context, state) => const ProfileScreen()),
-            GoRoute(
-                path: '/wait', builder: (context, state) => const AppLoader()),
+                builder: (context, state) => AuthBuilder(
+                      isNotAuthorized: (context) => AuthScreen(),
+                      isWaiting: (context) => const AppLoader(),
+                      isAuthorized: (context, value, child) =>
+                          const ProfileScreen(),
+                    )),
             GoRoute(
                 path: '/favorites',
                 builder: (context, state) => const FavoritesScreen()),

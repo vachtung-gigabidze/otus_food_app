@@ -146,7 +146,7 @@ class ProfileScreen extends StatelessWidget {
                     onPressed: () {
                       context.read<AuthCubit>().logOut();
                       context.read<RecipeListCubit>().getRecipeList();
-                      context.read<NavbarCubit>().selectPage(0);
+                      context.read<NavbarCubit>().selectPage(3);
                     },
                     child: const Text('Выход'),
                   ),
