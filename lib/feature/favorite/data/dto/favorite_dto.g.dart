@@ -21,6 +21,6 @@ FavoriteDto _$FavoriteDtoFromJson(Map<String, dynamic> json) => FavoriteDto(
 
 Map<String, dynamic> _$FavoriteDtoToJson(FavoriteDto instance) =>
     <String, dynamic>{
-      'recipe': instance.recipe,
-      'user': instance.user,
+      'recipe': instance.recipe.toJson(),
+      'user': instance.user.toJson(),
     };

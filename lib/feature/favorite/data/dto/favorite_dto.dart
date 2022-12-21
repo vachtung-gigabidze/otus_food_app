@@ -11,6 +11,11 @@ class IdDto {
   factory IdDto.fromJson(Map<String, dynamic> json) => _$IdDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$IdDtoToJson(this);
+
+  @override
+  String toString() {
+    return '{"id": ${id.toString()}}';
+  }
 }
 
 @JsonSerializable()
@@ -27,4 +32,9 @@ class FavoriteDto {
       _$FavoriteDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$FavoriteDtoToJson(this);
+
+  @override
+  String toString() {
+    return '{"recipe": ${recipe.toString()}, "user": ${user.toString()}}';
+  }
 }
