@@ -3,6 +3,7 @@ import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
+import 'package:otus_food_app/feature/navbar/domain/navbar_state/navbar_cubit.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -77,7 +78,7 @@ class RegisterScreen extends StatelessWidget {
                                     content: Text("Пароли не совпадают")));
                           } else {
                             _onTapToSingUp(context.read<AuthCubit>());
-                            Navigator.of(context).pop();
+                            context.read<NavbarCubit>().selectPage(0);
                           }
                         }
                       },

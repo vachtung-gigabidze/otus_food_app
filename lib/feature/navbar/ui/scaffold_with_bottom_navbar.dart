@@ -75,7 +75,7 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
               context.go('/favorites');
               break;
             case 3:
-              if (userEntity != null) context.go('/auth');
+              if (userEntity != null) context.go('/profile');
               break;
             default:
           }

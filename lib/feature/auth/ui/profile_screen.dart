@@ -7,15 +7,18 @@ import 'package:otus_food_app/constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:otus_food_app/feature/auth/domain/entities/user_entity/user_entity.dart';
+import 'package:otus_food_app/feature/navbar/domain/navbar_state/navbar_cubit.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key, required this.userEntity}) : super(key: key);
-
-  final UserEntity userEntity;
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final UserEntity? userEntity = context.read<AuthCubit>().state.maybeWhen(
+          authorized: (userEntity) => userEntity,
+          orElse: () => null,
+        );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -106,7 +109,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        userEntity.login,
+                        userEntity?.login ?? "",
                         style: const TextStyle(
                           fontFamily: 'Roboto',
                           fontStyle: FontStyle.normal,
@@ -143,6 +146,7 @@ class ProfileScreen extends StatelessWidget {
                     onPressed: () {
                       context.read<AuthCubit>().logOut();
                       context.read<RecipeListCubit>().getRecipeList();
+                      context.read<NavbarCubit>().selectPage(0);
                     },
                     child: const Text('Выход'),
                   ),
