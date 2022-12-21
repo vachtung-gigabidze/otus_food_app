@@ -18,7 +18,7 @@ class RecipesListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return
-        //TODO: Перенести в scaffold
+        //TODO: Перенести для страницы логин  в scaffold
         // AnnotatedRegion<SystemUiOverlayStyle>(
         //   value: StatusOverlay.grey,
         Container(

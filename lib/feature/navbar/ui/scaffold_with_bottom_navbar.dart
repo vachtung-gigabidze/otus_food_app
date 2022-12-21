@@ -58,13 +58,33 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
       final userEntity = context.read<AuthCubit>().state.whenOrNull(
             authorized: (userEntity) => userEntity,
           );
-      return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: StatusOverlay.grey,
-        child: Scaffold(
-          body: child,
-          bottomNavigationBar: BlocConsumer<NavbarCubit, NavBarState>(
-            listener: (context, state) {},
-            builder: (context, state) => BottomNavigationBar(
+      return BlocConsumer<NavbarCubit, NavBarState>(
+        listener: (context, state) {
+          switch (state.index) {
+            case 0:
+              context.go('/');
+              break;
+            case 1:
+              if (userEntity == null) {
+                context.go('/auth');
+              } else {
+                context.go('/freezer');
+              }
+              break;
+            case 2:
+              context.go('/favorites');
+              break;
+            case 3:
+              if (userEntity != null) context.go('/auth');
+              break;
+            default:
+          }
+        },
+        builder: (context, state) => AnnotatedRegion<SystemUiOverlayStyle>(
+          value: StatusOverlay.grey,
+          child: Scaffold(
+            body: child,
+            bottomNavigationBar: BottomNavigationBar(
               items: _tabs(userEntity),
               currentIndex:
                   (userEntity == null && state.index > 1) ? 1 : state.index,
@@ -88,25 +108,5 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
       return;
     }
     context.read<NavbarCubit>().selectPage(index);
-
-    switch (index) {
-      case 0:
-        context.go('/');
-        break;
-      case 1:
-        if (userEntity == null) {
-          context.go('/login');
-        } else {
-          context.go('/freezer');
-        }
-        break;
-      case 2:
-        context.go('/favorites');
-        break;
-      case 3:
-        if (userEntity != null) context.go('/login');
-        break;
-      default:
-    }
   }
 }

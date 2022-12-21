@@ -8,8 +8,8 @@ import 'package:otus_food_app/feature/navbar/domain/navbar_state/navbar_cubit.da
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 import 'package:provider/provider.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class AuthScreen extends StatelessWidget {
+  AuthScreen({super.key});
 
   final controllerLogin = TextEditingController();
   final controllerPassword = TextEditingController();
@@ -71,7 +71,7 @@ class LoginScreen extends StatelessWidget {
                               if (formKey.currentState?.validate() == true) {
                                 _onTapToSingIn(context.read<AuthCubit>());
                                 context.read<RecipeListCubit>().getRecipeList();
-                                context.read<NavbarCubit>().selectPage(3);
+                                context.read<NavbarCubit>().selectPage(0);
                               }
                             },
                             text: 'Войти')),

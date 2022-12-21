@@ -7,7 +7,7 @@ import 'package:otus_food_app/app/ui/app_loader.dart';
 import 'package:otus_food_app/app/ui/root_screen.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:otus_food_app/feature/auth/ui/components/auth_builder.dart';
-import 'package:otus_food_app/feature/auth/ui/login_screen.dart';
+import 'package:otus_food_app/feature/auth/ui/auth_screen.dart';
 import 'package:otus_food_app/feature/favorite/ui/favorites_screen.dart';
 import 'package:otus_food_app/feature/freezer/domain/state/cubit/freezer_cubit.dart';
 import 'package:otus_food_app/feature/freezer/freezer_repository.dart';
@@ -33,9 +33,9 @@ class MainAppBuilder implements AppBuilder {
               ),
           routes: [
             GoRoute(
-                path: '/login',
+                path: '/auth',
                 builder: (context, state) => AuthBuilder(
-                      isNotAuthorized: (context) => LoginScreen(),
+                      isNotAuthorized: (context) => AuthScreen(),
                       isWaiting: (context) => const AppLoader(),
                       isAuthorized: (context, value, child) =>
                           ProfileScreen(userEntity: value),
