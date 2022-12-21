@@ -1,24 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
-// import 'package:otus_food_app/models/recipe_model.dart';
-// import 'package:otus_food_app/model.dart';
 
 // ignore: constant_identifier_names
 class Constants {
   static const String logoIMAGE = 'assets/images/logo.png';
-  // static const String avatar_1 = 'assets/images/avatar_1.png';
-  // static const String commentImage_1 = 'assets/images/comment_image_1.png';
+
   static const String imageIcon = 'assets/icons/image_green.png';
   static const String lockIcon = 'assets/icons/lock_grey.png';
   static const String flagIcon = 'assets/icons/flag_green.png';
 
-  // static const String IMAGE1 = 'assets/images/1.png';
-  // static const String IMAGE2 = 'assets/images/2.png';
-  // static const String IMAGE3 = 'assets/images/3.png';
-  // static const String IMAGE4 = 'assets/images/4.png';
-  // static const String IMAGE5 = 'assets/images/5.png';
-  // static const String IMAGE6 = 'assets/images/6.png';
-  // static const String IMAGE7 = 'assets/images/7.png';
   static const String iconPizza = 'assets/icons/pizza_green.png';
   static const String iconFridge = 'assets/icons/fridge_green.png';
   static const String iconHeartBlack = 'assets/icons/heart_black.png';
@@ -47,8 +37,6 @@ class Constants {
     }
   }
 }
-
-//enum CookingStepsStatus { noStart, start, complete }
 
 class AppColors {
   static const Color main = Color(0xFF165932);
@@ -112,12 +100,10 @@ class AppColors {
   static const Color stepOrderNoStart = Color.fromARGB(255, 194, 194, 194);
   static const Color stepTextNoStart = Color.fromARGB(255, 121, 118, 118);
   static const Color stepCheckboxNoStart = Color.fromARGB(255, 121, 118, 118);
-  // static const Color step_duration_nostart = Color.fromARGB(255, 121, 118, 118);
 
   //green
   static const Color stepBackgroundStart = Color(0xFFe0f8ea);
   static const Color stepOrderStart = Color.fromRGBO(46, 204, 113, 1);
   static const Color stepTextStart = Color(0xFF2D490C);
   static const Color stepCheckboxStart = Color(0xFF165932);
-  // static const Color step_duration_start = Color(0xFF165932);
 }

@@ -39,7 +39,6 @@ class CommentView extends StatelessWidget {
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -83,7 +82,6 @@ class CommentView extends StatelessWidget {
                         fontSize: 14.0,
                         color: Colors.black,
                       ),
-                      //overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ],

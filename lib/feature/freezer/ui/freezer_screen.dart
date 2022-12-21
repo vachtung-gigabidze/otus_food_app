@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otus_food_app/app/ui/app_loader.dart';
 import 'package:otus_food_app/feature/freezer/domain/state/cubit/freezer_cubit.dart';
 import 'package:otus_food_app/feature/freezer/ui/freezer_ingredients.dart';
-import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
+// import 'package:otus_food_app/feature/navbar/ui/scaffold_with_bottom_navbar.dart';
 
 class FreezerScreen extends StatefulWidget {
   const FreezerScreen({Key? key}) : super(key: key);
@@ -16,7 +16,6 @@ class _FridgeScreenState extends State<FreezerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // bottomNavigationBar: const BottomNavBar(screenIdx: 1),
       backgroundColor: const Color(0xFFC2C2C2),
       body: BlocConsumer<FreezerCubit, FreezerState>(
         listener: (context, state) {
@@ -64,6 +63,7 @@ class _FridgeScreenState extends State<FreezerScreen> {
                           ),
                         ),
                       ),
+                      //TODO: Add recommendation of recipes
                       // FutureBuilder<List<Recipe>?>(
                       //     future: recipes,
                       //     builder: (context, snap) => ListView.builder(

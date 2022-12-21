@@ -4,8 +4,6 @@ import 'package:otus_food_app/app/ui/components/app_snackbar.dart';
 import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:otus_food_app/feature/auth/domain/entities/user_entity/user_entity.dart';
@@ -43,7 +41,6 @@ class ProfileScreen extends StatelessWidget {
               icon: const Icon(Icons.password)),
         ],
       ),
-      //bottomNavigationBar: const BottomNavBar(screenIdx: 3),
       backgroundColor: const Color(0xFFC2C2C2),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {

@@ -3,9 +3,8 @@ import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
-// import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/auth/ui/register_screen.dart';
-import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
+import 'package:otus_food_app/feature/navbar/domain/navbar_state/navbar_cubit.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 import 'package:provider/provider.dart';
 
@@ -25,15 +24,11 @@ class LoginScreen extends StatelessWidget {
     return Form(
       key: formKey,
       child: Scaffold(
-        //resizeToAvoidBottomInset: false,
-        //bottomNavigationBar: const BottomNavBar(screenIdx: 1),
         backgroundColor: const Color(0xFF2ECC71),
         body: Stack(
           children: [
             Center(
               child: SingleChildScrollView(
-                // reverse: true,
-                // padding: const EdgeInsets.all(32),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -76,6 +71,7 @@ class LoginScreen extends StatelessWidget {
                               if (formKey.currentState?.validate() == true) {
                                 _onTapToSingIn(context.read<AuthCubit>());
                                 context.read<RecipeListCubit>().getRecipeList();
+                                context.read<NavbarCubit>().selectPage(3);
                               }
                             },
                             text: 'Войти')),

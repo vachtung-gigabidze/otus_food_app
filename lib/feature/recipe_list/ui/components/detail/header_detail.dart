@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
@@ -58,9 +57,6 @@ class _HeaderDetailState extends State<HeaderDetail> {
 
   @override
   Widget build(BuildContext context) {
-    //var recept = widget.snapshot.data;
-    // int id = context.read<AuthCubit>().state.maybeWhen(
-    //     authorized: (userEntity) => int.parse(userEntity.id), orElse: () => -1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -73,8 +69,6 @@ class _HeaderDetailState extends State<HeaderDetail> {
             Flexible(
               fit: FlexFit.tight,
               flex: 5,
-              // height: 31,
-              // width: 314,
               child: Text(
                 recipe.name ?? "Название рецепта",
                 overflow: TextOverflow.ellipsis,
@@ -92,10 +86,6 @@ class _HeaderDetailState extends State<HeaderDetail> {
             BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
               return state.maybeWhen(
                 authorized: (userEntity) {
-                  // setState(() {
-                  //   isFavorites = recipe.isFavorite(int.parse(userEntity.id));
-                  // });
-
                   return Flexible(
                     flex: 1,
                     child: Container(

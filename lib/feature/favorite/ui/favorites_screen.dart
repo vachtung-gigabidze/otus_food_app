@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/recipe_card.dart';
-import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/recipe_detail_screen.dart';
 import 'package:otus_food_app/slider_page_route.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
@@ -23,7 +22,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           orElse: () => 0,
         );
     return Scaffold(
-      // bottomNavigationBar: const BottomNavBar(screenIdx: 2),
       backgroundColor: const Color(0xFFC2C2C2),
       body: BlocBuilder<RecipeListCubit, RecipeListState>(
           builder: (context, state) {

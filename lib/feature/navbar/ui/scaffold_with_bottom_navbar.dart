@@ -4,30 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
-// import 'package:go_router/go_router.dart';
-// import 'package:otus_food_app/feature/auth/domain/entities/user_entity/user_entity.dart';
+import 'package:otus_food_app/feature/navbar/domain/navbar_state/navbar_cubit.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
-// import 'package:path/path.dart';
-// import 'package:path/path.dart';
 
-class ScaffoldWithBottomNavBar extends StatefulWidget {
+class ScaffoldWithBottomNavBar extends StatelessWidget {
   const ScaffoldWithBottomNavBar({Key? key, required this.child})
       : super(key: key);
   final Widget child;
-
-  @override
-  State<ScaffoldWithBottomNavBar> createState() =>
-      _ScaffoldWithBottomNavBarState();
-}
-
-class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
-  late int position;
-
-  @override
-  void initState() {
-    position = 0;
-    super.initState();
-  }
 
   _tabs(userEntity) {
     return <BottomNavigationBarItem>[
@@ -78,15 +61,19 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
       return AnnotatedRegion<SystemUiOverlayStyle>(
         value: StatusOverlay.grey,
         child: Scaffold(
-          body: widget.child,
-          bottomNavigationBar: BottomNavigationBar(
-            items: _tabs(userEntity),
-            currentIndex: (userEntity == null && position > 1) ? 1 : position,
-            type: BottomNavigationBarType.fixed,
-            //showUnselectedLabels: true,
-            selectedItemColor: AppColors.accent,
-            unselectedItemColor: AppColors.greyColor,
-            onTap: (value) => _onTapItem(userEntity, context, value),
+          body: child,
+          bottomNavigationBar: BlocConsumer<NavbarCubit, NavBarState>(
+            listener: (context, state) {},
+            builder: (context, state) => BottomNavigationBar(
+              items: _tabs(userEntity),
+              currentIndex:
+                  (userEntity == null && state.index > 1) ? 1 : state.index,
+              type: BottomNavigationBarType.fixed,
+              //showUnselectedLabels: true,
+              selectedItemColor: AppColors.accent,
+              unselectedItemColor: AppColors.greyColor,
+              onTap: (value) => _onTapItem(userEntity, context, value),
+            ),
           ),
         ),
       );
@@ -95,14 +82,13 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
 
   void _onTapItem(userEntity, BuildContext context, index) {
     if (userEntity == null && index! > 1) {
-      position = 0;
+      context.read<NavbarCubit>().selectPage(0);
     }
-    if (index == position) {
+    if (index == context.read<NavbarCubit>().state.index) {
       return;
     }
-    setState(() {
-      position = index;
-    });
+    context.read<NavbarCubit>().selectPage(index);
+
     switch (index) {
       case 0:
         context.go('/');

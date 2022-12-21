@@ -14,16 +14,14 @@ import 'package:otus_food_app/feature/freezer/freezer_repository.dart';
 import 'package:otus_food_app/feature/freezer/ui/freezer_screen.dart';
 import 'package:otus_food_app/feature/internet/domain/internet_state/internet_cubit.dart';
 import 'package:otus_food_app/feature/logo/logo_screen.dart';
-import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
+import 'package:otus_food_app/feature/navbar/domain/navbar_state/navbar_cubit.dart';
+import 'package:otus_food_app/feature/navbar/ui/scaffold_with_bottom_navbar.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_repository.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 import 'package:otus_food_app/feature/auth/ui/profile_screen.dart';
 
 class MainAppBuilder implements AppBuilder {
-  final GlobalKey<NavigatorState> _rootNavigatorKey =
-      GlobalKey<NavigatorState>();
   final _routes = GoRouter(
-    // navigatorKey: _rootNavigatorKey,
     initialLocation: '/logo',
     routes: [
       GoRoute(
@@ -37,16 +35,11 @@ class MainAppBuilder implements AppBuilder {
             GoRoute(
                 path: '/login',
                 builder: (context, state) => AuthBuilder(
-                      isNotAuthorized: (context) =>
-                          LoginScreen(), //nslookup nvaintgate.nvavia.ru
+                      isNotAuthorized: (context) => LoginScreen(),
                       isWaiting: (context) => const AppLoader(),
                       isAuthorized: (context, value, child) =>
                           ProfileScreen(userEntity: value),
                     )),
-            // GoRoute(
-            //     path: '/logo',
-            //     builder: (context, state) =>
-            //         const LogoScreen(nextRoute: 'root')),
             GoRoute(
                 name: "root",
                 path: '/',
@@ -96,7 +89,8 @@ class _GlobalProviders extends StatelessWidget {
         BlocProvider(
           create: (context) =>
               FreezerCubit(locator<FreezerRepository>())..fetchFreezer(),
-        )
+        ),
+        BlocProvider(create: (context) => NavbarCubit()),
       ],
       child: child,
     );

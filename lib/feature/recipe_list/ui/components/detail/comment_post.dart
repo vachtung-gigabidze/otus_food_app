@@ -88,13 +88,11 @@ class _CommentPostState extends State<CommentPost> {
             controller: _controllerTextComment,
             onEditingComplete: () {
               if (_controllerTextComment.text.isNotEmpty) {
-                // DateTime today = DateTime.now();
                 widget.addComment(Comment(
                     id: 3,
                     user: User(id: 2, login: "dime", photo: null),
                     text: _controllerTextComment.text,
                     datetime: DateTime.now().toString(),
-                    // '${today.day < 10 ? 0 : ''}${today.day}.${today.month < 10 ? 0 : ''}${today.month}.${today.year}',
                     photo: _newImageComment?.path ?? ""));
                 _newImageComment = null;
                 _controllerTextComment.clear();

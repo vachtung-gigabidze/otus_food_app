@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
-import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/comment_list.dart';
@@ -61,9 +60,6 @@ class _RecipeDetailState extends State<RecipeDetail> {
           authorized: (userEntity) => int.parse(userEntity.id),
           orElse: () => 0,
         );
-
-    //User(id: 1, login: "User"); //await RecipeApi().fetchUser();
-    //log(user.username!);
   }
 
   @override
@@ -109,9 +105,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   Widget build(BuildContext context) {
     recipe = widget.recipe;
 
-    //recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
     return Scaffold(
-      // extendBodyBehindAppBar: false,
       appBar: AppBar(
         systemOverlayStyle: recipe?.isCooking ?? false
             ? StatusOverlay.green
@@ -183,11 +177,9 @@ class _RecipeDetailState extends State<RecipeDetail> {
           color: Colors.black87,
           onPressed: () {
             context.pop();
-            //Navigator.of(context).pushReplacementNamed('/');
           },
         ),
       ),
-      // bottomNavigationBar: const BottomNavBar(),
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(

@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 
 enum VariantButton { startCooking, stopCooking, checkIngredients }
 
-// enum ColorButton { primary, secondary, success, error }
-
 enum SizeButton { small, medium, large }
 
 class Button extends StatelessWidget {
@@ -11,18 +9,14 @@ class Button extends StatelessWidget {
     Key? key,
     this.variant = VariantButton.startCooking,
     this.text,
-    // this.color = ColorButton.primary,
     this.size = SizeButton.medium,
     this.onPressed,
-    //this.disable = false
   }) : super(key: key);
 
   final VariantButton variant;
-  // final ColorButton color;
   final SizeButton size;
   final String? text;
   final VoidCallback? onPressed;
-  //final bool disable;
 
   @override
   Widget build(BuildContext context) {

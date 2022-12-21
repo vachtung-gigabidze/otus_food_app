@@ -167,7 +167,7 @@ class DioAppApi implements AppApi {
   @override
   Future<Response> deleteFavorite(int id) {
     try {
-      //return dio.delete("/favorite/$id");
+      //return dio.delete("/favorite/$id"); //HTTPS METHOD DELETE IGNORE NGINX RETURN 504
       return dio.post("/favorites/$id");
     } catch (_) {
       rethrow;

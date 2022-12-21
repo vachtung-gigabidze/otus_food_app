@@ -21,7 +21,6 @@ class _LogoScreenState extends State<LogoScreen> {
 
     Future.delayed(const Duration(seconds: 2), () {
       context.go(widget.nextRoute);
-      //Navigator.of(context).pushReplacementNamed(widget.nextRoute);
     });
   }
 

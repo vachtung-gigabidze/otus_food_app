@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-Widget selectFoto() {
+Widget selectPhoto() {
   return AnnotatedRegion<SystemUiOverlayStyle>(
     value: const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFFFFFFF),

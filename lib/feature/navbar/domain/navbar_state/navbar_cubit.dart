@@ -10,19 +10,9 @@ class NavbarCubit extends HydratedCubit<NavBarState> {
   NavbarCubit()
       : super(const NavBarState(asyncSnapshot: AsyncSnapshot.nothing()));
 
-  //  Future<void> fetchFreezer() async {
-  //   await repository.fetchFreezer(3).then((value) {
-  //     // final List<Freezer> freezerValues = value;
-  //     //final Iterable iterable = value;
-  //     emit(state.copyWith(
-  //         //freezerList: iterable.map((f) => Freezer.fromJson(f)).toList(),
-  //         freezerList: value,
-  //         asyncSnapshot:
-  //             const AsyncSnapshot.withData(ConnectionState.done, true)));
-  //   }).catchError((error) {
-  //     addError(error);
-  //   });
-  // }
+  void selectPage(int index) {
+    emit(state.copyWith(index: index));
+  }
 
   @override
   void addError(Object error, [StackTrace? stackTrace]) {
@@ -42,23 +32,3 @@ class NavbarCubit extends HydratedCubit<NavBarState> {
     return state.toJson();
   }
 }
-
-// class NavbarBloc extends Bloc<NavbarItems, NavbarState> {
-//   @override
-//   NavbarState get initialState => ShowRed();
-
-//   @override
-//   Stream<NavbarState> mapEventToState(
-//       NavbarState state, NavbarItems event) async* {
-//     switch (event) {
-//       case NavbarItems.Blue:
-//         yield ShowBlue();
-//         break;
-//       case NavbarItems.Green:
-//         yield ShowGreen();
-//         break;
-//       default:
-//         yield ShowRed();
-//         break;
-//     }
-//   }

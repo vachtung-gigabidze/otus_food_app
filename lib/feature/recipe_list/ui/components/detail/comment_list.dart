@@ -12,8 +12,6 @@ class CommentList extends StatelessWidget {
     return ListView.builder(
         shrinkWrap: true,
         physics: const ClampingScrollPhysics(),
-        //padding: const EdgeInsets.all(8),
-
         itemCount: comments?.length ?? 0,
         itemBuilder: (BuildContext context, int index) {
           return Container(

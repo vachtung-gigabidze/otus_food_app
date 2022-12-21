@@ -97,7 +97,7 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
       imageMean: 127.5,
       imageStd: 127.5,
     );
-    // print(output);
+
     return output!.isNotEmpty
         ? '${output[0]['label'].substring(2)} (${(output[0]['confidence'] * 100.0).toString().substring(0, 2)}%)'
         : "Не распознал фото";
@@ -113,7 +113,6 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
         mainAxisSpacing: 4.0,
         crossAxisSpacing: 4.0,
         children: images.map((photo) {
-          //Image img = Utility.imageFromBase64String(photo.pict);
           return Stack(children: [
             Column(
               children: [
