@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
-// import 'package:otus_food_app/models/recipe_model.dart';
-// import 'package:otus_food_app/model.dart';
 
 class IngredientsDetails extends StatelessWidget {
   const IngredientsDetails(

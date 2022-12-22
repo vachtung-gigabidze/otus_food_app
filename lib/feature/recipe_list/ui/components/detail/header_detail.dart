@@ -1,18 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/heart.dart';
 import 'package:otus_food_app/screens/gallery_screen.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 
 class HeaderDetail extends StatefulWidget {
-  const HeaderDetail({Key? key, required this.recipe}) : super(key: key);
+  const HeaderDetail({Key? key, required this.recipe, required this.userId})
+      : super(key: key);
 
   final Recipe recipe;
+  final int userId;
 
   @override
   State<HeaderDetail> createState() => _HeaderDetailState();
@@ -24,9 +26,28 @@ class _HeaderDetailState extends State<HeaderDetail> {
   String username = 'anonymous';
   @override
   void initState() {
-    super.initState();
     recipe = widget.recipe;
-    isFavorites = recipe.isFavorite(3);
+    isFavorites = recipe.isFavorite(widget.userId);
+    super.initState();
+    //
+  }
+
+  void _addFavorite(int userId, int recipeId) async {
+    final id = await context
+        .read<RecipeListCubit>()
+        .createFavorite(User(id: userId), Recipe(id: recipeId));
+
+    setState(() {
+      recipe.favoriteRecipes?.add(Favorite(
+          id: id, user: User(id: userId), recipe: Recipe(id: recipeId)));
+    });
+  }
+
+  void _deleteFavorite(Favorite favorite) {
+    context.read<RecipeListCubit>().deleteFavorite(favorite.id ?? 0);
+    setState(() {
+      recipe.favoriteRecipes?.remove(favorite);
+    });
   }
 
   void openGalleryPage() {
@@ -36,8 +57,6 @@ class _HeaderDetailState extends State<HeaderDetail> {
 
   @override
   Widget build(BuildContext context) {
-    //var recept = widget.snapshot.data;
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -50,8 +69,6 @@ class _HeaderDetailState extends State<HeaderDetail> {
             Flexible(
               fit: FlexFit.tight,
               flex: 5,
-              // height: 31,
-              // width: 314,
               child: Text(
                 recipe.name ?? "Название рецепта",
                 overflow: TextOverflow.ellipsis,
@@ -68,24 +85,32 @@ class _HeaderDetailState extends State<HeaderDetail> {
             ),
             BlocBuilder<AuthCubit, AuthState>(builder: (context, state) {
               return state.maybeWhen(
-                authorized: (userEntity) => Flexible(
-                  flex: 1,
-                  child: Container(
-                    margin: const EdgeInsets.only(right: 20),
-                    child: InkWell(
-                      onTap: () => setState(() {
-                        isFavorites = !isFavorites;
-                      }),
-                      child: isFavorites
-                          ? const HeartWidget()
-                          : Image.asset(
-                              Constants.iconHeartBlack,
-                              height: 30,
-                              width: 30,
-                            ),
+                authorized: (userEntity) {
+                  return Flexible(
+                    flex: 1,
+                    child: Container(
+                      margin: const EdgeInsets.only(right: 20),
+                      child: InkWell(
+                        onTap: () {
+                          isFavorites = !isFavorites;
+                          if (isFavorites) {
+                            _addFavorite(int.parse(userEntity.id), recipe.id!);
+                          } else {
+                            _deleteFavorite(recipe.findFavorite(
+                                userId: int.parse(userEntity.id))!);
+                          }
+                        },
+                        child: isFavorites
+                            ? const HeartWidget()
+                            : Image.asset(
+                                Constants.iconHeartBlack,
+                                height: 30,
+                                width: 30,
+                              ),
+                      ),
                     ),
-                  ),
-                ),
+                  );
+                },
                 orElse: () => Container(),
               );
             }),

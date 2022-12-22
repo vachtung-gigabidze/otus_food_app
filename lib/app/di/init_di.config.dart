@@ -55,9 +55,7 @@ _i1.GetIt $initGetIt(
   gh.factory<_i9.FreezerRepository>(
       () => _i10.NetworkFreezerRepository(get<_i5.AppApi>()));
   gh.factory<_i11.RecipeListRepository>(
-    () => _i12.NetworkRecipeListRepository(get<_i5.AppApi>()),
-    registerFor: {_prod},
-  );
+      () => _i12.NetworkRecipeListRepository(get<_i5.AppApi>()));
   gh.singleton<_i13.AuthCubit>(_i13.AuthCubit(get<_i7.AuthRepository>()));
   return get;
 }

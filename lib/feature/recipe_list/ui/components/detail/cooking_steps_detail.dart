@@ -9,7 +9,6 @@ class CookingStepsDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //var recipe = recipe;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,8 +28,6 @@ class CookingStepsDetail extends StatelessWidget {
         ListView.builder(
             shrinkWrap: true,
             physics: const ClampingScrollPhysics(),
-            //padding: const EdgeInsets.all(8),
-
             itemCount: recipe.recipeStepLinks?.length ?? 0,
             itemBuilder: (BuildContext context, int index) {
               return Container(

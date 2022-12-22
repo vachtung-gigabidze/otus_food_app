@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io' as io;
-
 import 'package:otus_food_app/models/photo_entity.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';

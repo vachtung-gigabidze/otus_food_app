@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/utils/recipe_utils.dart';
-import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/entities/recipe_entity.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/comment_list.dart';
@@ -13,6 +12,7 @@ import 'package:otus_food_app/feature/recipe_list/ui/components/detail/cooking_s
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/header_detail.dart';
 import 'package:otus_food_app/feature/recipe_list/ui/components/detail/ingredients_detail.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
+import 'package:go_router/go_router.dart';
 
 class RecipeDetail extends StatefulWidget {
   const RecipeDetail({Key? key, this.recipe}) : super(key: key);
@@ -26,7 +26,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   late ScrollController _scrollController;
   late Timer cookingTimer;
   late int cookingTime;
-  late User user;
+  late int userId;
   late Recipe? recipe;
 
   void _addComment(Comment newComment) {
@@ -56,17 +56,19 @@ class _RecipeDetailState extends State<RecipeDetail> {
   }
 
   void _getUser() async {
-    user = User(id: 1, login: "User"); //await RecipeApi().fetchUser();
-    //log(user.username!);
+    userId = context.read<AuthCubit>().state.maybeWhen(
+          authorized: (userEntity) => int.parse(userEntity.id),
+          orElse: () => 0,
+        );
   }
 
   @override
   void initState() {
-    super.initState();
     _getUser();
     cookingTimer = Timer(const Duration(seconds: 1), () {});
     cookingTime = 0;
     _scrollController = ScrollController()..addListener(() {});
+    super.initState();
   }
 
   @override
@@ -102,9 +104,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
   @override
   Widget build(BuildContext context) {
     recipe = widget.recipe;
-    //recipe = ModalRoute.of(context)!.settings.arguments as Recipe;
+
     return Scaffold(
-      // extendBodyBehindAppBar: false,
       appBar: AppBar(
         systemOverlayStyle: recipe?.isCooking ?? false
             ? StatusOverlay.green
@@ -175,12 +176,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
           tooltip: 'Show Snackbar',
           color: Colors.black87,
           onPressed: () {
-            Navigator.of(context).pushReplacementNamed('/root');
-            //Navigator.of(context, rootNavigator: true).pushReplacement(context);
+            context.pop();
           },
         ),
       ),
-      bottomNavigationBar: const BottomNavBar(),
       body: SingleChildScrollView(
         controller: _scrollController,
         child: Column(
@@ -190,7 +189,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
               padding: const EdgeInsets.only(left: 15, right: 15, top: 27.6),
               child: Column(
                 children: [
-                  HeaderDetail(recipe: recipe!),
+                  HeaderDetail(
+                    recipe: recipe!,
+                    userId: userId,
+                  ),
                   const SizedBox(
                     height: 16.54,
                   ),

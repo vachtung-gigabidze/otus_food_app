@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:go_router/go_router.dart';
 import 'package:otus_food_app/feature/logo/ui/components/logo.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
@@ -20,7 +20,7 @@ class _LogoScreenState extends State<LogoScreen> {
     super.initState();
 
     Future.delayed(const Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacementNamed(widget.nextRoute);
+      context.go(widget.nextRoute);
     });
   }
 

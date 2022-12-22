@@ -106,6 +106,10 @@ class Recipe {
   void removeFavorite(String username) {
     favoriteRecipes!.remove(Favorite(user: null));
   }
+
+  Favorite? findFavorite({required int userId}) {
+    return favoriteRecipes?.firstWhere((f) => f.user?.id == userId);
+  }
 }
 
 class RecipeIngredient {

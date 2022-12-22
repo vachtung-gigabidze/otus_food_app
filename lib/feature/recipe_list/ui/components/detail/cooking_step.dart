@@ -31,15 +31,14 @@ class _MyWidgetState extends State<CookingStepCard> {
             color: Colors.grey.withOpacity(0.25),
             spreadRadius: 0,
             blurRadius: 4,
-            offset: const Offset(0, 4), // changes position of shadow
+            offset: const Offset(0, 4),
           ),
         ],
       ),
       height: 120,
       alignment: Alignment.center,
       child: SizedBox(
-        height: 120, //double.infinity,
-
+        height: 120,
         child: Card(
           color: AppColors().stepBackground(
               cookingStepLink!.status ?? CookingStepsStatus.notStarted),

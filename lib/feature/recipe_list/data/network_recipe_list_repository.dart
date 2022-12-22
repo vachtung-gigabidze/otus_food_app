@@ -23,4 +23,27 @@ class NetworkRecipeListRepository implements RecipeListRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<int> addFavorite(User user, Recipe recipe) async {
+    try {
+      Favorite newFavorite = Favorite();
+      newFavorite.recipe = recipe;
+      newFavorite.user = user;
+
+      final response = await api.createFavorite(newFavorite);
+      return response.data['id'];
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future deleteFavorite(int favoriteId) async {
+    try {
+      await api.deleteFavorite(favoriteId);
+    } catch (_) {
+      rethrow;
+    }
+  }
 }

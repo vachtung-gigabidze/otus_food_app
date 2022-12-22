@@ -24,7 +24,8 @@ mixin _$UserEntity {
   String get login => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
   String? get accessToken => throw _privateConstructorUsedError;
-  String? get refreshToken => throw _privateConstructorUsedError;
+  String? get refreshToken =>
+      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
   @JsonKey(ignore: true)
   AsyncSnapshot<dynamic>? get userState => throw _privateConstructorUsedError;
 
@@ -186,6 +187,7 @@ class _$_UserEntity implements _UserEntity {
   final String? accessToken;
   @override
   final String? refreshToken;
+// ignore: invalid_annotation_target
   @override
   @JsonKey(ignore: true)
   final AsyncSnapshot<dynamic>? userState;
@@ -253,7 +255,7 @@ abstract class _UserEntity implements UserEntity {
   String? get accessToken;
   @override
   String? get refreshToken;
-  @override
+  @override // ignore: invalid_annotation_target
   @JsonKey(ignore: true)
   AsyncSnapshot<dynamic>? get userState;
   @override

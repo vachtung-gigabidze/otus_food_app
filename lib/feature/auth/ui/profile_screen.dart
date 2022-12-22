@@ -4,19 +4,21 @@ import 'package:otus_food_app/app/ui/components/app_snackbar.dart';
 import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
 import 'package:otus_food_app/constants.dart';
-import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:otus_food_app/feature/auth/domain/entities/user_entity/user_entity.dart';
+import 'package:otus_food_app/feature/navbar/domain/navbar_state/navbar_cubit.dart';
+import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key, required this.userEntity}) : super(key: key);
-
-  final UserEntity userEntity;
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final UserEntity? userEntity = context.read<AuthCubit>().state.maybeWhen(
+          authorized: (userEntity) => userEntity,
+          orElse: () => null,
+        );
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -42,7 +44,6 @@ class ProfileScreen extends StatelessWidget {
               icon: const Icon(Icons.password)),
         ],
       ),
-      bottomNavigationBar: const BottomNavBar(screenIdx: 3),
       backgroundColor: const Color(0xFFC2C2C2),
       body: BlocConsumer<AuthCubit, AuthState>(
         listener: (context, state) {
@@ -108,7 +109,7 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        userEntity.login,
+                        userEntity?.login ?? "",
                         style: const TextStyle(
                           fontFamily: 'Roboto',
                           fontStyle: FontStyle.normal,
@@ -142,7 +143,11 @@ class ProfileScreen extends StatelessWidget {
                         color: Color(0xFFF54848),
                       ),
                     ),
-                    onPressed: () => context.read<AuthCubit>().logOut(),
+                    onPressed: () {
+                      context.read<AuthCubit>().logOut();
+                      context.read<RecipeListCubit>().getRecipeList();
+                      context.read<NavbarCubit>().selectPage(3);
+                    },
                     child: const Text('Выход'),
                   ),
                 ),

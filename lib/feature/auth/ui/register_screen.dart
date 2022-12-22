@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
+import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
-import 'package:otus_food_app/feature/navbar/ui/bottom_nav_bar.dart';
+import 'package:otus_food_app/feature/navbar/domain/navbar_state/navbar_cubit.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatelessWidget {
@@ -11,13 +12,13 @@ class RegisterScreen extends StatelessWidget {
   final controllerLogin = TextEditingController();
   final controllerPassword = TextEditingController();
   final controllerRepeatPassword = TextEditingController();
-  final controllerEmail = TextEditingController();
+  //final controllerEmail = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey();
 
   void _onTapToSingUp(AuthCubit authCubit) => authCubit.singUp(
         login: controllerLogin.text,
         password: controllerPassword.text,
-        email: controllerEmail.text,
+        email: controllerLogin.text, //controllerEmail.text,
       );
 
   @override
@@ -25,7 +26,6 @@ class RegisterScreen extends StatelessWidget {
     return Form(
       key: formKey,
       child: Scaffold(
-        bottomNavigationBar: const BottomNavBar(screenIdx: 1),
         backgroundColor: const Color(0xFF2ECC71),
         body: Stack(
           children: [
@@ -41,18 +41,20 @@ class RegisterScreen extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
-                  AppTextField(
-                    controller: controllerEmail,
-                    labelText: 'эл.почта',
-                    obscureText: false,
-                  ),
-                  const SizedBox(
-                    height: 16,
-                  ),
+                  // AppTextField(
+                  //   controller: controllerEmail,
+                  //   labelText: 'эл.почта',
+                  //   obscureText: false,
+                  //   // iconName: Constants.,
+                  // ),
+                  // const SizedBox(
+                  //   height: 16,
+                  // ),
                   AppTextField(
                     controller: controllerPassword,
                     labelText: 'пароль',
                     obscureText: true,
+                    iconName: Constants.lockIcon,
                   ),
                   const SizedBox(
                     height: 16,
@@ -61,6 +63,7 @@ class RegisterScreen extends StatelessWidget {
                     controller: controllerRepeatPassword,
                     labelText: 'повторите пароль',
                     obscureText: true,
+                    iconName: Constants.lockIcon,
                   ),
                   const SizedBox(
                     height: 40,
@@ -75,7 +78,7 @@ class RegisterScreen extends StatelessWidget {
                                     content: Text("Пароли не совпадают")));
                           } else {
                             _onTapToSingUp(context.read<AuthCubit>());
-                            Navigator.of(context).pop();
+                            context.read<NavbarCubit>().selectPage(0);
                           }
                         }
                       },

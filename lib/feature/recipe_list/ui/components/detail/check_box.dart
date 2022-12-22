@@ -20,7 +20,6 @@ class _CheckBoxViewState extends State<CheckBoxView>
   void animate() {
     log('animate');
     _animationController.forward();
-    // _animationController.reverse();
   }
 
   @override
@@ -35,11 +34,7 @@ class _CheckBoxViewState extends State<CheckBoxView>
 
     _pulseAnimation.addStatusListener((status) {
       if (status == AnimationStatus.completed) _animationController.reverse();
-      // else if (status == AnimationStatus.dismissed)
-      //   _animationController.forward();
     });
-
-    //log(widget.cookingStepsStatus!.toString());
   }
 
   @override
