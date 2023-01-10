@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
 import 'package:otus_food_app/app/ui/components/app_snackbar.dart';
 import 'package:otus_food_app/app/ui/components/app_text_button.dart';
@@ -9,6 +10,7 @@ import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
 import 'package:otus_food_app/feature/auth/domain/entities/user_entity/user_entity.dart';
 import 'package:otus_food_app/feature/navbar/domain/navbar_state/navbar_cubit.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
+import 'package:otus_plugin_bluetooth/otus_plugin_bluetooth.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -19,6 +21,7 @@ class ProfileScreen extends StatelessWidget {
           authorized: (userEntity) => userEntity,
           orElse: () => null,
         );
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -151,6 +154,14 @@ class ProfileScreen extends StatelessWidget {
                     child: const Text('Выход'),
                   ),
                 ),
+              ),
+              const SizedBox(
+                height: 29,
+              ),
+              Text('Подключить холодильник'),
+              SizedBox(
+                height: 200,
+                child: AndroidView(viewType: "bluetoothview"),
               ),
             ],
           ),
