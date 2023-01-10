@@ -24,7 +24,7 @@ class MainAppRunner implements AppRunner {
       var status = await Permission.location.status;
       if (status.isGranted) {
       } else if (status.isDenied) {
-        Map<Permission, PermissionStatus> status2 = await [
+        await [
           Permission.location,
         ].request();
 
