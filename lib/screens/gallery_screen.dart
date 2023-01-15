@@ -5,8 +5,8 @@ import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/models/photo_entity.dart';
 import 'package:otus_food_app/utils/db_helper.dart';
+import 'package:otus_food_app/utils/tflite_isolate.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
-import 'package:tflite/tflite.dart';
 
 class SaveImageSQLite extends StatefulWidget {
   final int? recipeId;
@@ -23,23 +23,20 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
   XFile? _image;
   // dynamic _pickImageError;
 
-  loadModel() async {
-    await Tflite.loadModel(
-        labels: 'assets/tensorflow/labels.txt',
-        model: 'assets/tensorflow/model_unquant.tflite');
-  }
-
   @override
   void initState() {
     super.initState();
     images = [];
     dbHelper = DBHelper();
     refreshImages();
-    loadModel();
+
+    TfliteIsolate().startIsolate();
+    //loadModel(); //init isolate
   }
 
   @override
   void dispose() {
+    TfliteIsolate().dispose();
     super.dispose();
   }
 
@@ -68,7 +65,7 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
         _image = imgFile;
         Future<f.Uint8List> u8 = imgFile.readAsBytes();
         u8.then((value) async {
-          var detectedInfo = await detectImage(_image!);
+          final detectedInfo = await TfliteIsolate().detectImage(_image!);
           Photo photo =
               Photo(0, imgFile.name, widget.recipeId!, detectedInfo, value);
           dbHelper.save(photo);
@@ -87,20 +84,6 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
   deletePhoto(Photo photo) {
     dbHelper.delete(photo);
     refreshImages();
-  }
-
-  Future<String> detectImage(XFile image) async {
-    List<dynamic>? output = await Tflite.runModelOnImage(
-      path: image.path,
-      numResults: 1,
-      threshold: 0.5,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-
-    return output!.isNotEmpty
-        ? '${output[0]['label'].substring(2)} (${(output[0]['confidence'] * 100.0).toString().substring(0, 2)}%)'
-        : "Не распознал фото";
   }
 
   gridView() {
