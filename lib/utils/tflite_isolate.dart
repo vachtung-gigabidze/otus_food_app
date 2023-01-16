@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'dart:isolate';
 import 'dart:typed_data';
-import 'package:flutter/services.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:tflite/tflite.dart';
@@ -85,7 +83,6 @@ class TfliteIsolate {
     //     binary: imageToByteListFloat32(image, 224, 127.5, 127.5), // required
     //     numResults: 6, // defaults to 5
     //     threshold: 0.05, // defaults to 0.1
-    //     asynch: true // defaults to true
     //     );
 
     try {
@@ -94,8 +91,7 @@ class TfliteIsolate {
           numResults: 1,
           threshold: 0.5,
           imageMean: 127.5,
-          imageStd: 127.5,
-          asynch: false);
+          imageStd: 127.5);
       return output?[0].toJson();
     } catch (e) {
       return "Не распознал фото";

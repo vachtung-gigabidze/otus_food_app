@@ -4,7 +4,6 @@ import 'package:otus_food_app/app/domain/app_builder.dart';
 import 'package:otus_food_app/app/domain/app_runner.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class MainAppRunner implements AppRunner {
   final String env;
@@ -13,26 +12,9 @@ class MainAppRunner implements AppRunner {
 
   @override
   Future<void> preloaderData() async {
-    await _requestRelevantRuntimePermissions();
     // init app
     initDi(env);
     // init config
-  }
-
-  Future<void> _requestRelevantRuntimePermissions() async {
-    if (await Permission.location.serviceStatus.isEnabled) {
-      var status = await Permission.location.status;
-      if (status.isGranted) {
-      } else if (status.isDenied) {
-        await [
-          Permission.location,
-        ].request();
-
-        if (await Permission.location.isPermanentlyDenied) {
-          openAppSettings();
-        }
-      }
-    } else {}
   }
 
   @override

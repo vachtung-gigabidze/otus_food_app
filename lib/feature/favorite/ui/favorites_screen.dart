@@ -45,7 +45,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                         return InkWell(
                           onTap: () {
                             Navigator.of(context).push(SliderPageRoute(
-                                widget: RecipeDetail(recipe: recipes![index])));
+                                widget: RecipeDetail(recipe: recipes[index])));
                           },
                           child: RecipeCard(
                               recipe: recipes![index], showFavorites: true),
