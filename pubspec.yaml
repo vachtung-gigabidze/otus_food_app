@@ -49,6 +49,7 @@ dependencies:
       ref : main   
   cupertino_icons: ^1.0.2
   permission_handler: ^9.2.0
+  flutter_isolate: ^2.0.4
 
 dev_dependencies:
   build_runner: ^2.3.2

@@ -1,5 +1,7 @@
 import 'package:flutter/foundation.dart' as f;
 import 'package:flutter/material.dart';
+import 'package:flutter_isolate/flutter_isolate.dart';
+import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
 import 'package:otus_food_app/constants.dart';
@@ -30,13 +32,13 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
     dbHelper = DBHelper();
     refreshImages();
 
-    TfliteIsolate().startIsolate();
+    //TfliteIsolate().startIsolate;
     //loadModel(); //init isolate
   }
 
   @override
   void dispose() {
-    TfliteIsolate().dispose();
+    //TfliteIsolate().dispose();
     super.dispose();
   }
 
@@ -53,7 +55,7 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
     pickImage(ImageSource.gallery);
   }
 
-  pickImage(ImageSource imageSource) {
+  pickImage(ImageSource imageSource) async {
     try {
       ImagePicker()
           .pickImage(source: imageSource, maxHeight: 600, maxWidth: 800)
@@ -65,7 +67,12 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
         _image = imgFile;
         Future<f.Uint8List> u8 = imgFile.readAsBytes();
         u8.then((value) async {
-          final detectedInfo = await TfliteIsolate().detectImage(_image!);
+          //var detectedInfo = await detectImage(_image!);
+          //var b = await imageToByteListFloat32(_image!, 224, 127.5, 127.5);
+          //int? detectedInfo = await flutterCompute(expensiveWork, 1);
+          final detectedInfo =
+              await flutterCompute(TfliteIsolate.detectImage, _image!.path);
+          // final detectedInfo = await TfliteIsolate().detectImage(value);
           Photo photo =
               Photo(0, imgFile.name, widget.recipeId!, detectedInfo, value);
           dbHelper.save(photo);
@@ -76,6 +83,39 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
       _showSnackBar(context, ErrorEntity.fromException(e));
     }
   }
+
+  Future<Uint8List> imageToByteListFloat32(
+      XFile image, int inputSize, double mean, double std) async {
+    var convertedBytes = await image.readAsBytes();
+    return convertedBytes.buffer.asUint8List();
+    // var convertedBytes = Float32List(1 * inputSize * inputSize * 3);
+    // var buffer = Float32List.view(convertedBytes.buffer);
+    // int pixelIndex = 0;
+    // for (var i = 0; i < inputSize; i++) {
+    //   for (var j = 0; j < inputSize; j++) {
+    //     var pixel = image.getPixel(j, i);
+    //     buffer[pixelIndex++] = (img.getRed(pixel) - mean) / std;
+    //     buffer[pixelIndex++] = (img.getGreen(pixel) - mean) / std;
+    //     buffer[pixelIndex++] = (img.getBlue(pixel) - mean) / std;
+    //   }
+    // }
+    // return convertedBytes.buffer.asUint8List();
+  }
+
+  // Uint8List imageToByteListUint8(img.Image image, int inputSize) {
+  //   var convertedBytes = Uint8List(1 * inputSize * inputSize * 3);
+  //   var buffer = Uint8List.view(convertedBytes.buffer);
+  //   int pixelIndex = 0;
+  //   for (var i = 0; i < inputSize; i++) {
+  //     for (var j = 0; j < inputSize; j++) {
+  //       var pixel = image.getPixel(j, i);
+  //       buffer[pixelIndex++] = img.getRed(pixel);
+  //       buffer[pixelIndex++] = img.getGreen(pixel);
+  //       buffer[pixelIndex++] = img.getBlue(pixel);
+  //     }
+  //   }
+  //   return convertedBytes.buffer.asUint8List();
+  // }
 
   pickImageFromCamera() {
     pickImage(ImageSource.camera);
