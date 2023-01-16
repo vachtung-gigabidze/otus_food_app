@@ -3,6 +3,7 @@
 // import 'package:image/image.dart' as img;
 // import 'package:image_picker/image_picker.dart';
 // import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tflite/tflite.dart';
 
 class TfliteIsolate {
@@ -107,6 +108,27 @@ class TfliteIsolate {
     return output!.isNotEmpty
         ? '${output[0]['label'].substring(2)} (${(output[0]['confidence'] * 100.0).toString().substring(0, 2)}%)'
         : "Не распознал фото";
+  }
+
+  @pragma('vm:entry-point')
+  static Future<String> detectBinary(Uint8List binary) async {
+    // Future<String> detectImage(Uint8List image) async {
+    try {
+      final res = await Tflite.loadModel(
+          labels: 'assets/tensorflow/labels.txt',
+          model: 'assets/tensorflow/model_unquant.tflite');
+
+      final output = await Tflite.runModelOnBinary(
+        binary: binary,
+        numResults: 6,
+        threshold: 0.5,
+        asynch: true,
+      );
+
+      return '${output![0]['label'].substring(2)} (${(output[0]['confidence'] * 100.0).toString().substring(0, 2)}%)';
+    } catch (e) {
+      return "Не распознал фото";
+    }
   }
 
   // static Future<dynamic> runModelOnImage(Uint8List image) async {

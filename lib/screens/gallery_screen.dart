@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_isolate/flutter_isolate.dart';
@@ -70,8 +72,9 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
           //var detectedInfo = await detectImage(_image!);
           //var b = await imageToByteListFloat32(_image!, 224, 127.5, 127.5);
           //int? detectedInfo = await flutterCompute(expensiveWork, 1);
-          final detectedInfo =
-              await flutterCompute(TfliteIsolate.detectImage, _image!.path);
+          final detectedInfo = await flutterCompute(
+              TfliteIsolate.detectBinary, await xFileToByteListInt8(_image!));
+          // final detectedInfo = await flutterCompute(TfliteIsolate.detectImage, _image!.path);
           // final detectedInfo = await TfliteIsolate().detectImage(value);
           Photo photo =
               Photo(0, imgFile.name, widget.recipeId!, detectedInfo, value);
@@ -84,10 +87,10 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
     }
   }
 
-  Future<Uint8List> imageToByteListFloat32(
-      XFile image, int inputSize, double mean, double std) async {
-    var convertedBytes = await image.readAsBytes();
-    return convertedBytes.buffer.asUint8List();
+  Future<Uint8List> xFileToByteListInt8(XFile image) async {
+    final bytes = await File(image.path).readAsBytes();
+    // var convertedBytes = await image.readAsBytes();
+    return bytes; //convertedBytes.buffer.asUint8List();
     // var convertedBytes = Float32List(1 * inputSize * inputSize * 3);
     // var buffer = Float32List.view(convertedBytes.buffer);
     // int pixelIndex = 0;
