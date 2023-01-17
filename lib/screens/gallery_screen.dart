@@ -62,12 +62,17 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
 
         Future<f.Uint8List> u8 = imgFile.readAsBytes();
         u8.then((value) async {
-          final outputJson =
-              await flutterCompute(TfliteIsolate.runModelOnBinary, value);
+          final outputJson = await flutterCompute(
+              TfliteIsolate.runModelOnBinary, [
+            value,
+            'assets/tensorflow/labels.txt',
+            'assets/tensorflow/model_unquant.tflite'
+          ]);
 
-          final TfliteDto dto = TfliteDto.fromJson(json.decode(outputJson));
-          Photo photo =
-              Photo(0, imgFile.name, widget.recipeId!, dto.toString(), value);
+          final TfliteDto tfliteObject =
+              TfliteDto.fromJson(json.decode(outputJson));
+          Photo photo = Photo(0, imgFile.name, widget.recipeId!,
+              tfliteObject.toString(), value);
           dbHelper.save(photo);
           refreshImages();
         });

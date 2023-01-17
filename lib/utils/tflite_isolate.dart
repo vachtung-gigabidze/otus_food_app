@@ -6,12 +6,13 @@ import 'package:tflite/tflite.dart';
 
 class TfliteIsolate {
   @pragma('vm:entry-point')
-  static Future<dynamic> runModelOnBinary(Uint8List binary) async {
-    // Future<String> detectImage(Uint8List image) async {
+  static Future<dynamic> runModelOnBinary(List<dynamic> args) async {
     try {
-      await Tflite.loadModel(
-          labels: 'assets/tensorflow/labels.txt',
-          model: 'assets/tensorflow/model_unquant.tflite');
+      final binary = args[0] as Uint8List;
+      final labels = args[1] as String;
+      final model = args[2] as String;
+
+      await Tflite.loadModel(labels: labels, model: model);
 
       img.Image? oriImage = img.decodeImage(binary.buffer.asUint8List());
       img.Image? resizedImage =
@@ -19,7 +20,7 @@ class TfliteIsolate {
 
       final output = await Tflite.runModelOnBinary(
         binary: imageToByteListFloat32(resizedImage, 224, 127.5, 127.5),
-        numResults: 6,
+        numResults: 1,
         threshold: 0.05,
       );
 
