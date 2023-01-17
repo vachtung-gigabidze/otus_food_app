@@ -1,14 +1,14 @@
-import 'dart:io';
+import 'dart:convert';
 
 import 'package:flutter/foundation.dart' as f;
 import 'package:flutter/material.dart';
 import 'package:flutter_isolate/flutter_isolate.dart';
-import 'dart:typed_data';
 import 'package:image_picker/image_picker.dart';
 import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/models/photo_entity.dart';
 import 'package:otus_food_app/utils/db_helper.dart';
+import 'package:otus_food_app/utils/gallery_utils.dart';
 import 'package:otus_food_app/utils/tflite_isolate.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
 
@@ -24,8 +24,6 @@ class SaveImageSQLite extends StatefulWidget {
 class SaveImageSQLiteState extends State<SaveImageSQLite> {
   late DBHelper dbHelper;
   late List<Photo> images;
-  XFile? _image;
-  // dynamic _pickImageError;
 
   @override
   void initState() {
@@ -33,14 +31,10 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
     images = [];
     dbHelper = DBHelper();
     refreshImages();
-
-    //TfliteIsolate().startIsolate;
-    //loadModel(); //init isolate
   }
 
   @override
   void dispose() {
-    //TfliteIsolate().dispose();
     super.dispose();
   }
 
@@ -66,18 +60,14 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
           return;
         }
 
-        _image = imgFile;
         Future<f.Uint8List> u8 = imgFile.readAsBytes();
         u8.then((value) async {
-          //var detectedInfo = await detectImage(_image!);
-          //var b = await imageToByteListFloat32(_image!, 224, 127.5, 127.5);
-          //int? detectedInfo = await flutterCompute(expensiveWork, 1);
-          final detectedInfo = await flutterCompute(
-              TfliteIsolate.detectBinary, await xFileToByteListInt8(_image!));
-          // final detectedInfo = await flutterCompute(TfliteIsolate.detectImage, _image!.path);
-          // final detectedInfo = await TfliteIsolate().detectImage(value);
+          final outputJson =
+              await flutterCompute(TfliteIsolate.runModelOnBinary, value);
+
+          final TfliteDto dto = TfliteDto.fromJson(json.decode(outputJson));
           Photo photo =
-              Photo(0, imgFile.name, widget.recipeId!, detectedInfo, value);
+              Photo(0, imgFile.name, widget.recipeId!, dto.toString(), value);
           dbHelper.save(photo);
           refreshImages();
         });
@@ -86,39 +76,6 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
       _showSnackBar(context, ErrorEntity.fromException(e));
     }
   }
-
-  Future<Uint8List> xFileToByteListInt8(XFile image) async {
-    final bytes = await File(image.path).readAsBytes();
-    // var convertedBytes = await image.readAsBytes();
-    return bytes; //convertedBytes.buffer.asUint8List();
-    // var convertedBytes = Float32List(1 * inputSize * inputSize * 3);
-    // var buffer = Float32List.view(convertedBytes.buffer);
-    // int pixelIndex = 0;
-    // for (var i = 0; i < inputSize; i++) {
-    //   for (var j = 0; j < inputSize; j++) {
-    //     var pixel = image.getPixel(j, i);
-    //     buffer[pixelIndex++] = (img.getRed(pixel) - mean) / std;
-    //     buffer[pixelIndex++] = (img.getGreen(pixel) - mean) / std;
-    //     buffer[pixelIndex++] = (img.getBlue(pixel) - mean) / std;
-    //   }
-    // }
-    // return convertedBytes.buffer.asUint8List();
-  }
-
-  // Uint8List imageToByteListUint8(img.Image image, int inputSize) {
-  //   var convertedBytes = Uint8List(1 * inputSize * inputSize * 3);
-  //   var buffer = Uint8List.view(convertedBytes.buffer);
-  //   int pixelIndex = 0;
-  //   for (var i = 0; i < inputSize; i++) {
-  //     for (var j = 0; j < inputSize; j++) {
-  //       var pixel = image.getPixel(j, i);
-  //       buffer[pixelIndex++] = img.getRed(pixel);
-  //       buffer[pixelIndex++] = img.getGreen(pixel);
-  //       buffer[pixelIndex++] = img.getBlue(pixel);
-  //     }
-  //   }
-  //   return convertedBytes.buffer.asUint8List();
-  // }
 
   pickImageFromCamera() {
     pickImage(ImageSource.camera);

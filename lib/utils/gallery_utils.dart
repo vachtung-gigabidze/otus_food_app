@@ -28,3 +28,30 @@ class Utility {
     });
   }
 }
+
+class TfliteDto {
+  double? confidence;
+  int? index;
+  String? label;
+
+  TfliteDto({this.confidence, this.index, this.label});
+
+  TfliteDto.fromJson(Map<String, dynamic> json) {
+    confidence = json['confidence'];
+    index = json['index'];
+    label = json['label'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['confidence'] = confidence;
+    data['index'] = index;
+    data['label'] = label;
+    return data;
+  }
+
+  @override
+  String toString() {
+    return '$label (${(confidence! * 100.0).toString().substring(0, 2)}%)';
+  }
+}
