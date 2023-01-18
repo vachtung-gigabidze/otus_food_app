@@ -90,7 +90,8 @@ class Recipe {
     return double.parse((recipeIngredients!.fold<double>(
             0,
             (previousValue, element) =>
-                previousValue + element.ingredient!.caloriesForUnit!))
+                previousValue +
+                (element.ingredient!.caloriesForUnit! * element.count!)))
         .toStringAsFixed(2));
   }
 
