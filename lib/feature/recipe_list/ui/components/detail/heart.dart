@@ -13,7 +13,7 @@ class HeartWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => heatTap,
+        onTap: () => heatTap(),
         child: animate
             ? const SizedBox(
                 height: 30,

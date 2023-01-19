@@ -101,7 +101,9 @@ class _HeaderDetailState extends State<HeaderDetail> {
                       margin: const EdgeInsets.only(right: 20),
                       child: HeartWidget(
                         animate: isFavorites,
-                        heatTap: heartCallback(userEntity.id),
+                        heatTap: () {
+                          heartCallback(userEntity.id);
+                        },
                       ),
                     ),
                   );
