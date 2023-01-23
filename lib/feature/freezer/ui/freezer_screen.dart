@@ -18,9 +18,7 @@ class _FridgeScreenState extends State<FreezerScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFC2C2C2),
       body: BlocConsumer<FreezerCubit, FreezerState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           if (state.freezerList.isNotEmpty) {
             return SingleChildScrollView(
@@ -63,18 +61,6 @@ class _FridgeScreenState extends State<FreezerScreen> {
                           ),
                         ),
                       ),
-                      //TODO: Add recommendation of recipes
-                      // FutureBuilder<List<Recipe>?>(
-                      //     future: recipes,
-                      //     builder: (context, snap) => ListView.builder(
-                      //         shrinkWrap: true,
-                      //         physics: const ScrollPhysics(),
-                      //         itemCount: snap.data?.length ?? 1,
-                      //         itemBuilder: (context, index) {
-                      //           return snap.hasData
-                      //               ? RecipeCard(recipe: snap.data![index])
-                      //               : Container();
-                      //         })),
                     ],
                   ),
                 ),

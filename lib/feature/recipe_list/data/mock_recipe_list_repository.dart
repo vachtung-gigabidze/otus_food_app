@@ -16,13 +16,11 @@ class MockRecipeListRepository implements RecipeListRepository {
 
   @override
   Future<int> addFavorite(User user, Recipe recipe) async {
-    // TODO: implement getProfile
     throw UnimplementedError();
   }
 
   @override
   Future deleteFavorite(int favoriteId) async {
-    // TODO: implement getProfile
     throw UnimplementedError();
   }
 }
