@@ -9,9 +9,10 @@
     <uses-permission android:name="androidS.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
    <application
-        android:label="@strings/applicationName"
+        android:label="@string/application_name"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        
+        android:icon="@mipmap/otus_launcher">
         <activity
             android:name=".MainActivity"
             android:exported="true"
