@@ -1,12 +1,16 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart' as f;
 import 'package:flutter/material.dart';
+import 'package:flutter_isolate/flutter_isolate.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
 import 'package:otus_food_app/constants.dart';
 import 'package:otus_food_app/models/photo_entity.dart';
 import 'package:otus_food_app/utils/db_helper.dart';
+import 'package:otus_food_app/utils/gallery_utils.dart';
+import 'package:otus_food_app/utils/tflite_isolate.dart';
 import 'package:otus_food_app/widgets/status_style.dart';
-import 'package:tflite/tflite.dart';
 
 class SaveImageSQLite extends StatefulWidget {
   final int? recipeId;
@@ -20,14 +24,6 @@ class SaveImageSQLite extends StatefulWidget {
 class SaveImageSQLiteState extends State<SaveImageSQLite> {
   late DBHelper dbHelper;
   late List<Photo> images;
-  XFile? _image;
-  // dynamic _pickImageError;
-
-  loadModel() async {
-    await Tflite.loadModel(
-        labels: 'assets/tensorflow/labels.txt',
-        model: 'assets/tensorflow/model_unquant.tflite');
-  }
 
   @override
   void initState() {
@@ -35,7 +31,6 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
     images = [];
     dbHelper = DBHelper();
     refreshImages();
-    loadModel();
   }
 
   @override
@@ -56,7 +51,7 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
     pickImage(ImageSource.gallery);
   }
 
-  pickImage(ImageSource imageSource) {
+  pickImage(ImageSource imageSource) async {
     try {
       ImagePicker()
           .pickImage(source: imageSource, maxHeight: 600, maxWidth: 800)
@@ -65,12 +60,19 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
           return;
         }
 
-        _image = imgFile;
         Future<f.Uint8List> u8 = imgFile.readAsBytes();
         u8.then((value) async {
-          var detectedInfo = await detectImage(_image!);
-          Photo photo =
-              Photo(0, imgFile.name, widget.recipeId!, detectedInfo, value);
+          final outputJson = await flutterCompute(
+              TfliteIsolate.runModelOnBinary, [
+            value,
+            'assets/tensorflow/labels.txt',
+            'assets/tensorflow/model_unquant.tflite'
+          ]);
+
+          final TfliteDto tfliteObject =
+              TfliteDto.fromJson(json.decode(outputJson));
+          Photo photo = Photo(0, imgFile.name, widget.recipeId!,
+              tfliteObject.toString(), value);
           dbHelper.save(photo);
           refreshImages();
         });
@@ -87,20 +89,6 @@ class SaveImageSQLiteState extends State<SaveImageSQLite> {
   deletePhoto(Photo photo) {
     dbHelper.delete(photo);
     refreshImages();
-  }
-
-  Future<String> detectImage(XFile image) async {
-    List<dynamic>? output = await Tflite.runModelOnImage(
-      path: image.path,
-      numResults: 1,
-      threshold: 0.5,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
-
-    return output!.isNotEmpty
-        ? '${output[0]['label'].substring(2)} (${(output[0]['confidence'] * 100.0).toString().substring(0, 2)}%)'
-        : "Не распознал фото";
   }
 
   gridView() {

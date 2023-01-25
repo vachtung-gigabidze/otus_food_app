@@ -9,10 +9,10 @@ class CookingStepCard extends StatefulWidget {
 
   final RecipeStepLink? cookingStepLink;
   @override
-  State<CookingStepCard> createState() => _MyWidgetState();
+  State<CookingStepCard> createState() => CookingStepCardState();
 }
 
-class _MyWidgetState extends State<CookingStepCard> {
+class CookingStepCardState extends State<CookingStepCard> {
   late RecipeStepLink? cookingStepLink;
   late RecipeStep? cookingStep;
   @override
@@ -77,6 +77,10 @@ class _MyWidgetState extends State<CookingStepCard> {
                   children: [
                     InkWell(
                       onTap: () {
+                        if (cookingStepLink?.status ==
+                            CookingStepsStatus.notStarted) {
+                          return;
+                        }
                         setState(() {
                           if (cookingStepLink?.status ==
                               CookingStepsStatus.passed) {

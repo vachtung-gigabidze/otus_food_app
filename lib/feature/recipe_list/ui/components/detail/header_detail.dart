@@ -32,6 +32,15 @@ class _HeaderDetailState extends State<HeaderDetail> {
     //
   }
 
+  heartCallback(String userId) {
+    isFavorites = !isFavorites;
+    if (isFavorites) {
+      _addFavorite(int.parse(userId), recipe.id!);
+    } else {
+      _deleteFavorite(recipe.findFavorite(userId: int.parse(userId))!);
+    }
+  }
+
   void _addFavorite(int userId, int recipeId) async {
     final id = await context
         .read<RecipeListCubit>()
@@ -90,23 +99,11 @@ class _HeaderDetailState extends State<HeaderDetail> {
                     flex: 1,
                     child: Container(
                       margin: const EdgeInsets.only(right: 20),
-                      child: InkWell(
-                        onTap: () {
-                          isFavorites = !isFavorites;
-                          if (isFavorites) {
-                            _addFavorite(int.parse(userEntity.id), recipe.id!);
-                          } else {
-                            _deleteFavorite(recipe.findFavorite(
-                                userId: int.parse(userEntity.id))!);
-                          }
+                      child: HeartWidget(
+                        animate: isFavorites,
+                        heatTap: () {
+                          heartCallback(userEntity.id);
                         },
-                        child: isFavorites
-                            ? const HeartWidget()
-                            : Image.asset(
-                                Constants.iconHeartBlack,
-                                height: 30,
-                                width: 30,
-                              ),
                       ),
                     ),
                   );

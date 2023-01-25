@@ -86,6 +86,15 @@ class Recipe {
     }
   }
 
+  double calcCaloriesForUnit() {
+    return double.parse((recipeIngredients!.fold<double>(
+            0,
+            (previousValue, element) =>
+                previousValue +
+                (element.ingredient!.caloriesForUnit! * element.count!)))
+        .toStringAsFixed(2));
+  }
+
   bool changeFavorite(bool prevFavorite, String username) {
     if (prevFavorite) {
       removeFavorite(username);
@@ -253,12 +262,14 @@ class Ingredient {
   int? id;
   String? name;
   MeasureUnit? measureUnit;
+  double? caloriesForUnit;
 
-  Ingredient({this.id, this.name, this.measureUnit});
+  Ingredient({this.id, this.name, this.measureUnit, this.caloriesForUnit});
 
   Ingredient.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
+    caloriesForUnit = json['caloriesForUnit'];
     measureUnit = json['measureUnit'] != null
         ? MeasureUnit.fromJson(json['measureUnit'])
         : null;
@@ -268,6 +279,7 @@ class Ingredient {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
+    data['caloriesForUnit'] = caloriesForUnit;
     if (measureUnit != null) {
       data['measureUnit'] = measureUnit!.toJson();
     }

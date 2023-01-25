@@ -24,6 +24,7 @@ class MainAppRunner implements AppRunner {
     HydratedBlocOverrides.runZoned(
       () async {
         await preloaderData();
+        //WidgetsFlutterBinding.ensureInitialized();
         runApp(appBuilder.buildApp());
       },
       storage: storage,

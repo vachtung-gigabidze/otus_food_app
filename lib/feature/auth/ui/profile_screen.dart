@@ -1,17 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
+import 'package:otus_food_app/constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:otus_food_app/app/ui/components/app_snackbar.dart';
 import 'package:otus_food_app/app/ui/components/app_text_button.dart';
 import 'package:otus_food_app/app/ui/components/app_text_field.dart';
-import 'package:otus_food_app/constants.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:otus_food_app/app/domain/error_entity/error_entity.dart';
 import 'package:otus_food_app/feature/auth/domain/auth_state/auth_cubit.dart';
-import 'package:otus_food_app/feature/auth/domain/entities/user_entity/user_entity.dart';
 import 'package:otus_food_app/feature/navbar/domain/navbar_state/navbar_cubit.dart';
+import 'package:otus_food_app/feature/auth/domain/entities/user_entity/user_entity.dart';
 import 'package:otus_food_app/feature/recipe_list/domain/recipe_list_state/recipe_list_cubit.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  Future<void> _requestRelevantRuntimePermissions() async {
+    if (await Permission.location.serviceStatus.isEnabled) {
+      var status = await Permission.location.status;
+      if (status.isGranted) {
+      } else if (status.isDenied) {
+        await [
+          Permission.location,
+        ].request();
+
+        if (await Permission.location.isPermanentlyDenied) {
+          openAppSettings();
+        }
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _requestRelevantRuntimePermissions();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +47,7 @@ class ProfileScreen extends StatelessWidget {
           authorized: (userEntity) => userEntity,
           orElse: () => null,
         );
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -152,6 +181,15 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 29,
+              ),
+              const Text('Подключить холодильник'),
+              // ignore: prefer_const_constructors
+              SizedBox(
+                  height: 200,
+                  // ignore: prefer_const_constructors
+                  child: AndroidView(viewType: "bluetoothview")),
             ],
           ),
         ),
