@@ -45,7 +45,7 @@ dependencies:
       url: https://github.com/vachtung-gigabidze/otus_bluetooth_plugin.git
       ref : main   
   cupertino_icons: ^1.0.2
-  permission_handler: ^9.2.0
+  permission_handler: ^10.2.0
   flutter_isolate: ^2.0.4
 
   mocktail: ^0.3.0
